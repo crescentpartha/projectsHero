@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    display: flex;
+    background-color: tomato;
+    
+}
+.head-title{
+    margin-left: 30px;
+    
+}
+.head-title h1{
+    text-transform: uppercase;
+}
+.head-list{
+    margin-left: 500px;
+    
+}
+.head-list ul{
+    list-style-type: none;
+    text-align: center;
+    margin-top: 30px;
+    overflow: hidden;
+    
+}
+.head-list ul li{
+    float: right;
+    margin-right: 20px;
+    font-size: 20px;
+}
+.head-list ul li a{
+    text-decoration: none;
+}
