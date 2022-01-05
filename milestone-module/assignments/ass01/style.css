@@ -40,7 +40,7 @@ header{
 /* Mission Section Design  */
 
 .mission-banner{
-
+    padding: 2%;
 }
 .mb-3{
     display: flex;
@@ -81,5 +81,50 @@ header{
 
 /* Limit Section Design  */
 
+.limit{
+    display: flex;
+    margin: 2%;
+    padding: 2%;
+    justify-content: space-evenly;
+    background-image: url(images/dream-bg.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    margin-top: 80px;
+}
+.limit-img{
+    width: 50%;
+}
+.limit-img img{
+    width: 80%;
+    margin-left: 30px;
+}
+.limit-hpa{
+    width: 50%;
+    margin: 6% 0%;
+}
+.limit-hpa h1{
+    font-size: 35px;
+    margin: 0;
+}
+.limit-hpa p{
+    text-align: justify;
+    font-size: 20px;
+    margin-right: 30px;
+}
+.limit-hpa a{
+    background-image: linear-gradient(#fb00dc, #ff6245);
+    text-decoration: none;
+    padding: 2% 4%;
+    font-size: 20px;
+}
+
+/* Global Section Design  */
+
+#limit-id{
+    background-image: url(images/shape-1.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
 
 
