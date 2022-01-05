@@ -11,61 +11,74 @@ header{
     
 }
 .head-title{
-    margin-left: 30px;
-    
+    width: 40%;
 }
 .head-title h1{
     text-transform: uppercase;
+    font-size: 40px;
+    padding: 0px;
+    margin: 10px 50px;
 }
 .head-list{
-    margin-left: 500px;
+    width: 60%;
     
 }
 .head-list ul{
-    list-style-type: none;
-    text-align: center;
-    margin-top: 30px;
-    overflow: hidden;
-    
+    display: flex;
+    padding: 1% 10%;
+    margin-left: 0px;
+    justify-content: space-between;
 }
 .head-list ul li{
-    float: right;
-    margin-right: 20px;
-    font-size: 20px;
+    text-transform: uppercase;
+    list-style-type: none;
+    
 }
 .head-list ul li a{
     text-decoration: none;
+    font-size: 20px;
 }
 
 /* Top Banner Contant Design */
 .top-banner{
     display: flex;
-    padding-left: 10px;
+    justify-content: space-between;
+    padding: 2%;
+    position: relative;
+    margin-bottom: 50px;
 }
 .tb-half-width{
     width: 50%;
+    padding-right: 2%;
+    /* background-color: gray; */
 }
 .tb-half-width h1{
-
+    font-size: 250%;
 }
 .tb-half-width h3{
-
+    font-size: 150%;
 }
 .tb-half-width p{
-
+    font-size: 100%;
+    text-align: justify;
 }
 .tb-half-width a{
-
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    background-image: linear-gradient(tomato, orange);
+    padding: 10px 30px;
 }
 .name{
-
+    color: orange;
 }
 .tb-image1{
-    width: 90%;
-    
+    width: 40%;
+    /* background-color: green; */
 }
 .tb-image1 img{
-
+    width: 80%;
+    margin-left: 100px;
 }
 
 
