@@ -1,3 +1,6 @@
+
+/* Hearder Section Contant Design */
+
 body{
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -33,3 +36,94 @@ header{
 .head-list ul li a{
     text-decoration: none;
 }
+
+/* Top Banner Contant Design */
+.top-banner{
+    display: flex;
+    padding-left: 10px;
+}
+.tb-half-width{
+    width: 50%;
+}
+.tb-half-width h1{
+
+}
+.tb-half-width h3{
+
+}
+.tb-half-width p{
+
+}
+.tb-half-width a{
+
+}
+.name{
+
+}
+.tb-image1{
+    width: 90%;
+    
+}
+.tb-image1 img{
+
+}
+
+
+/* Middle Banner Contant Design  */
+.middle-banner{
+
+}
+.middle-img{
+
+}
+.middle-img img{
+
+}
+.middle-half-width{
+
+}
+.middle-half-width h1{
+
+}
+.middle-half-width h3{
+
+}
+.middle-half-width p{
+
+}
+.middle-half-width a{
+
+}
+
+
+/* Bottom Banner Contant Design  */
+.bottom-banner{
+
+}
+.bottom-banner h1{
+
+}
+.bottom-half-width{
+    
+}
+.bottom-half-width h1{
+
+}
+.bottom-half-width h3{
+
+}
+.bottom-half-width p{
+
+}
+
+
+/* Footer Contant Design  */
+footer{
+
+}
+footer p{
+
+}
+
+
+
