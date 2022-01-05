@@ -46,11 +46,12 @@ header{
     padding: 2%;
     position: relative;
     margin-bottom: 50px;
+    background-image: url(images/top-banner.png);
+    background-repeat: no-repeat;
 }
 .tb-half-width{
     width: 50%;
     padding-right: 2%;
-    /* background-color: gray; */
 }
 .tb-half-width h1{
     font-size: 250%;
@@ -73,8 +74,7 @@ header{
     color: orange;
 }
 .tb-image1{
-    width: 40%;
-    /* background-color: green; */
+    width: 45%;
 }
 .tb-image1 img{
     width: 80%;
@@ -83,60 +83,56 @@ header{
 
 
 /* Middle Banner Contant Design  */
-.middle-banner{
-
-}
-.middle-img{
-
-}
-.middle-img img{
-
-}
-.middle-half-width{
-
-}
-.middle-half-width h1{
-
-}
-.middle-half-width h3{
-
-}
-.middle-half-width p{
-
-}
-.middle-half-width a{
-
-}
-
 
 /* Bottom Banner Contant Design  */
 .bottom-banner{
 
 }
 .bottom-banner h1{
-
+    margin: 0;
+    font-size: 50px;
+}
+.h1-margin h1{
+    margin-left: 27px;
+}
+#bottom1{
+    border-left: 5px solid;
+    border-image: linear-gradient(#e76b32, #bfee3f);
+    border-image-slice: 1;
+}
+#bottom2{
+    border-left: 5px solid;
+    border-image: linear-gradient(#bfee3f, #e76b32);
+    border-image-slice: 1;
 }
 .bottom-half-width{
-    
+    width: 50%;
+    padding: 0px 70px;
+    box-shadow: 30px 30px 60px grey;
+    margin: 0px 40px;
+    border-radius: 10px;
 }
 .bottom-half-width h1{
-
+    font-size: 250%;
 }
 .bottom-half-width h3{
-
+    font-size: 135%;
+    color: orange;
 }
 .bottom-half-width p{
-
+    font-size: 100%;
+    text-align: justify;
 }
 
 
 /* Footer Contant Design  */
 footer{
-
+    text-align: center;
+    text-transform: uppercase;
 }
 footer p{
 
 }
 
 
-
+/* Welcome To My Design World! */
