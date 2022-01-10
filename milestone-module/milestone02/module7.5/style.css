@@ -1,0 +1,22 @@
+*{
+    /* margin: 0;
+    padding: 0; */
+
+}
+h1{
+    text-align: center;
+    color: red;
+    font-size: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin-top: 20px;
+}
+p {
+    font-size: 25px;
+    font-style: italic;
+    color: blue;
+    background-color: bisque;
+}
+ol li{
+    
+}
