@@ -69,7 +69,81 @@
     font-size: 50px;
 }
 
-
 /* Icon Design End  */
+
+/* Transform Design Start  */
+
+.container, .inner{
+    width: 150px;
+    height: 150px;
+    border: 2px solid khaki;
+}
+.container {
+    background-color: lightblue;
+}
+.inner {
+    background-color: lightcoral;
+    /* transform: scale(0.75); */
+    /* transform: rotate(30deg); */
+    /* transform: scale(0.75) rotate(45deg) translate(100px); */
+    /* transform: scale(0.75) rotate(45deg) translateX(100px); */
+    transform: scale(0.75) rotate(45deg) translate(50px, 50px);
+
+}
+
+/* Transform Design End  */
+
+
+/* Transition Design Start  */
+
+.boox {
+    width: 200px;
+    height: 200px;
+    border: 2px solid cadetblue;
+    background-color: coral;
+    transition: width 1s, height 1s, transform 1s;
+}
+.boox:hover {
+    width: 400px;
+    height: 400px;
+    /* transition: width 5s ease-in 2s; */
+    /* transition: width 5s linear 2s; */
+    /* transition: width 10s ease 0.5s, height 3s ease 0.5s; */
+    transform: rotate(180deg);
+
+}
+
+/* Transition Design End  */
+
+
+/* Cricket Match Animation */
+
+.field {
+    /* width: 1000px; */
+    border: 5px solid coral;
+}
+.ball {
+    width: 50px;
+    height: 50px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    position: relative;
+    left: 480px;
+    transition: transform 1s ease-out 0.25s;
+}
+.field:hover .ball{
+    transform: translate(900px, -100px);
+}
+.bat {
+    width: 15%;
+    transition: transform 0.2s ease-in;
+}
+
+.field:hover .bat{
+    transform: rotate(-60deg);
+    transform-origin: top right;
+}
+
+/* Cricket Match Animation */
 
 
