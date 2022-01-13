@@ -1,6 +1,22 @@
 
 
 
+nav ul{
+    display: flex;
+}
+nav li{
+    list-style: none;
+}
+nav li:hover{
+    background-color: lightgray;
+}
+nav li a{
+    text-decoration: none;
+    color: gold;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
 .title{
     color: red;
     text-align: center;

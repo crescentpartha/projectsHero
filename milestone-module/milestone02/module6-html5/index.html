@@ -13,9 +13,11 @@
 
 <body>
     <h1 class="title">Exploring HTML5</h1>
+    <h1 class="heading1-title">Video-6.1: Audio | Videos | Iframe</h1>
+    <hr>
+
     <div class="html5">
         
-        <h1 class="heading1-title">Video-6.1: Audio | Videos | Iframe</h1>
         <audio src="./media/audio/tiger-audio.mp3" autoplay muted controls></audio>
         <video src="./media/video/tiger-video.mp4" muted width="300px" controls></video>
         <br>
@@ -29,146 +31,6 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
     </div>
-
-    <h1 class="heading1-title">Video-6.2: Semantic Tags - Section | Article | Header | Footer | Main </h1>
-
-    <p>A semantic tag in HTML is a tag whose name clearly describes its purpose and content. <br> HTML5 introduced several new semantic tags. <br> These include - header, nave, main, section, aside, article, footer, figure, figcaption, time, mark, details, summary, form, table etc.</p>
-
-    <header class="header">
-        <!-- nav>a*4{link-$} -->
-        <nav>
-            <a href="">link-1</a><a href="">link-2</a><a href="">link-3</a><a href="">link-4</a>
-        </nav>
-        
-        <h1>Welcome to my website</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates magnam praesentium laboriosam illo nobisdicta ipsam repellendus dolores accusantium quasi quod dignissimos hic, nihil eveniet!</p>
-
-    </header>
-    <main>
-        <section class="blogs">
-            <h2>Read my blogs</h2>
-            <!-- article.blog*4>h3{my blog-$}+p>lorem25 -->
-            <artical class="blog">
-                <h3>my blog-1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sunt explicabo eius, impedit assumenda ab magni quod aliquid amet et rem itaque voluptatem dolorum magnam?</p>
-            </artical>
-            <artical class="blog">
-                <h3>my blog-2</h3>
-                <p>Id excepturi suscipit veniam libero? Distinctio, maxime et pariatur beatae dolorum doloremque suscipit dolorem nihil ipsum! Quia culpa nisi perspiciatis officia vero cupiditate, vel repellat.</p>
-            </artical>
-            <artical class="blog">
-                <h3>my blog-3</h3>
-                <p>Officiis placeat ipsum sequi cupiditate quas consequatur hic? Eius magnam optio odio fuga officia aspernatur quasi accusantium nisi similique, laborum, ea repellendus culpa voluptate reiciendis.</p>
-            </artical>
-            <artical class="blog">
-                <h3>my blog-4</h3>
-                <p>Deserunt sint dolorum error dignissimos cum amet voluptatem autem, hic nihil illo vitae possimus corporis assumenda odit natus at enim recusandae ratione a libero fuga.</p>
-            </artical>
-    
-        </section>
-    
-        <section class="container">
-            <h3>Photo Album</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse commodi natus delectus porro repellat cumque nobis. Doloribus iusto dolores totam. Autem officiis deserunt iure. Quisquam?</p>
-        </section>
-    </main>
-    <footer class="footer">
-        <p>&copy;copyright 2022</p>
-    </footer>
-
-    <h1 class="heading1-title">Video-6.3: Table - thead, tbody, tfoot, tr, th, td, caption </h1>
-
-    <table>
-        <caption>Founder Details</caption>
-        <thead>
-            <tr>
-                <th>Serial</th>
-                <th>Name</th>
-                <th>Founder</th>
-                <th>Selary</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <!-- tr*4>td*4{$} -->
-            <tr>
-                <td>1</td>
-                <td>Bill Gates</td>
-                <td>Microsoft</td>
-                <td>$1000</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Steve Jobs</td>
-                <td>Apple</td>
-                <td>$1200</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Larry Page</td>
-                <td>Google</td>
-                <td>$1100</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Mark Auckeberg</td>
-                <td>Facebook</td>
-                <td>$1300</td>
-            </tr>
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="3">Total</td>
-                <td>$1600</td>
-            </tr>
-        </tfoot>     
-    </table>
-
-    <h1 class="heading1-title">Video-6.4: Form - input, label, fieldset, legend, textarea, submit</h1>
-
-    <form action="">
-        <p>Name: <input type="text" name="name" placeholder="Enter your name" required id=""></p>
-        <p>Email: <input type="email" name="email" placeholder="Enter your email" required id=""></p>
-        <fieldset>
-            <legend>Select your Pitha</legend>
-            <p>
-                <label for="chitoi">
-                    <input type="radio" name="pitha" id="chitoi">Chitoi
-                </label>
-            </p>
-            <p>
-                <label for="bhapa">
-                    <input type="radio" name="pitha" id="bhapa">Bhapa
-                </label>
-            </p>
-            <p>
-                <label for="moulfua">
-                    <input type="radio" name="pitha" id="moulfua">Moulfua
-                </label>
-            </p>
-        </fieldset>
-
-        <!-- fieldset>legend{Select your vorta} -->
-        <fieldset>
-            <legend>Select your vorta</legend>
-            <!-- p*4>label>input:checkbox -->
-            <p><label for="sorisa"><input type="checkbox" name="vorta" id="sorisa">Sorisa</label></p>
-            <p><label for="sutki"><input type="checkbox" name="vorta" id="sutki">Sutki</label></p>
-            <p><label for="begun"><input type="checkbox" name="vorta" id="begun">Begun</label></p>
-            <p><label for="sorisa-begun"><input type="checkbox" name="vorta" id="sorisa-begun">Sorisa-Begun</label></p>
-        </fieldset>
-
-        <p>Special Instruction
-            <br>
-            <textarea name="instruction" id="" placeholder="make a heart shape....." cols="30" rows="10"></textarea>
-        </p>
-
-        <button type="submit">submit</button>
-        <button type="reset">Reset</button>
-
-    </form>
-
 
 </body>
 
