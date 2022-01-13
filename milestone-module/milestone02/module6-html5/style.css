@@ -1,11 +1,13 @@
 
 
-
-nav ul{
+/* navigation var  */
+nav > ul{
     display: flex;
 }
 nav li{
     list-style: none;
+    margin-right: 10px;
+    padding: 0px 10px;
 }
 nav li:hover{
     background-color: lightgray;
@@ -15,9 +17,25 @@ nav li a{
     text-decoration: none;
     color: gold;
     font-size: 20px;
-    margin-right: 10px;
-    padding: 0px 10px;
+
 }
+
+.dropdown{
+    display: none;
+    position: absolute;
+    background-color: lightgoldenrodyellow;
+    padding: 0;
+}
+.dropdown li{
+    margin: 0;
+    padding: 0 10px;
+}
+nav > ul > li:hover> ul{
+    display: block;
+}
+
+/* navigation var  */
+
 
 .title{
     color: red;
@@ -30,6 +48,8 @@ nav li a{
     text-align: center;
     
 }
+
+/* table style  */
 table{
     border-collapse: collapse;
 }
@@ -38,7 +58,7 @@ td, th{
     border: 1px solid lightgray;
     padding: 2px 10px;
 }
-
+/* table style  */
 
 
 
