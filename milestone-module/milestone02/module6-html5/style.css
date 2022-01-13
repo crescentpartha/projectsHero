@@ -1,0 +1,29 @@
+
+
+
+.title{
+    color: red;
+    text-align: center;
+    font-size: 3em;
+}
+.heading1-title{
+    color: tomato;
+    font-size: 30px;
+    text-align: center;
+    
+}
+table{
+    border-collapse: collapse;
+}
+
+td, th{
+    border: 1px solid lightgray;
+    padding: 2px 10px;
+}
+
+
+
+
+
+
+
