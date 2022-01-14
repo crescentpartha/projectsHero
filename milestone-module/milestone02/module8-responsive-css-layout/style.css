@@ -79,4 +79,49 @@ nav{
 /* Flexuse Design End  */
 
 
+/* Grid Design Start  */
+.grid-container{
+    display: grid;
+    /* grid-template-columns: 200px 200px 200px;/ repeat(4, 200px);/ repeat(4, 1fr);/ repeat(4, 25%);/ repeat(4, 1fr) 200px;/ repeat(4, 1fr) 2fr; */
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px 20px;
+}
+.grid-cell{
+    border: 1px solid gold;
+    font-size: 2em;
+    padding: 20px;
+}
+/* Grid Design End  */
+
+
+/* Calendar Design Start */
+.calendar{
+    height: 600px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 3em repeat(5, 1fr);
+    grid-gap: 10px 5px;
+}
+.date, .day{
+    border: 1px solid brown;
+    background-color: gold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 2.5em;
+    font-weight: 500;
+    border-radius: 10px;
+    /* text-align: center;
+    padding: 10px; */
+}
+.other-month, .day{
+    background-color: goldenrod;
+}
+.day{
+    /* background-color: greenyellow; */
+    font-size: 2em;
+}
+/* Calendar Design End */
+
 
