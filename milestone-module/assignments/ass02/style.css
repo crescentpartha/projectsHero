@@ -9,6 +9,7 @@ body{
 header{
     display: flex;
     justify-content: space-between;
+    margin: 0 140px;
 }
 .header-title > a{
     font-size: 1.6em;
@@ -66,7 +67,22 @@ nav a{
 }
 /* top section Design End */
 
-
+/* sponsor section start */
+.sponsor{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 290px;
+    align-items: center;
+    padding: 15px 50px;
+}
+hr{
+    color: lightgray;
+    margin: 0 140px;
+}
+.hr{
+    margin-top: 120px;
+}
+/* sponsor section end */
 
 /* main Design End */
 
