@@ -84,5 +84,58 @@ hr{
 }
 /* sponsor section end */
 
+/* grid section start */
+.grid-section{
+    margin: 110px 140px;
+}
+.grid-title h1{
+    font-size: 2.5em;
+    text-align: center;
+}
+.grid-blogs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px 20px;
+}
+.grid-blog{
+    /* border: 1px solid tomato; */
+    border-radius: 8px;
+    padding: 10px;
+    text-align: justify;
+    box-shadow: 10px 5px 15px 1px gray;
+}
+.grid-blog img{
+    width: 100%;
+}
+.grid-blog h2{
+    font-size: 2em;
+    margin: 5px 0;
+}
+.grid-blog h3{
+    font-size: 1.8em;
+    margin: 0%;
+}
+.grid-blog .number{
+    margin-left: 20px;
+}
+.fa-star, .fa-star-half-alt, .number, .grid-blog>p{
+    font-size: 1.2em;
+}
+.fa-star, .fa-star-half-alt{
+    color: #fc962b;
+}
+.grid-link {
+    margin-top: 40px;
+    text-align: right;
+}
+.grid-link a{
+    text-decoration: none;
+    color: #e02b6c;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+/* grid section end */
+
+
 /* main Design End */
 
