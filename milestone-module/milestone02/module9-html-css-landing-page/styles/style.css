@@ -1,0 +1,42 @@
+*{
+    margin: 0%;
+}
+
+/* header & navigation start  */
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+}
+header a{
+    /* text-decoration: none;
+    font-size: 2em;
+    color: whitesmoke;
+    margin: 0 10px; */
+    
+    
+}
+.logo1{
+    margin-left: 20px;
+}
+.logo1 a img{
+    width: 10%;
+    padding: 5px;
+}
+/* header & navigation end  */
+
+/* top players style  */
+.players{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.player{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.player img{
+    width: 56px;
+    height: 56px;
+}
