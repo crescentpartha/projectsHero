@@ -1,4 +1,42 @@
 
+/* navigation var  */
+nav > ul{
+    display: flex;
+}
+nav li{
+    list-style: none;
+    margin-right: 10px;
+    padding: 0px 10px;
+}
+nav li:hover{
+    background-color: lightgray;
+    border-radius: 5px;
+}
+nav li a{
+    text-decoration: none;
+    color: gold;
+    font-size: 20px;
+
+}
+
+.dropdown{
+    display: none;
+    position: absolute;
+    background-color: lightgoldenrodyellow;
+    padding: 0;
+}
+.dropdown li{
+    margin: 0;
+    padding: 0 10px;
+}
+nav > ul > li:hover> ul{
+    display: block;
+}
+
+/* navigation var  */
+
+
+
 /* Part-1 */
 /* visibility Design Start*/
 
@@ -116,7 +154,7 @@
 /* Transition Design End  */
 
 
-/* Cricket Match Animation */
+/* Cricket Match Animation Start */
 
 .field {
     /* width: 1000px; */
@@ -144,6 +182,75 @@
     transform-origin: top right;
 }
 
-/* Cricket Match Animation */
+/* Cricket Match Animation End*/
 
 
+/* Animation Design Started */
+
+@keyframes sliding {
+    0%{
+        background-color: red;
+        left: 0px;
+        top: 0;
+        
+    }
+    25%{
+        top: 330px;
+        background-color: yellow;
+        transform: scale(0.5);
+    }
+    50%{
+        top: 0px;
+        background-color: darkorange;
+        transform: scale(1);
+    }
+    75%{
+        top: 330px;
+        background-color: chartreuse;
+        transform: scale(0.5);
+    }
+    100%{
+        background-color: magenta;
+        left: 700px;
+        top: 0;
+    }
+}
+
+.stage {
+    height: 400px;
+    width: 800px;
+    background-color: lightskyblue;
+    border: 2px solid chocolate;
+}
+.c-ball{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 50%;
+    animation: sliding 2s ease-in-out 0.5s infinite alternate ;
+    animation-play-state: running;
+    position: relative;
+}
+
+/* Animation Design End */
+
+
+/* Float Design Start */
+
+
+/* .blog-container{
+    display: flex;
+} */
+.blog{
+    cursor: pointer;
+    float: left;
+    width: 400px;
+    min-height: 100px;
+    /* max-height: 300px; */
+    background-color: darkorange;
+    margin: 10px;
+    padding: 10px;
+    
+}
+
+/* Float Design End */
