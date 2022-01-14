@@ -18,9 +18,9 @@ M02-Assignment Link:
 
 # Module Projects Link
 
-Module01-03 Link: https://crescentpartha.github.io/projectsHero/
+Module01-03 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone01/module01-03/intel.html
 
-Module4 Link: https://crescentpartha.github.io/projectsHero/
+Module4 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone01/module04/intel.html
 
 Module6 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone02/module6-html5/index.html
 
