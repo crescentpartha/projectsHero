@@ -1,0 +1,82 @@
+
+/* Flexbox Design Start */
+.container{
+    height: 400px;
+    display: flex;
+    border: 2px solid black;
+    margin-bottom: 10px;
+    /* justify-content: center/start/end/flex-start/flex-end/space-evenly/space-between/space-around; */
+    /* align-items: center/flex-start/flex-end/stretch(height need to be undefind); */
+    justify-content: space-around;
+    align-items: center;
+
+}
+.box{
+    width: 200px;
+    height: 200px;
+    font-size: 3em;
+    border: 3px dashed rebeccapurple;
+}
+/* ------------------------------------ */
+.container1{
+    height: 400px;
+    display: flex;
+    border: 2px solid black;
+    
+
+}
+.box1{
+    width: 200px;
+    font-size: 3em;
+    border: 3px dashed rebeccapurple;
+}
+/* ----------------------------------------- */
+#box-1{
+    order: 2;
+}
+#box-2{
+    flex-grow: 1;
+    order: 1;
+}
+/* Flexbox Design End  */
+
+
+/* Flexuse Design Start  */
+nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+    margin-right: 15px;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+}
+/* --------------------------------------- */
+.login-container{
+    display: flex;
+    justify-content: center;
+}
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
+/* ---------------------------------- */
+.login-form input, button{
+    font-size: 1.3em;
+    margin-top: 15px;
+    padding-left: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.login-form button{
+    background-color: orange;
+    color: whitesmoke;
+    font-weight: 700;
+    padding: 5px;
+    border: 0;
+}
+/* Flexuse Design End  */
+
+
+
