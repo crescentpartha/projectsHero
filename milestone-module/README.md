@@ -10,7 +10,7 @@ Project-1 Link: https://crescentpartha.github.io/projectsHero/project1/intel.htm
 
 M01-Assignment Link: https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass01/index.html
 
-M02-Assignment Link: 
+M02-Assignment Link: https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass02/index.html
 
 
 

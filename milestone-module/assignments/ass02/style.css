@@ -23,4 +23,50 @@ nav a{
 }
 /* header Design End  */
 
+/* main Design Start */
+
+/* top section Design Start */
+.top-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 50px 0;
+}
+.top-left{
+    width: 35%;
+    /* border: 1px solid red; */
+    padding: 10px;
+    text-align: justify;
+}
+.top-left h1{
+    font-size: 3.5em;
+    margin-bottom: 0;
+}
+.top-left p{
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+.top-left a{
+    font-size: 1.4em;
+    text-decoration: none;
+    background-color: #e02b6c;
+    padding: 10px 40px;
+    border-radius: 25px;
+    color: whitesmoke;
+}
+.top-right{
+    width: 35%;
+    /* border: 1px solid red; */
+}
+.top-right img{
+    margin-left: 50px;
+}
+.top-right:hover img{
+    transform: scale(1.2) rotate(40deg);
+}
+/* top section Design End */
+
+
+
+/* main Design End */
 
