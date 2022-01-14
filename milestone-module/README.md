@@ -30,3 +30,5 @@ Module7.5 Link: https://crescentpartha.github.io/projectsHero/milestone-module/m
 
 Module8 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone02/module8-responsive-css-layout/flexuse.html
 
+Module9 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone02/module9-html-css-landing-page/index.html
+
