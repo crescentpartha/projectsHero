@@ -26,9 +26,8 @@ nav a{
 nav a:hover{
     text-decoration: none;
     color: whitesmoke;
-    /* font-size: 1.4em; */
-    /* font-weight: 700; */
-    padding: 10px auto;
+    /* padding: 5px 5px; */
+    padding: 5px auto;
     border-radius: 10px;
     background-color: #e02b6c;
     
@@ -227,7 +226,8 @@ footer a{
 
 /* css breakpoint */
 
-/* @media only screen and (min-width: 1201px) {
+/* 
+@media only screen and (min-width: 1201px) {
     
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -244,6 +244,9 @@ footer a{
 } */
 
 @media only screen and (min-width: 1201px) {
+    nav a:hover{
+        padding: 5px 10px;
+    } 
     .top-right{
         text-align: center;
     }
@@ -265,6 +268,9 @@ footer a{
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    nav a:hover{
+        padding: 5px 10px;
+    } 
     header {
         /* display: flex; */
         justify-content: center;
@@ -320,6 +326,9 @@ footer a{
  
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    nav a:hover{
+        padding: 5px 10px;
+    } 
     .header-title > a {
         font-size: 1.2em;
         margin-left: 0;
@@ -406,6 +415,125 @@ footer a{
     
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    
+    header {
+        display: block;
+        margin: 25px 50px;
+        text-align: center;
+    }
+    .header-title > a {
+        font-size: 1.2em;
+        margin-left: 0;
+    }
+    .header-title > a:hover {
+        color: #e02b6c;
+    }
+    nav a {
+        font-size: 0.8em;
+        margin-left: 8px;
+        padding: 5px;
+    }
+    .top-section {
+        display: block;
+        margin: 25px 50px;
+    }
+    .top-left h1 {
+        font-size: 0.9em;
+    }
+    .top-left {
+        width: 90%;
+        padding: 15px;
+        text-align: justify;
+        margin-bottom: 5px;
+    }
+    .top-left:hover, .top-right:hover{
+        border: 2px solid #e02b6c;
+    }
+    .top-left p {
+        font-size: 0.5em;
+        margin-bottom: 5px;
+    }
+    .top-left a {
+        font-size: 0.6em;
+        padding: 5px 6px;
+    }
+    .top-right {
+        width: 90%;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .top-right img {
+        width: 70%;
+    }
+    .top-right a {
+        font-size: 1em;
+        padding: 6px 13px;
+    }
+    hr {
+        margin: 0 60px;
+        margin-top: 0px;
+    }
+    .hr {
+        margin-top: 65px;
+    }
+    .sponsor {
+        width: 365px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+    .sponsor img {
+        width: 70px;
+    }
+    .sponsor a {
+        margin: 0px 10px;
+    }
+    .grid-title h1 {
+        font-size: 1.5em;
+    }
+    .grid-blogs {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-section {
+        margin: 110px 60px;
+    }
+    .grid-link a {
+        font-size: 1.5em;
+    }
+    .grid-link:hover a{
+        text-decoration: none;
+        color: whitesmoke;
+        font-size: 1.5em;
+        font-weight: 700;
+        background-color: #e02b6c;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .top-right h1 {
+        font-size: 1.5em;
+    }
+    .top-right p {
+        font-size: 0.8em;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+    .grid-blog h3 {
+        font-size: 1.5em;
+    }
+    .fa-star, .fa-star-half-alt, .number, .grid-blog > p {
+        font-size: 0.8em;
+    }
+    .grid-section {
+        margin: 45px 60px;
+    }
+    .top-right {
+        text-align: center;
+    }
+    footer h1 {
+        font-size: 20px;
+    }
+    footer h3 {
+        font-size: 12px;
+    }
 }
 
