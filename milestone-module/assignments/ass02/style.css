@@ -9,18 +9,19 @@ body{
 header{
     display: flex;
     justify-content: space-between;
-    margin: 0 140px;
+    margin: 0 90px;
 }
 .header-title > a{
     font-size: 1.6em;
     text-decoration: none;
     color: black;
+    margin-left: 60px;
 }
 nav a{
     text-decoration: none;
     color: black;
     font-size: 1.4em;
-    margin-left: 45px;
+    margin-left: 30px;
 }
 /* header Design End  */
 
@@ -36,12 +37,16 @@ nav a{
 .top-left{
     width: 35%;
     /* border: 1px solid red; */
-    padding: 10px;
+    padding: 30px;
     text-align: justify;
 }
+.top-left:hover, .top-right:hover{
+    border: 5px solid #e02b6c;
+    border-radius: 10px;
+}
 .top-left h1{
-    font-size: 3.5em;
-    margin-bottom: 0;
+    font-size: 2.5em;
+    margin: 0;
 }
 .top-left p{
     font-size: 1.2em;
@@ -64,6 +69,7 @@ nav a{
 }
 .top-right:hover img{
     transform: scale(1.2) rotate(40deg);
+    transition: transform 3s ease;
 }
 /* top section Design End */
 
@@ -136,6 +142,66 @@ hr{
 }
 /* grid section end */
 
+/* bottom section start */
+.bottom-left{
+    width: 35%;
+}
+.bottom-left img{
+    width: 100%;
+}
+.bottom-right{
+    width: 35%;
+    padding: 30px;
+    text-align: justify;
+}
+.top-right h1{
+    font-size: 3em;
+    margin: 0;
+}
+.top-right p{
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+.top-right a{
+    font-size: 1.4em;
+    text-decoration: none;
+    background-color: #e02b6c;
+    padding: 10px 40px;
+    border-radius: 25px;
+    color: whitesmoke;
+}
+.bottom-left:hover img{
+    transform: scale(1.2) rotate(-360deg);
+    transition: transform 3s ease;
+}
+
+/* bottom section end */
 
 /* main Design End */
 
+
+/* footer section start */
+footer{
+    text-align: center;
+    background-color: #0a0826;
+    color: whitesmoke;
+    margin: 0;
+}
+footer h1{
+    padding: 50px 0 0;
+    margin: 0;
+}
+footer h3{
+    margin: 0 0 10px;
+}
+footer span{
+    /* margin-bottom: 20px; */
+}
+footer a{
+    color: whitesmoke;
+    margin: 0px 10px;
+}
+.icon-link{
+    padding-bottom: 40px;
+}
+/* footer section end */
