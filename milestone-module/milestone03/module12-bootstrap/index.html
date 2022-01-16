@@ -20,33 +20,236 @@
 
     </header>
     <main>
-        <!-- 12.2 Exploring Background Color -->
-        <h1 class="bg-info">I am starting a bootstrap while wearing boots.</h1>
-        <h2 class="bg-primary">Hello from Bootstrap</h2>
-        <p class="bg-success">This is something about me exploring something new.</p>
-        <p class="bg-warning">I warn you don't text this person, he/she will block you.</p>
-        <div class="p-3 mb-2 bg-info text-dark">.bg-info</div>
+        <section>
+            <!-- 12.2 Exploring Background Color -->
+            <h1>Exploring Background Color</h1> <br> <br>
+            <h1 class="bg-info">I am starting a bootstrap while wearing boots.</h1>
+            <h2 class="bg-primary">Hello from Bootstrap</h2>
+            <p class="bg-success">This is something about me exploring something new.</p>
+            <p class="bg-warning">I warn you don't text this person, he/she will block you.</p>
+            <div class="p-3 mb-2 bg-info text-dark">.bg-info</div>
 
-        <!-- 12.3 Exploring Borders, Colors, Overflow -->
-        <div class=" border-primary border-top border-bottom">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, non!</div>
-        <span class="border border-success bg-warning rounded-pill">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, ipsa!</span>
+            <!-- 12.3 Exploring Borders, Colors, Overflow -->
+            <h1>Exploring Borders, Colors, Overflow</h1> <br> <br>
+            <div class=" border-primary border-top border-bottom">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, non!</div>
+            <span class="border border-success bg-warning rounded-pill">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, ipsa!</span>
 
-        <!-- 12.3 Exploring Position -->
-        <br> <br>
-        <div class="position-relative">
-            <div class="position-absolute top-0 start-0">Lorem, ipsum.</div>
-            <div class="position-absolute top-0 end-0">Lorem, ipsum.</div>
-            <div class="position-absolute top-50 start-50">Lorem, ipsum.</div>
-            <div class="position-absolute bottom-50 end-50">Lorem, ipsum.</div>
-            <div class="position-absolute bottom-0 start-0">Lorem, ipsum.</div>
-            <div class="position-absolute bottom-0 end-0">Lorem, ipsum.</div>
-        </div>
+            <!-- 12.3 Exploring Position -->
+            <h1>Exploring Position</h1> <br> <br>
+            <br> <br>
+            <div class="position-relative">
+                <div class="position-absolute top-0 start-0">Lorem, ipsum.</div>
+                <div class="position-absolute top-0 end-0">Lorem, ipsum.</div>
+                <div class="position-absolute top-50 start-50">Lorem, ipsum.</div>
+                <div class="position-absolute bottom-50 end-50">Lorem, ipsum.</div>
+                <div class="position-absolute bottom-0 start-0">Lorem, ipsum.</div>
+                <div class="position-absolute bottom-0 end-0">Lorem, ipsum.</div>
+            </div>
 
-        <br> <br>
-        <!-- 12.4 Exploring Shadow, Margin, Padding, Width, Height -->
-        <div class="shadow-lg p-3 m-5 w-50 bg-body rounded">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, placeat.</div>
+            <br> <br>
+            <!-- 12.4 Exploring Shadow, Margin, Padding, Width, Height -->
+            <h1>Exploring Shadow, Margin, Padding, Width, Height</h1> <br> <br>
+            <div class="shadow-lg p-3 m-5 w-50 bg-body rounded">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, placeat.</div>
 
+            <!-- 12.5 Typography, Image, Image Thumbnail, Table, Striped Table -->
+            <h1>Typography Exploring</h1> <br> <br>
+            <p class="h2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, maiores.</p>
+            <h1>Image Exploring</h1> <br> <br>
+            <img class="mb-5 w-75 img-fluid img-thumbnail" src="./images/blog-2.png" alt="image">
+            <h1>Table Exploring</h1> <br> <br>
+            <table class="table table-success table-bordered border-primary table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
 
+        <section>
+            <!-- 12.6 Create a image Slider, Carousel using bootstrap -->
+            <h1>Slider Exploring</h1> <br> <br>
+            <section class="carousel-container w-50 mx-auto">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="./images/blog-1.png" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="./images/blog-2.png" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="./images/blog-3.png" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="./images/blog-4.png" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                  <h1 class="fs-3">I am tring to show slider</h1>
+            </section>
+
+            <!-- 12.7 Website Card, Card Design, Card Image, Card Group -->
+            <h1>Card Design Exploring</h1> <br> <br>
+            <div class="card" style="width: 18rem;">
+                <img src="./images/blog-3.png" class="card-img-top" alt="Image Title">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="./images/blog-2.png" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/blog-1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/blog-2.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/blog-3.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <!-- 12.8 Button, Button Group, Accordion, Spinner, Tooltips, Scrollspy, Toasts -->
+            <h1>Button Exploring</h1> <br> <br>
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-success">Primary</button>
+            <button class="btn btn-warning">Primary</button>
+
+            <br> <br>
+            <h1>Button Group Exploring</h1> <br> <br>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-danger">Left</button>
+                <button type="button" class="btn btn-warning">Middle</button>
+                <button type="button" class="btn btn-success">Right</button>
+            </div> <br> <br>
+
+            <h1>Accordion Exploring</h1> <br> <br>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Accordion Item #1
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                    </div>
+                    </div>
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Accordion Item #2
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                    </div>
+                    </div>
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                    </div>
+                </div>
+            </div>
+
+            <h1>Pagination Exploring</h1> <br> <br>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+            
+        </section>
     </main>
     <footer>
 
