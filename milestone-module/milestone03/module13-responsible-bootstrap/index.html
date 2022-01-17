@@ -9,13 +9,61 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Module Introduction and Recap -->
+    <!-- 13.1 Module Introduction and Recap -->
     <section>
         <h1>Responsible Bootstrap Exploration with my Friends.</h1>
         <div class="bg-primary text-white w-25 border border-danger border-5 rounded-pill d-flex justify-content-center shadow-lg p-3 mb-5 ">
             I am a colorful Div.
         </div>
     </section>
+
+    <!-- 13.2 Create Form with Floating label and form validation -->
+    <section>
+        <h1>Form-1</h1>
+        <form action="">
+            <h1>Form without Bootstrap</h1>
+            <input type="text" placeholder="Enter your name"> <br>
+            <input type="password" name="password" id="pass" placeholder="Enter your password"> <br>
+            <button>Submit</button><br>
+        </form>
+        <br>
+        <h1>Form-2</h1>
+        <form class="w-50 mx-auto">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form> <br>
+        <h1>Form-3</h1>
+        <form action="" class="w-50 mx-auto">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+        </form> <br>
+    </section>
+
+    <!-- 13.3 Try Modal, Dialog, handle multiple modal, Offcanvas -->
+    
 
 
 
