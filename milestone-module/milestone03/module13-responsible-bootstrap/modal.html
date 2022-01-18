@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- 13.3 Try Modal, Dialog, Handle multiple modal, Offcanvas -->
+    <section>
+        <!-- Toggle between modals -->
+        <h1 class="text-center bg-danger rounded border border-3 m-3">Toggle between <span class="bg-warning">Modals</span></h1>
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Show a second modal and hide this one with the button below.
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Hide this modal and show the first with the button below.
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
+    </section>
+    <section>
+        <h1 class="text-center bg-danger rounded border border-3 m-3">Live Demo | <span class="bg-warning">Offcanvas</span></h1>
+        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            Link with href
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            Button with data-bs-target
+        </button>
+        
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+            <div>
+                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+            </div>
+            <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13.4 Flex layout, justify content, align items, horizontal center -->
+    <section>
+        <h1 class="text-center bg-danger rounded border border-3 m-3">Flexible <span class="bg-warning">Flexbox</span> Hotel Rooms</h1>
+        <div class="d-flex justify-content-center">
+            <div class="w-25 border border-primary border-3 rounded m-2 order-2">
+                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <h2>Single Hotel Room</h2>
+            </div>
+            <div class="w-25 border border-primary border-3 rounded m-2 order-3">
+                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <h2>Double Hotel Room</h2>
+            </div>
+            <div class="w-25 border border-primary border-3 rounded m-2 order-1">
+                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <h2>Family Hotel Room</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13.5 Bootstrap responsive Container and breakpoints -->
+    <section>
+        <h1 class="text-center bg-danger rounded border border-3 m-3">Bootstrap <span class="bg-warning">Container</span> Exploretion</h1>
+        <div class="bg-success mb-3 text-white container">
+            I am a container.
+        </div>
+        <div class="bg-success mb-3 text-white container-md">
+            I am a container.
+        </div>
+        <div class="bg-success mb-3 text-white container-lg">
+            I am a container.
+        </div>
+        <div class="bg-success mb-3 text-white container-xl">
+            I am a container.
+        </div>
+        <div class="bg-success mb-3 text-white container-fluid">
+            I am a container.
+        </div>
+    </section>
+
+    <!-- 13.6 Grid System with 12 column layout, responsive grid -->
+    <section class="container">
+        <h1 class="text-center bg-danger rounded border border-3">My <span class="bg-warning">Grid System</span></h1>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-6">
+                <h1>First Column</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit aut voluptates recusandae corporis natus et a fuga repudiandae doloremque facere, odit nihil iure ad minus eveniet rerum libero. Enim, eum.</p>
+            </div>
+            <div class="col-lg-3 col-md-8 col-6">
+                <h1>Second Column</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit aut voluptates recusandae corporis natus et a fuga repudiandae doloremque facere, odit nihil iure ad minus eveniet rerum libero. Enim, eum.</p>
+            </div>
+            <div class="col-lg-3 col-md-8 col-8">
+                <h1>Third Column</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit aut voluptates recusandae corporis natus et a fuga repudiandae doloremque facere, odit nihil iure ad minus eveniet rerum libero. Enim, eum.</p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-4">
+                <h1>Fourth Column</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit aut voluptates recusandae corporis natus et a fuga repudiandae doloremque facere, odit nihil iure ad minus eveniet rerum libero. Enim, eum.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
