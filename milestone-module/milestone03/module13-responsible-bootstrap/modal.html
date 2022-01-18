@@ -10,6 +10,46 @@
 </head>
 <body>
 
+    <!-- 13.9 Navbar again, Bootstrap Overview, Module Summary -->
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./modal.html">Modal</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+    </header>
+
     <!-- 13.3 Try Modal, Dialog, Handle multiple modal, Offcanvas -->
     <section>
         <!-- Toggle between modals -->
@@ -85,15 +125,15 @@
         <h1 class="text-center bg-danger rounded border border-3 m-3">Flexible <span class="bg-warning">Flexbox</span> Hotel Rooms</h1>
         <div class="d-flex justify-content-center">
             <div class="w-25 border border-primary border-3 rounded m-2 order-2">
-                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <img class="img-fluid" class="img-fluid" src="./images/blog-1.png" alt="images">
                 <h2>Single Hotel Room</h2>
             </div>
             <div class="w-25 border border-primary border-3 rounded m-2 order-3">
-                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <img class="img-fluid" class="img-fluid" src="./images/blog-1.png" alt="images">
                 <h2>Double Hotel Room</h2>
             </div>
             <div class="w-25 border border-primary border-3 rounded m-2 order-1">
-                <img class="img-fluid" src="./images/blog-1.png" alt="images">
+                <img class="img-fluid" class="img-fluid" src="./images/blog-1.png" alt="images">
                 <h2>Family Hotel Room</h2>
             </div>
         </div>
@@ -142,7 +182,193 @@
         </div>
     </section>
 
+    <!-- 13.7 Responsive players using bootstrap grid columns -->
+    <section>
+        <h1 class="text-center bg-danger rounded border border-3 m-3 fs-3">13.7 <span class="bg-warning">Responsive</span> players using bootstrap grid columns</h1>
+        <section class="container">
+            <h2>My Players Playing Hard!</h2>
+            <div class="row">
+                <!-- .col-lg-3.col-md-4.col-sm-6.col-12*4>img.img-fluid[src="./images/blog-$.png"]+h2{Player-$}+p>lorem -->
 
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-1.png" alt="" class="img-fluid">
+                    <h2>Player-1</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis eius voluptas omnis repellat, ipsum soluta consequuntur repudiandae, rem quaerat illum architecto voluptatibus asperiores cum totam ad labore voluptates dignissimos dicta.</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-2.png" alt="" class="img-fluid">
+                    <h2>Player-2</h2>
+                    <p>Ratione natus iure tenetur sed harum cum sapiente, illo sequi vero voluptatibus illum adipisci debitis iste dicta voluptatum id nihil architecto maiores excepturi tempore porro in accusamus laboriosam eius. Rem?</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-3.png" alt="" class="img-fluid">
+                    <h2>Player-3</h2>
+                    <p>Maiores dolor, deserunt officiis itaque vel voluptates asperiores voluptate repellat rem voluptas? Dignissimos tenetur quibusdam aut porro iure, totam, illo nisi corporis facilis adipisci inventore! Nulla adipisci fugiat facilis ut.</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-4.png" alt="" class="img-fluid">
+                    <h2>Player-4</h2>
+                    <p>Non nisi architecto mollitia nobis sint natus distinctio consectetur iusto labore quibusdam maxime laboriosam, enim temporibus, sit tenetur dolorum perspiciatis atque. Accusamus nihil quibusdam dolorem distinctio consequatur quasi sequi omnis.</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-1.png" alt="" class="img-fluid">
+                    <h2>Player-5</h2>
+                    <p>Ratione natus iure tenetur sed harum cum sapiente, illo sequi vero voluptatibus illum adipisci debitis iste dicta voluptatum id nihil architecto maiores excepturi tempore porro in accusamus laboriosam eius. Rem?</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-2.png" alt="" class="img-fluid">
+                    <h2>Player-6</h2>
+                    <p>Maiores dolor, deserunt officiis itaque vel voluptates asperiores voluptate repellat rem voluptas? Dignissimos tenetur quibusdam aut porro iure, totam, illo nisi corporis facilis adipisci inventore! Nulla adipisci fugiat facilis ut.</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-3.png" alt="" class="img-fluid">
+                    <h2>Player-7</h2>
+                    <p>Non nisi architecto mollitia nobis sint natus distinctio consectetur iusto labore quibusdam maxime laboriosam, enim temporibus, sit tenetur dolorum perspiciatis atque. Accusamus nihil quibusdam dolorem distinctio consequatur quasi sequi omnis.</p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <img class="img-fluid" src="./images/blog-4.png" alt="" class="img-fluid">
+                    <h2>Player-8</h2>
+                    <p>Non nisi architecto mollitia nobis sint natus distinctio consectetur iusto labore quibusdam maxime laboriosam, enim temporibus, sit tenetur dolorum perspiciatis atque. Accusamus nihil quibusdam dolorem distinctio consequatur quasi sequi omnis.</p>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+    <!-- 13.8 Another Responsive example for bags and jackets cards -->
+    <section>
+        <h1 class="text-center bg-danger rounded border border-3 m-3 fs-3">13.8 Another <span class="bg-warning">Responsive</span> example for bags and jackets cards</h1>
+
+        <h1>Horizontal & Vertical gutters</h1>
+        <div class="container">
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="p-3 border bg-light">Custom column padding</div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 border bg-light">Custom column padding</div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 border bg-light">Custom column padding</div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 border bg-light">Custom column padding</div>
+              </div>
+            </div>
+        </div>
+
+        <h1>I am in shopping mood. Bkash me some money!!</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4">
+            <div class="col">
+              <div class="card">
+                <img class="img-fluid" src="./images/blog-1.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img class="img-fluid" src="./images/blog-2.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img class="img-fluid" src="./images/blog-3.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img class="img-fluid" src="./images/blog-4.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <h1>Grid-Card <br> I am cool. I need a Jacket. A cool Jacket!!!!!</h1>
+        <section class="container">
+            <div class="row g-4 row-cols-md-3 row-cols-sm-2 row-cols-1 row-cols-lg-4">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-1.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-2.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-3.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-4.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-1.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-2.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img class="img-fluid" src="./images/blog-3.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- 13.9 Navbar again, Bootstrap Overview, Module Summary -->
+    
 
     <!-- Bootstrap Bundle JS -->
     <script src="./js/bootstrap.bundle.min.js"></script>

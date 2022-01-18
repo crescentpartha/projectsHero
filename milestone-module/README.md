@@ -32,3 +32,9 @@ Module8 Link: https://crescentpartha.github.io/projectsHero/milestone-module/mil
 
 Module9 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone02/module9-html-css-landing-page/index.html
 
+Module12 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module12-bootstrap/index.html
+
+Module13 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module13-responsible-bootstrap/index.html
+
+
+
