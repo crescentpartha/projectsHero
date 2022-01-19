@@ -38,5 +38,5 @@ Module13 Link: https://crescentpartha.github.io/projectsHero/milestone-module/mi
 
 Module13.5 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module13.5-bootstrap-practice/index.html
 
-
+Module13.6 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module13.6-bootstrap-practice/index.html
 
