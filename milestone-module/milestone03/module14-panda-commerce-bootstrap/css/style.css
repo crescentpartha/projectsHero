@@ -1,0 +1,23 @@
+.sliders-bg-color {
+    background-color: #fceae8 !important;
+}
+.watch-bg-color {
+    background-color: #ffa500;
+}
+.bag-bg-color {
+    background-color: #da70d6;
+}
+.shoe-bg-color {
+    background-color: #0000ff;
+}
+.subscribe-bg-color {
+    background-color: #fceae8;
+}
+.button-bg-color {
+    background-image: linear-gradient(to bottom, #FF589B 0%, #FF136F 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 25px;
+    cursor: pointer;
+}
