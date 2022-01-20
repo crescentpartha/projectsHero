@@ -14,9 +14,9 @@
     <!-- Header Section Start -->
     <header>
         <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#home">
                     <img src="./images/logo.png" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -28,16 +28,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link text-dark" href="#">Home</a>
+                            <a class="nav-link text-dark" href="#home">Home</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link text-dark" href="#">Shoes</a>
+                            <a class="nav-link text-dark" href="#shoes">Shoes</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link text-dark" href="#">Playback</a>
+                            <a class="nav-link text-dark" href="#backpack">Backpack</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link text-dark" href="#">Subscribe</a>
+                            <a class="nav-link text-dark" href="#subscribe">Subscribe</a>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@
         </nav>
 
         <!-- Carousel or Image Slider -->
-        <div class="container">
+        <div class="container" id="home">
             <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -131,7 +131,7 @@
         </section>
 
         <!-- Shoes Section -->
-        <section class="container">
+        <section class="container" id="shoes">
             <h1>Shoes</h1>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
                 <div class="col">
@@ -180,7 +180,7 @@
         </section>
 
         <!-- Backpack Section -->
-        <section class="container my-5">
+        <section class="container my-5" id="backpack">
             <h1>Backpack</h1>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
                 <div class="col">
@@ -189,7 +189,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Red Laltu Bag</h5>
                             <h5>$120</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="m-3">
                             <button class="btn btn-warning">Buy Now >></button>
@@ -202,7 +203,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Blue Niltu Bag</h5>
                             <h5>$320</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                                content.</p>
                         </div>
                         <div class="m-3">
                             <button class="btn btn-warning">Buy Now >></button>
@@ -215,7 +217,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Black Kaltu Bag</h5>
                             <h5>$169</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This card has even longer content than the first to show that equal
+                                height action.</p>
                         </div>
                         <div class="m-3">
                             <button class="btn btn-warning">Buy Now >></button>
@@ -225,11 +229,23 @@
             </div>
         </section>
 
+        <!-- Subscribe Section -->
+        <section class="container bg-primary d-flex justify-content-center py-5 my-5 align-items-center rounded-3" id="subscribe">
+            <div>
+                <h1>LET'S STAY IN TOUCH</h1>
+                <p>Get updates on sales, specials and more</p>
+                <input type="text" placeholder="Enter your Email" name="mail" id="mail">
+                <br>
+                <button class="btn btn-warning">Submit</button>
+            </div>
+        </section>
 
     </main>
     <!-- Footer Section Start -->
-    <footer>
-
+    <footer class="">
+        <p class="text-center">
+            <small>&copy2020. Panda Commerce. All rights reserved. Sofia, Bulgaria.</small>
+        </p>
     </footer>
     <!-- Bootstrap Bundle Js -->
     <script src="./js/bootstrap.bundle.min.js"></script>
