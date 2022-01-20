@@ -40,3 +40,8 @@ Module13.5 Link: https://crescentpartha.github.io/projectsHero/milestone-module/
 
 Module13.6 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module13.6-bootstrap-practice/index.html
 
+Module14 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module14-panda-commerce-bootstrap/index.html
+
+
+
+
