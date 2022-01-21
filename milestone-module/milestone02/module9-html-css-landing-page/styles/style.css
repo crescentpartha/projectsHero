@@ -1,9 +1,12 @@
+
 *{
     margin: 0%;
 }
 
+
 /* poppins font  */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
 
 /* common styles or utilities*/
 body{
@@ -11,7 +14,7 @@ body{
     background-color: #F3F1FF;
 }
 main{
-    display: flex;
+    display: block;
     justify-content: center;
 }
 .container{
@@ -24,6 +27,7 @@ main{
 hr{
     border: 1px solid #D1D1D1;
 }
+
 
 /* header & navigation start  */
 header{
@@ -83,6 +87,7 @@ nav ul li a img{
 }
 /* header & navigation end  */
 
+
 /* top players style  */
 .top-players{
     margin-bottom: 30px;
@@ -112,6 +117,7 @@ nav ul li a img{
     font-size: 18px;
 }
 
+
 /* Top blog section start  */
 .top-blogs{
     margin: 20px 0px;
@@ -122,15 +128,17 @@ nav ul li a img{
     grid-gap: 20px;
 }
 .blog{
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 20px;
 }
 .blog-img img{
-    width: 220px;
-    height: 127px;
+    width: 100%;
 }
 .blog-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-left: 5px;
 }
 .blog-info > h1 {
@@ -144,5 +152,61 @@ nav ul li a img{
 }
 .blog-info > p > span{
     color: gray;
+}
+
+
+/* Latest Course Section Start */
+.courses{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+.course{
+    box-shadow: 1px 1px 10px gray;
+    border-radius: 10px;
+    padding: 5px;
+}
+.course > img {
+    width: 100%;
+}
+.course > h1 {
+    font-size: 20px;
+    padding: 5px 0;
+}
+.course > p {
+    color: #ed6b4f;
+    font-size: 15px;
+}
+.course-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.course-footer-star > img{
+    width: 13px;
+}
+.course-footer-star > span{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.course-footer-star > .star-5{
+    /* color: black; */
+    opacity: 0.5;
+    /* background-color: red; */
+} 
+.course-footer-time{
+    display: flex;
+    align-items: center;
+    background-color: #ffe4e7;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+.course-footer-time img{
+    width: 13px;
+}
+.course-footer-time span{
+    font-size: 14px;
+    margin-left: 5px;
 }
 
