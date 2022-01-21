@@ -18,6 +18,8 @@ main{
     background-color: #FFFFFF;
     width: 70%;
     padding: 30px;
+    margin: 30px auto;
+    border-radius: 10px;
 }
 hr{
     border: 1px solid #D1D1D1;
@@ -110,4 +112,37 @@ nav ul li a img{
     font-size: 18px;
 }
 
+/* Top blog section start  */
+.top-blogs{
+    margin: 20px 0px;
+}
+.blogs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+.blog{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.blog-img img{
+    width: 220px;
+    height: 127px;
+}
+.blog-info{
+    margin-left: 5px;
+}
+.blog-info > h1 {
+    font-size: 20px;
+    padding: 10px;
+}
+.blog-info > p {
+    font-size: 16px;
+    padding: 10px;
+    color: blue;
+}
+.blog-info > p > span{
+    color: gray;
+}
 
