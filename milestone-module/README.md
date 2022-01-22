@@ -42,6 +42,8 @@ Module13.6 Link: https://crescentpartha.github.io/projectsHero/milestone-module/
 
 Module14 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module14-panda-commerce-bootstrap/index.html
 
+Module15 Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module15-tailwind-css/index2.html
 
+Module15(ii) Link: https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module15-tailwind-css/index.html
 
 
