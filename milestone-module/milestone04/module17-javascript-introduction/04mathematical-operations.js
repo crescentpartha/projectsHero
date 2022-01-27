@@ -1,6 +1,8 @@
 
 // Simple Mathematical Operations in JavaScript
 
+// Addition, Subtraction, Multiplication, Division
+
 var onionPrice = 40;
 var eggPrice = 50;
 var eggQuantity = 10;
@@ -17,4 +19,11 @@ console.log(priceDifference); // -10
 console.log(eggPriceMultiplicaiton); // 500
 console.log(orangeQuantity); // 50
 
-// Addition, Subtraction, Multiplication, Division
+// Modulus
+var mangoes = 7;
+var hungryPerson = 2;
+var remaining = mangoes % hungryPerson;
+console.log(remaining); // 1
+
+var dividing = mangoes / hungryPerson;
+console.log(dividing); // 3.5
