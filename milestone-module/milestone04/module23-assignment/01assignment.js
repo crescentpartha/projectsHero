@@ -2,7 +2,7 @@
 // Problem-01: Write a function called anaToVori and take a parameter called ana then convert it to vori and return vori as a number.
 
 function anaToVori (ana) {
-    if (ana >= 0) {
+    if (typeof ana === 'number' && ana >= 0) {
         const vori = ana/16;
         return vori;
     }
@@ -21,12 +21,18 @@ console.log(ana, 'Ana =', voriResult, 'Vori'); // 32 Ana = 2 Vori
 // Ratios (1 singara = 7 || 1 somosa = 10 || 1 gilapi = 15 taka)
 
 function pandaCost (singara, somosa, gilapi) {
-    if (singara >= 0 && somosa >= 0 && gilapi >= 0){
-        const totalCost = singara*7 + somosa*10 + gilapi*15;
-        return totalCost;
+    if (typeof singara === 'number' && typeof somosa === 'number' && typeof gilapi === 'number') {
+        if (singara >= 0 && somosa >= 0 && gilapi >= 0){
+            const totalCost = singara*7 + somosa*10 + gilapi*15;
+            return totalCost;
+        }
+        else {
+            console.log('Enter three positive number as a input');
+            return false;
+        }
     }
     else {
-        console.log('Enter three positive number as a input');
+        console.log('Enter Three Valid Number');
         return false;
     }
 }
@@ -39,7 +45,7 @@ console.log('Total Cost =', orderCost, 'taka'); // Total Cost = 87 taka
 
 function picnicBudget (people) {
     let cost = 0;
-    if (people >= 0) {
+    if (typeof people === 'number' && people >= 0) {
         if (people >= 0 && people <=100){
             cost = people * 5000;
         }
