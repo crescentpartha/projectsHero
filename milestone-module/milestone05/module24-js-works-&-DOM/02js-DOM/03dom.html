@@ -150,6 +150,62 @@
         console.log(document.querySelectorAll('#second-title'));
 
 
+        // 24.7 NodeList, htmlcollection, setAttribute, getAttribute, parentNode, childnodes, DOM-Nodes with tree
+
+        // 1. NodeList and HTMLCollection
+        console.log(document.getElementsByClassName('blog')); // HTMLCollection(4)
+        console.log(document.querySelectorAll('.blog')); // NodeList(4)
+        // Why HTMLCollection and NodeList are different?
+        // NodeList --> If all of are not tag 
+        // HTMLCollection --> If all of are tag
+
+        // Normal Array
+        const numbers = [2, 3, 4, 5, 6];
+        console.log(numbers.length);
+        numbers.push(234);
+        console.log(numbers.length);
+
+        // Array like Object
+        /* If I getElement from DOM by ClassName/TagName/querySelector
+            1. We can't make push pop operation.
+            2. We can apply for loop and for of loop 
+            3. We can get access by index 
+            4. We can check length
+        */   
+        /* DOM teke ami jodi getElement kore nie achi ClassName / querySelector / TagName er moddhome. 
+            1. We can not make  push pop operation. 
+            2. for loop chalaite parbo. 
+            3. for of loop chalite parbo. 
+            4. Index die access korte parbo. 
+            5. Length check korte parbo.
+        */
+        
+        const blogs2 = document.querySelectorAll('.blog');
+        // blogs2.push('23'); // Uncaught TypeError: blogs2.push is not a function
+        console.log(blogs2.length);
+        console.log(blogs2[0]);
+        console.log(blogs2[1]);
+
+        // 2. setAttribute and getAttribute
+        const secondTitle2 = document.getElementById('second-title');
+        console.log(secondTitle2);
+        console.log(secondTitle2.getAttribute('id')); // second-title
+        console.log(secondTitle2.getAttribute('style')); // color: yellow; text-align: center;
+        secondTitle2.setAttribute('title', 'I added a tooltip using JS');
+
+        // 3. DOM-Nodes with tree and parentNode
+        console.log(secondTitle2.parentNode); // article
+        console.log(secondTitle2.parentNode.parentNode); // section
+        console.log(secondTitle2.parentNode.parentNode.parentNode); // main
+        console.log(secondTitle2.parentNode.parentNode.parentNode.parentNode); // body
+        console.log(secondTitle2.parentNode.parentNode.parentNode.parentNode.parentNode); // html
+        console.log(secondTitle2.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode); // #document
+        console.log(secondTitle2.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode); // null
+
+        // 4. childNodes
+        const secondBlog = document.getElementById('second-blog');
+        console.log(secondBlog.childNodes);
+
     </script>
 </body>
 </html>
