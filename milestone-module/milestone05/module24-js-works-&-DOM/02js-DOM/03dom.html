@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to my blog website</h1>
+    </header>
+    <main>
+        <section>
+            <!-- article*3>h3{My Awesome Blog-$}+p>lorem-25 -->
+            <article>
+                <h3>My Awesome Blog-1</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptatum alias laboriosam nisi quas veritatis iusto id atque, laudantium consequuntur, a, cumque voluptatibus ipsa aliquam? Cupiditate eius impedit consectetur aliquid.</p>
+            </article>
+            <article>
+                <h3>My Awesome Blog-2</h3>
+                <p>Reiciendis iste eaque provident, enim, aspernatur voluptatum culpa nam excepturi optio autem pariatur quisquam in expedita nihil nostrum velit soluta minus cupiditate dolor, omnis illo fugiat! Ad voluptatibus facere sed!</p>
+            </article>
+            <article>
+                <h3>My Awesome Blog-3</h3>
+                <p>Molestiae doloribus accusamus, veritatis officiis quaerat corporis, eligendi laborum impedit cum vero possimus, blanditiis provident non! Quod eaque harum quaerat sequi sunt modi, inventore ipsa quibusdam! Optio praesentium vel cum.</p>
+            </article>
+        </section>
+    </main>
+    <script>
+        // 24.3 What is DOM (Document Object Model)
+        
+        // HTML er Document er Object er ekta Model | Model of Object of Document of HTML (Model is a representitive of original like car model, plane model)
+        // Object has property
+        // Object has function which called Method
+        console.log(document);
+        console.log(document.body);
+
+        // 24.4 Get different HTML elements in JS by using tag name 
+
+        const student = {
+            name: 'kissmot Ali',
+            age: 16, 
+            height: 60
+
+        };
+
+        // In console Penal 
+        console.log(student); 
+        console.log(student.age); 
+        console.log(student.name); 
+        console.log(student.height); 
+        console.log(document.getElementsByTagName('h3')); 
+        console.log(document.getElementsByTagName('article')); 
+         
+        const blogTitles = document.getElementsByTagName('h3');
+        console.log(blogTitles);
+        for (const h3 of blogTitles) {
+            console.log(h3);
+            console.log(h3.innerText);
+        }
+         
+        const blogDetails = document.getElementsByTagName('p');
+        for (const p of blogDetails) {
+            console.log(p);
+            
+        }
+        
+    </script>
+</body>
+</html>
