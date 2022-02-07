@@ -22,7 +22,17 @@
         <h1>Welcome to my blog website</h1>
     </header>
     <main>
-        <section class="blogs">
+        <section id="blogs" class="blogs">
+            <header>
+                <h2>Blogs list</h2>
+                <!-- ul>li*4{Blog-$} -->
+                <ul id="blog-list">
+                    <li>Blog-1</li>
+                    <li>Blog-2</li>
+                    <li>Blog-3</li>
+                    <li>Blog-4</li>
+                </ul>
+            </header>
             <!-- article*3>h3{My Awesome Blog-$}+p>lorem-25 -->
             <article class="blog">
                 <h3 id="first-title">My Awesome Blog-1</h3>
@@ -106,7 +116,8 @@
         console.log(document.getElementsByClassName('blog'));
         console.log(document.getElementsByTagName('article'));
 
-        const blogs = document.getElementsByClassName('blog');
+        // This code is reuse from line No - 254
+        let blogs = document.getElementsByClassName('blog');
         for (const blog of blogs) {
             // console.log(blog);
             blog.style.border = '2px solid orange';
@@ -205,6 +216,74 @@
         // 4. childNodes
         const secondBlog = document.getElementById('second-blog');
         console.log(secondBlog.childNodes);
+
+
+        
+        // 24.8 Create HTML elements using Javascript and appendChild
+
+        console.log(document.createElement('p'));
+        console.log(document.createElement('a'));
+        console.log(document.createElement('ul'));
+        console.log(document.createElement('li'));
+        console.log(document.createElement('h3'));
+        console.log(document.createElement('article'));
+        console.log(document.createElement('div'));
+
+        // create and add element by using JS
+
+        // create the element
+        const li = document.createElement('li');
+        li.innerText = 'Blog-5';
+        // where to add
+        const ul = document.getElementById('blog-list');
+        // append new element
+        ul.appendChild(li);
+
+        // add article - two different way
+
+        // Way-1 
+        // My Awesome Blog-5 added Start 
+        const article = document.createElement('article');
+        article.classList.add('blog'); // To add blog class
+        
+        const h3 = document.createElement('h3');
+        h3.innerText = 'My Awesome Blog-5';
+        const p = document.createElement('p');
+        p.innerText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptatum alias laboriosam nisi quas veritatis iusto id atque, laudantium consequuntur, a, cumque voluptatibus ipsa aliquam? Cupiditate eius impedit consectetur aliquid.';
+        article.appendChild(h3);
+        article.appendChild(p);
+
+        // parent of article
+        const blogSection = document.getElementById('blogs');
+        blogSection.appendChild(article);
+        // My Awesome Blog-5 added End 
+
+
+        // Way-2 
+        // My Awesome Blog-6 added Start 
+        const article2 = document.createElement('article');
+        article2.classList.add('blog'); // To add blog class
+        
+        article2.innerHTML = `
+        <h3>My Awesome Blog-6</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptatum alias laboriosam nisi quas veritatis iusto id atque, laudantium consequuntur, a, cumque voluptatibus ipsa aliquam? Cupiditate eius impedit consectetur aliquid.</p>
+        `
+        // parent of article
+        const blogSection2 = document.getElementById('blogs');
+        blogSection2.appendChild(article2);
+        // My Awesome Blog-6 added End 
+        
+
+        // This code is reuse from line No - 119
+        blogs = document.getElementsByClassName('blog');
+        for (const blog of blogs) {
+            // console.log(blog);
+            blog.style.border = '2px solid orange';
+            blog.style.margin = '5px';
+            blog.style.padding = '10px';
+            blog.style.borderRadius = '10px';
+        }
+
 
     </script>
 </body>
