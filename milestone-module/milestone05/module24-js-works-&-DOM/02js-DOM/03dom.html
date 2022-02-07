@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* #second-title{
+            background-color: rgba(210, 105, 30, 0.322);
+        } */
+    </style>
 </head>
 <body>
     <header>
@@ -14,22 +19,26 @@
         <section>
             <!-- article*3>h3{My Awesome Blog-$}+p>lorem-25 -->
             <article>
-                <h3>My Awesome Blog-1</h3>
+                <h3 id="first-title">My Awesome Blog-1</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptatum alias laboriosam nisi quas veritatis iusto id atque, laudantium consequuntur, a, cumque voluptatibus ipsa aliquam? Cupiditate eius impedit consectetur aliquid.</p>
             </article>
             <article>
-                <h3>My Awesome Blog-2</h3>
+                <h3 id="second-title">My Awesome Blog-2</h3>
                 <p>Reiciendis iste eaque provident, enim, aspernatur voluptatum culpa nam excepturi optio autem pariatur quisquam in expedita nihil nostrum velit soluta minus cupiditate dolor, omnis illo fugiat! Ad voluptatibus facere sed!</p>
             </article>
             <article>
-                <h3>My Awesome Blog-3</h3>
+                <h3 id="third-title">My Awesome Blog-3</h3>
+                <p>Molestiae doloribus accusamus, veritatis officiis quaerat corporis, eligendi laborum impedit cum vero possimus, blanditiis provident non! Quod eaque harum quaerat sequi sunt modi, inventore ipsa quibusdam! Optio praesentium vel cum.</p>
+            </article>
+            <article>
+                <h3 id="fourth-title">My Awesome Blog-4</h3>
                 <p>Molestiae doloribus accusamus, veritatis officiis quaerat corporis, eligendi laborum impedit cum vero possimus, blanditiis provident non! Quod eaque harum quaerat sequi sunt modi, inventore ipsa quibusdam! Optio praesentium vel cum.</p>
             </article>
         </section>
     </main>
     <script>
         // 24.3 What is DOM (Document Object Model)
-        
+
         // HTML er Document er Object er ekta Model | Model of Object of Document of HTML (Model is a representitive of original like car model, plane model)
         // Object has property
         // Object has function which called Method
@@ -65,7 +74,26 @@
             console.log(p);
             
         }
+
+        //24.5 Capture and change Element by using getElementById
+
+        const secondTitle = document.getElementById('second-title');
+        console.log(secondTitle);     
+        console.log(document.getElementById('second-title').style);       
+        console.log(document.getElementById('second-title').style.color = 'yellow');       
+        console.log(document.getElementById('third-title').style.backgroundColor = 'green');       
         
+        secondTitle.style.textAlign = 'center';
+        const thirdTitle = document.getElementById('third-title');
+        thirdTitle.innerHTML = 'Title updated by JS';
+        thirdTitle.style.backgroundColor = 'salmon';
+        thirdTitle.style.padding = '10px';
+        thirdTitle.style.marginLeft = '20px';
+
+        console.log(document.getElementById('fourth-title'));
+        console.log(document.getElementById('fourth-title').innerText = 'I can do magic');
+        
+
     </script>
 </body>
 </html>
