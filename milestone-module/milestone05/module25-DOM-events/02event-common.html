@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <!-- 25.4 Most common ways to set Event Handers -->
+
+        <p id="clicking-method"></p>
+        <input id="name-field" type="text">
+        <button id="update-name">Update</button>
+        <button onclick="handleJustFuctionClick()">Just function</button>
+        <button id="handle-event">Direct add Event</button>
+
+
+        <script>
+            // Using function & Direct
+            // Using function
+            function handleJustFuctionClick() {
+                const p = document.getElementById('clicking-method');
+                p.innerText = 'Set by using function';
+            }
+            // Direct
+            document.getElementById('handle-event').addEventListener('click', function(){
+                const p = document.getElementById('clicking-method');
+                p.innerText = 'Set by direct add Event Listener';
+            })
+            // Direct with input field 
+            // Anonymous function or Call back function
+            // p --> .innerText | input --> .value 
+            document.getElementById('update-name').addEventListener('click', function(){
+                const nameField = document.getElementById('name-field');
+                // console.log(nameField);
+                console.log(nameField.value);
+                const p = document.getElementById('clicking-method');
+                p.innerText = nameField.value;
+                nameField.value = '';
+            })
+        </script>
+
+    </main>
+</body>
+</html>
