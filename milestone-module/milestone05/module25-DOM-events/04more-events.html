@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 25.6 Simple delete confirmation button like github -->
+
+    <h2>More Events</h2>
+    <section>
+        <h3 id="secret-info">Very very important secret information</h3>
+        <input id="delete-confirm" type="text" placeholder="Please type delete">
+        <button id="delete-btn" disabled>Delete</button>
+    </section>
+    <script>
+        // Remove propertics --> display: none, remove child
+        // display: none;
+        document.getElementById('delete-btn').addEventListener('click', function () {
+            document.getElementById('secret-info').style.display = 'none';
+        })
+
+        // focus
+        document.getElementById('delete-confirm').addEventListener('focus', function () {
+            // console.log('O! amar dike takaise :D');
+            document.body.style.backgroundColor = 'lightcoral';
+        })
+        // blur
+        document.getElementById('delete-confirm').addEventListener('blur', function () {
+            document.body.style.backgroundColor = 'white';
+        })
+
+        // keydown
+        // document.getElementById('delete-confirm').addEventListener('keydown', function (){
+        //     // console.log('keydown');
+        //     const deleteField = document.getElementById('delete-confirm');
+        //     console.log(deleteField.value);
+        // })
+        // keypress
+        // document.getElementById('delete-confirm').addEventListener('keypress', function (){
+        //     const deleteField = document.getElementById('delete-confirm');
+        //     console.log(deleteField.value);
+        // })
+        // keyup
+        // document.getElementById('delete-confirm').addEventListener('keyup', function (){
+        //     const deleteField = document.getElementById('delete-confirm');
+        //     console.log(deleteField.value);
+        // })
+        document.getElementById('delete-confirm').addEventListener('keyup', function (event) {
+            // console.log(event.target.value);
+            const deleteBtn = document.getElementById('delete-btn');
+            if (event.target.value == 'delete') {
+                // document.getElementById('delete-btn').removeAttribute('disabled');
+                deleteBtn.removeAttribute('disabled');
+            }
+            else {
+                deleteBtn.setAttribute('disabled', true);
+            }
+        })
+
+        // change | change will caught when it's blur 
+        document.getElementById('delete-confirm').addEventListener('change', function () {
+            const deleteField = document.getElementById('delete-confirm');
+            console.log(deleteField.value);
+        })
+
+
+    </script>
+</body>
+
+</html>
