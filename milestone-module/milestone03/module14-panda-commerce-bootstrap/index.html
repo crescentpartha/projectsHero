@@ -84,7 +84,7 @@
                                 <p>This is the best headphone in the world for people who just want to waste time in
                                     front of funky world.</p>
                                 <h1>$420</h1>
-                                <button class="btn button-bg-color">Buy Now</button>
+                                <button onclick="handleBuyNow()" class="btn button-bg-color">Buy Now</button>
                             </div>
                             <div class="col-lg-5 col-md-5 col-12">
                                 <img src="./images/banner-images/headphone.png" class="d-block w-100" alt="headphone">
@@ -98,7 +98,7 @@
                                 <p>This is the best tv in the world for people who just want to waste time in
                                     front of tv.</p>
                                 <h1>$1200</h1>
-                                <button class="btn button-bg-color">Buy Now</button>
+                                <button onclick="handleBuyNow()" class="btn button-bg-color">Buy Now</button>
                             </div>
                             <div class="col-lg-5 col-md-5 col-12">
                                 <img src="./images/banner-images/tv.png" class="d-block w-100" alt="tv">
@@ -112,7 +112,7 @@
                                 <p>This is the best x-box in the world for people who just want to waste time in
                                     front of fake sports.</p>
                                 <h1>$600</h1>
-                                <button class="btn button-bg-color">Buy Now</button>
+                                <button onclick="handleBuyNow()" class="btn button-bg-color">Buy Now</button>
                             </div>
                             <div class="col-lg-5 col-md-5 col-12">
                                 <img src="./images/banner-images/xbox.png" class="d-block w-100" alt="xbox">
@@ -137,6 +137,7 @@
     <main>
         <!-- Catagories Section -->
         <section class="container">
+            <h1 class="lightblue">Catagories</h1>
             <div class="row g-5 mb-5">
                 <div class="col-lg-4 col-md-6">
                     <div class="p-3 border watch-bg-color d-flex align-items-center justify-content-between rounded-3">
@@ -161,11 +162,11 @@
 
         <!-- Shoes Section -->
         <section class="container" id="shoes">
-            <h1>Shoes</h1>
+            <h1 class="lightblue">Shoes</h1>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
                 <div class="col">
                     <div class="card border-0 shadow-lg h-100">
-                        <img src="./images/shoes/shoe-1.png" class="card-img-top" alt="shoe-1">
+                        <img id="image-card" src="./images/shoes/shoe-1.png" class="card-img-top" alt="shoe-1">
                         <div class="card-body">
                             <h5 class="card-title">Supply 350</h5>
                             <p class="card-text">This is a longer card with supporting text below as a natural lead-in
@@ -210,7 +211,7 @@
 
         <!-- Backpack Section -->
         <section class="container my-5" id="backpack">
-            <h1>Backpack</h1>
+            <h1 class="lightblue">Backpack</h1>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
                 <div class="col">
                     <div class="card border-0 shadow-lg h-100">
@@ -267,7 +268,7 @@
                 <p>Get updates on sales, specials and more</p>
                 <input class="form-control" type="text" placeholder="Enter your Email" name="mail" id="mail">
                 <br>
-                <button class="btn button-bg-color">Submit</button>
+                <button id="delete-confirm" class="btn button-bg-color" disabled>Submit</button>
             </div>
         </section>
 
@@ -278,8 +279,13 @@
             <small>&copy2020. Panda Commerce. All rights reserved. Sofia, Bulgaria.</small>
         </p>
     </footer>
+
+    <script>
+
+    </script>
     <!-- Bootstrap Bundle Js -->
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/dom.js"></script>
 </body>
 
 </html>
