@@ -12,7 +12,9 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [M02-Assignment: Influencer Gear - Responsive Website](https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass02/index.html)
 
-* [M03-Assignment: Crescent Convention Center](https://github.com/Porgramming-Hero-web-course/convention-center-crescentpartha) | [Live-Server](https://happy-mclean-606233.netlify.app/)
+* [M03-Assignment: Crescent Convention Center](https://github.com/Porgramming-Hero-web-course/convention-center-crescentpartha "Client-Side Code") | [Live-Server](https://happy-mclean-606233.netlify.app/ "Website")
+
+* [M04-Assignment: Basic JavaScript Problem Solving Assignment](https://crescentpartha.github.io/projectsHero/milestone-module/milestone04/module23-assignment/01assignment.js "Solutions")
 
 
 
@@ -51,5 +53,9 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 ## Milestone 05
 * [Module 24: JavaScript work's & DOM](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module24-js-works-&-DOM/02js-DOM/03dom.html)
+
+* [Module 25: DOM & Events](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module25-DOM-events/01event.html)
+
+
 
 

@@ -6,17 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- 25.6 Simple delete confirmation button like github -->
+    <header class="header">
+        <!-- nav>ul>li*5>a -->
+        <nav>
+            <ul>
+                <li><a href="./01event.html">Event</a></li>
+                <li><a href="./02event-common.html">Event-Common</a></li>
+                <li><a href="./03comment.html">Comment</a></li>
+                <li><a href="./04more-events.html">More-Events</a></li>
+                <li><a href="./05bubble.html">Bubble</a></li>
+                <li><a href="./06delegate.html">Delegate</a></li>
+                <li><a href="./07summary.html">Summary</a></li>
+            </ul>
+        </nav>
+        <hr> <br>
+    </header>
 
-    <h2>More Events</h2>
-    <section>
-        <h3 id="secret-info">Very very important secret information</h3>
-        <input id="delete-confirm" type="text" placeholder="Please type delete">
-        <button id="delete-btn" disabled>Delete</button>
-    </section>
+    <main>
+
+        <!-- 25.6 Simple delete confirmation button like github -->
+
+        <h2>More Events</h2>
+        <section>
+            <h3 id="secret-info">Very very important secret information</h3>
+            <input id="delete-confirm" type="text" placeholder="Please type delete">
+            <button id="delete-btn" disabled>Delete</button>
+        </section>
+    </main>
+
     <script>
         // Remove propertics --> display: none, remove child
         // display: none;

@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Bubble</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- 25.7 (semi-advanced) Event bubble and Stop propagating -->
 
-    <h2>Event bubble and Stop propagating</h2>
-    <section id="section-container">
-        <h4>Bubble vai list</h4>
-        <!-- ul#list-container>li.item*6>lorem2  -->
-        <ul id="list-container">
-            <li class="item">Lorem, ipsum.</li>
-            <li id="second-item" class="item">Repellat, distinctio.</li>
-            <li class="item">Inventore, voluptatem?</li>
-            <li class="item">Fugiat, cum!</li>
-            <li class="item">Dolores, perspiciatis.</li>
-            <li class="item">Aspernatur, autem?</li>
-        </ul>
-    </section>
+<body>
+    <header class="header">
+        <!-- nav>ul>li*5>a -->
+        <nav>
+            <ul>
+                <li><a href="./01event.html">Event</a></li>
+                <li><a href="./02event-common.html">Event-Common</a></li>
+                <li><a href="./03comment.html">Comment</a></li>
+                <li><a href="./04more-events.html">More-Events</a></li>
+                <li><a href="./05bubble.html">Bubble</a></li>
+                <li><a href="./06delegate.html">Delegate</a></li>
+                <li><a href="./07summary.html">Summary</a></li>
+            </ul>
+        </nav>
+        <hr> <br>
+    </header>
+
+    <main>
+
+        <!-- 25.7 (semi-advanced) Event bubble and Stop propagating -->
+
+        <h2>Event bubble and Stop propagating</h2>
+        <section id="section-container">
+            <h4>Bubble vai list</h4>
+            <!-- ul#list-container>li.item*6>lorem2  -->
+            <ul id="list-container">
+                <li class="item">Lorem, ipsum.</li>
+                <li id="second-item" class="item">Repellat, distinctio.</li>
+                <li class="item">Inventore, voluptatem?</li>
+                <li class="item">Fugiat, cum!</li>
+                <li class="item">Dolores, perspiciatis.</li>
+                <li class="item">Aspernatur, autem?</li>
+            </ul>
+        </section>
+    </main>
+
     <script>
         // JavaScript event bubble
         // What is event bubble? --> If I add event handler in parent and child, It trigger first the lowest element, then to upper element.
-        
-        document.getElementById('second-item').addEventListener('click', function(event){
+
+        document.getElementById('second-item').addEventListener('click', function (event) {
             console.log('second1 item clicked');
             // event.stopPropagation(); // To stop event bubble
             event.stopImmediatePropagation(); // To stop it's relative event
         });
-        document.getElementById('second-item').addEventListener('click', function(event){
+        document.getElementById('second-item').addEventListener('click', function (event) {
             console.log('second2 item clicked');
         });
-        document.getElementById('second-item').addEventListener('click', function(event){
+        document.getElementById('second-item').addEventListener('click', function (event) {
             console.log('second3 item clicked');
         });
-        document.getElementById('second-item').addEventListener('click', function(event){
+        document.getElementById('second-item').addEventListener('click', function (event) {
             console.log('second4 item clicked');
         });
 
         // section
-        document.getElementById('section-container').addEventListener('click', function(){
+        document.getElementById('section-container').addEventListener('click', function () {
             console.log('section clicked');
         });
         // ul
-        document.getElementById('list-container').addEventListener('click', function(){
+        document.getElementById('list-container').addEventListener('click', function () {
             console.log('ul clicked');
         });
-        
+
     </script>
 </body>
+
 </html>
