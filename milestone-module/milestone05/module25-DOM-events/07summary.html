@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Summary</title>
+</head>
+
+<body>
+
+    <main>
+        <!-- 01. We can add event handler in any element | Handler -> click, keydown, keypress, keyup, focus, blur -->
+        <!-- 02. Event bubble -> If I use bubble in Child, it goes to parent. -->
+        <!-- 03. Event Delegate -> If I use bubble in parent then it is event delegate. -->
+
+        <h2 id="mouse-header">More Mouse event</h2>
+        <input type="text" id="email-field" placeholder="Email Address">
+        <button onclick="handleClickGreen()">Click Me: Green</button> <br><br>
+
+        <!-- Add two input field and two button then show message and concatenate both messages -->
+        <p id="name"></p>
+        <input type="text" id="first-name" placeholder="First Name">
+        <button id="fn-btn">First Name</button>
+
+        <input type="text" id="second-name" placeholder="Second Name">
+        <button id="sn-btn">Second Name</button>
+        <button id="full-name-btn">Full Name</button>
+    </main>
+
+    <script>
+        function handleClickGreen() {
+            document.body.style.backgroundColor = 'green';
+        }
+
+        document.getElementById('email-field').addEventListener('keyup', function (event) {
+            console.log(event.target.value);
+        });
+
+        // document.getElementById('mouse-header').addEventListener('mousemove', function(){
+        //     console.log('Mouse is moving ... giving me sursuri ');
+        // });
+
+        // document.getElementById('mouse-header').addEventListener('mouseenter', function(){
+        //     console.log('Mouse is entering');
+        // });
+
+        document.getElementById('mouse-header').addEventListener('mouseout', function () {
+            console.log('Mouse tumi kotha na koiya jaio na');
+        });
+
+        // Add two input field and two button then show message and concatenate both messages
+
+        // First Name Button
+        document.getElementById('fn-btn').addEventListener('click', function () {
+            const firstName = document.getElementById('first-name');
+            const p = document.getElementById('name');
+            p.innerText = firstName.value;
+            firstName.value = '';
+        });
+
+        // Second Name Button
+        document.getElementById('sn-btn').addEventListener('click', function () {
+            const secondName = document.getElementById('second-name');
+            const p = document.getElementById('name');
+            p.innerText = secondName.value;
+            secondName.value = '';
+        });
+
+        // FullName Button
+        document.getElementById('full-name-btn').addEventListener('click', function () {
+            const firstName = document.getElementById('first-name');
+            const secondName = document.getElementById('second-name');
+            const p = document.getElementById('name');
+            p.innerText = firstName.value + ' ' + secondName.value;
+            firstName.value = '';
+            secondName.value = '';
+        });
+
+    </script>
+</body>
+
+</html>
