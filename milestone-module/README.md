@@ -56,6 +56,6 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 25: DOM & Events](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module25-DOM-events/01event.html)
 
-* [Module 26: Bank Website](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module26-bank-website/index.html)
+* [Module 26: Bank Website](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module26-bank-website/01index.html)
 
 
