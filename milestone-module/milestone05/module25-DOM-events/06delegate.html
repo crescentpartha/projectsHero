@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegate</title>
+</head>
+<body>
+    <!-- 25.8 (advanced) Event delegate and benefit of Event bubble -->
+
+    <h2>Event Delegate</h2>
+    <!-- ul#item-container>li.item*6>lorem2 -->
+    <ul id="item-container">
+        <li class="item">Lorem, ipsum.</li>
+        <li class="item">At, dolorem.</li>
+        <li class="item">Est, minima?</li>
+        <li class="item">Molestiae, nisi!</li>
+        <li class="item">Eveniet, quod.</li>
+        <li class="item">Modi, harum!</li>
+    </ul>
+    <button id="add-item">Add Item</button>
+    <script>
+        // const items = document.getElementsByClassName('item');
+        // for (const item of items) {
+        //     // console.log(item);
+
+        //     // System-01
+        //     // item.addEventListener('click', function () {
+        //     //     // console.log('remove item');
+        //     //     document.getElementById('item-container').removeChild(item);
+        //     // });
+
+        //     // System-02
+        //     item.addEventListener('click', function (event) {
+        //         // console.log(event.target);
+        //         // console.log(event.target.parentNode);
+        //         // event.target.parentNode.removeChild(item);
+        //         event.target.parentNode.removeChild(event.target);
+        //     });
+        // }
+
+        document.getElementById('add-item').addEventListener('click', function(){
+            const li = document.createElement('li');
+            li.innerText = 'Brand New Item';
+            const parent = document.getElementById('item-container');
+            parent.appendChild(li);
+
+            // This is a bad way to write same code again;
+
+            // System-01
+            li.classList.add('item');           
+            // const items = document.getElementsByClassName('item');
+            // for (const item of items) {
+            //     item.addEventListener('click', function (event) {
+            //         event.target.parentNode.removeChild(event.target);
+            //     });
+            // }
+
+        });
+
+        // System-02 | Event delegate and benefit of Event bubble
+        document.getElementById('item-container').addEventListener('click', function(event) {
+            // console.log(event.target); 
+            event.target.parentNode.removeChild(event.target);
+        });
+    </script>
+
+</body>
+</html>
