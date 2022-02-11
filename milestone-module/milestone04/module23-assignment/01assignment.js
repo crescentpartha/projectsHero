@@ -50,10 +50,15 @@ function picnicBudget (people) {
             cost = people * 5000;
         }
         else if (people >= 101 && people <=200) {
-            cost = people * 4000;
+            let before100 = 100 * 5000;
+            let after100 = people - 100;
+            cost = before100 + (after100 * 4000);
         }
         else {
-            cost = people * 3000;
+            let before100 = 100 * 5000;
+            let before200 = 100 * 4000;
+            let after200 = people - 200;
+            cost = before100 + before200 + (after200 * 3000);
         }
         return cost;
     }
@@ -62,7 +67,7 @@ function picnicBudget (people) {
         return false;
     }
 }
-const picnicCost = picnicBudget(5);
+const picnicCost = picnicBudget(201);
 console.log('Picnic Budget =', picnicCost, 'taka'); // Picnic Budget = 25000 taka
 
 
