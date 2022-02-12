@@ -25,10 +25,19 @@ function updateTotalField(totalFieldId, amount) {
 }
 
 // 27.8 (advanced) Shared Balance update function
-function updateBalance(amount, isAdd) {
+
+function getCurrentBalance() {
     const balanceTotal = document.getElementById('balance-total');
     const balanceTotalText = balanceTotal.innerText;
     const previousBalanceTotal = parseFloat(balanceTotalText);
+    return previousBalanceTotal;
+}
+
+function updateBalance(amount, isAdd) {
+    const balanceTotal = document.getElementById('balance-total');
+    // const balanceTotalText = balanceTotal.innerText;
+    // const previousBalanceTotal = parseFloat(balanceTotalText);
+    const previousBalanceTotal = getCurrentBalance();
     if(isAdd == true){
         balanceTotal.innerText = previousBalanceTotal + amount; // update current balance
     }
@@ -68,10 +77,13 @@ document.getElementById('deposit-button').addEventListener('click', function () 
     balanceTotal.innerText = previousBalanceTotal + depositAmount; // update current balance */
     // updateBalance(depositAmount, true);
 
+    // input string --> NaN for depositAmount
     const depositAmount = getInputValue('deposit-input');
-    updateTotalField('deposit-total', depositAmount);
-    updateBalance(depositAmount, true);
-
+    if(depositAmount > 0){
+        updateTotalField('deposit-total', depositAmount);
+        updateBalance(depositAmount, true);
+    }
+    
 });
 
 // 27.4 Money withdraw and reduce balance for withdraw | handle withdraw button
@@ -105,10 +117,33 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
     balanceTotal.innerText = previousBalanceTotal - withdrawAmount; */
     // updateBalance(withdrawAmount, false);
 
-
+    // input string --> NaN for withdrawAmount
     const withdrawAmount = getInputValue('withdraw-input');
-    updateTotalField('withdraw-total', withdrawAmount);
-    updateBalance(withdrawAmount, false);
-
+    const currentBalance = getCurrentBalance();
+    if(withdrawAmount > 0 && withdrawAmount < currentBalance){
+        updateTotalField('withdraw-total', withdrawAmount);
+        updateBalance(withdrawAmount, false);
+    }
+    if(withdrawAmount > currentBalance){
+        console.log('You can not withdraw more than what you want in your account');
+    }
+    
 });
+
+/* 
+Quizes:
+
+01. What is an event in JavaScript?
+--> Events are actions or occurrences that happen in the system you are programming, which the system tells you about so your code can react to them. 
+
+02. Mouse Events in JavaScript?
+
+03. When should you create a function?
+    --> To avoid writing the same code multiple times
+    --> To put similar functionalities at the same place 
+    --> To organize the code better
+
+
+*/
+
 

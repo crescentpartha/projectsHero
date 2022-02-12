@@ -13,7 +13,7 @@ document.getElementById('login-submit').addEventListener('click', function(){
     // console.log(userPassword);
 
     // check email and password
-    if(userEmail == 'baaperbank@gmail.com' && userPassword == 'password') {
+    if(userEmail == 'functionalbank@gmail.com' && userPassword == 'secret') {
         window.location.href = '02banking.html';
     }
 });
