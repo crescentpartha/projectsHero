@@ -6,15 +6,23 @@
 const first = doubleIt(5);
 const second = doubleIt(7); */
 
+// 27.6 (advanced) Share one function between two input field
 function getInputValue(inputId){
     const inputField = document.getElementById(inputId);
     const inputAmountText = inputField.value;
     const AmountValue = parseFloat(inputAmountText);
 
-    inputField.value = ''; // set entered deposit empty
+    inputField.value = ''; // set entered deposit/withdraw empty
     return AmountValue;
 }
-
+// 27.7 (advanced) Deposit and withdraw update with one function
+function updateTotalField(totalFieldId, amount) {
+    // debugger; // To debug code in console panel
+    const totalElement = document.getElementById(totalFieldId);
+    const totalText = totalElement.innerText;
+    const previousTotal = parseFloat(totalText);
+    totalElement.innerText = previousTotal + amount; // update current deposit/withdraw
+}
 
 
 // 27.2 Get User deposit and set deposit total value 
@@ -29,11 +37,12 @@ document.getElementById('deposit-button').addEventListener('click', function(){
     const depositAmount = getInputValue('deposit-input'); 
     // console.log(depositAmount);
 
-    // get current deposit and set current deposit
-    const depositTotal = document.getElementById('deposit-total');
+    // get current deposit and update current deposit
+    /* const depositTotal = document.getElementById('deposit-total');
     const depositTotalText = depositTotal.innerText;
     const previousDepositTotal = parseFloat(depositTotalText);
-    depositTotal.innerText = previousDepositTotal + depositAmount; // update current deposit
+    depositTotal.innerText = previousDepositTotal + depositAmount; // update current deposit */
+    updateTotalField('deposit-total', depositAmount);
     // console.log(depositTotalText);
 
     // 27.3 Update deposit and balance and handle string add
@@ -49,7 +58,7 @@ document.getElementById('deposit-button').addEventListener('click', function(){
 // 27.4 Money withdraw and reduce balance for withdraw | handle withdraw button
 document.getElementById('withdraw-button').addEventListener('click', function(){
     // get entered withdraw
-    
+
     // console.log('withdraw clicked');
     /* // Don't Repeat Yourself --> DRY
     const withdrawInput = document.getElementById('withdraw-input');
@@ -60,12 +69,13 @@ document.getElementById('withdraw-button').addEventListener('click', function(){
 
     // console.log(withdrawAmountText);
 
-    // get current withdraw and set current withdraw
-    const withdrawTotal = document.getElementById('withdraw-total');
+    // get current withdraw and update current withdraw
+    /* const withdrawTotal = document.getElementById('withdraw-total');
     const previousWithdrawTotalText = withdrawTotal.innerText;
     const previousWithdrawTotal = parseFloat(previousWithdrawTotalText);
 
-    withdrawTotal.innerText = previousWithdrawTotal + withdrawAmount;
+    withdrawTotal.innerText = previousWithdrawTotal + withdrawAmount; */
+    updateTotalField('withdraw-total', withdrawAmount);
 
     // update balance after withdraw
     const balanceTotal = document.getElementById('balance-total');
