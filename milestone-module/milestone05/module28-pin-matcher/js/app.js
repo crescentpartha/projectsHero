@@ -13,6 +13,10 @@ function getPin(){
 }
 
 function generatePin(){
+    document.getElementById('typed-numbers').value = '';
+    document.getElementById('notify-success').style.display = 'none';
+    document.getElementById('notify-fail').style.display = 'none';
+
     const pin = getPin();
     document.getElementById('display-pin').value = pin;
 }
@@ -43,13 +47,16 @@ function varifyPin(){
     const successMessage = document.getElementById('notify-success');
     const failError = document.getElementById('notify-fail');
     if (pin == typedNumber){
-        console.log('matched, YAY');
+        // console.log('matched, YAY');
         successMessage.style.display = 'block';
         failError.style.display = 'none';
+        document.getElementById('typed-numbers').value = '';
+        document.getElementById('display-pin').value = '';
     }
     else {
-        console.log('opps');
+        // console.log('opps');
         failError.style.display = 'block';
         successMessage.style.display = 'none';
+        document.getElementById('typed-numbers').value = '';
     }
 }
