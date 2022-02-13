@@ -14,6 +14,27 @@ function updateProductNumber(product, price, isIncreasing) {
     const productTotal = document.getElementById(product +'-total');
     productTotal.innerText = productNumber * price;
     // console.log('Product =', product, productInput.value, productTotal.innerText);
+    // calculate total
+    calculateTotal();
+}
+
+// 28.4 Get all product subtotal, tax and totalPrice
+function getInputValue(product){
+    const productInput = document.getElementById(product +'-number');
+    const productNumber = parseInt(productInput.value);
+    return productNumber;
+}
+function calculateTotal() {
+    const phoneTotal = getInputValue('phone') * 1219;
+    const caseTotal = getInputValue('case') * 59;
+    const subTotal = phoneTotal + caseTotal;
+    const tax = subTotal / 10; // tax 10%
+    const totalPrice = subTotal + tax;
+    // console.log(subTotal);
+    // update on the html
+    document.getElementById('sub-total').innerText = subTotal;
+    document.getElementById('tax-amount').innerText = tax;
+    document.getElementById('total-price').innerText = totalPrice;
 }
 
 // 28.3 Calculate phone cost using the same shared function
