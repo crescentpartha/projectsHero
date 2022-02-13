@@ -61,4 +61,6 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 * [Module 27: Functional Bank Website (Baap-Er-Bank)](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module27-functional-bank/01index.html)
 
 
+* [Module 28: Shopping Cart](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module28-shopping-cart/index.html) | [Pin Matcher](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module28-pin-matcher/index.html)
+
 
