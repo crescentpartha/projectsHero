@@ -34,3 +34,22 @@ document.getElementById('key-pad').addEventListener('click', function(event){
         calcInput.value = newNumber;
     }
 });
+
+// 28.7 Verify match and use function to reduce duplicate
+function varifyPin(){
+    // console.log("going to varify");
+    const pin = document.getElementById('display-pin').value;
+    const typedNumber = document.getElementById('typed-numbers').value;
+    const successMessage = document.getElementById('notify-success');
+    const failError = document.getElementById('notify-fail');
+    if (pin == typedNumber){
+        console.log('matched, YAY');
+        successMessage.style.display = 'block';
+        failError.style.display = 'none';
+    }
+    else {
+        console.log('opps');
+        failError.style.display = 'block';
+        successMessage.style.display = 'none';
+    }
+}
