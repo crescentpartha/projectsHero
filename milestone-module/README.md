@@ -63,4 +63,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 28: Shopping Cart](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module28-shopping-cart/index.html) | [Pin Matcher](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module28-pin-matcher/index.html)
 
+* [Module 29.5: Shopping Cart - Design Practice with DOM](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module29.5-practice-and-revision/shopping-cart-design/index.html)
+
+
 

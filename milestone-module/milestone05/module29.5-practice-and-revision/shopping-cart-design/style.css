@@ -13,15 +13,6 @@
     padding: 10px 0px;
     border-radius: 10px;
 }
-.items button {
-    padding: 10px;
-    border: none;
-    background-color: #2FBE70;
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: white;
-}
 .item1 {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -46,7 +37,16 @@
 }
 .item3 {
     text-align: end;
-    margin-right: 5%;
+    margin-right: 5.5%;
+}
+.item3 button {
+    padding: 10px;
+    border: none;
+    background-color: #2FBE70;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: white;
 }
 .part1{
     display: flex;
