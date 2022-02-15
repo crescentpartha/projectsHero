@@ -1,0 +1,205 @@
+
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .part1 img {
+        width: 100px;
+        height: 125px;
+    }
+    .part1 h3 {
+        font-size: 1em;
+        margin-left: 10px;
+    }
+    .right h5 {
+        font-size: 1.25em;
+    }
+    .right img {
+        width: 20px;
+    }
+    .middle input {
+        font-size: 1em;
+        padding: 7px;
+    }
+    .middle button {
+        margin: 0 10px;
+        font-size: 1.5em;
+    }
+    .item2 {
+        padding: 10px 20px;
+    }
+    .item3 button {
+        margin-right: 2%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .part1 img {
+        width: 90px;
+    }
+    .part1 h3 {
+        font-size: 0.9em;
+        margin-left: 10px;
+    }
+    .middle input {
+        width: 45px;
+    }
+    .right img {
+        margin: 0 10px;
+    }
+    .item2 h3 {
+        font-size: 1em;
+    }
+    .right h5 {
+        font-size: 1.1em;
+        margin: 0px 10px;
+    }
+    .middle input {
+        font-size: 1em;
+    }
+    .middle button {
+        margin: 0 8px;
+    }
+    .item3 button {
+        margin-right: 4%;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .main h1 {
+	    font-size: 1.8em;
+    }
+    .item1 {
+        grid-template-columns: 1fr;
+    }
+    .part1 img {
+        width: 80px;
+        height: 105px;
+    }
+    .part1 h3 {
+        font-size: 1em;
+        margin-left: 10px;
+    }
+    .part1 {
+        padding: 5px;
+        justify-content: center;
+    }
+    .part2 {
+        margin: 10px auto;
+    }
+    .right {
+        justify-content: center;
+        padding: 10px;
+    }
+    .item3 button {
+        margin-right: 10%;
+    }
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    .main h1 {
+        font-size: 1.5em;
+    }
+    .item1 {
+        grid-template-columns: 1fr;
+        margin: 25px 10px;
+    }
+    .part1 {
+        justify-content: center;
+    }
+    .part1 img {
+        width: 75px;
+        height: 100px;
+    }
+    .part1 h3 {
+        font-size: 1em;
+        margin-left: 5px;
+    }
+    .middle button {
+        margin: 0 10px;
+    }
+    .middle input {
+        font-size: 1em;
+    }
+    .middle {
+        margin: 10px auto;
+    }
+    .right h5 {
+        font-size: 1.2em;
+        margin: 0px 10px;
+    }
+    .right img {
+        margin: 0 10px;
+        width: 15px;
+    }
+    .right {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .item2 {
+        margin: 25px 10px;
+        padding: 10px 15px;
+    }
+    .item3 button {
+        font-size: 1em;
+    }
+
+}
+
+@media only screen and (max-width: 319px) {
+    .main h1 {
+        font-size: 1.2em;
+    }
+    .item1 {
+        grid-template-columns: 1fr;
+        margin: 10px 5px;
+    }
+    .part1 {
+        justify-content: center;
+    }
+    .part1 img {
+        width: 30px;
+        height: 60px;
+    }
+    .part1 h3 {
+        font-size: 0.5em;
+        margin-left: 2px;
+    }
+    .middle {
+        justify-content: center;
+    }
+    .middle input {
+        width: 30px;
+        font-size: 0.7em;
+    }
+    .middle button {
+        margin: 0 2px;
+        font-size: 1em;
+    }
+    .right {
+        justify-content: center;
+    }
+    .right h5 {
+        font-size: 0.9em;
+        margin: 0px 10px;
+    }
+    .right img {
+        margin: 0 5px;
+        width: 12px;
+    }
+    .part2 {
+        margin: 10px auto;
+    }
+    .item2 {
+        margin: 10px 5px;
+        padding: 5px 2px;
+    }
+    .item2 h3 {
+        font-size: 0.6em;
+        margin: 5px;
+    }
+    .item3 button {
+        padding: 2px;
+        font-size: 0.6em;
+    }
+}
+
