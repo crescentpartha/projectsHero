@@ -45,8 +45,17 @@ function loadUsers() {
     .then(reponse => reponse.json())
     .then(data => displayUsers(data));
 }
+// 33.5 Dynamically display loaded data on your website
 function displayUsers(data) {
-    console.log(data);
+    // console.log(data);
+    const ul = document.getElementById('users');
+    for (const user of data) {
+        // console.log(user.name);
+        const li = document.createElement('li');
+        // li.innerText = user.name;
+        li.innerText = `name: ${user.name} | Email: ${user.email}`;
+        ul.appendChild(li);
+    }
 }
 
 function loadPosts() {
