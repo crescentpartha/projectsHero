@@ -37,3 +37,23 @@ function loadData() {
 }
 
 
+// 33.4 Load more data, more APIs, send data to function 
+// Load more data from users and posts
+
+function loadUsers() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(reponse => reponse.json())
+    .then(data => displayUsers(data));
+}
+function displayUsers(data) {
+    console.log(data);
+}
+
+function loadPosts() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => console.log(data))
+}
+// loadPosts();
+
+
