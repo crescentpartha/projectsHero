@@ -86,8 +86,8 @@ console.log(phoneName, price); // iPhone 30000
 
 // 09. [Challenging] You have an array. Now use destructing to create a simple (or more) variable to get the third element of the array in a variable called 'three'.
 const arr = [2, 32, 523, 34, 64, 60];
-const [first, second, third] = arr;
-console.log(first, second, third); // 2 32 523
+const [ , , third] = arr;
+console.log(third); // 523
 
 // 10. [Optional] just write a function with three parameters and the last pareameter will have a default parameter with value 7. this function will take three parameters and will return the sum of all the three parameters.
 
