@@ -1,0 +1,9 @@
+
+/* 34.3 International Travel, Display countries name, capital */
+
+.country {
+    border: 2px solid tomato;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+}
