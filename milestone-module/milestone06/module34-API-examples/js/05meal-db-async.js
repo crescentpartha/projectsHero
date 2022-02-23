@@ -1,7 +1,12 @@
 
-// 34.5 Explore meal db api and create dynamic url to load meals
+/* 
+    fetch --> (alternative version) --> async await
+*/
 
-const searchFood = () => {
+// 34.5 Explore meal db api and create dynamic url to load meals
+// 34.8 (advanced) Remove previous result and async await
+
+const searchFood = async () => {
     // get text from the field
     const searchField = document.getElementById('serach-field');
     const searchText = searchField.value;
@@ -13,6 +18,7 @@ const searchFood = () => {
     // mealDetail.innerHTML = ''; // But doesn't recommended | It's for single item | for multiful items, remove this line;
     mealDetail.textContent = '';
 
+    // clear searField 
     searchField.value = '';
     if (searchText == '') {
         const searchResult = document.getElementById('search-result');
@@ -25,9 +31,14 @@ const searchFood = () => {
         // Load data | create a dynamic url by template string
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
         // console.log(url);
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displaySearchResult(data.meals))
+        
+        const res = await fetch(url);
+        const data = await res.json();
+        displaySearchResult(data.meals);
+        
+        // fetch(url)
+        //     .then(res => res.json())
+        //     .then(data => displaySearchResult(data.meals))
     }
 
 }
@@ -60,18 +71,26 @@ const displaySearchResult = meals => {
 }
 
 // 34.7 Create dynamic url based on click and display data
-const loadMealDetail = mealId => {
+
+// 34.8 (advanced) Remove previous result and async await
+const loadMealDetail = async mealId => {
     // console.log(mealId);
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayMealDetail(data.meals[0]))
+    
+    const res = await fetch(url);
+    const data = await res.json();
+    displayMealDetail(data.meals[0]);
+    
+    // fetch(url)
+    //     .then(res => res.json())
+    //     .then(data => displayMealDetail(data.meals[0]))
 }
 
 const displayMealDetail = meal => {
     console.log(meal);
     const mealDetail = document.getElementById('meal-details');
-    mealDetail.innerHTML = ''; // But doesn't recommended | It's for single item | for multiful items, remove this line;
+    // mealDetail.innerHTML = ''; // But doesn't recommended | It's for single item | for multiful items, remove this line;
+    mealDetail.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.style.marginBottom = '10px';
