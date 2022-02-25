@@ -3,6 +3,8 @@
     fetch --> (alternative version) --> async await
 */
 
+document.getElementById('error-message').style.display = 'none';
+
 // 34.5 Explore meal db api and create dynamic url to load meals
 // 34.8 (advanced) Remove previous result and async await
 
@@ -20,6 +22,7 @@ const searchFood = async () => {
 
     // clear searField 
     searchField.value = '';
+    document.getElementById('error-message').style.display = 'none';
     if (searchText == '') {
         const searchResult = document.getElementById('search-result');
         // searchResult.innerHTML = ''; // But it doesn't recommended
@@ -32,15 +35,24 @@ const searchFood = async () => {
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
         // console.log(url);
         
-        const res = await fetch(url);
-        const data = await res.json();
-        displaySearchResult(data.meals);
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            displaySearchResult(data.meals);
+        }
+        catch(error) {
+            displayError(error);
+        }
         
         // fetch(url)
         //     .then(res => res.json())
         //     .then(data => displaySearchResult(data.meals))
     }
 
+}
+
+const displayError = error => {
+    document.getElementById('error-message').style.display = 'block';
 }
 
 // 34.6 Display dynamic search result using bootstrap cards

@@ -1,4 +1,6 @@
 
+document.getElementById('error-message').style.display = 'none';
+
 // 34.5 Explore meal db api and create dynamic url to load meals
 
 const searchFood = () => {
@@ -14,6 +16,7 @@ const searchFood = () => {
     mealDetail.textContent = '';
 
     searchField.value = '';
+    document.getElementById('error-message').style.display = 'none';
     if (searchText == '') {
         const searchResult = document.getElementById('search-result');
         // searchResult.innerHTML = ''; // But it doesn't recommended
@@ -28,8 +31,12 @@ const searchFood = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => displaySearchResult(data.meals))
+            .catch(error => displayError(error));
     }
+}
 
+const displayError = error => {
+    document.getElementById('error-message').style.display = 'block';
 }
 
 // 34.6 Display dynamic search result using bootstrap cards
