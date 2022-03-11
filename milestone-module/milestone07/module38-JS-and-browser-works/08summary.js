@@ -37,7 +37,12 @@
     # JavaScript execute V8 engine --> Interpret + Just in time Compilation (JIT Compiler)
     # JavaScript work sequentially and use Event Loop to handle which is Non-Blocking and Asynchronous
     # Event Loop contain Stack, Queue, Heap and CallBack
+    # Understanding JavaScript — Heap, Stack, Event-loops and Callback Queue
+      (Link: https://javascript.plainenglish.io/understanding-javascript-heap-stack-event-loops-and-callback-queue-6fdec3cfe32e)
     # Handling I/O is typically performed via events and callbacks
+    # Call Stack - A call stack is a mechanism for an interpreter to keep track of its place in a script. 
+      (Link: https://developer.mozilla.org/en-US/docs/Glossary/Call_stack)
+    # Heap - Objects are allocated in a heap which is just a name to denote a large (mostly unstructured) region of memory.
 
     ------------------------------------------------------------------------------------------------------------------------------------------
 
