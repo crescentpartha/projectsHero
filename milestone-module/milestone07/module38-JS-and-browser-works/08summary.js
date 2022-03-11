@@ -36,7 +36,8 @@
 
     # JavaScript execute V8 engine --> Interpret + Just in time Compilation (JIT Compiler)
     # JavaScript work sequentially and use Event Loop to handle which is Non-Blocking and Asynchronous
-    # Event Loop contain Stack, Queue, CallBack
+    # Event Loop contain Stack, Queue, Heap and CallBack
+    # Handling I/O is typically performed via events and callbacks
 
     ------------------------------------------------------------------------------------------------------------------------------------------
 
