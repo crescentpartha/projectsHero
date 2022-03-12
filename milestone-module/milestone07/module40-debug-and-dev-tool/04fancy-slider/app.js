@@ -39,7 +39,7 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -68,6 +68,10 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000;
+  if (duration < 0) {
+    alert('Please put a positive value more than 1000');
+    return;
+  }
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
