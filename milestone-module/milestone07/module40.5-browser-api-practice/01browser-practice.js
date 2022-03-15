@@ -3,7 +3,7 @@
 
 // 1. console.log in setTimeout and Show the output after 3.5 seconds later.
 
-setTimeout( () => {
+setTimeout(() => {
         console.log('Start your job preparation');
 }, 1000);
 function completeToDoList() {
@@ -11,7 +11,7 @@ function completeToDoList() {
 }
 console.log('Exploring Browser API and JS Debug');
 setTimeout(completeToDoList, 3500);
-setTimeout(function(){
+setTimeout(function () {
         console.log('Make your portfolio website');
 }, 2500);
 
@@ -185,25 +185,121 @@ const seeHREF = () => {
 */
 
 
+// ------------------------
+//         OPTIONAL
+// ------------------------
 
 /* 
-
-
-
-
-------------------------
-        OPTIONAL
-------------------------
-
-9. simple website with two input fields and a button. product name (1st input field), product price (2nd input field) 
-    by clicking on the button product will be added to the local storage. You should be able to add multiple.
-10. Display products on the websites. If they exists on the local storage. Display from there.
-
-------------------------
-        MUST
-------------------------
-
-11. stack overflow, create an account. spend 30 minute.
-
+    9. simple website with two input fields and a button. product name (1st input field), product price (2nd input field) 
+       by clicking on the button product will be added to the local storage. You could be able to add multiple Product and there prices. 
+      
+    10. Display products on the websites. If they exists on the local storage. Display from there.
 */
+
+const addItem = () => {
+        // get value from the input fields
+        const productName = document.getElementById('productName');
+        const pNameValue = productName.value;
+        const productPrice = document.getElementById('productPrice');
+        const pPriceValue = parseFloat(productPrice.value);
+
+        // return if input field is empty
+        if (!pNameValue || !pPriceValue) {
+                alert('Enter both the Product Name & Product Price value.');
+                return;
+        }
+
+        // To show Product Name & Price in popup window
+        alert(`Product Name & Product Price are added to the localStorage.
+        Product Name = ${pNameValue}
+        Product Price = ${pPriceValue}
+        `);
+
+        // display in the UI
+        // displayProduct(pNameValue, pPriceValue);
+
+        // Add to the localStorage
+        addProductToCart(pNameValue, pPriceValue);
+
+        // clear the input fields
+        productName.value = '';
+        productPrice.value = '';
+
+}
+// display in the UI
+const displayProduct = (name, price) => {
+        const ul = document.getElementById('products');
+        const li = document.createElement('li');
+        const div = document.createElement('div');
+
+        div.innerHTML = `
+        ${name} = ${price}tk
+        `;
+        li.appendChild(div);
+        ul.appendChild(li);
+}
+
+// To create and check cart have or not
+const getCart = () => {
+        const cart = localStorage.getItem('cart');
+        let cartObj;
+        if (cart) {
+                cartObj = JSON.parse(cart);
+        }
+        else {
+                cartObj = {};
+        }
+        return cartObj;
+}
+
+// Add to the localStorage
+const addProductToCart = (name, price) => {
+        const cart = getCart();
+        // if (cart[name] && cart[price]) {
+        if (cart[name]) {
+                // cart[name] = cart[name] + 1;
+                // cart[price] += price;
+                cart[name] += parseInt(price);
+        }
+        else {
+                // cart[name] = 1;
+                // cart[price] = price;
+                cart[name] = price;
+        }
+        const cartStringified = JSON.stringify(cart);
+        localStorage.setItem('cart', cartStringified);
+        // displayLocalStorageCart();
+        console.log(cart);
+}
+
+// display local Storage Cart in the UI
+const displayLocalStorageCart = () => {
+        const cart = getCart();
+        for (const product in cart) {
+                // let value = `${localStorage.getItem('product')}`; // null
+                // let value = `${JSON.parse(localStorage.cart).phone}`; // display phone price
+                let value = JSON.parse(localStorage.cart).phone; // display phone price
+                // let value = `${localStorage.cart('product')}`; // localStorage.cart is not a function
+                // let value = localStorage.cart(`${product}`); // localStorage.cart is not a function
+                // let value = JSON.parse(localStorage.cart); // return object
+                // console.log(product, value.phone, value);
+                // displayProduct(product, value.product);
+                displayProduct(product, value);
+        }
+        // console.log(cart);
+}
+displayLocalStorageCart();
+
+const placeOrder = () => {
+        document.getElementById('products').textContent = '';
+        localStorage.removeItem('cart');
+}
+
+// ------------------------
+//         MUST
+// ------------------------
+
+// 11. stack overflow, create an account. spend 30 minute.
+
+
 

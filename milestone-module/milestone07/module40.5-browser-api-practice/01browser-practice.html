@@ -11,6 +11,18 @@
 
     <button onclick="userInput()">User Input</button>
     <button onclick="seeHREF()">See href</button>
+
+    <br> <br>
+
+    <input type="text" placeholder="Product Name" id="productName">
+    <input type="number" placeholder="Product Price" id="productPrice">
+    <button onclick="addItem()">Add to localStorage</button>
+
+    <ul id="products">
+        <div id="product"></div>
+    </ul>
+
+    <button onclick="placeOrder()" title="If you click then localStorage data & UI content are removed">Place Order</button>
     <script src="./01browser-practice.js"></script>
 </body>
 </html>
