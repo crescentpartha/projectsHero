@@ -127,12 +127,69 @@ const seeHREF = () => {
         How JavaScript works: https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf
 */
 
+// 7. list of things that are asynchronous in JS/browser
+
+/* 
+        Asynchronous programming means that the code runs in an event loop. When there is a blocking operation, the event is started. 
+        The blocking code keeps running without blocking the main execution thread. When the blocking code finishes running, 
+        it queue’s the result of the blocking operations and pushes them back to the stack.
+        But JavaScript has a single thread?
+
+        (Link: https://geekflare.com/javascript-event-loops/)
+
+        ---------------------------------------------------------------------------------------------------------------------------------
+
+        # JavaScript is Synchronous/Asynchronous | Blocking/Non-Blocking?
+        --> JavaScript is a single-threaded, non-blocking, asynchronous, concurrent programming language with lots of flexibility.
+        Synchronous:
+                console.log, normal function
+        Asynchronous: 
+                setTimeout, SetInterval, fetch, async await
+                # async await --> looks Synchronous but works Asynchronously
+
+        ---------------------------------------------------------------------------------------------------------------------------------
+
+        # Introducing asynchronous JavaScript (MDN) - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+
+        Asynchronous programming is a technique that enables your program to start a potentially long-running task, 
+        and then rather than having to wait until that task has finished, to be able to continue to be responsive to other events 
+        while the task runs. Once the task is completed, your program is presented with the result.
+
+        Many functions provided by browsers, and especially the most interesting ones, can potentially take a long time, 
+        and are therefore asynchronous. For example:
+                1. making HTTP requests with fetch()
+                2. accessing the user's camera or microphone with getUserMedia()
+                3. asking the user to select files for you to access using showOpenFilePicker()
+
+        # Understanding Asynchronous JavaScript - https://blog.bitsrc.io/understanding-asynchronous-javascript-the-event-loop-74cd408419ff
+
+*/
+
+// 8. What is event loop in JS and how does it work?
+
+/* 
+    01. JavaScript Event Loop - MDN web docs
+        (link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)
+    02. JavaScript Concurrency Model and Event Loop
+        (Link: https://www.freecodecamp.org/news/javascript-concurrency-model-and-event-loop/)
+    03. What the heck is the event loop anyway? | Philip Roberts
+        (Link: https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+    04. JSConf
+        (Link: https://www.youtube.com/channel/UCzoVCacndDCfGDf41P-z0iA)
+
+    The Event Loop has one simple job — to monitor the Call Stack and the Callback Queue. If the Call Stack is empty, 
+    it will take the first event from the queue and will push it to the Call Stack, which effectively runs it. 
+    Such an iteration is called a tick in the Event Loop. Each event is just a function callback.
+
+    # How does the Event Loop works in JavaScript? (Link: https://geekflare.com/javascript-event-loops/)
+*/
+
 
 
 /* 
 
-7. list of things that are asynchronous in JS/browser
-8. What is event loop in JS and how does it work?
+
+
 
 ------------------------
         OPTIONAL
