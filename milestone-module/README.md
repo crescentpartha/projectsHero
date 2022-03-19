@@ -65,5 +65,34 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 29.5: Shopping Cart - Design Practice with DOM](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module29.5-practice-and-revision/shopping-cart-design/index.html)
 
+* [Module 30.5: clean-functional-bank](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module30.5-clean-functional-bank/01index.html) | [Banking-Calculation](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module30.5-clean-functional-bank/02banking.html) | [Players Stats](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module30.5-integrate-js-bonus/01players.html)
+
+## Milestone 06
+
+* [Module 31: Recap DOM](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module31-ES6-Intro/02recap-dom.html)
+
+* [Module 33: API](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module33-API-Intro/01index.html) | [Display Posts](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module33-API-Intro/02posts.html) | [Album](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module33-API-Intro/03album.html) | [Comments-Photos](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module33-API-Intro/04comments-photos-H.W.html)
+
+* [Module 34: Kanye-rest](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34-API-examples/01kanye-rest.html "Kanye-Quotes") | [Buddy](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34-API-examples/02buddy.html "Display Name & Email") | [Countries](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34-API-examples/03countries.html) | [Meal-DB](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34-API-examples/04meal-db.html)
+
+* [Module 34.5: JSON](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34.5-recap-and-more-API/01json.html) | [RandomUser](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34.5-recap-and-more-API/02randomuser.html) | [Sports-DB](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module34.5-recap-and-more-API/03sports-db.html)
+
+* [Module 36: Object-Concepts](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module36-JS-object-concepts/08index.html)
+
+* [Module 37.5: Temperature-Hot-Solution](https://crescentpartha.github.io/projectsHero/milestone-module/milestone06/module37.5-API-and-JS-recap/01temperature-hot-solution/index.html "Display area-wise Temperature")
+
+## Milestone 07
+
+* [Module 38: fetch-asynchronous](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module38-JS-and-browser-works/05fetch-asynchronous/01index.html)
+
+* [Module 39: alert-confirm-prompt](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module39-browser-api-&-methods/02alert-confirm-prompt/02alert.html) | [location](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module39-browser-api-&-methods/03location/03location.html#render) | [shopping](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module39-browser-api-&-methods/07shopping/07shopping.html)
+
+* [Module 40: fancy-slider](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module40-debug-and-dev-tool/04fancy-slider/index.html)
+
+* [Module 40.5: Browser-Practice](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module40.5-browser-api-practice/01browser-practice.html)
+
+* [Module 41: salary-app-master](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module41-more-JS-and-debug/01salary-app-master/index.html) | [Propose](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module41-more-JS-and-debug/01salary-app-master/propose.html)
+
+* [Module 42: storage](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42-JS-concepts-for-React/07storage.html)
 
 
