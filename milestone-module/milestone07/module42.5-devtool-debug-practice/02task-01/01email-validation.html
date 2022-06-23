@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email-Validation By Regular Expressions</title>
+    <style>
+        .inputfield {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .notify {
+            color: #fff;
+            text-align: center;
+            margin: 0 auto;
+            background: #222436;
+            margin-top: 20px;
+            border-radius: 15px;
+            padding: 5px 20px;
+            display: none;
+        }
+        .notify-section{
+            width: 35%;
+            margin: 0 auto;
+        }
+        #notify-success {
+            color: #00ff00
+        }
+        #notify-fail {
+            color: #ff0000
+        }
+    </style>
+</head>
+<body>
+    <h2>Email Validation By Regular Expressions</h2>
+    <button onclick="taskDescription()">Task Description</button>
+    <br><br>
+
+    <div class="inputfield">
+        <input type="email" name="email" id="email">
+        <button onclick="checkValidation()">Check Validation</button>
+    </div>
+    <br><br>
+
+    <div class="notify-section">
+        <p id="notify-fail" class="notify">❌ Email is not valid. Please, Enter the correct Email.</p>
+        <p id="notify-success" class="notify">✅ Email is valid. Congratulations.</p>
+        <p id="enter-message" class="notify">🔔 Enter your Email Address</p>
+    </div>
+
+    <script src="./01email-validation.js"></script>
+</body>
+</html>
