@@ -4,13 +4,13 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 # Projects
 
-* [Project-1: Simple Portfolio](https://crescentpartha.github.io/projectsHero/project1/intel.html)
+* [Project-1: Simple Portfolio](https://github.com/crescentpartha/projectsHero/tree/main/project1 "Client-Side Code") | [Live-Server](https://crescentpartha.github.io/projectsHero/project1/intel.html "Website")
 
 # Assignment Projects Link
 
-* [M01-Assignment: Personal Website](https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass01/index.html)
+* [M01-Assignment: Personal Website](https://github.com/crescentpartha/projectsHero/tree/main/milestone-module/assignments/ass01 "Client-Side Code") | [Live-Server](https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass01/index.html "Website")
 
-* [M02-Assignment: Influencer Gear - Responsive Website](https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass02/index.html)
+* [M02-Assignment: Influencer Gear - Responsive Website](https://github.com/crescentpartha/projectsHero/tree/main/milestone-module/assignments/ass02 "Client-Side Code") | [Live-Server](https://crescentpartha.github.io/projectsHero/milestone-module/assignments/ass02/index.html "Website")
 
 * [M03-Assignment: Crescent Convention Center](https://github.com/Porgramming-Hero-web-course/convention-center-crescentpartha "Client-Side Code") | [Live-Server](https://happy-mclean-606233.netlify.app/ "Website")
 
@@ -19,6 +19,8 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 * [M05-Assignment: Money Heist Calculator](https://github.com/Porgramming-Hero-web-course/money-master-crescentpartha "Client-Side Code") | [Live-Server](https://money-heist-calculator.netlify.app/ "Website")
 
 * [M06-Assignment: Phone Shop](https://github.com/programming-hero-web-course2/phone-hunter-crescentpartha "Client-Side Code") | [Live-Server](https://phonesshops.netlify.app/ "Website")
+
+* [M07-Assignment: Insta Shohor](https://github.com/Programming-Hero-Web-Course4/insta-shohor-crescentpartha "Client-Side Code") | [Live-Server](https://insta-shohor-crescentpartha.netlify.app/ "Website")
 
 
 
@@ -55,6 +57,9 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 * [Module 15: TailWind CSS - Penguin Fasion](https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module15-tailwind-css/index2.html)
 
 * [Module 15(ii): Tailwind CSS Introduction](https://crescentpartha.github.io/projectsHero/milestone-module/milestone03/module15-tailwind-css/index.html)
+
+## Milestone 04
+* [Module 17-23: Basic JavaScript](https://github.com/crescentpartha/projectsHero/tree/main/milestone-module/milestone04 "Hello JavaScript")
 
 ## Milestone 05
 * [Module 24: JavaScript work's & DOM](https://crescentpartha.github.io/projectsHero/milestone-module/milestone05/module24-js-works-&-DOM/02js-DOM/03dom.html)
@@ -99,5 +104,8 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 * [Module 41: salary-app-master](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module41-more-JS-and-debug/01salary-app-master/index.html) | [Propose](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module41-more-JS-and-debug/01salary-app-master/propose.html)
 
 * [Module 42: storage](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42-JS-concepts-for-React/07storage.html "Explore localStorage and sessionStorage with JSON")
+
+* [Module 42.5: devtool-debug-practice](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/02task-01/01email-validation.html "Task-01: Email Validation By Regular Expressions") | [Issue Tracker](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/03task-02-issue-tracker/index.html "Task-02: Issue Tracker") | [ranga-store](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/04extra-hw-ranga-store/index.html "Extra-HW: Ranga-Store")
+
 
 
