@@ -107,5 +107,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 42.5: devtool-debug-practice](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/02task-01/01email-validation.html "Task-01: Email Validation By Regular Expressions") | [Issue Tracker](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/03task-02-issue-tracker/index.html "Task-02: Issue Tracker") | [ranga-store](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module42.5-devtool-debug-practice/04extra-hw-ranga-store/index.html "Extra-HW: Ranga-Store")
 
-
+* [Module 43.5: js-slider](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module43.5-browser-debug-bonus-module/01js-slider/01slider.html "Simple JS Slider")
 
