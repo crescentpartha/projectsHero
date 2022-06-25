@@ -24,6 +24,41 @@
         .catch(err => console.error(err));
 */
 
+/* -------------------------------------------------------------------------------- */
+
+/* 
+    In HTML, 
+        - <a> --> tag/element
+        - href --> attribute
+        - attribute come in name/value pairs like (name="value" | href="https://www.google.com")
+        - attributes (href, src, alt, style, width, height, id, class, title, )
+    In JavaScript,
+        - A JavaScript object is a collection of properties.
+        - Properties can be changed, added, deleted and read only.
+        - Properties (objName.property = person.age)
+        - Properties (name, age, color, country, capital, flags)
+
+    ------------------------------------------------------------------------------------------------------
+    
+    Attributes vs Properties:
+        # In HTML Tags = attributes (ex: id, class, title)
+        # In JS Object = properties (ex: name, flags, capital)
+    
+    Props:
+        - we can set attributes by JS also. ( Ex: imgElement.setAttribute('src', imgUrl); )
+        - We can send attributes/properties in HTML, This attributes/properties called props.
+        - In short, Properties is props.
+
+    ------------------------------------------------------------------------------------------------------
+
+    1. In JavaScript (the DOM, really), an element has attributes and properties. The terms are often used interchangeably, 
+    but they're actually two separate things. An attribute is the initial state when rendered in the DOM. A property is the current state.
+    2. In the specific context of HTML / Javascript the terms get confused because the HTML representation of a DOM element has attributes 
+    (that being the term used in XML for the key/value pairs contained within a tag) 
+    but when represented as a JavaScript object those attributes appear as object properties.
+
+*/
+
 const loadCountries = () => {
     fetch('https://restcountries.com/v3.1/all') // https://restcountries.com/
     .then(res => res.json())
@@ -38,19 +73,70 @@ const displayCountries = countries => {
     container.innerHTML = allCountriesHTML.join(' ');
 }
 
-const getCountryHTML = country => {
+// option-2:
+const getCountryHTML = ({name, flags, capital, continents, subregion, population}) => {
+    // distructuring
+    // const {name, flags, capital, continents, subregion, population} = country;
+
     return `
         <div class="country">
-            <h2>${country.name.common}</h2>
-            <img src='${country.flags.png}'>
-            <h3>${country.name.official}</h3>
-            <p>Capital: <b>${country.capital}</b></p>
-            <p>Continents: <b>${country.continents}</b></p>
-            <p>Subregion: <b>${country.subregion}</b></p>
-            <p>Population: <b>${country.population}</b></p>
+            <h2>${name.common}</h2>
+            <img src='${flags.png}'>
+            <p>Capital: <b>${capital}</b></p>
+            <p>Continents: <b>${continents}</b></p>
+            <p>Subregion: <b>${subregion}</b></p>
+            <p>Population: <b>${population}</b></p>
         </div>
     `
 }
+
+/* ------------------------------------------------------------------ */
+
+/* 
+    In Console Panel:
+        const student = { name: 'sakib', age: 27 };
+        student.name // 'sakib'
+        name // ' '
+
+        const {name, age} = student; // Object Distructuring
+        name // 'sakib'
+        age // 17
+*/
+
+// // option-1: distructuring
+// const getCountryHTML = country => {
+//     // distructuring
+//     const {name, flags, capital, continents, subregion, population} = country;
+
+//     return `
+//         <div class="country">
+//             <h2>${name.common}</h2>
+//             <img src='${flags.png}'>
+//             <p>Capital: <b>${capital}</b></p>
+//             <p>Continents: <b>${continents}</b></p>
+//             <p>Subregion: <b>${subregion}</b></p>
+//             <p>Population: <b>${population}</b></p>
+//         </div>
+//     `
+// }
+
+/* ------------------------------------------------------------------ */
+
+// // option-0: Original
+// const getCountryHTML = country => {
+//     return `
+//         <div class="country">
+//             <h2>${country.name.common}</h2>
+//             <img src='${country.flags.png}'>
+//             <h3>${country.name.official}</h3>
+//             <p>Capital: <b>${country.capital}</b></p>
+//             <p>Continents: <b>${country.continents}</b></p>
+//             <p>Subregion: <b>${country.subregion}</b></p>
+//             <p>Population: <b>${country.population}</b></p>
+//         </div>
+//     `
+// }
+
 
 loadCountries();
 
