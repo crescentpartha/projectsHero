@@ -27,7 +27,7 @@
             - Meteor | React.JS | Angular.JS | Vue.JS | Backbone.JS | Ember.JS
 
         Single Page Application Examples:
-            - Gmail | GitHub | Facebook | Twitter | Google Maps | Netflix | Grammarly | Trello | Spotify | Instagram | WhatsApp
+            - Gmail | Reactjs.org | GitHub | Facebook | Twitter | Google Maps | Netflix | Grammarly | Trello | Spotify | Instagram | WhatsApp
 
     ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@
             - Less reusability
 
         Multi-Page Application Examples:
-            - Amazon | eBay
+            - Wikipedia | Amazon | eBay  | Alibaba | OLX | Rokomari | Daraz | Chaldal | AjkerDeal | PriyoShop
 
         When used:
             - E-Commerce Websites, Blogs, Forums
