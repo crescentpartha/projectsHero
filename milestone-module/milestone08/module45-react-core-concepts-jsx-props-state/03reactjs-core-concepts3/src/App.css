@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.comment {
+  background-color: antiquewhite;
+  border: 3px solid chocolate;
+  border-radius: 25px;
+  margin: 20px;
+  padding: 10px;
+}
+
+span {
+  color: blue;
+}
