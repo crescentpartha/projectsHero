@@ -47,12 +47,23 @@ import './App.css';
     (45.4) Pass dynamic data to components by props in react 
         - We can set props (properties) in a component, similer like HTML attributes.
         - User defind props like: name="partha" | Avoid to use common name like: (id, class, title, onClick(), href, src)
-        - 
+    
+    (45.5) (advanced) Create multiple components from an array of objects
+        - If data come dynamically (array, object), then we can create component dynamically | (much data = much component) 
+        - To make it dynamic | using map (loop) to access all elements
+
 */
 
 const number = 55555;
 const singer = { name: 'Dr. Mahfuz', job: 'Singer' };
 const singer2 = { name: 'Eva Rahman', job: 'Singer2' };
+const singers = [
+  {name: 'Dr. Mahfuz', job: 'Singer'},
+  {name: 'Eva Rahman', job: 'Singer2'},
+  {name: 'Arnob', job: 'bakso bakso'},
+  {name: 'Anupom', job: 'boshonto'},
+  {name: 'Partha', job: 'Bondhu'},
+];
 
 const singerStyle = {
   color: 'purple',
@@ -62,11 +73,34 @@ const singerStyle = {
 }
 
 function App() {
+  // if new data come, it does not add (all data) to the UI in this way.
+  const nayoks = ['Amir Khan', 'Ajay Devgun', 'Sharuk Khan', 'Salman Shah', 'Riyaz']; 
   return (
     <div className="App">
+      {
+        /* To make it dynamic | using map (loop) to access all elements | It shows list items*/
+        nayoks.map(nayok => <li>Name: {nayok}</li>)
+      }
+
+      <img src={logo} className="App-logo" alt="logo" />
+
+      {
+        /* Array Example | Hero component*/
+        nayoks.map(nayok => <Hero name={nayok}></Hero>)
+      }
+
+      <img src={logo} className="App-logo" alt="logo" />
+
+      {
+        /* Object Example | If data come dynamically (array, object), then we can create component dynamically | (much data = much component)  */
+        singers.map(singer => <Hero name={singer.name}></Hero>)
+      }
+
+      <img src={logo} className="App-logo" alt="logo" />
+
       <Person name='Crescent Partha' profession='Engineering' favorite='Competitive Programming'></Person>
       <h5>Component: Similer in Look, Different in Data by using props</h5>
-      <Friend name="Amir Khan" job="Acting" movie="3 Idiot" phone="017965923**"></Friend>
+      <Friend name={nayoks[0]} job="Acting" movie="3 Idiot" phone="017965923**"></Friend>
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -87,10 +121,19 @@ function App() {
       <Person name="Crescent" profession="Web Development" nayok="Hrithik Roshan" favorite="Coding"></Person>
       <Person name="Kopila" profession="Love Scientist" nayok="Kuber" favorite="Kuber Majhi"></Person>
       <h5 id="totocompany">Rock Mama - React Mama</h5>
-      <Friend name="Ajay Devgun" job="Maramari" movie="Singgam" phone="017992923**"></Friend>
+      <Friend name={nayoks[1]} job="Maramari" movie="Singgam" phone="017992923**"></Friend>
       <Friend name="Hrithik Roshan" job="Actor" phone="017171719**" movie="Krrish"></Friend>
     </div>
   );
+}
+
+function Hero(props) {
+  console.log(props);
+  return (
+    <div className="person">
+      <h1>{props.name}</h1>
+    </div>
+  )
 }
 
 // This function is nothing but a component.
