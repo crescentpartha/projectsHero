@@ -3,6 +3,7 @@ import './App.css';
 
 /* Basic Information of React:
 
+    (45.2) JSX, Dynamic content, Dynamic Style in React
     # Comments could be done by 3 ways.
         1. Single line comment.
         2. Multi line comment.
@@ -37,29 +38,35 @@ import './App.css';
               </div>
             )
 
+    (45.3) Create Component, return HTML from a component
     # Component (function)
         - Component Name write with Capital letter because of differentiating normal HTML tag vs User defined tag. 
-        - similer in look, different in data.
+        - similer in look, different in data. (by using props)
         - create one component, and use as much as you can.
+    
+    (45.4) Pass dynamic data to components by props in react 
+        - We can set props (properties) in a component, similer like HTML attributes.
+        - User defind props like: name="partha" | Avoid to use common name like: (id, class, title, onClick(), href, src)
+        - 
 */
 
 const number = 55555;
-const singer = {name: 'Dr. Mahfuz', job: 'Singer'};
-const singer2 = {name: 'Eva Rahman', job: 'Singer2'};
+const singer = { name: 'Dr. Mahfuz', job: 'Singer' };
+const singer2 = { name: 'Eva Rahman', job: 'Singer2' };
 
 const singerStyle = {
-  color: 'purple', 
-  backgroundColor: 'white', 
-  padding: '10px', 
+  color: 'purple',
+  backgroundColor: 'white',
+  padding: '10px',
   borderRadius: '10px'
 }
 
 function App() {
   return (
     <div className="App">
-      <Person></Person>
-      <h5>Component: Similer in Look, Different in Data.</h5>
-      <Friend></Friend>
+      <Person name='Crescent Partha' profession='Engineering' favorite='Competitive Programming'></Person>
+      <h5>Component: Similer in Look, Different in Data by using props</h5>
+      <Friend name="Amir Khan" job="Acting" movie="3 Idiot" phone="017965923**"></Friend>
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -70,37 +77,43 @@ function App() {
         <div className="music">
           <p>Name: {22222 + number}</p>
           <p style={singerStyle}>Name: {singer.name} {singer.job}</p>
-          <p style={{color: 'blue', backgroundColor: 'yellow', padding: '10px', borderRadius: '10px'}}>Name: {singer2.name} {singer2.job}</p>
+          <p style={{ color: 'blue', backgroundColor: 'yellow', padding: '10px', borderRadius: '10px' }}>Name: {singer2.name} {singer2.job}</p>
         </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
       </header>
 
-      <Person></Person>
-      <Person></Person>
-      <h5>Component: Similer in Look, Different in Data.</h5>
-      <Friend></Friend>
-      <Friend></Friend>
+      <Person name="Crescent" profession="Web Development" nayok="Hrithik Roshan" favorite="Coding"></Person>
+      <Person name="Kopila" profession="Love Scientist" nayok="Kuber" favorite="Kuber Majhi"></Person>
+      <h5 id="totocompany">Rock Mama - React Mama</h5>
+      <Friend name="Ajay Devgun" job="Maramari" movie="Singgam" phone="017992923**"></Friend>
+      <Friend name="Hrithik Roshan" job="Actor" phone="017171719**" movie="Krrish"></Friend>
     </div>
   );
 }
 
 // This function is nothing but a component.
-function Person() {
+function Person(props) {
+  console.log(props);
   return (
     <div className="person">
-      <h1>Sakib Al Hasan</h1>
-      <p>Profession: Cricket</p>
+      {/* <h1>Sakib Al Hasan</h1> */}
+      <h1>Name: {props.name}</h1>
+      <p>Profession: {props.profession}</p>
+      <p>Favorite: {props.favorite}</p>
     </div>
   )
 }
 
-function Friend() {
+function Friend(props) {
+  console.log(props);
   return (
     <div className="container">
-      <h3>Name: Ajay Devgun</h3>
-      <p>Job: Maramari</p>
+      <h3>Name: {props.name}</h3>
+      <p>Job: {props.job}</p>
+      <p>Movie: {props.movie}</p>
+      <p>Phone: {props.phone}</p>
     </div>
   )
 }
