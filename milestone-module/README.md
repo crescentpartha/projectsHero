@@ -109,3 +109,11 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 43.5: js-slider](https://crescentpartha.github.io/projectsHero/milestone-module/milestone07/module43.5-browser-debug-bonus-module/01js-slider/01slider.html "Simple JS Slider")
 
+## Milestone 08
+
+* [Module 44: rest-countries-recap](https://crescentpartha.github.io/projectsHero/milestone-module/milestone08/module44-modern-front-end-core-concepts/02rest-countries-recap/index.html "create-react-app | Rest Countries Recap in React | Modern Front-End Core Concepts")
+
+* [Module 45: 01reactjs-core-concepts](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module45-react-core-concepts-jsx-props-state/01reactjs-core-concepts/src/App.js "create-react-app | 6 core concepts | Dynamic content - Dynamic Style (3 ways) | JSX - Component - props") | [Module 45: 02reactjs-core-concepts2](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module45-react-core-concepts-jsx-props-state/02reactjs-core-concepts2/src/App.js "create-react-app | Concept Recap, JSX, components, props, display array of objects") | [Module 45: 03reactjs-core-concepts3](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module45-react-core-concepts-jsx-props-state/03reactjs-core-concepts3/src/App.js "create-react-app | 6 Core Concepts in React | JSX - Component - props - Display array of objects (map) - State - API Call | 5 tasks for data load")
+  
+
+
