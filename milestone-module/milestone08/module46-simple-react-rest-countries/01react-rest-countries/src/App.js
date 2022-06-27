@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Countries from './components/Countries/Countries';
+import Person from './components/Person/Person';
+import Header from './components/Header/Header';
 
 /* 
     06 Core Concepts in React:
@@ -8,7 +11,7 @@ import { useEffect, useState } from 'react';
                             OR
       - JSX, component, props, State, Event Handler, Data Load
                             OR
-      - JSX, component, props, Event Hander, State, API call
+      - JSX, component, props, Event Handler, State, API call
     
     -----------------------------------------------------------
 
@@ -39,14 +42,23 @@ import { useEffect, useState } from 'react';
       2. Folder Structure:
           - Easier to manage | Every component have to manage structurally
           - Depends on person (Who leads this project) | Depends on complexity (How large this project)
-          - Everyone manage folder structure in different ways, not similer way | There is no common Folder Structure
+          - Everyone manage folder structure in different ways, not similar way | There is no common Folder Structure
           - Ex: components --> Country --> 2 files (Country.js & Country.css) | Every Component contains 2 files (js & css)
-
+          
+          Problems:
+            - need to export, import 'react'
+          Solutions:
+            - Extensions: (React Extension Pack, Reactjs Code Snippets)
+            - Other for life Easy: (Code Spell Checker, Live Server, Auto Import, Markdown All in One)
 */
 
 function App() {
   return (
     <div className="App">
+      <Header></Header>
+      <Countries></Countries>
+      <Person></Person>
+      <img src={logo} className="App-logo" alt="logo" />
       <LoadCountries></LoadCountries>
     </div>
   );
@@ -77,7 +89,7 @@ function LoadCountries() {
 
 function Country(props) {
   return (
-    <div>
+    <div className='country'>
       <h2>Name: {props.name}</h2>
       <h4>Population: {props.population}</h4>
     </div>
