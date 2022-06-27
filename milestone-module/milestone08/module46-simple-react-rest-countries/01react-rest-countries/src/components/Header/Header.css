@@ -1,7 +1,21 @@
+.header-container {
+    background-color: rgb(86, 86, 253);
+    margin-top: 0px;
+    padding: 5px 0px 10px;
+
+}
+
 nav a {
     text-decoration: none;
     margin-right: 20px;
+    font-weight: bold;
+    color: blue;
 }
+
+nav a:hover {
+    color: gold;
+}
+
 span {
     color: gold;
 }
