@@ -89,9 +89,11 @@ function LoadCountries() {
 
 function Country(props) {
   return (
-    <div className='country'>
-      <h2>Name: {props.name}</h2>
-      <h4>Population: {props.population}</h4>
+    <div className='allCountry2'>
+      <div className='country2'>
+        <h2>Name: {props.name}</h2>
+        <h4>Population: {props.population}</h4>
+    </div>
     </div>
   )
 }

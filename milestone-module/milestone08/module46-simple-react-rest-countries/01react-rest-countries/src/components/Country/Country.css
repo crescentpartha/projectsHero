@@ -1,8 +1,15 @@
-.country2 {
+.country {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
     margin: 20px 40px;
     padding: 10px;
     background-color: darksalmon;
     border: 2px solid firebrick;
     border-radius: 25px;
-
+}
+.country p {
+    color: red;
+}
+.country h2 {
+    color: black;
 }

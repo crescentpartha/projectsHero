@@ -25,11 +25,16 @@ const Countries = () => {
             {
                 // countries.map(country => console.log(country))
                 // countries.map(country => <p>{country.name.common}</p>)
+
                 countries.map(country => <Country 
-                    name={country.name.common} 
-                    region={country.region}
-                    area={country.area}
+                    country={country} // pass the whole country
+                    // name={country.name.common} 
+                    // region={country.region}
+                    // area={country.area}
                     ></Country>)
+            }
+            {
+                // countries.map(country => <Country country={country}></Country>)
             }
         </div>
     );

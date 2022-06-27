@@ -36,8 +36,18 @@
     transform: rotate(360deg);
   }
 }
+.allCountry2{
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px; */
 
-.country {
+  /* display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap; */
+}
+.country2 {
   background-color: bisque;
   border: 2px solid peru;
   border-radius: 25px;
