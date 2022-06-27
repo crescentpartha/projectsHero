@@ -1,15 +1,31 @@
 .country {
-    display: grid;
-    grid-template-columns: 2fr repeat(3, 1fr);
-    margin: 20px 40px;
+    /* display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: start;
+    gap: 5px;
+    margin: 5px 10px;
     padding: 10px;
     background-color: darksalmon;
     border: 2px solid firebrick;
     border-radius: 25px;
 }
+
 .country p {
-    color: red;
+    color: white;
+    margin: 0 5%;
+    padding: 20px;
+    background-color: #e9a58f;
+    border-radius: 5px;
 }
-.country h2 {
+
+.country span {
     color: black;
+    font-weight: bold;
+}
+
+.country img {
+    width: 100%;
 }

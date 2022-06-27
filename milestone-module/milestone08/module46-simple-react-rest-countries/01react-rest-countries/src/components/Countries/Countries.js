@@ -17,25 +17,28 @@ const Countries = () => {
 
     return (
         <div>
-            <h2>This is <span>Countries component</span> from File Structure</h2>
-            <h3>Available Countries: {countries.length}</h3>
-            {
-                // countries.map(country => console.log(country))
-            }
-            {
-                // countries.map(country => console.log(country))
-                // countries.map(country => <p>{country.name.common}</p>)
+            <div className='heading-container'>
+                <h2>This is <span>Countries component</span> from File Structure</h2>
+                <h3>Available Countries: <b>{countries.length}</b></h3>
+            </div>
+            <div className='countries-container'>
+                {
+                    // countries.map(country => console.log(country))
+                    // countries.map(country => <p>{country.name.common}</p>)
+                    // countries.map(country => <Country name={country.name.common} population={country.population}></Country>)
 
-                countries.map(country => <Country 
-                    country={country} // pass the whole country
-                    // name={country.name.common} 
-                    // region={country.region}
-                    // area={country.area}
-                    ></Country>)
-            }
-            {
-                // countries.map(country => <Country country={country}></Country>)
-            }
+                    countries.map(country => <Country 
+                        country={country} // pass the whole country
+                        // name={country.name.common} 
+                        // region={country.region}
+                        // area={country.area}
+                        key={country.cca3} // add unique key for mapping components
+                        ></Country>)
+                }
+                {
+                    // countries.map(country => <Country country={country}></Country>)
+                }
+            </div>
         </div>
     );
 };

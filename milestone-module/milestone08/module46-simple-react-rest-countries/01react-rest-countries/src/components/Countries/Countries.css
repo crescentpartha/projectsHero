@@ -1,3 +1,22 @@
 span {
-    color: brown;
+    color: gold;
+}
+
+.heading-container {
+    border: 1px solid red;
+    border-radius: 20px;
+    margin: 5px 20%;
+}
+
+.heading-container h3 b {
+    color: red;
+    background-color: gold;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.countries-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
