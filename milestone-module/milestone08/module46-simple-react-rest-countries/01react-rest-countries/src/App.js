@@ -9,9 +9,13 @@ import { useEffect, useState } from 'react';
       - JSX, component, props, State, Event Handler, Data Load
                             OR
       - JSX, component, props, Event Hander, State, API call
-                    
+    
+    -----------------------------------------------------------
+
     REST COUNTRIES API - Plain JS
     REST COUNTRIES API - React JS
+
+    -----------------------------------------------------------
 
     05 Steps to load dynamic data from API:
       step-01: 
@@ -26,6 +30,18 @@ import { useEffect, useState } from 'react';
         - Connect with State
       step-05:
         - Show data using map()
+
+    -----------------------------------------------------------------------------------------------
+
+    Display Data (Countries) by 2 ways:
+      1. Simple way:
+          - for large/many component, it does not easier to manage (Ex: 1000 components in one page)
+      2. Folder Structure:
+          - Easier to manage | Every component have to manage structurally
+          - Depends on person (Who leads this project) | Depends on complexity (How large this project)
+          - Everyone manage folder structure in different ways, not similer way | There is no common Folder Structure
+          - Ex: components --> Country --> 2 files (Country.js & Country.css) | Every Component contains 2 files (js & css)
+
 */
 
 function App() {
@@ -50,6 +66,20 @@ function LoadCountries() {
     <div>
       <h1>Visiting Every Country of the world!!!</h1>
       <h3>Available Countries: {countries.length}</h3>
+      {
+        // countries.map(country => console.log(country))
+        // countries.map(country => <p>{country.name.common}</p>)
+        countries.map(country => <Country name={country.name.common} population={country.population}></Country>)
+      }
+    </div>
+  )
+}
+
+function Country(props) {
+  return (
+    <div>
+      <h2>Name: {props.name}</h2>
+      <h4>Population: {props.population}</h4>
     </div>
   )
 }
