@@ -56,8 +56,8 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Countries></Countries>
       <Person></Person>
+      <Countries></Countries>
       <img src={logo} className="App-logo" alt="logo" />
       <LoadCountries></LoadCountries>
     </div>

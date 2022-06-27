@@ -5,7 +5,7 @@ import './Person.css';
 const Person = () => {
     return (
         <div>
-            <h2>This is <span>Person component</span> from other File.</h2>
+            <h2>This is <span>Person component</span> from File Structure</h2>
         </div>
     );
 };
