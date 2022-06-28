@@ -1,10 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 /* 
   Js Vs React:
     - class="container" --> className="container"
-    - onclick()="Increment" --> onClick()="Increment"
+    - onclick="Increment()" --> onClick={Increment}
+  
+  React 6 core concepts:
+    - (46.5.1) JSX, Component, props
+    - (46.5.2) State, set eventHandler
+    - API Call --> useEffect(), fetch()
   
   React.Fragment vs div:
     - Fragment will not add any additional elements into the DOM tree, whereas, using a div will add a div to the DOM tree.
@@ -26,10 +32,15 @@ import './App.css';
    - receive as a props
    - show dynamically --> <h2>{props.name}</h2>
       
-  Basic Information:
+  Steps to State change:
+    - declare the State
+    - show the State in the UI
+    - set a event handler
+    - make connection to event handler by using onClick
+  
+   Basic Information:
     - Component name should be meaningful & Uppercase
-    - 
-
+    
 */
 
 function App() {
@@ -48,10 +59,19 @@ const districtStyle = {
 }
 
 function District(props) {
+  const [power, setPower] = useState(1)
+
+  const boostPower = () => {
+    const newPower = power * 2;
+    setPower(newPower);
+  }
+
   return (
     <div className="district" style={districtStyle}>
       <h2>Name: {props.name}</h2>
       <p style={{fontWeight: 'bold'}}>Specialty: {props.specialty}</p>
+      <h4>Power: {power}</h4>
+      <button onClick={boostPower}>Boost The Power</button>
     </div>
   )
 }
