@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Mobile from './components/Mobile/Mobile';
+import ToDo from './components/ToDo/ToDo';
 
 const articleStyle = {
   color: 'darkBlue',
@@ -38,6 +39,10 @@ function App() {
         content="One of the many great parts of React is how it makes you think about apps as you build them. In this document, we’ll walk you through the thought process of building a searchable product data table using React."
         ></Blog>
       </div>
+
+      <img src={logo} className="App-logo" alt="logo" />
+
+      <ToDo></ToDo>
     </div>
   );
 }
