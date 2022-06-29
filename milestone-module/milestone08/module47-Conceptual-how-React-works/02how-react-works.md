@@ -135,7 +135,43 @@ npm -v
 - __Angular__ Framework (Two way Binding)
   - __Parent ↔ Child__
 
+## 47.4 (advanced) [How states works, asynchronous, console state](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module47-Conceptual-how-React-works/01how-react-works/src/components/Watch/Watch.js "Learn with example")
 
+⫸ [`State:`](https://reactjs.org/docs/state-and-lifecycle.html "State and LifeCycle - reactjs.org")
+- The state is a built-in React object that is used to contain data or information about the component. 
+- A component's state can change over time; whenever it changes, the component re-renders.
+---
+- State is the situation of anythings like (Ex: cart, logIn, Counter, Increase, Decrease, React on FB, Session, Data Loading)
+- State could be changed or not (Ex: user can react or not)
+- State depends on users activities
+- Used useState() method (if anything could change)
+- To use useState() & useEffect(), we need to import alongside these method:- import { useState, useEffect } from 'react';
+- Default value of useState() & useEffect() methods: 0, []
 
+⫸ `How states works:`
+- Click button → Call event handler by onClick method → stateful value + 1
+- new stateful value assign to a variable → then passing by a function 
+- this function delivery(dispatch) a Action to useState → useState check value is different or not
+- if different, then check the UI (where will be changed) → find + rerender + change stateful value & give us <br>
+[__stateful value = steps__ | __function = setSteps__]
+
+⫸ `Asynchronous`
+- [function = setSteps] is asynchronous like setTimeout()
+- State update is asynchronous.
+
+⫸ `Solutions (To print latest value):` setInterval(), setTimeout(), useEffect()
+__useEffect():__
+- does not depend on anyone/anything. But, sometimes could depend on one value called __"stateful value"__ (Execute multi-time)
+- if we set empty array, then execute only one. 
+- if we don't given any empty array, then it executes multiple times. (normally not used, by default making mistake)
+- latest value need to get __asynchronous way__ by useEffect().
+
+⫸ `State vs Props`
+|  | __State__ | __Props__ |
+| --- | --- | --- |
+| __Use Case__ | State is used to store the data of the components that have to be rendered to the view | Props are used to pass data and event handlers to the children components |
+| __Mutability__ | State holds the data and can change over time | Props are immutable—once set, props cannot be changed |
+| __Component__ | State can only be used in class components | Props can be used in both functional and class components |
+| __Updating__ | Event handlers generally update state | The parent component sets props for the children components |
 
 
