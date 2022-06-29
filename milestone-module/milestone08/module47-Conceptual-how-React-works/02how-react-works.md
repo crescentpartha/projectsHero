@@ -1,5 +1,4 @@
-# How [React](https://reactjs.org/) Works
-
+# How [React](https://reactjs.org/) Works (Conceptual)
 
 ## 47.1 Module Introduction Create React App under the hood
 ```git
@@ -61,6 +60,40 @@ npm -v
 - It also defines __functional attributes__ of a project that npm uses to install dependencies, run scripts, and identify the entry point to our package.
 - `index.js` is the entry point to our package.
 
-⫸ __Markdown Cheat Sheet:__ 
+⫸ __Markdown Cheat Sheet:__ [1](https://www.markdownguide.org/cheat-sheet/ "Markdown Cheat Sheet") [2](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#headings "GitHub Docs")
+
+## 47.2 What is JSX, React Component, babel transpiler
+
+⫸ What is __JSX (JavaScript XML)__? ([JSX in Depth](https://reactjs.org/docs/jsx-in-depth.html))
+- JSX is an `extension` to the JavaScript language syntax.
+- JSX just provides __syntactic sugar__ for the `React.createElement(component, props, ...children)` function. JSX is converted into JavaScript, you can try out [the online Babel compiler/transpiler](https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=script&lineWrap=true&presets=react&prettier=false&targets=&version=7.18.7&externalPlugins=&assumptions=%7B%7D).
+- __Specifying The React Element Type:__ Capitalized types indicate that the JSX tag is referring to a React component. 
+- __React Must Be in Scope:__ The React library must always be in scope from your JSX code. Ex: `import React from 'react';`
+- __Using Dot Notation for JSX Type:__ You can also refer to a React component using dot-notation from within JSX.
+- __User-Defined Components Must Be Capitalized:__ Ex: `<Person></Person>`
+- __Props in JSX__
+- __JavaScript Expressions as Props:__ Ex: `<MyComponent foo={1 + 2 + 3 + 4} />`
+- __String Literals:__ Ex: `<MyComponent message={'hello world'} />`
+- __Props Default to “True”:__ Ex: `<MyTextBox autocomplete={true} />`
+- __Spread Attributes:__ Ex: `return <Greeting {...props} />;`
+- __Children in JSX:__ Ex: `props.children`
+- __JSX Children:__ You can provide more JSX elements as the children.
+- __JavaScript Expressions as Children:__ Ex: `<MyComponent>{'foo'}</MyComponent>`
+- __Functions as Children:__
+- __Booleans, Null, and Undefined Are Ignored:__ Ex: `<div>{false}</div>`
+
+⫸ __Power of JSX:__ OR __advantages of using JSX in ReactJS__
+- To give a ability to `write html code` in JS file and `JavaScript expression` in html code.
+- JSX helps for `code simpler and Attractive` when writing large pieces of code for big React Application.
+- JSX also __allows React__ to Show more useful `error and warning messages`.
+- One of the advantages of JSX is that `React creates a virtual DOM` (a virtual representation of the page) __to track changes and updates__. Instead of rewriting the entire HTML, `React modifies the DOM` of the page whenever the information is updated. This is one of the main issues React was created to solve.
+- Use __React Component__ to put together `Markup language & logic` in same file. 
+- We can use `Map`, `Spread Attributes`, `String Literals`, `User-Defined Components`, `Dot Notation`
+- Declare `User-Defined Components`, then use like html tag as much as you want
+- We can `set style dynamically`
+- We can `pass dynamic data`
+- The only reason behind the fact that `JSX code is converted to JS code`
+
+
 
 
