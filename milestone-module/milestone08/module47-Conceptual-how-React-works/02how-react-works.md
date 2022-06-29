@@ -1,4 +1,4 @@
-# How [React](https://reactjs.org/) Works (Conceptual)
+# How [React](https://reactjs.org/ "Recommended to read Reactjs.org documentation") Works (Conceptual)
 
 ## 47.1 Module Introduction Create React App under the hood
 ```git
@@ -55,31 +55,35 @@ npm -v
 - This file is a kind of __manifest file__ for your application.
 - The __package.json__ file is the __heart__ of any Node project.
 - This file plays a very __important role__ in the react application development and deployment.
+---
 - `Package.json` = __Metadata associated with project + All [Dependencies](https://www.pluralsight.com/guides/add-a-dependency-to-react-in-package.json-for-a-react-component) with version + scripts__.
 - It records __important metadata__ about a project which is required before publishing to NPM.
 - It also defines __functional attributes__ of a project that npm uses to install dependencies, run scripts, and identify the entry point to our package.
-- `index.js` is the entry point to our package.
+- `index.js` is the __entry point__ to our package.
 
 ⫸ __Markdown Cheat Sheet:__ [1](https://www.markdownguide.org/cheat-sheet/ "Markdown Cheat Sheet") [2](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#headings "GitHub Docs")
 
 ## 47.2 What is JSX, React Component, babel transpiler
 
-⫸ What is __JSX (JavaScript XML)__? ([JSX in Depth](https://reactjs.org/docs/jsx-in-depth.html))
+⫸ What is __JSX (JavaScript XML)__? ([JSX in Depth](https://reactjs.org/docs/jsx-in-depth.html "Recommended to read Reactjs.org documentation - JSX in Depth"))
 - JSX is an `extension` to the JavaScript language syntax.
 - JSX just provides __syntactic sugar__ for the `React.createElement(component, props, ...children)` function. JSX is converted into JavaScript, you can try out [the online Babel compiler/transpiler](https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=script&lineWrap=true&presets=react&prettier=false&targets=&version=7.18.7&externalPlugins=&assumptions=%7B%7D).
 - __Specifying The React Element Type:__ Capitalized types indicate that the JSX tag is referring to a React component. 
 - __React Must Be in Scope:__ The React library must always be in scope from your JSX code. Ex: `import React from 'react';`
-- __Using Dot Notation for JSX Type:__ You can also refer to a React component using dot-notation from within JSX.
-- __User-Defined Components Must Be Capitalized:__ Ex: `<Person></Person>`
-- __Props in JSX__
-- __JavaScript Expressions as Props:__ Ex: `<MyComponent foo={1 + 2 + 3 + 4} />`
-- __String Literals:__ Ex: `<MyComponent message={'hello world'} />`
-- __Props Default to “True”:__ Ex: `<MyTextBox autocomplete={true} />`
+---
 - __Spread Attributes:__ Ex: `return <Greeting {...props} />;`
-- __Children in JSX:__ Ex: `props.children`
-- __JSX Children:__ You can provide more JSX elements as the children.
+- __String Literals:__ Ex: `<MyComponent message={'hello world'} />`
+- __User-Defined Components Must Be Capitalized:__ Ex: `<Person></Person>`
+- __Using Dot Notation for JSX Type:__ You can also refer to a React component using dot-notation from within JSX.
+---
+- __Props in JSX__
+- __Props Default to “True”:__ Ex: `<MyTextBox autocomplete={true} />`
+- __JavaScript Expressions as Props:__ Ex: `<MyComponent foo={1 + 2 + 3 + 4} />`
 - __JavaScript Expressions as Children:__ Ex: `<MyComponent>{'foo'}</MyComponent>`
 - __Functions as Children:__
+---
+- __Children in JSX:__ Ex: `props.children`
+- __JSX Children:__ You can provide more JSX elements as the children.
 - __Booleans, Null, and Undefined Are Ignored:__ Ex: `<div>{false}</div>`
 
 ⫸ __Power of JSX:__ OR __advantages of using JSX in ReactJS__
@@ -87,12 +91,50 @@ npm -v
 - JSX helps for `code simpler and Attractive` when writing large pieces of code for big React Application.
 - JSX also __allows React__ to Show more useful `error and warning messages`.
 - One of the advantages of JSX is that `React creates a virtual DOM` (a virtual representation of the page) __to track changes and updates__. Instead of rewriting the entire HTML, `React modifies the DOM` of the page whenever the information is updated. This is one of the main issues React was created to solve.
+---
 - Use __React Component__ to put together `Markup language & logic` in same file. 
 - We can use `Map`, `Spread Attributes`, `String Literals`, `User-Defined Components`, `Dot Notation`
 - Declare `User-Defined Components`, then use like html tag as much as you want
 - We can `set style dynamically`
 - We can `pass dynamic data`
 - The only reason behind the fact that `JSX code is converted to JS code`
+
+## 47.3 [Components](https://reactjs.org/docs/components-and-props.html "Components and Props - reactjs.org") and how props works, unidirectional data flow
+
+⫸ `Component` (a function, can use __multiple times__)
+- Component is nothing but __a function__
+- We can declare __User-Defined Components__, then use as much as you like
+- __Code reuse ability__ by creating component
+- __Similar in look, different in data__
+- When creating a component in React, the __first letter__ of that function name should be in __Uppercase__ (Lowercase for props)
+---
+- Components are __independent__ and __reusable bits of code__.
+- A Component is one of the __core building blocks__ of React app.
+- Components let you split the UI into __independent__, __reusable pieces__, and think about each piece in __isolation__.
+- They serve the __same purpose__ as JavaScript functions, but __work in isolation and return HTML__.
+- They accept arbitrary inputs (called __“props”__) and return __React elements__ describing what should appear on the screen.
+---
+- Components come in __two types__, __Class components__ and __Function components__.
+- Recently, people mostly used Function components after coming the __React-Hook__.
+- __Component → composed → rendering → optimized → show in UI__
+- Components compare with [Leader-board-css3](https://github.com/ProgrammingHero1/leader-board-css3/blob/main/index.html) | (__player__ class, __article__ tag) → __similar in look, different in data__.
+
+⫸ `Props` (__properties__, used for __passing dynamic data to component__)
+
+- Used for __passing dynamic data__
+- __props is properties__ in js, similar to html is attributes
+- props helps to make (__similar in look, different in data__)
+- convert html attributes to a js properties
+- props __read only__
+  - __Cannot assign__ any value (__ex:__ props.price = 150000) | makes error
+  - you can change value only from the root (__from where__ you send)
+
+⫸ `Unidirectional Data Flows`
+- __React:__ Unidirectional Data Flows: (One way Binding)
+  - __Parent → Child__ (ex: App → Device → DeviceDetail)
+- __Angular__ Framework (Two way Binding)
+  - __Parent ↔ Child__
+
 
 
 

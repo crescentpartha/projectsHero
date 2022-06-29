@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import Device from './components/Device/Device';
+
+/* 
+  React: Unidirectional Data Flows: (One way Binding)
+    - Parent → Child (ex: App → Device → DeviceDetail)
+  Angular Framework (Two way Binding)
+    - Parent ↔ Child
+
+  -----------------------------------------------------------------------
+
+  props read only
+    - Cannot assign any value (ex: props.price = 150000) | makes error
+    - you can change value only from the root (from where you send)
+    
+*/
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Device name="IPhone" price="130000"></Device>
     </div>
   );
 }
