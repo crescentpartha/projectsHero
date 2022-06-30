@@ -4,8 +4,8 @@ import DeviceDetail from '../DeviceDetail/DeviceDetail';
 
 const Device = (props) => {
     return (
-        <div style={{border: '2px solid yellow', margin: '20px', borderRadius: '10px'}}>
-            <h3>I have: {props.name}</h3>
+        <div style={{border: '2px solid cyan', margin: '20px', borderRadius: '10px'}}>
+            <h3>I have: {props.name} <span className='component'>Device</span></h3>
             <DeviceDetail price={props.price}></DeviceDetail>
         </div>
     );

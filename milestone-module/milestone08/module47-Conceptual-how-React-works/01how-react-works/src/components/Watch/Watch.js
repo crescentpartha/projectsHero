@@ -48,10 +48,10 @@ const Watch = () => {
 
     return (
         <div style={{border: '2px solid purple', margin: '20px', borderRadius: '10px'}}>
-            <h2>This is my smart watch</h2>
+            <h2>This is my smart <span className='component'>Watch</span></h2>
             <h3>My Current Steps: {steps}</h3>
             <button onClick={increaseSteps}>De Dour........</button>
-            <Display name="garmin" steps={steps}></Display>
+            <Display name="Display" steps={steps}></Display>
         </div>
     );
 };
