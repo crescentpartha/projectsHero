@@ -1,5 +1,6 @@
 // rsc - snippets for creating component automatically
 import React, { useEffect, useState } from 'react';
+import Display from '../Display/Display';
 
 /* 
     How states works:
@@ -46,10 +47,11 @@ const Watch = () => {
     }, [steps]) // DependencyList // How many times steps changed, update it.  
 
     return (
-        <div>
+        <div style={{border: '2px solid purple', margin: '20px', borderRadius: '10px'}}>
             <h2>This is my smart watch</h2>
             <h3>My Current Steps: {steps}</h3>
             <button onClick={increaseSteps}>De Dour........</button>
+            <Display name="garmin" steps={steps}></Display>
         </div>
     );
 };

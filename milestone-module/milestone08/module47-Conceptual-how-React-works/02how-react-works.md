@@ -153,7 +153,7 @@ npm -v
 - new stateful value assign to a variable → then passing by a function 
 - this function delivery(dispatch) a Action to useState → useState check value is different or not
 - if different, then check the UI (where will be changed) → find + rerender + change stateful value & give us <br>
-[__stateful value = steps__ | __function = setSteps__]
+[__state variable = steps = stateful value__ | __function = setSteps__]
 
 ⫸ `Asynchronous`
 - [function = setSteps] is asynchronous like setTimeout()
@@ -173,5 +173,50 @@ __useEffect():__
 | __Mutability__ | State holds the data and can change over time | Props are immutable—once set, props cannot be changed |
 | __Component__ | State can only be used in class components | Props can be used in both functional and class components |
 | __Updating__ | Event handlers generally update state | The parent component sets props for the children components |
+
+## 47.5 How React Hook works, send state via props, props vs state
+
+⫸ `Props vs State`
+| __Props__ | __State__ |
+| --- | --- |
+| Props are used to __pass data__ from one component to another | state is a __local data storage__ that is local to the component only and __cannot be passed__ to other components
+| props are __read-only__ | state __changes__ can be __asynchronous way__ |
+| props __can not be modified__ | state can be __modified using this.setState__ |
+| we can __send state by using props__ to child component | state actually __stay where we declare__ it |
+
+⫸ `Stateful component and Stateless component`
+- A stateful component is a component that __holds some state__.
+  - contains the state object, event handling function, and user actions.
+- Stateless components, by contrast, __have no state__.
+  - we can't use this.setState inside these components.
+  - It is like a normal function with no render method.
+  - They simply accept data and display them in some form that is they are mainly responsible for rendering UI. It accept properties(props) in function and return html(JSX), It gives solution without using state.
+  - It has no lifecycle, so it is not possible to use lifecycle methods such as componentDidMount and other hooks.
+- There are __two__ React component
+  - __Stateful component__ → (class-based components | smart components | store component | containers)
+  - __Stateless component__ → (functional components | dump components | week component | presentational components)
+
+⫸ What is [__Hooks__](https://reactjs.org/docs/hooks-intro.html "Introducing Hooks - Reactjs.org")?
+- Hooks are the functions which "hook into" __React state__ and __lifecycle features__ from function components.[^2]
+- It allows us to use __state__ and other __React features__ without writing a class.[^3]
+- It does not work inside classes.[^4]
+- Hooks are the special functions that implement React functionality to optimize.
+---
+- Hooks are JavaScript functions that manage the __state's behavior__ and __side effects__ by isolating them from a component.[^1]
+- With hooks, you achieve similar functionality to a class-based component.[^5]
+- Hooks give power to React functional components, making it possible to develop an entire application with it.
+- There are 15 hooks in Reactjs
+
+⫸ `useState(default value)`: is the hook that allows us to track state in a function component.
+- __state variable__ & __function__ names are customizable like (color, setColor | user, setUser)
+- function that changes state and updates the value of state variable.
+- __default value__ could be __0__, __100__, __[]__, __true__, __false__
+- Links: [1](https://ihatetomatoes.net/wp-content/uploads/2020/05/01-react-hook-useState.png "useState Hook | state variable - function that changes state - default value")
+
+⫸ `useEffect(callback, dependencies)`: is the hook that manages the side-effects in functional components.
+- __callback argument__ is a function to put the side-effect logic.
+- __dependencies__ is a list of dependencies of your side-effect: being props or state values.
+- Links: [1](https://ihatetomatoes.net/wp-content/uploads/2020/05/02-react-hook-useEffect.png "useEffect Hook | dependency of side effect") [2](https://dmitripavlutin.com/533bea4c73b775e7cb1cad6d1d4acaf1/react-useeffect-callback-3.svg "useEffect Hook | A Simple Explanation of React.useEffect(callback, dependencies)")
+
 
 
