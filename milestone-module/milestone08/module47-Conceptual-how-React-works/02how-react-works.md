@@ -312,6 +312,49 @@ __Vue.js__
 
 ⩥ Links: [1](https://dev.to/rohitrana/what-is-the-difference-between-library-vs-framework-174n "What is the difference between Library vs Framework? - DEV.to") [2](https://www.interviewbit.com/blog/framework-vs-library/#:~:text=Libraries%20provide%20developers%20with%20predefined,build%20applications%20for%20specific%20platforms. "Framework vs Library: Full Comparison - InterviewBit") [3](https://www.geeksforgeeks.org/software-framework-vs-library/ "Software Framework vs Library - GeeksforGeeks") [4](http://tom.lokhorst.eu/2010/09/why-libraries-are-better-than-frameworks "Why Libraries are better than Frameworks - Tom Lokhorst's Blog")
 
+## 47.7 How React works, Render, virtual DOM, diff algorithm, fiber
+
+⫸ How React works?
+
+[__The Virtual DOM:__](https://www.codecademy.com/article/react-virtual-dom "What is the Virtual DOM | How it works in React - CodeCademy.com") 
+- A virtual DOM object is a representation of a real DOM object, like a lightweight copy.
+- A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
+- Manipulating the DOM is slow. Manipulating the virtual DOM is much faster, because nothing gets drawn onscreen. Think of manipulating the virtual DOM as editing a blueprint, as opposed to moving rooms in an actual house.
+
+`How it works:`<br>
+<details>
+  <summary><b>Descriptions</b></summary>
+
+- When you render a JSX element, every single virtual DOM object gets updated.
+- This sounds incredibly inefficient, but the cost is insignificant because the virtual DOM can update so quickly.
+- Once the virtual DOM has updated, then React compares the virtual DOM with a virtual DOM snapshot that was taken right before the update.
+- By comparing the new virtual DOM with a pre-update version, React figures out exactly which virtual DOM objects have changed. This process is called “diffing.”
+- Once React knows which virtual DOM objects have changed, then React updates those objects, and only those objects, on the real DOM. In our example from earlier, React would be smart enough to rebuild your one checked-off list-item, and leave the rest of your list alone.
+- This makes a big difference! React can update only the necessary parts of the DOM. React’s reputation for performance comes largely from this innovation.
+---
+</details>
+
+<details>
+  <summary><b>Summary</b></summary>
+
+1. The entire virtual DOM __gets updated__.
+2. The virtual DOM gets compared to (__a virtual DOM snapshot__) what it looked like before you updated it. React figures out __which objects have changed__.
+3. The changed objects, and the changed objects only, get __updated on the real DOM__.
+4. Changes on the real DOM cause __the screen to change__.
+</details>
+
+⩥ Links: [1](https://programmingwithmosh.com/react/react-virtual-dom-explained/ "React Virtual DOM Explanation - programmingWithMosh") [2](https://i0.wp.com/programmingwithmosh.com/wp-content/uploads/2018/11/lnrn_0201.png?resize=768%2C514&ssl=1 "Image comparison (Virtual DOM vs real DOM works)") [3](https://www.geeksforgeeks.org/what-is-diffing-algorithm/ "What is Diffing Algorithm? - geeksforgeeks") [4](https://reactjs.org/docs/reconciliation.html "Reconciliation - Diffing Algorithm | reactjs.org") [5](https://reactjs.org/docs/faq-internals.html "Virtual DOM and Internals - reactjs.org")
+
+⫸ What is `diff algorithm` in React?
+- React uses a heuristic algorithm called the __Diffing algorithm__ for __reconciliation__ based on these assumptions: Elements of different types will produce different trees. We can set which elements are static and do not need to be checked.
+- `DOM Diffing:` Whenever there is a change in the state of the UI elements, a new virtual DOM is created. Then the new virtual DOM and the previous virtual DOM are compared with each other. This comparing is called __DOM diffing__.
+
+⫸ `React Fiber Architecture:`
+- React Fiber is an ongoing re-implementation of React's core algorithm. It is the culmination of over two years of research by the React team. 
+- The goal of React Fiber is to increase its suitability for areas like animation, layout, and gestures.
+- Links: [1](https://github.com/acdlite/react-fiber-architecture "React Fiber Architecture - GitHub") [2](https://dzone.com/articles/understanding-of-react-fiber-architecture "Understanding React Fiber Architecture - Dzone.com")
+
+
 
 
 
