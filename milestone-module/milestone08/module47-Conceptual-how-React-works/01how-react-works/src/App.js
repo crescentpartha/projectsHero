@@ -3,6 +3,7 @@ import './App.css';
 import Device from './components/Device/Device';
 import Watch from './components/Watch/Watch';
 import Display from './components/Display/Display';
+import Tablet from './components/Tablet/Tablet';
 
 /* 
   React: Unidirectional Data Flows: (One way Binding)
@@ -24,6 +25,7 @@ function App() {
       <h2>React: Unidirectional Data Flows (One way Binding)</h2>
       <Device name="IPhone" price="130000"></Device>
       <Watch></Watch>
+      <Tablet></Tablet>
     </div>
   );
 }

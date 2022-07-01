@@ -354,7 +354,50 @@ __Vue.js__
 - The goal of React Fiber is to increase its suitability for areas like animation, layout, and gestures.
 - Links: [1](https://github.com/acdlite/react-fiber-architecture "React Fiber Architecture - GitHub") [2](https://dzone.com/articles/understanding-of-react-fiber-architecture "Understanding React Fiber Architecture - Dzone.com")
 
+## 47.8 React Class Component, Component lifecycle and rerender
 
+⫸ `Class Component:`
+- Recently, developers use functional component.
+- But we can use functional & class component both together in a project.
+- Class component uses extra method called render() | return() method stays in render() method
+- __useState__ (in functional-component)
+  - constructor in class component
+    - this.state 
+    - this.setState()
+    - this.handleClick.bind(this) | Binding
+- __useEffect__ (in functional-component) Done both tasks
+  - componentDidMountJ(){} → 1st time Data Load | called lifecycle method
+  - componentWillMount(){} → dependency | called lifecycle method
+
+⫸ `Lifecycle of Components:`
+- Each component in React has a lifecycle which you can __monitor and manipulate__ during its three main phases. 
+- The three phases/stages are: __Mounting__, __Updating__, and __Unmounting__.
+- Links: [1](https://reactjs.org/docs/react-component.html "React.Component - reactjs.org") [2](https://www.w3schools.com/react/react_lifecycle.asp#:~:text=Lifecycle%20of%20Components,Mounting%2C%20Updating%2C%20and%20Unmounting. "Lifecycle of Components - w3school.com") [3](https://www.c-sharpcorner.com/article/components-lifecycle-in-react/ "Components Lifecycle in React - C# Corner") [4](https://codingstatus.com/wp-content/uploads/2021/10/react-component-lifecycle-methods-1.jpg "Image of React Components Lifecycle Methods") [5](https://res.cloudinary.com/practicaldev/image/fetch/s--b8hPmHM8--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://thepracticaldev.s3.amazonaws.com/i/b9btyrkuppcczemz1y7q.png "Image of React Components Lifecycle Methods 2")
+
+`Mounting:`
+- This is __initial stage__. When any __component enter into DOM__, then this stage start.
+- This stage has __four method__ consequently:
+  - __constructor()__
+  - __getDerivedStateFromProps()__
+  - __render()__
+  - __componentDidMount()__
+
+`Updating:`
+- When any __props/state change__ that is responsible for __component change__, then component enter this phase.
+- This stage has __five method__ consequently:
+  - __getDerivedStateFromProps()__
+  - __shouldComponentUpdate()__
+  - __render()__
+  - __getSnapshotBeforeUpdate()__
+  - __componentDidUpdate()__
+
+`UnMounting:`
+- When any __component remove__ from DOM, then this component enter this phase.
+- This stage has __one method__:
+  - __componentWillMount()__
+
+↪ Entire process is fully understand by Class-Component. <br>
+↪ This full things are work for functional-Component.
 
 
 

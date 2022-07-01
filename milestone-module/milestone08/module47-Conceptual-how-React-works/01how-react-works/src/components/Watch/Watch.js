@@ -1,4 +1,4 @@
-// rsc - snippets for creating component automatically
+// rsc - snippets for creating component automatically | reactStatelessComponent
 import React, { useEffect, useState } from 'react';
 import Display from '../Display/Display';
 

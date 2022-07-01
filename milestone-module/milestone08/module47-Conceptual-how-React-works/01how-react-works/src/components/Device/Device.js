@@ -1,4 +1,4 @@
-// rsc - snippets for creating component automatically
+// rsc - snippets for creating component automatically | reactStatelessComponent
 import React from 'react';
 import DeviceDetail from '../DeviceDetail/DeviceDetail';
 
