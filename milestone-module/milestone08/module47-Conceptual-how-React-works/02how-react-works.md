@@ -107,6 +107,7 @@ npm -v
 - __Code reuse ability__ by creating component
 - __Similar in look, different in data__
 - When creating a component in React, the __first letter__ of that function name should be in __Uppercase__ (Lowercase for props)
+- By using React Component, we can __return__ only __one element__.
 ---
 - Components are __independent__ and __reusable bits of code__.
 - A Component is one of the __core building blocks__ of React app.
@@ -317,6 +318,7 @@ __Vue.js__
 ⫸ How React works?
 
 [__The Virtual DOM:__](https://www.codecademy.com/article/react-virtual-dom "What is the Virtual DOM | How it works in React - CodeCademy.com") 
+- React uses virtual DOM to make rerender efficient and increase performance.
 - A virtual DOM object is a representation of a real DOM object, like a lightweight copy.
 - A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
 - Manipulating the DOM is slow. Manipulating the virtual DOM is much faster, because nothing gets drawn onscreen. Think of manipulating the virtual DOM as editing a blueprint, as opposed to moving rooms in an actual house.
@@ -399,5 +401,18 @@ __Vue.js__
 ↪ Entire process is fully understand by Class-Component. <br>
 ↪ This full things are work for functional-Component.
 
+# 47.9 Module Summary, Recap, Properties vs Attributes
 
+- JSX (syntactic sugar)
+- Create React App (CLI)
+- npm - npx
+- Components (building block)
+- Props (one way data binding)
+- State (asynchronous)
+- Hook
+- Virtual DOM
+- Class component
+- Lifecycle of component
+
+[reactjs.org](https://reactjs.org/): Must Read - Recommendation
 
