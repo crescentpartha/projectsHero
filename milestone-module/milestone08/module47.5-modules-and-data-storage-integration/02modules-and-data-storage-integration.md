@@ -50,5 +50,81 @@
 - __../../__ means two folder upper Or two level-up.
 - __../../utilities__ means two folder upper then go to utilities folder.
 
+## 47.5.3 Create and Load Fake data, json generator, online API
+
+⫸ There are __three types of way__ to create and load fake data.
+1. Data Generate System: `Create Object of data`
+``` JavaScript
+// Data Generate System
+const cosmetics = [
+    {id: 1, name: 'Alta', price: 100}, 
+    {id: 2, name: 'Palis', price: 200}, 
+    {id: 3, name: 'Malis', price: 300}, 
+    {id: 4, name: 'Balis', price: 400}, 
+    {id: 5, name: 'Nalis', price: 500}
+]
+```
+2. Data Generate System: [`json generator`](https://json-generator.com/ "json generator - json-generator.com")
+``` JavaScript
+// from json-generator
+const cosmetics = [
+  {
+    "id": "62c0931f912f5dc9bd357458",
+    "price": 724,
+    "name": "Ruthie Nash"
+  },
+  {
+    "id": "62c0931f9054587abe7baee9",
+    "price": 1037,
+    "name": "Lolita Jarvis"
+  },
+  {
+    "id": "62c0931ff90b12c0c949a17a",
+    "price": 2586,
+    "name": "Cooley Robinson"
+  },
+  {
+    "id": "62c0931f19131f46b7a151b5",
+    "price": 1489,
+    "name": "Betty Joyce"
+  },
+  {
+    "id": "62c0931f2a763e72bbacd2e8",
+    "price": 741,
+    "name": "Daugherty Klein"
+  },
+  {
+    "id": "62c0931f53b614ba0ef9d579",
+    "price": 2486,
+    "name": "Willa Mathews"
+  },
+  {
+    "id": "62c0931ffbfd7543d904c8ef",
+    "price": 3114,
+    "name": "Anthony Martinez"
+  }
+]
+```
+3. Data Generate System Number-03: `Data set by fetch`
+   - go to __public__ folder, then create __data.json__ file and paste your __json-generator data__ inside this file.
+``` JavaScript
+const [cosmetics, setCosmetics] = useState([]);
+
+useEffect( () => {
+    fetch('data.json')
+    .then(res => res.json())
+    // .then(data => console.log(data));
+    .then(data => setCosmetics(data));
+}, [])
+```
+4. Data Generate System Number-04: (`Online API`) → free api online | [mockAPI online](https://mockapi.io/ "mockAPI - mock api online - mockapi.io | The easiest way to mock REST APIs!") | [Beeceptor](https://beeceptor.com/ "Beeceptor.com | Rest API mocking and intercepting in seconds.")
+   - Example: (go to __Beeceptor__ website first). Then, follow the following steps.
+     - set __Endpoint Name__ like __cosmetic__, then press __Create Endpoint__ 
+     - Rules enabled → Mocking Rules → Create New Rule
+     - Paste data on Response body → Save Rule
+     - You will find a link like https://cosmetic.free.beeceptor.com → here you will find data
+     - __Problem__ is, there have data limit. You need to choose __premium service__.
+
+__Note:__ It is safer to __create your own data__ like __data.json__ in __public__ folder.
 
 
