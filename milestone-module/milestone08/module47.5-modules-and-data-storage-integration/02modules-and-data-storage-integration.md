@@ -127,4 +127,15 @@ useEffect( () => {
 
 __Note:__ It is safer to __create your own data__ like __data.json__ in __public__ folder.
 
+## 47.5.4 How to Create Event handler with parameters
+
+⫸ [`Event Handler Call with Parameter:`](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module47.5-modules-and-data-storage-integration/01react-storage-and-handler/src/components/Cosmetic/Cosmetic.js "Event Handler Call with Parameter: Wrap the Event Handler - Directly creating arrow function")
+- Call another function which actually call the Event Handler with parameter by creating arrow function. (__Wrap the Event Handler__)
+  - `<button onClick={addToCartWithParam}>Add to Cart</button>`
+    - `const addToCartWithParam = () => addToCart(id);`
+- Call Event Handler by directly creating arrow function.
+  - `<button onClick={() => addToCart(id)}>Add To Cart</button>`
+
+
+
 
