@@ -138,6 +138,21 @@ __Note:__ It is safer to __create your own data__ like __data.json__ in __public
 
 ## 47.5.5 Indro to Local storage and store data just one item
 
+⫸ We can store data in __3 different place__:
+- In __our code__
+- In the __database__
+- In the __browser__
 
+## 47.5.6 Store multiple data in an Object with local storage
+
+⫸ [__Window.localStorage__](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage "Window.localStorage - MDN web docs")
+
+``` JavaScript
+// Some methods
+const storedCart = localStorage.getItem('shopping-cart');
+const shoppingCart = JSON.parse(storedCart);
+const quantity = shoppingCart[id];
+localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+```
 
 
