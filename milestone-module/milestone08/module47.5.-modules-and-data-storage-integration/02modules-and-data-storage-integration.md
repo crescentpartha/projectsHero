@@ -136,6 +136,8 @@ __Note:__ It is safer to __create your own data__ like __data.json__ in __public
 - Call Event Handler by directly creating arrow function.
   - `<button onClick={() => addToCart(id)}>Add To Cart</button>`
 
+## 47.5.5 Indro to Local storage and store data just one item
+
 
 
 
