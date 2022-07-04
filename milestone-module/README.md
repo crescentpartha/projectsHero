@@ -119,7 +119,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 46.5 01reactjs-core-concepts-recap](https://46-5-1reactjs-core-concepts-recap.netlify.app/ "React-App | Live-Server _-_ Recap React JS Core Concepts by practicing") | [02reactjs-revision-checklist-practice](https://46-5-2reactjs-revision-checklist-practice.netlify.app/ "React-App | Live-Server _-_ Checkout reactjs-revision-checklist.md file for checklist")
 
-* [Module 47 Conceptual-how-React-works](https://47-1-1how-react-works.netlify.app/ "React-App | Live-Serve _-_ How React works | JSX - Create React App - Components - Lifecycle of Components - Props - State - Binding - asynchronous - console state - What is React - React Popularity - Library vs Framework - Render - Rerendering - Virtual DOM - Diff Algorithm - Fiber Architecture")
+* [Module 47 Conceptual-how-React-works](https://47-1-1how-react-works.netlify.app/ "React-App | Live-Server _-_ How React works | JSX - Create React App - Components - Lifecycle of Components - Props - State - Binding - asynchronous - console state - What is React - React Popularity - Library vs Framework - Render - Rerendering - Virtual DOM - Diff Algorithm - Fiber Architecture")
 
-
+* [Module 47.5 01react-storage-and-handler](https://47-5-1react-storage-and-handlers.netlify.app/ "React-App | Live-Server _-_ ES6 Modules (Simple import, export) - import default - export default - relative path - create and load fake data - json generator - mockAPI online - event handler call with parameters - local storage - store single data - store multiple data as an object in local storage - remove data - delete shopping cart - Array.reduce() method → 👍(Modules and data storage integration)")
 
