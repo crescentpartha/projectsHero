@@ -163,4 +163,37 @@ delete shoppingCart[id];
 localStorage.removeItem('shopping-cart');
 ```
 
+## 47.5.8 Module Summary and simple intro to array reduce
 
+⫸ [__Array.prototype.reduce()__](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce "reduce() method - MDN web docs")
+
+``` JavaScript
+// Array.reduce()
+const numbers = [20, 24, 235, 65, 89];
+const sumReducer = (previous, current) => previous + current;
+const total = numbers.reduce( sumReducer, 0);
+```
+
+``` JavaScript
+// Array.reduce()
+const items = [
+    {id: 1, name: 'alta', price: 100}, 
+    {id: 2, name: 'malta', price: 200}, 
+    {id: 3, name: 'ualta', price: 300}, 
+    {id: 4, name: 'palta', price: 400}
+]
+const itemSumReducer = (previous, current) => previous + current.price;
+const itemTotal = items.reduce(itemSumReducer, 0);
+```
+
+``` JavaScript
+// Array.reduce()
+const arr = [1, 2, 3, 4, 5];
+const initialValue = 0;
+const sumWithInitial = arr.reduce(
+  (previousValue, currentValue) => previousValue + currentValue,
+  initialValue
+);
+
+console.log(sumWithInitial); // 15
+```
