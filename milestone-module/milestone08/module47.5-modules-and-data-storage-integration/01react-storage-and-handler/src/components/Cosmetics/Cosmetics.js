@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { add } from '../../utilities/calculate'; // if not default, then import like a object;
 import Cosmetic from '../Cosmetic/Cosmetic';
+import './Cosmetics.css';
 // import add from '../../utilities/calculate'; // if default;
 
 const Cosmetics = () => {
@@ -68,9 +69,11 @@ const Cosmetics = () => {
     }, [])
 
     return (
-        <div>
-            <h1>Welcome to my Cosmetics Store</h1>
-            <p>Total: {total}</p>
+        <div className='container'>
+            <div className='products'>
+                <h1>Welcome to my Cosmetics Store</h1>
+                <p>Total: {total}</p>
+            </div>
             {
                 // cosmetics.map(cosmetic => console.log(cosmetic))
                 cosmetics.map(cosmetic => <Cosmetic 

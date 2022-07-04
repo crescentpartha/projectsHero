@@ -8,7 +8,7 @@ const Shoes = () => {
     const result = multiply(first, second);
     const sum = add(first, second);
     return (
-        <div>
+        <div className='products'>
             <h2>This is Shoes Component</h2>
             <p>Result: {result} and Total: {sum}</p>
         </div>
