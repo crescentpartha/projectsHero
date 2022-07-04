@@ -155,4 +155,12 @@ const quantity = shoppingCart[id];
 localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
 ```
 
+## 47.5.7 Remove data to the local storage and delete shopping cart
+
+``` JavaScript
+// Some methods
+delete shoppingCart[id];
+localStorage.removeItem('shopping-cart');
+```
+
 

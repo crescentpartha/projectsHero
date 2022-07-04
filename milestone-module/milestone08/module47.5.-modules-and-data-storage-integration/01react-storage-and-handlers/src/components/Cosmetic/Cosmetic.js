@@ -1,6 +1,6 @@
 // rsc - snippets for creating component automatically | reactStatelessComponent
 import React from 'react';
-import { addToDb } from '../../utilities/fakedb';
+import { addToDb, deleteShoppingCart, removeFromDb } from '../../utilities/fakedb';
 import './Cosmetic.css';
 
 const Cosmetic = (props) => {
@@ -10,6 +10,15 @@ const Cosmetic = (props) => {
     const addToCart = (id) => {
         // console.log('item added', id);
         addToDb(id);
+    }
+
+    const removeFromCart = id => {
+        // console.log('removing', id);
+        removeFromDb(id);
+    }
+
+    const deleteWholeShoppingCart = () => {
+        deleteShoppingCart();
     }
 
     // wrap the Event Handler
@@ -25,6 +34,8 @@ const Cosmetic = (props) => {
             {/* <button onClick={addToCartWithParam}>Add to Cart</button> */}
             {/* <button onClick={() => addToCart(id)}>Purchase: shortcut</button> */}
             <button onClick={() => addToCart(id)}>Add to Cart</button>
+            <button onClick={() => removeFromCart(id)}>Remove</button>
+            <button onClick={() => deleteWholeShoppingCart()}>Remove All</button>
         </div>
     );
 };
