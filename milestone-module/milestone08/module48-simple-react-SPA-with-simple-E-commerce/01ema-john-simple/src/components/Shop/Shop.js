@@ -4,6 +4,7 @@ import './Shop.css';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect( () => {
         // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
@@ -13,7 +14,10 @@ const Shop = () => {
     }, [])
 
     const handleAddToCart = (product) => {
-        console.log(product);
+        // console.log(product);.
+        // cart.push(product);
+        const newCart = [...cart, product];
+        setCart(newCart);
     }
 
     return (
@@ -29,6 +33,7 @@ const Shop = () => {
             </div>
             <div className="cart-container">
                 <h4>Order Summary</h4>
+                <p>Selected Items: {cart.length}</p>
             </div>
         </div>
     );
