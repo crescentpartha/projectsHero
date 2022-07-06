@@ -132,6 +132,9 @@ const handleAddToCart = (product) => {
     <p>Add to Cart</p>
 </button>
 ```
+<p align="center">
+    <img src='./images/EventHandler.drawio.svg' alt="EventHandler Call from Child Component" />
+</p>
 
 ## 48.7 (advanced) Cart state setup, update cart and total on click
 
@@ -257,4 +260,50 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 ## 48.10 (Bonus) Deploy Simple React website to Netlify
 
+- `To Deploy:` [Netlify.com](https://www.netlify.com/) → sites → Drag & Drop (__build__ folder) → Click Link → get React App
+- `To Modify:` Change → npm run build → Drag & Drop (build folder) → Click shareable Link → get React App
+
 ## Quiz:
+
+1. What is the purpose of the key prop used in react?
+   - It can efficiently identify the changes in virtual DOM
+2. How will you import useState in React?
+   - `import { useState } from 'react'`
+3. `const [count, setCount] = useState(0)` → What should you do to increase the count state?
+   - `setCount(count+1)`
+4. `const [products, setProducts] = useState( _?_ )` → What will be the default value of the above state  If you want to store an array of objects from a server and set it to the state?
+   - __[]__
+5. Can we pass a function through props?
+   - Yes
+6. If A and B are siblings of components that share a common state, where should you declare the state?
+   - In their Parent Component
+7. Where did we declare  const [products, setProducts] = useState( [ ] ) in the Ema John Project?
+   - In Shop.js
+8. How do we pass data from a Child to a parent Component using props?
+   - No, you can not sent data from child to parent using props
+9. What does the package.json file do? (Search on Google Mama)
+   - It records important metadata about a project
+10. Which is the correct way to call the function inside a button in React?
+``` JavaScript
+const handleAdd( item ){
+    console.log(item)  
+}
+```
+- `<button onClick={() => handleAdd(item)}> </button>`
+11.  How will you set a clickhandler on a Button using React?
+``` JavaScript
+<button ________= {handleClick}>Click me</button>
+```
+- `onClick`
+12. How would you import a App.css file staying in the same folder of the App.js file? (if needed check the React Project that you have created)
+``` JavaScript
+import ______?______;
+```
+- `"./App.css";`
+13. Which ReactJS function renders HTML to the web page?
+    - `ReactDOM.render()`
+14. What does transpile jsx in react?
+    - Babel
+15. Where we can call react hooks?
+    - At the top level of React function
+
