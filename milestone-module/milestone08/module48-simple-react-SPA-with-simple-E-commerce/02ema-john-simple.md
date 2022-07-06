@@ -1,4 +1,4 @@
-# Simple React SPA with Simple E-commerce
+# Module 48: Simple React SPA with Simple E-commerce
 
 # 02ema-john-simple
 
@@ -148,6 +148,7 @@ const handleAddToCart = (product) => {
 ```
 
 - Where we declare __EventHandler__, Where we declare __State__ `const [cart, setCart] = useState([]);`
+- [__Lifting State Up | Lifting up the state:__](https://reactjs.org/docs/lifting-state-up.html "Lifting State Up - reactjs.org") In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called __"Lifting State Up"__.
 - We don't push the product into the cart like `cart.push(product);`
 - We copy cart to newCart, then add new product `const newCart = [...cart, product];` 
 - Because, In React, it is easier to compare with __new virtual DOM__.
@@ -306,4 +307,71 @@ import ______?______;
     - Babel
 15. Where we can call react hooks?
     - At the top level of React function
+
+---
+
+# Module 49: (advanced) Cart calculation, Save and Retrieve cart
+
+## 49.1 Module Introduction and simple ema-john recap
+
+## 49.2 Run Github clone react project, Create Cart Component
+
+⫸ `Run Github clone react Project:`
+- If we clone any react repository from github and try to execute command `npm start`, It will give an error message.
+- If we clone any react repository, then we need to `install these dependencies`.
+- We don't find `node_modules` folder when we clone react repository.
+- To install these dependencies, we need to run `npm install` command. It will install all dependencies of that react project.
+- When we __push__ any react project into the github, we don't send __node_modules__ folder. We __ignore node_modules__ folder because __create-react-app__ makes this initial setting in __.gitignore__ file.
+- After run `npm install`, we can run `npm start` command.
+- After that, we can also change our __project/folder name__.
+
+---
+
+⫸ `Access the Github clone react Project:`
+- When we `push` any clone repository into Github, It shows an error message that you __don't have access__. 
+- Run `git remote -v`, to check the __origin__ where to fetch and where did push.
+- If we want to send these into another Repository: (search: [__git remote set-url origin__](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories "Managing remote repositories | Switching remote URLs from SSH to HTTPS"))
+  - Create __repository__ and copy the __origin__ link.
+  - run `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
+  - Then, run `git remote -v` to verify that the remote URL has changed.
+
+---
+
+⫸ `Create Cart Component:`
+
+``` JavaScript
+<div className="cart-container">
+    <Cart cart={cart}></Cart>
+</div>
+```
+
+``` JavaScript
+const Cart = ({cart}) => {
+    return (
+        <div>
+            <h4>Order Summary</h4>
+            <p>Selected Items: {cart.length}</p>
+        </div>
+    );
+};
+```
+
+## 49.3 Calculate shopping cart price, shipping and tax with toFixed
+
+## 49.4 Setting the cart data on the localStorage for future retrieve
+
+## 49.5 (advanced) Load cart from local storage, find product
+
+## 49.6 (advanced) Display local storage cart to the UI
+
+## 49.7 (super advanced) Handle quantity from storage to cart
+
+## 49.8 (advanced) Add to the cart with quantity and explanation
+
+## 49.9 Module summary, deploy, code recap
+
+## Quiz:
+
+
+
 
