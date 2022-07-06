@@ -358,6 +358,39 @@ const Cart = ({cart}) => {
 
 ## 49.3 Calculate shopping cart price, shipping and tax with toFixed
 
+⫸ `Calculate shopping cart price:`
+- 2 ways: `Reduce` & `for of` loop
+
+``` JavaScript
+const Cart = (props) => {
+    const {cart} = props;
+
+    // console.log(cart);
+    let total = 0;
+    let shipping = 0;
+    for (const product of cart) {
+        total = total + product.price;
+        shipping = shipping + product.shipping;
+    }
+    // const tax = (total * 10 / 100).toFixed(2);
+    const tax = (total * 0.1).toFixed(2);
+
+    return (
+        <div className='cart'>
+            <h4>Order Summary</h4>
+            <p>Selected Items: {cart.length}</p>
+            <p>Total Price: ${total}</p>
+            <p>Total Shipping: ${shipping}</p>
+            <p>Tax: ${tax}</p>
+            <h5>Grand Total: </h5>
+        </div>
+    );
+};
+```
+
+- [JavaScript two decimal places without rounding](https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding "stackoverflow.com")
+- [JavaScript toFixed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed "Number.prototype.toFixed() - MDN web docs")
+
 ## 49.4 Setting the cart data on the localStorage for future retrieve
 
 ## 49.5 (advanced) Load cart from local storage, find product
