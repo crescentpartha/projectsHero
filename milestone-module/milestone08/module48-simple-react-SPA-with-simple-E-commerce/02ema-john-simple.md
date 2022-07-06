@@ -393,6 +393,31 @@ const Cart = (props) => {
 
 ## 49.4 Setting the cart data on the localStorage for future retrieve
 
+``` JavaScript
+const Cart = (props) => {
+    // const tax = parseFloat((total * 10 / 100).toFixed(2));
+    const tax = parseFloat((total * 0.1).toFixed(2));
+    const grandTotal = total + shipping + tax;
+
+    return (
+        <div className='cart'>
+            <h5>Grand Total: ${grandTotal.toFixed(2)}</h5>
+        </div>
+    );
+};
+```
+⫸ `Use fakedb.js in Shop.js file:`
+
+``` JavaScript
+import { addToDb } from '../../utilities/fakedb';
+
+const Shop = () => {
+    const handleAddToCart = (product) => {
+        addToDb(product.id);
+    }
+};
+```
+
 ## 49.5 (advanced) Load cart from local storage, find product
 
 ## 49.6 (advanced) Display local storage cart to the UI
