@@ -214,6 +214,45 @@ const Product = ({product, handleAddToCart}) => {
 
 ## 48.8 Install external packages, react-fontawesome, display icon
 
+⫸ [__heroicons__](https://heroicons.com/ "Beautiful hand-crafted SVG icons") | [__Heroicons__](https://heroicons.dev/ "heroicons.dev")
+
+⫸ [__React - Font Awesome Docs__](https://fontawesome.com/docs "React - Font Awesome Docs | How to use icons in our projects, awesomely.")
+- `Get Started:` To get started you'll need to install the following __packages__ into your project using a __package manager__ like __npm__ or __yarn__.
+``` FontAwesomeIcon 
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
+```
+OR
+``` FontAwesomeIcon 
+npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+```
+- Check __dependencies__ section in the __package.json__ file, packages are install or not.
+- __Ctrl + P__ for searching file.
+
+- __Using Icons via Individual Use:__
+
+``` JavaScript
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+```
+- Display __icon__
+``` JavaScript
+<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
+```
+``` CSS
+/* set AddToCart & icon horizontally */
+.btn-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-cart .btn-text {
+    margin-right: 5px;
+}
+```
+- Change __favicon.ico__ and __title__ of the page.
+
 ## 48.9 Simple React SPA module summary
 
 ## 48.10 (Bonus) Deploy Simple React website to Netlify
