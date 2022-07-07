@@ -527,6 +527,30 @@ const Cart = (props) => {
 
 ## 49.8 (advanced) Add to the cart with quantity and explanation
 
+``` JavaScript
+// ONLY the changes things contains this code | In Shop.js
+const Shop = () => {
+    const handleAddToCart = (selectedProduct) => {
+        // console.log(selectedProduct);
+        let newCart = [];
+        const exists = cart.find(product => product.id === selectedProduct.id);
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            // cart.push(product); // Don't do this
+            newCart = [...cart, selectedProduct];
+        }
+        else {
+            const rest = cart.filter(product => product.id !== selectedProduct.id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+        setCart(newCart);
+        addToDb(selectedProduct.id);
+    }
+};
+```
+- To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-8-advanced-add-to-the-cart-with-quantity-and-explanation?t=532s "Add to the cart with quantity and explanation"): Go to __49.8__, Time Start: __8:52__
+
 ## 49.9 Module summary, deploy, code recap
 
 ## Quiz:
