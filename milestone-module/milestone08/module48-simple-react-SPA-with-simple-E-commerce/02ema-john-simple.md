@@ -420,6 +420,41 @@ const Shop = () => {
 
 ## 49.5 (advanced) Load cart from local storage, find product
 
+``` JavaScript
+// In fakedb.js
+const getStoredCart = () => {
+    let shoppingCart = {};
+
+    //get the shopping cart from local storage
+    const storedCart = localStorage.getItem('shopping-cart');
+    if(storedCart){
+        shoppingCart = JSON.parse(storedCart);
+    }
+    return shoppingCart;
+}
+export {
+    getStoredCart
+}
+```
+
+- If any data load from outside, then it is __side effect__. You need to use `useEffect()`;
+- There is 2 ways to find anythings → `filter` & `find`
+
+``` JavaScript
+// In Shop.js
+import { addToDb, getStoredCart } from '../../utilities/fakedb';
+
+useEffect( () => {
+        const storedCart = getStoredCart();
+        // console.log(storedCart);
+        for (const id in storedCart) {
+            // console.log(id);
+            const addedProduct = products.find(product => product.id === id);
+            console.log(addedProduct);
+        }
+    }, [])
+```
+
 ## 49.6 (advanced) Display local storage cart to the UI
 
 ## 49.7 (super advanced) Handle quantity from storage to cart
