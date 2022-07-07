@@ -421,7 +421,7 @@ const Shop = () => {
 ## 49.5 (advanced) Load cart from local storage, find product
 
 ``` JavaScript
-// In fakedb.js
+// ONLY the changes things contains this code | In fakedb.js
 const getStoredCart = () => {
     let shoppingCart = {};
 
@@ -441,7 +441,7 @@ export {
 - There is 2 ways to find anythings → `filter` & `find`
 
 ``` JavaScript
-// In Shop.js
+// ONLY the changes things contains this code | In Shop.js
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 
 useEffect( () => {
@@ -464,6 +464,7 @@ useEffect( () => {
   - __Local Storage__ depends on __one things__ or __many things__.
     - for one things: `useEfect( , [products])`
     - for many things: `useEfect( , [products, cart])`
+- If we add dependency, then it __call this useEffect again__ for any little changes.
 
 ``` JavaScript
 // In Shop.js
@@ -501,6 +502,28 @@ const Shop = () => {
 ```
 
 ## 49.7 (super advanced) Handle quantity from storage to cart
+
+- Use `for in` loop, if it is __object__.
+- Use `for of` loop, if it is __array__.
+
+``` JavaScript
+// ONLY the changes things contains this code | In Cart.js
+const Cart = (props) => {
+    const {cart} = props;
+    let quantity = 0;
+    for (const product of cart) {
+        quantity = quantity + product.quantity;
+        total = total + product.price * product.quantity;
+    }
+
+    return (
+        <div className='cart'>
+            {/* <p>Selected Items: {cart.length}</p> */}
+            <p>Selected Items: {quantity}</p>
+        </div>
+    );
+};
+```
 
 ## 49.8 (advanced) Add to the cart with quantity and explanation
 

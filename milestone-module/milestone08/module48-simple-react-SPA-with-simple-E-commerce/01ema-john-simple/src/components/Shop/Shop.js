@@ -9,7 +9,7 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
 
     useEffect( () => {
-        console.log('products load before fetch');
+        // console.log('products load before fetch');
         // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
         fetch('products.json')
         .then(res => res.json())
@@ -20,7 +20,7 @@ const Shop = () => {
     }, [])
 
     useEffect( () => {
-        console.log('Local Storage first line', products);
+        // console.log('Local Storage first line', products);
         const storedCart = getStoredCart();
         // console.log(storedCart);
         const savedCart = [];
