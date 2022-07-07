@@ -549,12 +549,76 @@ const Shop = () => {
     }
 };
 ```
-- To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-8-advanced-add-to-the-cart-with-quantity-and-explanation?t=532s "Add to the cart with quantity and explanation"): Go to __49.8__, Time Start: __8:52__
+- To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-8-advanced-add-to-the-cart-with-quantity-and-explanation?t=532s "Add to the cart with quantity and explanation"): Go to __M49.8__, Time Start: __8:52__
 
 ## 49.9 Module summary, deploy, code recap
 
-## Quiz:
+- To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-9-module-summary-deploy-code-recap "Module Summary: How whole process works"): Go to __M49.9__, Time Start: __5:45__
 
+## `Quiz:`
+
+1. What type of things can we send via props?
+   - __array, object, function, event handler__
+
+2. What is true about localStorage? 
+   - __is not deleted__ after the browser has been closed
+
+3. What does it mean by __lifting up state__?
+   - Declare the __state in the parent component__ and pass __event handler to the child__
+
+``` JavaScript
+// 4. if we want to add this function as an event handler to a button by passing a parameter, then which pattern is correct?
+
+const findDevice= (id) => testArr.find(p=> p.id===id);
+```
+- `onClick={ () => findDevice(parameter)}`
+
+5. Which method is used to remove an item from local storage?
+   - `localStorage.removeItem();`
+
+``` JavaScript
+// 6. What will be the output?
+const student1= {name: "rafique", marks: 79, result: "A+"};
+console.log(student1.mark + 1);
+```
+- __NaN__
+
+7. How can we pass an event handler to the child component?
+   - __Using props__
+
+8. What is the purpose of `npm i --save <packageName>`?
+   - Install and save the specified package 
+   - `--save`: Package will appear in your dependencies.
+
+9. Where will you find information about all the packages that you have installed in your react app?
+   - __package.json__
+
+10. How can you pass a boolean value (true) as the prop named hero?
+    - `<HeroComponent hero={true} />` & `<HeroComponent hero />`
+
+11. Suppose you are trying to access something from local storage using `localStorage.getItem()` method, and the item is not exist there. Then you will get___?
+    - __null__
+
+12. What is the purpose of the dependency array in useEffect? 
+    - re-run the effect when the values within the array change across re-renders.
+
+13. If you want to set data into localStorage what two things should you do?
+    - Call __localStorage.setItem__ method and pass __name__ and __value__ as parameters
+
+14. How we can access object properties?
+    - Using dot notation → `object.property` 
+    - Using square bracket notation → `object['property']` 
+    - By destructuring → `const {property} = object;`
+
+``` JavaScript
+// 15. How we can access __brand name__? 
+<Phone brandName="iPhone">
+
+const Phone = (props) => {
+ return <h2>Phone Brand : { ___???____ }</h2>;
+}
+```
+- __props.brandName__
 
 
 
