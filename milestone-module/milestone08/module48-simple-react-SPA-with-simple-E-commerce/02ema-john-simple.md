@@ -457,6 +457,49 @@ useEffect( () => {
 
 ## 49.6 (advanced) Display local storage cart to the UI
 
+- __products load by fetch__ & __data load from Local Storage__ don't work sequentially. It would be __asynchronous__.
+- If we __load products before data fetch__/catch, then it shows __empty array__ because data don't loaded before data fetching. Solution is __dependency injection__.
+- __Dependency Injection__ means:
+  - if keep empty array `useEffect( , [])`, then call it only once.
+  - __Local Storage__ depends on __one things__ or __many things__.
+    - for one things: `useEfect( , [products])`
+    - for many things: `useEfect( , [products, cart])`
+
+``` JavaScript
+// In Shop.js
+const Shop = () => {
+    useEffect( () => {
+        console.log('products load before fetch');
+        // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
+        fetch('products.json')
+        .then(res => res.json())
+        .then(data => {
+            setProducts(data);
+            // console.log('products loaded');
+        });
+    }, [])
+
+    useEffect( () => {
+        console.log('Local Storage first line', products);
+        const storedCart = getStoredCart();
+        // console.log(storedCart);
+        const savedCart = [];
+        for (const id in storedCart) {
+            // console.log(id);
+            const addedProduct = products.find(product => product.id === id);
+            if (addedProduct) {
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
+                // console.log(addedProduct);
+                savedCart.push(addedProduct);
+            }
+        }
+        setCart(savedCart);
+        // console.log('local storage finished');
+    }, [products])
+};
+```
+
 ## 49.7 (super advanced) Handle quantity from storage to cart
 
 ## 49.8 (advanced) Add to the cart with quantity and explanation
