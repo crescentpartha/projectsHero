@@ -1,9 +1,10 @@
 import React from 'react';
+import './Summary.css';
 
 const Summary = () => {
     return (
-        <div>
-            <h2>This is from Summary</h2>
+        <div className='summary'>
+            <h2>Summary</h2>
         </div>
     );
 };
