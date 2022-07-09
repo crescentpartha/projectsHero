@@ -123,7 +123,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 47.5 01react-storage-and-handler](https://47-5-1react-storage-and-handlers.netlify.app/ "React-App | Live-Server _-_ ES6 Modules (Simple import, export) - import default - export default - relative path - create and load fake data - json generator - mockAPI online - event handler call with parameters - local storage - store single data - store multiple data as an object in local storage - remove data - delete shopping cart - Array.reduce() method → 👍(Modules and data storage integration)")
 
-* [Module 48 01ema-john-simple](https://48-1ema-john-simple.netlify.app/ "React-App | Live-Server _-_ Use figma file - API Data Create & Load - Create Nav - Display Data - Set EventHandler, Pass EventHandler to Child / EventHandler Call from Child Component - Cart state setup, update cart and count total on click - Install external packages, react-fontawesome, display icon - Deploy in Netlify")
+* [Module 48&49 01ema-john-simple](https://48-1ema-john-simple.netlify.app/ "React-App | Live-Server _-_ Use figma file - API Data Create & Load - Create Nav - Display Data - Set EventHandler, Pass EventHandler to Child / EventHandler Call from Child Component - Cart state setup, update cart and count total on click - Install external packages, react-fontawesome, display icon - Deploy in Netlify")
 
-
+* [Module 49.5 01food-uganda-practice](https://49-01food-uganda-practice.netlify.app/ "React-App | Live-Server _-_ Simple React Revision - Food-Uganda-Practice - API data load, Display Data, set EventHandler with Parameter, Cart state setup, update cart, React-fontawesome, display icon, add product to cart(only last one) - Deploy in Netlify")
 
