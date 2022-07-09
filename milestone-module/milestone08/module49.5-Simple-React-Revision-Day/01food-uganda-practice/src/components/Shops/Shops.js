@@ -16,7 +16,7 @@ const Shops = () => {
     } , [])
 
     const handleAddToCart = (selectedProduct) => {
-        console.log(selectedProduct);
+        // console.log(selectedProduct);
         // cart.push(selectedProduct);
         const newCart = [...cart, selectedProduct];
         setCart(newCart);
@@ -36,9 +36,6 @@ const Shops = () => {
             </div>
             <div className='summary-container'>
                 <Summary cart={cart}></Summary>
-                {/* {
-                    carts.map(cart => <Summary cart={cart}></Summary>)
-                } */}
             </div>
         </div>
     );
