@@ -35,7 +35,10 @@ const Shops = () => {
                 }
             </div>
             <div className='summary-container'>
-                <Summary></Summary>
+                <Summary cart={cart}></Summary>
+                {/* {
+                    carts.map(cart => <Summary cart={cart}></Summary>)
+                } */}
             </div>
         </div>
     );
