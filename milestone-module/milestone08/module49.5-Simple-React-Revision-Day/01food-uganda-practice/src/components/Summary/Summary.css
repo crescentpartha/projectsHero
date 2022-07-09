@@ -2,3 +2,11 @@
     position: sticky;
     top: 0;
 }
+
+.product-name {
+    background-color: bisque;
+    border: 1px solid #fda7a7;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 0 5px;
+}
