@@ -6,6 +6,7 @@ import Summary from '../Summary/Summary';
 
 const Shops = () => {
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect( () => {
         fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
@@ -16,6 +17,10 @@ const Shops = () => {
 
     const handleAddToCart = (selectedProduct) => {
         console.log(selectedProduct);
+        // cart.push(selectedProduct);
+        const newCart = [...cart, selectedProduct];
+        setCart(newCart);
+
     }
 
     return (
