@@ -22,6 +22,8 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [M07-Assignment: Insta Shohor](https://github.com/Programming-Hero-Web-Course4/insta-shohor-crescentpartha "Client-Side Code") | [Live-Server](https://insta-shohor-crescentpartha.netlify.app/ "Website")
 
+* [M08-Assignment: Table Chooser](https://github.com/Programming-Hero-Web-Course4/lucky-one-crescentpartha "M50.1: Client-Side Code") | [Live-Server](https://50-1table-chooser.netlify.app/ "Website")
+
 
 
 
