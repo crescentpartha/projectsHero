@@ -7,9 +7,18 @@ const db = {};
 
 const addToDb = item => {
     // To add an item to Object: (3 ways)
-    // db.alom = 1; // system-01
-    // db['alom'] = 1; // system-02
-    db[item] = 1; // system-03
+        // db.alom = 1; // system-01
+        // db['alom'] = 1; // system-02
+        // db[item] = 1; // system-03
+
+    // to check any property is exist or not in the Object
+    if (item in db) {
+        db[item] = db[item] + 1; 
+    }
+    else {
+        db[item] = 1;
+    }
+
     console.log(db);
 }
 
@@ -23,4 +32,72 @@ const addToDb = item => {
         5. addToDb('manna') // {manna: 1, sani: 1, mahi:1}
 */
 
- 
+
+// 50.5.2 Read, Write data stored in local storage
+
+/* 
+    There are 2 ways to check any property is exist or not in the Object:
+        - property is exist or not
+
+    In Console Panel:
+        1. db // {}
+        2. addToDb('bappa') // {bappa: 1}
+        3. addToDb('bappa') // {bappa: 2}
+        4. addToDb('bappa') // {bappa: 3}
+        5. addToDb('jashim') // {bappa: 3, jashim: 1}
+*/
+
+/* 
+    Many ways to put data in the browser: 
+        1. Local Storage
+        2. Session Storage
+        3. IndexedDB
+        4. Web SQL
+        5. Cookies
+
+    There are some given function to put, retrieve, update, delete data from local storage.
+        - Save data to localStorage
+            - localStorage.setItem('key', JSON.stringify('value'));
+
+        - Get saved data from localStorage
+            - localStorage.getItem('key')
+            - JSON.parse(localStorage.getItem('key'));
+
+        - Remove saved data from localStorage
+            - localStorage.removeItem('key');
+
+        - Remove all saved data from localStorage
+            - localStorage.clear();
+*/
+
+/*  
+    Local Storage Conditions:
+        1. any primitive data, we can put directly in the browser. 
+        2. But any non-primitive data like (array, object), we can't put directly in the browser. 
+            - We need to convert as a string to put data (JSON.stringify(db)). 
+            - We also need to convert as a JSON to get data (JSON.parse(localStorage.getItem('checka-tracker')))
+
+    In Console Panel: (primitive data)
+        1. localStorage.setItem('fruit', 'mango')
+        2. localStorage.setItem('age', '13')
+    
+    In Console Panel: (non-primitive data)
+        1. db // {}
+        2. addToDb('bappa') // {bappa: 1}
+        3. addToDb('bappa') // {bappa: 2}
+        4. addToDb('bappa') // {bappa: 3}
+        5. addToDb('jashim') // {bappa: 3, jashim: 1}
+
+        1. localStorage.setItem('checka-tracker', db) // [object Object]
+        2. localStorage.setItem('checka-tracker', JSON.stringify(db)) // {"bappa": 3, "jashim": 1}
+        
+        1. localStorage.getItem('age') // '13'
+        2. localStorage.getItem('fruit') // 'mango'
+        3. localStorage.getItem('checka-tracker') // '{"bappa":3,"jashim":1}'
+        4. typeof localStorage.getItem('checka-tracker') // 'string'
+        5. localStorage.getItem('checka-tracker')['jashim'] // undefined
+
+        1. localStorage.getItem('checka-tracker') // '{"bappa": 3, "jashim": 1}'
+        2. JSON.parse(localStorage.getItem('checka-tracker')) // ▸ {"bappa": 3, "jashim": 1}
+*/
+
