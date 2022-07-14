@@ -129,3 +129,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 49.5 01food-uganda-practice](https://49-01food-uganda-practice.netlify.app/ "React-App | Live-Server _-_ Simple React Revision - Food-Uganda-Practice - API data load, Display Data, set EventHandler with Parameter, Cart state setup, update cart, React-fontawesome, display icon, add product to cart(only last one) - Deploy in Netlify")
 
+* [Module 50.5 03react-meal-db-initial](https://50-5-3react-meal-db-initial.netlify.app/ "React-App | Live-Server _-_ Use localStorage as a database - Show total order items - How to put, retrieve, update, and delete data from localStorage")
+
