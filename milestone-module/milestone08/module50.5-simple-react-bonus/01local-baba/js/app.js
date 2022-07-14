@@ -3,13 +3,20 @@
 
 // console.log('Hello');
 
-const db = {};
+let db = {};
 
 const addToDb = item => {
     // To add an item to Object: (3 ways)
         // db.alom = 1; // system-01
         // db['alom'] = 1; // system-02
         // db[item] = 1; // system-03
+
+    // check data exist in the localStorage
+    const storedTracker = localStorage.getItem('checka-tracker');
+    if (storedTracker) {
+        // console.log(typeof storedTracker);
+        db = JSON.parse(storedTracker);
+    }
 
     // to check any property is exist or not in the Object
     if (item in db) {
@@ -19,7 +26,18 @@ const addToDb = item => {
         db[item] = 1;
     }
 
-    console.log(db);
+    // set to localStorage
+    localStorage.setItem('checka-tracker', JSON.stringify(db));
+}
+
+// to remove item
+const removeItem = item => {
+    const storedTracker = localStorage.getItem('checka-tracker');
+    if (storedTracker) {
+        const storedObject = JSON.parse(storedTracker);
+        delete storedObject[item];
+        localStorage.setItem('checka-tracker', JSON.stringify(storedObject));
+    }
 }
 
 /* 
@@ -99,5 +117,30 @@ const addToDb = item => {
 
         1. localStorage.getItem('checka-tracker') // '{"bappa": 3, "jashim": 1}'
         2. JSON.parse(localStorage.getItem('checka-tracker')) // ▸ {"bappa": 3, "jashim": 1}
+*/
+
+// 50.5.3 A very simple way to add or remove key to an object
+
+/* 
+    In Console Panel:
+        1. addToDb('bappa')
+        2. addToDb('bappa')
+        3. addToDb('mahi')
+            Application: checka-tracker: {"bappa":2,"mahi":1}
+
+    ------------------------------------------------------------
+
+        After Reloading: Because we set, const db = {}; | We didn't read actually.
+        4. addToDb('manna')
+            Application: checka-tracker: {"manna":1}
+
+    ------------------------------------------------------------
+
+        1. addToDb('bappa')
+        2. addToDb('suchorita')
+        3. addToDb('mahi')        
+            Application: checka-tracker: {"bappa":1,"suchorita":1,"mahi":1}
+        4. removeItem('bappa')
+            Application: checka-tracker: {"suchorita":1,"mahi":1}
 */
 

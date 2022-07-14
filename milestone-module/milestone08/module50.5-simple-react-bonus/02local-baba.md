@@ -3,8 +3,8 @@
 ## 50.5.1 `When to use Array` and `when to use Object`
 
 ⫸ __How to put data__, it depends on __2 things__:
-1. What data we put
-2. How to use data
+1. __What data we put__
+2. __How to use data__
 
 ``` JavaScript
 // console.log('Hello');
@@ -15,7 +15,7 @@ const fruits = [{name: 'pineapple'}, {name: 'mango'}, {name: 'papaya'}];
 ⫸ `If I want to know:` How many times a particular person stood for election?
 
 ``` JavaScript
-// This time as a data structure Object is more useful rather than array.
+// This time, as a data structure, Object is more useful rather than array.
 const election = ['razzak', 'alomgir', 'jayed', 'jayed', 'jayed', 'nepun', 'jayed'];
 
 const election2 = {
@@ -40,16 +40,19 @@ const addToDb = item => {
 
     console.log(db);
 }
+```
 
-/* 
-    In Console Panel:
-        1. db // {}
-        2. addToDb('manna') // {manna: 1}
-        3. addToDb('sani') // {manna: 1, sani: 1}
-        4. addToDb('mahi') // {manna: 1, sani: 1, mahi:1}
-        // If we add any item more than one times, it shows only once. Because we set "db[item] = 1;", we didn't set any condition.
-        5. addToDb('manna') // {manna: 1, sani: 1, mahi:1}
-*/
+``` JavaScript 
+/* In Console Panel: */
+
+    1. db // {}
+    2. addToDb('manna') // {manna: 1}
+    3. addToDb('sani') // {manna: 1, sani: 1}
+    4. addToDb('mahi') // {manna: 1, sani: 1, mahi:1}
+
+    // If we add any item more than one times, it shows only once. Because we set "db[item] = 1;", we didn't set any condition.
+    5. addToDb('manna') // {manna: 1, sani: 1, mahi:1}
+
 ```
 
 ## 50.5.2 Read, Write data stored in local storage
@@ -61,10 +64,12 @@ const addToDb = item => {
 const db = {};
 
 const addToDb = item => {
-    // Three ways to add a property to the Object:
-        // db.alom = 1; // system-01
-        // db['alom'] = 1; // system-02
-        // db[item] = 1; // system-03
+    /* 
+        Three ways to add a property to the Object:
+            db.alom = 1; // system-01
+            db['alom'] = 1; // system-02
+            db[item] = 1; // system-03 
+    */
 
     // to check any property is exist or not in the Object
     if (item in db) {
@@ -79,7 +84,8 @@ const addToDb = item => {
 ```
 
 ``` JavaScript
-In Console Panel:
+/* In Console Panel: */
+
     1. db // {}
     2. addToDb('bappa') // {bappa: 1}
     3. addToDb('bappa') // {bappa: 2}
@@ -112,11 +118,13 @@ In Console Panel:
    - We also need to convert as a JSON(JavaScript Object Notation) to get data by `JSON.parse(localStorage.getItem('checka-tracker'))`
 
 ``` JavaScript
-In Console Panel: (primitive data)
+/* In Console Panel: (primitive data) */
+
     1. localStorage.setItem('fruit', 'mango')
     2. localStorage.setItem('age', '13')
 
-In Console Panel: (non-primitive data)
+/* In Console Panel: (non-primitive data) */
+
     1. db // {}
     2. addToDb('bappa') // {bappa: 1}
     3. addToDb('bappa') // {bappa: 2}
@@ -142,5 +150,65 @@ In Console Panel: (non-primitive data)
     2. JSON.parse(localStorage.getItem('checka-tracker')) // ▸ {"bappa": 3, "jashim": 1}
 ```
 
+## 50.5.3 A very simple way to add or remove key to an object
 
+``` JavaScript
+let db = {};
+
+const addToDb = item => {
+
+    // check data exist in the localStorage
+    const storedTracker = localStorage.getItem('checka-tracker');
+    if (storedTracker) {
+        // console.log(typeof storedTracker);
+        db = JSON.parse(storedTracker);
+    }
+
+    // to check any property is exist or not in the Object
+    if (item in db) {
+        db[item] = db[item] + 1; 
+    }
+    else {
+        db[item] = 1;
+    }
+
+    // set to localStorage
+    localStorage.setItem('checka-tracker', JSON.stringify(db));
+}
+
+// to remove item
+const removeItem = item => {
+    const storedTracker = localStorage.getItem('checka-tracker');
+    if (storedTracker) {
+        const storedObject = JSON.parse(storedTracker);
+        delete storedObject[item];
+        localStorage.setItem('checka-tracker', JSON.stringify(storedObject));
+    }
+}
+```
+
+``` JavaScript
+/* In Console Panel: */
+
+    1. addToDb('bappa')
+    2. addToDb('bappa')
+    3. addToDb('mahi')
+        // Application: checka-tracker: {"bappa":2,"mahi":1}
+
+    ------------------------------------------------------------
+
+    // After Reloading: Because we set, const db = {}; | We didn't read actually.
+    4. addToDb('manna')
+        // Application: checka-tracker: {"manna":1}
+
+    ------------------------------------------------------------
+
+    // After Modifying code:
+    1. addToDb('bappa')
+    2. addToDb('suchorita')
+    3. addToDb('mahi')        
+        // Application: checka-tracker: {"bappa":1,"suchorita":1,"mahi":1}
+    4. removeItem('bappa')
+        // Application: checka-tracker: {"suchorita":1,"mahi":1}
+```
 
