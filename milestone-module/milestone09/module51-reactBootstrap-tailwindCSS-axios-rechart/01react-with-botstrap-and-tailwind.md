@@ -146,18 +146,18 @@ function App() {
 }
 ```
 
-## 51.4 Responsive Navbar using react and tailwind
+## 51.4 Responsive Navbar using React and Tailwind
 
 ⫸ [HeroIcons](https://heroicons.com/ "Beautiful hand-crafted SVG icons, by the makes of Tailwind CSS.") | [React + Vue Libraries](https://github.com/tailwindlabs/heroicons#react " High-quality SVG icons for you to use in your web projects")
 
 > ___`To use HeroIcons:`___
-1. First, install `@heroicons/react` from npm:
+1. ___First, install `@heroicons/react` from npm:___
 
 ``` Terminal
 npm install @heroicons/react
 ```
 
-2. Now each icon can be imported individually as a React component:
+2. ___Now each icon can be imported individually as a React component:___
 
 ``` JavaScript
 import { BeakerIcon, MenuIcon, XIcon } from '@heroicons/react/solid';
@@ -173,5 +173,39 @@ function MyComponent() {
   )
 }
 ```
+
+## 51.5 Simple Pricing Option using React and Tailwind
+
+``` JavaScript
+// Uses some Tailwind classes for creating beautiful UI
+
+// Navbar.js
+<nav className='bg-indigo-200'>
+    <div onClick={() => setOpen(!open)} className='w-6 h-6 md:hidden'>
+        {open ? <XIcon></XIcon> : <MenuIcon></MenuIcon>}
+    </div>
+    <ul className={`md:flex justify-center absolute md:static bg-indigo-200 w-full duration-500 ease-in ${open ? 'top-6' : 'top-[-120px]'}`}>
+    
+    </ul>
+</nav>
+
+// Pricing.js
+<div className='bg-indigo-300 p-4 mt-8'>
+    <h1 className='text-6xl font-mono text-white'>Best Deals of the Town</h1>
+    <div className='grid md:grid-cols-3 gap-3 mt-8'>
+        
+    </div>
+</div>
+
+// PricingOption.js
+<div className='bg-white p-4 rounded-lg'>
+    <h2 className='bg-indigo-300 py-2 rounded text-xl font-bold'>{name}</h2>
+    <p>
+        <span className='text-5xl font-bold'>{price}</span>
+        <span className='text-xl font-bold text-gray-500'>/month</span>
+    </p>
+</div>
+```
+
 
 
