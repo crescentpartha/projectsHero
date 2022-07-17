@@ -207,5 +207,28 @@ function MyComponent() {
 </div>
 ```
 
+## 51.6 Responsive pricing card with Tailwind and Hero icons
 
+``` JavaScript
+// Uses some Tailwind classes for creating beautiful UI
+
+// PricingOption.js
+<div className='bg-white p-4 rounded-lg'>
+    <div>
+        <h3 className='text-xl text-left'>Benefits: </h3>
+        {
+            benefits.map(benefit => <Benefit benefit={benefit}></Benefit>)
+        }
+    </div>
+    <button className='bg-green-500 flex justify-center w-full py-2 rounded mt-6 text-white hover:text-green-700 font-bold'>
+        Buy Now <ArrowRightIcon className='w-6 h-6 ml-2'></ArrowRightIcon>
+    </button>
+</div>
+
+// Benefit.js
+<p className='flex items-center'>
+    <CheckCircleIcon className='w-4 h-4 text-green-500 mr-2'></CheckCircleIcon>
+    {props.benefit}
+</p>
+```
 
