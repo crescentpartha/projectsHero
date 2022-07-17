@@ -134,7 +134,7 @@ export default function App() {
 }
 ```
 
-<center style="color:green">OR</center>
+<p style="color:green; text-align:center;">OR</p>
 
 ``` JavaScript
 function App() {
@@ -143,6 +143,34 @@ function App() {
       <h1 className='text-6xl'>Welcome to my pricing club</h1>
     </div>
   );
+}
+```
+
+## 51.4 Responsive Navbar using react and tailwind
+
+⫸ [HeroIcons](https://heroicons.com/ "Beautiful hand-crafted SVG icons, by the makes of Tailwind CSS.") | [React + Vue Libraries](https://github.com/tailwindlabs/heroicons#react " High-quality SVG icons for you to use in your web projects")
+
+> ___`To use HeroIcons:`___
+1. First, install `@heroicons/react` from npm:
+
+``` Terminal
+npm install @heroicons/react
+```
+
+2. Now each icon can be imported individually as a React component:
+
+``` JavaScript
+import { BeakerIcon, MenuIcon, XIcon } from '@heroicons/react/solid';
+
+function MyComponent() {
+  return (
+    <div>
+      <BeakerIcon className="h-5 w-5 text-blue-500"/>
+      <MenuIcon></MenuIcon>
+      <XIcon></XIcon>
+      <p>...</p>
+    </div>
+  )
 }
 ```
 
