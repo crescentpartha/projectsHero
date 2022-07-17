@@ -106,6 +106,7 @@ module.exports = {
 
 4. ___Add the Tailwind directives to your CSS___
    - Add the `@tailwind` directives for each of Tailwind’s layers to your `./src/index.css` file.
+   - we can keep or remove all other code of `./src/index.css` file, as your wish.
 
 ``` CSS
 @tailwind base;
@@ -130,6 +131,18 @@ export default function App() {
       Hello world!
     </h1>
   )
+}
+```
+
+<center style="color:green">OR</center>
+
+``` JavaScript
+function App() {
+  return (
+    <div className="App">
+      <h1 className='text-6xl'>Welcome to my pricing club</h1>
+    </div>
+  );
 }
 ```
 
