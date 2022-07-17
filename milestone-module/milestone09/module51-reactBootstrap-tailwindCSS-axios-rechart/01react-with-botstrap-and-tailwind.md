@@ -232,3 +232,48 @@ function MyComponent() {
 </p>
 ```
 
+## 51.7 Use rechart to draw any type of chart using React
+
+⫸ [React Chart Libraries/Frameworks: 1](https://www.tabnine.com/blog/top-11-react-chart-libraries/ "Top 11 React Chart Libraries - tabnine") [2](https://aglowiditsolutions.com/blog/react-chart-libraries/ "Top React Chart Libraries to Visualize your Data in 2022 - GLOWID") [3](https://blog.logrocket.com/top-5-react-chart-libraries/ "Top 5 React chart libraries - LogRocket") [4](https://technostacks.com/blog/react-chart-libraries/ "Top 10 React Chart Libraries For Your Web Projects - TechnoStacks")
+- [Recharts](https://recharts.org/en-US/ "A composable charting library built on React components") - [Getting Started](https://recharts.org/en-US/guide/getting-started "Recharts - Getting Started") - [API](https://recharts.org/en-US/api "Recharts - API") - [Examples](https://recharts.org/en-US/examples "Recharts - Examples | You can copy data from Examples and replace properties name") | [Installation](https://recharts.org/en-US/guide/installation "Installation - Recharts")
+
+``` Terminal
+npm install recharts
+```
+
+``` JavaScript
+// MyLineChart.js
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+
+const MyLineChart = () => {
+    const data = [
+        {
+          name: 'Supplier A',
+          price: 4000,
+          sales: 2400,
+          amt: 2400,
+        },
+        {
+          name: 'Supplier B',
+          price: 3000,
+          sales: 1398,
+          amt: 2210,
+        },
+    ];
+      
+    return (
+        <LineChart width={800} height={500} data={data}>
+            <Line dataKey={'price'} stroke="#8884d8"></Line>
+            <Line type="monotone" dataKey={'sales'} stroke="#8884d8"></Line>
+            <XAxis dataKey="name"></XAxis>
+            <Tooltip></Tooltip>
+            <YAxis></YAxis>
+        </LineChart>
+    );
+};
+
+export default MyLineChart;
+```
+
+
