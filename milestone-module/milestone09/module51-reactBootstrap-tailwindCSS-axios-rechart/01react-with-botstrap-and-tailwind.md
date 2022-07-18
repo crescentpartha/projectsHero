@@ -276,4 +276,59 @@ const MyLineChart = () => {
 export default MyLineChart;
 ```
 
+## 51.8 Axios, data extraction and data processing bar chart
 
+⫸ [Axios](https://axios-http.com/docs/intro "Getting Started") - [GitHub](https://github.com/axios/axios "Axios - GitHub | Promise based HTTP client for the browser and node.js | It makes easy Promise's work")
+- Axios ___simplify fetch's task___ and make more ___powerful___.
+- ___Intercept the API call___ & give the header (___authorization header___)
+- One piece of code ___intercept___ the API call and give the ___authorization code___.
+- To data load, ___save the interaction time___ with latest server when fetch data.
+- Axios is powerful for ___Error handling___ & ___parallel call___.
+- axios → convert to JSON (___thyself___) → get Data (___2 lines code___) 
+  - fetch → response → convert to JSON → get Data (___3 lines code___)
+- For post request, ___don't need to tell___ about ___type___(JSON), ___method___(Post)
+
+
+``` Terminal
+npm install axios
+```
+
+``` JavaScript
+// SpecialChart.js
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts';
+
+const SpecialChart = () => {
+    const [phones, setPhones] = useState([]);
+    useEffect( () => {
+        axios.get('https://openapi.programming-hero.com/api/phones?search=iphone')
+        // .then(data => console.log(data.data.data));
+        .then(data => {
+            const loadedData = data.data.data;
+            // const phoneData = loadedData.map(phone => phone.slug);
+            const phoneData = loadedData.map(phone => {
+                const parts = phone.slug.split('-');
+                const ph = {
+                    name: parts[0],
+                    value: parseInt(parts[1]) // create unique value by using split method
+                };
+                return ph;
+            });
+            setPhones(phoneData);
+            // console.log(phoneData);
+        });
+    }, [])
+    return (
+        <BarChart width={800} height={500} data={phones}>
+          <Bar dataKey="value" fill="#8884d8" />
+          <XAxis dataKey="name"></XAxis>
+            <Tooltip></Tooltip>
+            <YAxis></YAxis>
+        </BarChart>
+    );
+};
+
+export default SpecialChart;
+```
