@@ -308,6 +308,8 @@ const SpecialChart = () => {
         .then(data => {
             const loadedData = data.data.data;
             // const phoneData = loadedData.map(phone => phone.slug);
+
+            // data extraction and data processing
             const phoneData = loadedData.map(phone => {
                 const parts = phone.slug.split('-');
                 const ph = {
@@ -332,3 +334,106 @@ const SpecialChart = () => {
 
 export default SpecialChart;
 ```
+
+## 51.9 Module Summary and React spring animation
+
+⫸ `Use React-Tailwind framework`
+- make powerful ___customization___ 
+- use ___theme in configuration___ 
+- ___custom code___ and much more
+- Search: __React pdf__ | __React google map__ | __React animation__
+
+⫸ [React-Animation](https://reactjs.org/docs/animation.html "Animation Add-Ons - React")
+- `H.W.` Find out new Libraries which is included with ___React-Bootstrap___ or ___React-Tailwind___
+- [5 Ways to animate a React app](https://medium.com/hackernoon/5-ways-to-animate-a-reactjs-app-in-2019-56eb9af6e3bf "mediuum.com")
+- [react-spring](https://react-spring.dev/ "React Spring Animation") -&- [Basics](https://react-spring.dev/basics#basics "Getting Started - react-spring")
+
+___Installation:___
+``` Terminal
+npm install react-spring
+```
+
+___Basics:___
+``` JavaScript
+// First, you fetch your imports
+import { useSpring, animated } from 'react-spring'
+
+function App() {
+  // Next, define your spring
+  const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } })
+  // Finally, tie the animated values to your view
+  return <animated.div style={props}>I will fade in</animated.div>
+}
+```
+
+___Example:___
+``` JavaScript
+// App.js
+
+import { useSpring, animated } from 'react-spring';
+import { useState } from 'react';
+
+function App() {
+  const [flip, set] = useState(false);
+
+  const props = useSpring({ 
+    to: { opacity: 1 }, 
+    from: { opacity: 0 },
+    reset: true,
+    reverse: flip,
+    delay: 200,
+    onRest: () => set(!flip),
+  })
+
+  return (
+    <div className="App">
+      <animated.div className="text-4xl font-bold m-6" style={props}>Crescent Partha</animated.div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+## `Quiz`
+
+1. How will you declare a button with primary color using React Bootstrap?
+   - `<Button variant="primary">Click Me</Button>`
+2. Where should you add a bootstrap CDN link in a React Application?
+   - In `index.html`
+3. Which bootstrap class will you use to make images responsive? (don’t forget basic bootstrap)
+   - `img-fluid`
+4. Why do we use fragments in react? (google it)
+   - ___It lets you group a list of children without adding extra nodes to the DOM.___
+5. How we can toggle the boolean state in react?
+``` JavaScript
+const [state, setState] = useState(false)
+```
+- `setState(!state)`
+6. The Bootstrap grid system is based on how many columns?
+   - ___12___
+7. import  ___?___  from “react-bootstrap”
+   - `{Row}`
+8. What will you get in return if you  call isAdmin(true)?
+``` JavaScript
+function isAdmin( user) {
+ return (  user ? 'Admin' : 'Normal User');
+}
+```
+- `"Admin"`
+9. Which react-bootstrap component you will use for width: 100% across all viewport and device sizes. (check the documents)
+   - `<Container fluid />`
+10. What is recharts?
+    - ___A composable charting library built on React components___
+11. How we can set dynamic class names in react? 
+    - `className={isRed ? "red" : "blue"}`
+    - ___className={`card-container ${isRed ? "red" : "blue"}`}___
+12. What is react-spring?
+    - ___An animation library for react___
+13. Where we should add `@tailwind base;` `@tailwind components;` `@tailwind utilities;` when initializing a project with tailwind.
+    - Inside `index.css`
+14. How we can use the shorthand version for Cards with body only, and no other children?
+    - `<Card body> </Card>`
+15. How we can create a fade in animation using react spring ?
+    - `useSpring({ to: {opacity: 1 }, from: {opacity: 0 } })`
+

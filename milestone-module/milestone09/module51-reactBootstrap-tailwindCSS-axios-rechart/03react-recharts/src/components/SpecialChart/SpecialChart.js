@@ -10,6 +10,8 @@ const SpecialChart = () => {
         .then(data => {
             const loadedData = data.data.data;
             // const phoneData = loadedData.map(phone => phone.slug);
+            
+            // data extraction and data processing
             const phoneData = loadedData.map(phone => {
                 const parts = phone.slug.split('-');
                 const ph = {
