@@ -131,3 +131,42 @@ function App() {
 export default App;
 ```
 
+## 52.3 Load Users, display users, dynamic link, use Navigate
+
+⫸ [Nested Routes](https://reactrouter.com/docs/en/v6/getting-started/overview#nested-routes "Nested Routes - reactrouter.com")
+- This is one of the ___most powerful features___ of React Router.
+- Routes can be ___nested inside one another___, and their ___paths will nest too___ (child inheriting the parent).
+  - `"/invoices"`
+  - `"/invoices/sent"`
+  - `"/invoices/:invoiceId"` → ___dynamic___
+
+⫸ __There is two system for__ ___(similar data, but show in different looks)___
+- ___Nested Routes___
+- ___Reading URL Parameters___ (General system)
+
+``` JavaScript
+// Reading URL Parameter
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Friend = (props) => {
+    const {name, username, id} = props.friend;
+
+    const navigate = useNavigate();
+
+    const showFriendDetail = () => {
+        const path = `/friend/${id}`;
+        navigate(path);
+    }
+    return (
+        <div>
+            <h2>Name: {name}</h2>
+            <button onClick={showFriendDetail}>{username}'s ID: {id}</button>
+        </div>
+    );
+};
+
+export default Friend;
+```
+
