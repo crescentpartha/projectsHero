@@ -105,6 +105,8 @@ function App() {
 ⫸ [Uncaught Error: useRoutes() may be used only in the context of a <Router> component.](https://bobbyhadz.com/blog/react-useroutes-may-be-used-only-in-context-of-router "Fix the Error (Rare case)")
 
 ``` JavaScript
+// In App.js
+
 // import logo from './logo.svg';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -145,7 +147,7 @@ export default App;
 - ___Reading URL Parameters___ (General system)
 
 ``` JavaScript
-// Reading URL Parameter
+// Reading URL Parameter | In Friend.js
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -168,5 +170,64 @@ const Friend = (props) => {
 };
 
 export default Friend;
+```
+
+## Set Header, Nav, Create Link, display active route
+
+⫸ [Navigation:](https://reactrouter.com/docs/en/v6/getting-started/overview#navigation "Navigation - reactrouter.com") Use `Link` to let the user change the URL or `useNavigate` to do it yourself (like after form submissions):
+
+``` JavaScript
+// In Header.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+// import CustomLink from '../CustomLink/CustomLink';
+
+const Header = () => {
+    return (
+        <div>
+            <h1>Welcome to my fancy React Router website!</h1>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/friends">Friends</Link>
+                <Link to="/about">About</Link>
+                {/* <CustomLink to="/about">About</CustomLink> */}
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
+
+⫸ [Custom Active Link](https://reactrouter.com/docs/en/v6/examples/custom-link "Custom Link Example - reactrouter.com")
+- This example demonstrates how to make a custom `<Link>` component to render something different when the link is "active" using the `useMatch()` and `useResolvedPath()` hooks.
+- Then clicked on `Open in Stackblitz` to ___generate CustomLink___
+
+``` JavaScript
+// In CustomLink.js
+
+import React from 'react';
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+
+function CustomLink({ children, to, ...props }) {
+    let resolved = useResolvedPath(to);
+    let match = useMatch({ path: resolved.pathname, end: true });
+
+    return (
+        <div>
+            <Link
+                style={{ color: match ? 'red' : 'black', textDecoration: match ? "underline" : "none" }}
+                to={to}
+                {...props}
+            >
+                {children}
+            </Link>
+            {/* {match && " (active)"} */}
+        </div>
+    );
+}
+
+export default CustomLink;
 ```
 
