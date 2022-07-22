@@ -1,6 +1,6 @@
 # Module 52: Simple React Router Examples
 
-## 52.1 Module Introduction, install React Router, Project Setup
+## `52.1 Module Introduction, install React Router, Project Setup`
 
 ⫸ [React Router](https://reactrouter.com/ "React Router v6 | Click: Read the Docs → New to React Router?") - [Introduction](https://reactrouter.com/docs/en/v6/getting-started/tutorial "Getting Started - React Router")
 - Go to `Email/setting` and enjoy the ___routing___ by clicking many ___nav items___
@@ -21,7 +21,7 @@ cd router-tutorial
 npm install react-router-dom@6
 ```
 
-## 52.2 Create Simple Route and simple router setup
+## `52.2 Create Simple Route and simple router setup`
 
 > ___Once your project is set up and React Router is installed as a dependency, open the `src/index.js` in your text editor. Import `BrowserRouter` from `react-router-dom` near the top of your file and wrap your app in a `<BrowserRouter>`:___
 - [go to main website for better understanding](https://reactrouter.com/docs/en/v6/getting-started/installation#create-react-app "To import BrowserRouter and wrap your app in a <BrowserRouter>")
@@ -133,7 +133,7 @@ function App() {
 export default App;
 ```
 
-## 52.3 Load Users, display users, dynamic link, use Navigate
+## `52.3 Load Users, display users, dynamic link, use Navigate`
 
 ⫸ [Nested Routes](https://reactrouter.com/docs/en/v6/getting-started/overview#nested-routes "Nested Routes - reactrouter.com")
 - This is one of the ___most powerful features___ of React Router.
@@ -172,7 +172,7 @@ const Friend = (props) => {
 export default Friend;
 ```
 
-## Set Header, Nav, Create Link, display active route
+## `52.4 Set Header, Nav, Create Link, display active route`
 
 ⫸ [Navigation:](https://reactrouter.com/docs/en/v6/getting-started/overview#navigation "Navigation - reactrouter.com") Use `Link` to let the user change the URL or `useNavigate` to do it yourself (like after form submissions):
 
@@ -230,4 +230,15 @@ function CustomLink({ children, to, ...props }) {
 
 export default CustomLink;
 ```
+
+## `52.5 Recap Router, route, path, component, not found, link`
+
+⫸ `Reviews:`
+- ___Install React Router dependencies___
+- ___Follow 6 steps to use ReactRouter___
+- ___Nested Routes___
+- ___Reading URL Parameters___
+- ___Navigation___
+- ___Custom Active Link___
+
 
