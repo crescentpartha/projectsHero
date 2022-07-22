@@ -282,6 +282,8 @@ export default CustomLink;
 ⫸ [Reading URL Parameters:](https://reactrouter.com/docs/en/v6/getting-started/overview#reading-url-parameters)
 - ___Note that:___ the path segment `:friendId` and the param's key `params.friendId` match up.
 - How to ___set dynamic route___ & ___access the parameter___ for ___certain route___ using `useParams();`
+  - `useParams();` __gives__ us ___a object___, so we can ___destructuring___ it.
+  - We need to put ___exact name___ like `friendId`, otherwise it doesn't work.
 
 ``` JavaScript
 // In FriendDetail.js
@@ -302,5 +304,51 @@ const FriendDetail = () => {
 
 export default FriendDetail;
 ```
+
+## `52.7 React route parameter and load data based on dynamic route`
+
+⫸ __Uncaught TypeError: Cannot read properties of undefined (reading 'city')__
+- When we set `useState({});` empty, then ___first time load___ it ___didn't find data___
+  - For this reason, `{friend.name}` will be ___undefined___, but it won't create error.
+  - For `{friend.address.city}`, you will get ___error___, because ___address is undefined___ and you find any value for city inside ___address (undefined)___
+- `Solutions:` ___Add Spinner___ Or ___Optional Chaining (?.)___
+  - ___Optional Chaining (?.)___ means if address value exists then try to find value for city.
+  - if address value is undefined, then don't try to find value for city.
+  - You can notice that, it ___updates after data loading___.
+
+``` JavaScript
+// In FriendDetail.js
+
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+const FriendDetail = () => {
+    const {friendId} = useParams();
+
+    const [friend, setFriend] = useState({});
+
+    useEffect( () => {
+        const url = `https://jsonplaceholder.typicode.com/users/${friendId}`;
+        // console.log(url);
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setFriend(data));
+    }, [])
+
+    return (
+        <div>
+            {<h2>This is Detail of a Friend: {friendId}</h2>}
+            <h3>Name: {friend.name}</h3>
+            <h4>Email: {friend.email}</h4>
+            <h6>Website: {friend.website}</h6>
+            <p><small>City: {friend.address?.city}</small></p>
+            <p><small>Lat: {friend.address?.geo?.lat}</small></p>
+        </div>
+    );
+};
+
+export default FriendDetail;
+```
+
 
 
