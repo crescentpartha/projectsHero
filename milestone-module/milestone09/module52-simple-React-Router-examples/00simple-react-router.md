@@ -384,6 +384,7 @@ export default App;
 ``` JavaScript
 // In Header.js
 
+import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import CustomLink from '../CustomLink/CustomLink';
 
@@ -459,3 +460,97 @@ const PostDetail = () => {
 
 export default PostDetail;
 ```
+
+## `52.9 Module Summary and Recap React Route for Rest Countries`
+
+``` JavaScript
+// In App.js
+
+import { Route, Routes } from 'react-router-dom';
+import Countries from './components/Countries/Countries';
+import CountryDetail from './components/CountryDetail/CountryDetail';
+
+function App() {
+  return (
+    <div className="App">
+      <Header></Header>
+      <Routes>
+        <Route path='/countries' element={<Countries></Countries>}></Route>
+        <Route path='/country/:countryName' element={<CountryDetail></CountryDetail>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+``` JavaScript
+// In Header.js
+
+import { Link } from 'react-router-dom';
+import CustomLink from '../CustomLink/CustomLink';
+
+const Header = () => {
+    return (
+        <div>
+            <nav>
+                <Link to="/countries">Countries</Link>
+                <CustomLink to="/countries">Countries</CustomLink>
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
+
+
+``` JavaScript
+// In Countries.js
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const Countries = () => {
+    const [countries, setCountries] = useState([]);
+
+    useEffect( () => {
+        fetch('https://restcountries.com/v3.1/all')
+        .then(res => res.json())
+        .then(data => setCountries(data));
+    }, []);
+
+    return (
+        <div>
+            <h2>Welcome to my World! {countries.length}</h2>
+            {
+                countries.map(country => <li>
+                    <Link to={`/country/${country.name.common}`}>{country.name.common}</Link>
+                    </li>)
+            }
+        </div>
+    );
+};
+
+export default Countries;
+```
+
+``` JavaScript
+// In CountryDetail.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const CountryDetail = () => {
+    const {countryName} = useParams();
+    return (
+        <div>
+            <h2>Country Detail for: {countryName}</h2>
+        </div>
+    );
+};
+
+export default CountryDetail;
+```
+

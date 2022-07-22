@@ -12,8 +12,8 @@ const Friends = () => {
 
     return (
         <div>
-            <h2>Hello Friends. How are you.</h2>
-            <p><small>Parle kichu taka dhar dis...: {friends.length}</small></p>
+            <h2>Hello Friends. How are you: {friends.length}</h2>
+            <p><small>Parle kichu taka dhar dis...</small></p>
             {
                 friends.map(friend => <Friend
                     friend={friend}
