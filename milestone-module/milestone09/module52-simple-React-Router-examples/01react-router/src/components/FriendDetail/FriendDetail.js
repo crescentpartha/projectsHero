@@ -21,7 +21,7 @@ const FriendDetail = () => {
             {<h2>This is Detail of a Friend: {friendId}</h2>}
             <h3>Name: {friend.name}</h3>
             <h4>Email: {friend.email}</h4>
-            <h6>Website: {friend.website}</h6>
+            <h5>Website: {friend.website}</h5>
             <p><small>City: {friend.address?.city}</small></p>
             <p><small>Lat: {friend.address?.geo?.lat}</small></p>
         </div>

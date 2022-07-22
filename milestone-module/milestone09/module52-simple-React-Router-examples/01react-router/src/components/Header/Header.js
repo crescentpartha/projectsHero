@@ -10,11 +10,13 @@ const Header = () => {
                 <h3>This is from <span style={{color: "orange"}}>Link</span></h3>
                 <Link to="/">Home</Link>
                 <Link to="/friends">Friends</Link>
+                <Link to="/posts">Posts</Link>
                 <Link to="/about">About</Link>
 
                 <h3>This is from <span style={{color: "orange"}}>CustomLink</span></h3>
                 <CustomLink to="/">Home</CustomLink>
                 <CustomLink to="/friends">Friends</CustomLink>
+                <CustomLink to="/posts">Posts</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
             </nav>
         </div>

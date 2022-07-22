@@ -145,7 +145,7 @@ export default App;
 
 ⫸ __There is two system for__ ___(similar data, but show in different looks)___
 - ___Nested Routes___
-- ___Reading URL Parameters___ (General system)
+- ___Dynamic Route___ (General system)
 
 ``` JavaScript
 // Reading URL Parameter | In Friend.js
@@ -316,6 +316,8 @@ export default FriendDetail;
   - if address value is undefined, then don't try to find value for city.
   - You can notice that, it ___updates after data loading___.
 
+⫸ __So, we `set dynamic route` & `access the parameter` for certain route using `useParams();`__
+
 ``` JavaScript
 // In FriendDetail.js
 
@@ -350,5 +352,110 @@ const FriendDetail = () => {
 export default FriendDetail;
 ```
 
+## `52.8 (advanced) Nested route with useEffect dependency Injection`
 
+⫸ [Nested Routes:](https://reactrouter.com/docs/en/v6/getting-started/overview#nested-routes)
+- Need to use `Outlet`
 
+``` JavaScript
+// In App.js
+
+import PostDetail from './components/PostDetail/PostDetail';
+import Posts from './components/Posts/Posts';
+
+function App() {
+  return (
+    <div className="App">
+      <Header></Header>
+      <Routes>
+        <Route path='/friends' element={<Friends></Friends>}></Route> // Fixed or Static Route
+        <Route path='/friend/:friendId' element={<FriendDetail></FriendDetail>}></Route> // Dynamic Route
+        <Route path='/posts' element={<Posts></Posts>}>
+          <Route path=':postId' element={<PostDetail></PostDetail>}></Route> // Nested Route
+        </Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+``` JavaScript
+// In Header.js
+
+import { Link } from 'react-router-dom';
+import CustomLink from '../CustomLink/CustomLink';
+
+const Header = () => {
+  return (
+    <div>
+      <nav>
+        <Link to="/posts">Posts</Link>
+        <CustomLink to="/posts">Posts</CustomLink>
+      </nav>
+    </div>
+  );
+};
+
+export default Header;
+```
+
+``` JavaScript
+// In Posts.js
+
+import React, { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+
+const Posts = () => {
+    const [posts, setPosts] = useState([]);
+    useEffect( () => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(res => res.json())
+        .then(data => setPosts(data));
+    }, [])
+    return (
+        <div>
+            <h2>Every posts Facebook ever had: {posts.length}</h2>
+            {
+                posts.map(post => <Link 
+                    key={post.id}
+                    to={`/posts/${post.id}`}
+                    >{post.id} </Link>)
+            }
+            <Outlet></Outlet>
+        </div>
+    );
+};
+
+export default Posts;
+```
+
+``` JavaScript
+// In PostDetail.js
+
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+const PostDetail = () => {
+    const {postId} = useParams();
+    const [post, setPost] = useState({});
+
+    useEffect( () => {
+        const url = `https://jsonplaceholder.typicode.com/posts/${postId}`;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setPost(data));
+    }, [postId]);
+
+    return (
+        <div>
+            <h2>This is Post Detail for: {postId}</h2>
+            <h5>{post.title}</h5>
+            <p><small>{post.body}</small></p>
+        </div>
+    );
+};
+
+export default PostDetail;
+```
