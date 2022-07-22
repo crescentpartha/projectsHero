@@ -120,6 +120,7 @@ function App() {
     <div className="App">
       <h1>Welcome to my fancy React Router website!</h1>
       <Routes>
+        // fixed route or static route
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path='/friends' element={<Friends></Friends>}></Route>
@@ -233,12 +234,73 @@ export default CustomLink;
 
 ## `52.5 Recap Router, route, path, component, not found, link`
 
-⫸ `Reviews:`
+⫸ [Reviews:](https://reactrouter.com/docs/en/v6/getting-started/concepts#review "All Main Concepts put together")
 - ___Install React Router dependencies___
 - ___Follow 6 steps to use ReactRouter___
 - ___Nested Routes___
 - ___Reading URL Parameters___
 - ___Navigation___
 - ___Custom Active Link___
+
+## `52.6 Create route with some fixed and some dynamic part`
+
+⫸ __Dynamic Route:__
+- Although `"teams/:teamId"` is dynamic. Here, ___teams___ → (___fixed___) & ___:teamId___ → (___changing___)
+
+``` JavaScript
+// Dynamic Route
+<Route path="teams/:teamId" element={<Team />} />
+// Static Route or Fixed Route → more specific match
+<Route path="teams/new" element={<NewTeamForm />} />
+```
+
+⫸ [Configuring Routes:](https://reactrouter.com/docs/en/v6/getting-started/overview#configuring-routes)
+- In `'/friend/:friendId'` (here), `/friend/` is the ___fixed part___ & `:friendId` is the ___dynamic part___
+- If ___fixed part is matched___, then it ___works___, does not matter ___what I write___ in the dynamic part like (partha, dodotail, anything).
+- `:friendId` is called ___URL parameter___ or ___Route parameter___
+- So, ___Route___ could have one ___fixed part___ & one ___dynamic part___
+
+``` JavaScript
+// In App.js
+
+<Routes>
+  <Route path='/friend/:friendId' element={<FriendDetail></FriendDetail>}></Route>
+</Routes>
+```
+
+⫸ We can go another place as a __dynamic route__ by using ___Link___ or ___Button___
+
+``` JavaScript
+// In Friend.js
+
+<div>
+    <Link to={'/friend/' + id}>Show Detail</Link>
+    <button onClick={showFriendDetail}>{username}'s ID: {id}</button>
+</div>
+```
+
+⫸ [Reading URL Parameters:](https://reactrouter.com/docs/en/v6/getting-started/overview#reading-url-parameters)
+- ___Note that:___ the path segment `:friendId` and the param's key `params.friendId` match up.
+- How to ___set dynamic route___ & ___access the parameter___ for ___certain route___ using `useParams();`
+
+``` JavaScript
+// In FriendDetail.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const FriendDetail = () => {
+  const {friendId} = useParams();
+  // const params = useParams();
+  return (
+    <div>
+      <h2>This is Detail of a Friend: {friendId}</h2>
+      {/* <h2>This is Detail of a Friend: {params.friendId}</h2> */}
+    </div>
+  );
+};
+
+export default FriendDetail;
+```
 
 
