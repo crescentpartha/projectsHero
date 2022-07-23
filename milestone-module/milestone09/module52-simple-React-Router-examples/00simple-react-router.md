@@ -554,3 +554,31 @@ const CountryDetail = () => {
 export default CountryDetail;
 ```
 
+## `52.10 Quiz`
+
+1. What does a __404 mean__ to a web developer? (google it)
+   - ___The page or path you are trying to access in not available___
+2. Why will you __need a router__ for your app?
+   - ___So that you can show a specific component based on the current route___
+3. How will you __import a Routes from  React Router Dom__?
+   - `import {Routes} from "react-router-dom";`
+4. which __property will you set__ on the Route __to match with the url__? <br> `<Route  __?_ = ”/profile” element={<Profile />}`
+   - ___path___
+5. `<Route path=" __?__" element={<NotFound />} />` <br> What will you write if you want __to show the NotFound component__ if your __route parameter does not match__ any?
+   - `*`
+6. `<Route path = "/about" element={ <About />} / > ` <br> `<Route path =" * " element={< NotFound />} />` <br> If you hit  `http://localhost:3000/abut` which  component will you see?
+   - `<NotFound />` ___Or___ `<NotFound></NotFound>`
+7. How will you __set a dynamic part__ (___path parameter___) named id, under the user route? <br> `<Route path = "__?__" ></ Route >`
+   - `/user/:id`
+8. Which __router hook__ will you use __to get dynamic parameters from a URL__?
+   - ___useParams___
+9.  __useParams hook__ returns _______.
+    - ___an object___
+10. `http://localhost:3000/user/7` <br> `<Route path="/user/:id" element={<BlogPost />}` <br> How will you __get the value of the dynamic part__(7) from a URL named id?
+    - `const { id } = useParams();`
+11. We need to __wrap__ our <App /> component inside index.js with ___?____
+    - ___BrowserRouter___
+12. Does the __page reload__ when we __navigate to another route__?
+    - ___No___
+
+
