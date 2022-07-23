@@ -13,7 +13,7 @@ const FriendDetail = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setFriend(data));
-    }, [])
+    }, [friendId])
 
     return (
         <div style={{ backgroundColor: "cornSilk", padding: "10px", margin: "30px", borderRadius: "20px" }}>
