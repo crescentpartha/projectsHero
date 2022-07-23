@@ -135,5 +135,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 51 01react-with-bootstrap](https://51-1react-with-bootstrap.netlify.app/ "React-App | Live-Server _-_ How to use Bootstrap CDN in React - Install React-Bootstrap in my react application") | [02react-with-tailwind-pricing-club](https://51-2react-with-tailwind-pricing-club.netlify.app/ "React-App | Live-Server _-_ How to use Tailwind CSS with Create React App (Framework) - Installation - making Cards - Responsive Design - HeroIcons") | [03react-recharts](https://51-3react-recharts.netlify.app/ "React-App | Live-Server _-_ Use recharts to draw any type of chart using React - Recharts Installation - making LineCharts")
 
-
+* [Module 52 01react-router](https://52-1react-router.netlify.app/ "React-App | Live-Server _-_ Install React Router, Project Setup - StrictMode, follow 6 steps to use ReactRouter - Load Users, display users, dynamic link, use Navigate - Set Header, Nav, Create Link, display active route, Custom Active Link - Not Found Page, Link (Static Route, Dynamic Route, Nested Route), Configuring Routes, Reading URL Parameters - React route parameter and load data based on dynamic route - Nested route with useEffect dependency Injection | use RestCountriesAPI, JSONPlaceholder/users, JSONPlaceholder/posts | Optional Chaining")
 
