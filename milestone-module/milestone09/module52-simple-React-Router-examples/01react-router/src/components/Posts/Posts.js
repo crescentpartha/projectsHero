@@ -9,8 +9,8 @@ const Posts = () => {
         .then(data => setPosts(data));
     }, [])
     return (
-        <div>
-            <h2>Every posts Facebook ever had: {posts.length}</h2>
+        <div style={{ backgroundColor: "cornSilk", padding: "10px", margin: "30px", borderRadius: "20px" }}>
+            <h2>Every <span style={{ color: "orange" }}>posts</span> Facebook ever had: <span style={{color: "orange"}}>{posts.length}</span></h2>
             {
                 posts.map(post => <Link 
                     key={post.id}

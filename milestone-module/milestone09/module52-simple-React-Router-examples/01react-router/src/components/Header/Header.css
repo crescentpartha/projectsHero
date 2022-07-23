@@ -1,0 +1,30 @@
+.header {
+    background-color: #fff1e0;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 20px;
+}
+.link-nav, .customLink-nav {
+    background-color: bisque;
+    margin: 10px 30px;
+    padding: 10px;
+    border-radius: 20px;
+}
+.link-nav h3, .customLink-nav h3 {
+    font-size: 25px;
+}
+.link {
+    text-decoration: none;
+    margin-right: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: blue;
+}
+.link:hover {
+    color: orange;
+}
+
+.custom-link{
+    font-size: 18px;
+    font-weight: 600;
+}

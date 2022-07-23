@@ -11,8 +11,8 @@ const Countries = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Welcome to my World! {countries.length}</h2>
+        <div style={{ backgroundColor: "cornSilk", padding: "10px", margin: "30px", borderRadius: "20px" }}>
+            <h2>Welcome to my World! <span style={{ color: "orange" }}>{countries.length} Countries</span></h2>
             {
                 countries.map(country => <li>
                     <Link to={`/country/${country.name.common}`}>{country.name.common}</Link>
