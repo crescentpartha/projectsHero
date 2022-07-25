@@ -137,3 +137,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 52 01react-router](https://52-1react-router.netlify.app/ "React-App | Live-Server _-_ Install React Router, Project Setup - StrictMode, follow 6 steps to use ReactRouter - Load Users, display users, dynamic link, use Navigate - Set Header, Nav, Create Link, display active route, Custom Active Link - Not Found Page, Link (Static Route, Dynamic Route, Nested Route), Configuring Routes, Reading URL Parameters - React route parameter and load data based on dynamic route - Nested route with useEffect dependency Injection | use RestCountriesAPI, JSONPlaceholder/users, JSONPlaceholder/posts | Optional Chaining")
 
+* [Module 52.5 01search-mealdb-and-routing](https://52-5-1search-mealdb-and-routing.netlify.app/ "React-App | Live-Server _-_ Use CSS framework called Tailwind-CSS - Search functionality implemented - Responsive - Set Not Found (404) & Main URL ('/') route - Header component contains different links - Add link & button type Event Handlers - create dynamic route and static route - useNavigate() - fetch API data & display data from mealDB API")
+
