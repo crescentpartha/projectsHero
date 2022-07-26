@@ -718,4 +718,13 @@ const Header = () => {
 export default Header;
 ```
 
+## 53.2 Recap React Router setup and intro to order review page
+
+⫸ `Order Summary from Shop page, we need to bring it in Orders page:` (___2 ways to solve it___)
+1. We ___loaded data___ according to ___Id___ in a component, this time we do it ___outside of the component___.
+2. Use ___Redux___ 
+
+
+## 53.3 Write useState and useEffect in a different file and import it
+
 
