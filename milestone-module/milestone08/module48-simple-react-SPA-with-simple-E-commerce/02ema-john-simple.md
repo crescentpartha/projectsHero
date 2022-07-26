@@ -725,6 +725,71 @@ export default Header;
 2. Use ___Redux___ 
 
 
-## 53.3 Write useState and useEffect in a different file and import it
+## 53.3 Write useState and useEffect in a different file and import it (Custom Hook)
+
+⫸ `Product Load in different outside file:`
+- Increase ___code reusability___
+  - Same code implement in different different file easily.
+- Reduce ___code duplication/Repetition___ (DRY - Don't Repeat Yourself)
+
+⫸ `Create a Custom Hook:`
+
+``` JavaScript
+// In hooks/useProducts.js
+
+import { useEffect, useState } from "react"
+
+const useProducts = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect( () => {
+        fetch('products.json')
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, []);
+
+    return [products, setProducts];
+}
+
+export default useProducts;
+```
+
+⫸ `JavaScript function usually return only one element:`
+- ___Return one thing___ → `return products;`
+- But, we can ___return many thing___ like as array → `return [products, setProducts];`
+
+⫸ `Use a Custom Hook:`
+
+``` JavaScript
+// In Orders.js
+
+import React from 'react';
+import useProducts from '../../hooks/useProducts';
+
+const Orders = () => {
+    const [products, setProducts] = useProducts();
+    return (
+        <div>
+            <h2>This is Orders: {products.length}</h2>
+        </div>
+    );
+};
+
+export default Orders;
+```
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import useProducts from '../../hooks/useProducts';
+
+const Shop = () => {
+    // using a custom hook
+    const [products, setProducts] = useProducts();
+};
+
+export default Shop;
+```
 
 

@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
-    useEffect( () => {
-        // console.log('products load before fetch');
-        // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
-        fetch('products.json')
-        .then(res => res.json())
-        .then(data => {
-            setProducts(data);
-            // console.log('products loaded');
-        });
-    }, [])
+    // using a custom hook
+    const [products, setProducts] = useProducts();
+    
+    // const [products, setProducts] = useState([]);
+
+    // useEffect( () => {
+    //     // console.log('products load before fetch');
+    //     // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
+    //     fetch('products.json')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setProducts(data);
+    //         // console.log('products loaded');
+    //     });
+    // }, [])
 
     useEffect( () => {
         // console.log('Local Storage first line', products);
