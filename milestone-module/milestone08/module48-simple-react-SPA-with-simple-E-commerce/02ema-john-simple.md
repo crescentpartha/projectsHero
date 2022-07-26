@@ -1,6 +1,6 @@
 # Module 48: Simple React SPA with Simple E-commerce
 
-# 02ema-john-simple
+# `02ema-john-simple`
 
 ## 48.1 Module Introduction, site resource, figma
 
@@ -620,5 +620,102 @@ const Phone = (props) => {
 ```
 - __props.brandName__
 
+---
+
+# Module 52: ema-john with router and custom hook
+
+## 53.0 Text Instruction
+
+⫸ `Follow the five Steps to set-up the React-Router:`
+1. Use ___BrowserRouter___ in ___index.js___
+2. Set ___Routes___ in ___App.js___
+3. Set many ___Route___ inside the ___Routes___
+4. Route includes ___path___
+5. Route also includes a __prop__ called ___element___
+
+## 53.1 Install React router and implement simple router setup
+
+⫸ `Install React Router dependencies:`
+
+``` Terminal
+npm install react-router-dom@6
+```
+
+⫸ `Connect the URL:` import ___BrowserRouter___ from ___react-router-dom___ near the top of your file and ___wrap___ your app in a `<BrowserRouter>`:
+
+``` JavaScript
+// In src/index.js
+
+import { BrowserRouter } from "react-router-dom";
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+```
+
+⫸ `Replace the default markup with some routes:`
+
+``` JavaScript
+// In src/App.js
+
+// import logo from './logo.svg';
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Shop from './components/Shop/Shop';
+import Orders from './components/Orders/Orders';
+import Inventory from './components/Inventory/Inventory';
+import About from './components/About/About';
+import NotFound from './components/NotFound/NotFound';
+
+function App() {
+  return (
+    <div>
+      <Header></Header>
+      <Routes>
+        <Route path='/' element={<Shop></Shop>}></Route>
+        <Route path='/shop' element={<Shop></Shop>}></Route>
+        <Route path='/orders' element={<Orders></Orders>}></Route>
+        <Route path='/inventory' element={<Inventory></Inventory>}></Route>
+        <Route path='/about' element={<About></About>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `Create your route components & Link them in Header.js file:`
+
+``` JavaScript
+// In Header.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../images/Logo.svg';
+import './Header.css';
+
+const Header = () => {
+    return (
+        <nav className='header'>
+            <img src={logo} alt='logo' />
+            <div>
+                <Link to="/shop">Shop</Link>
+                <Link to="/orders">Orders</Link>
+                <Link to="/inventory">Inventory</Link>
+                <Link to="/about">About</Link>
+            </div>
+        </nav>
+    );
+};
+
+export default Header;
+```
 
 
