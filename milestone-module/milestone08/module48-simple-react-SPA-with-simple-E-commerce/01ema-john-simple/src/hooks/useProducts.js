@@ -1,4 +1,4 @@
-// Custom Hook
+// Create a Custom Hook without dependency
 import { useEffect, useState } from "react"
 
 const useProducts = () => {

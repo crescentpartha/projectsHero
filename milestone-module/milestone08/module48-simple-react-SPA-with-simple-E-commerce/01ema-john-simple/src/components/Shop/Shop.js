@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
@@ -6,7 +7,6 @@ import Product from '../Product/Product';
 import './Shop.css';
 
 const Shop = () => {
-    const [cart, setCart] = useState([]);
 
     // using a custom hook
     const [products, setProducts] = useProducts();
@@ -24,24 +24,30 @@ const Shop = () => {
     //     });
     // }, [])
 
-    useEffect( () => {
-        // console.log('Local Storage first line', products);
-        const storedCart = getStoredCart();
-        // console.log(storedCart);
-        const savedCart = [];
-        for (const id in storedCart) {
-            // console.log(id);
-            const addedProduct = products.find(product => product.id === id);
-            if (addedProduct) {
-                const quantity = storedCart[id];
-                addedProduct.quantity = quantity;
-                // console.log(addedProduct);
-                savedCart.push(addedProduct);
-            }
-        }
-        setCart(savedCart);
-        // console.log('local storage finished');
-    }, [products])
+    
+    // using a custom hook
+    const [cart, setCart] = useCart(products);
+
+    // const [cart, setCart] = useState([]);
+
+    // useEffect( () => {
+    //     // console.log('Local Storage first line', products);
+    //     const storedCart = getStoredCart();
+    //     // console.log(storedCart);
+    //     const savedCart = [];
+    //     for (const id in storedCart) {
+    //         // console.log(id);
+    //         const addedProduct = products.find(product => product.id === id);
+    //         if (addedProduct) {
+    //             const quantity = storedCart[id];
+    //             addedProduct.quantity = quantity;
+    //             // console.log(addedProduct);
+    //             savedCart.push(addedProduct);
+    //         }
+    //     }
+    //     setCart(savedCart);
+    //     // console.log('local storage finished');
+    // }, [products])
 
     const handleAddToCart = (selectedProduct) => {
         // console.log(selectedProduct);

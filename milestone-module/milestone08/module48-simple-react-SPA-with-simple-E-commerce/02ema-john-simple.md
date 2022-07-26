@@ -732,7 +732,9 @@ export default Header;
   - Same code implement in different different file easily.
 - Reduce ___code duplication/Repetition___ (DRY - Don't Repeat Yourself)
 
-⫸ `Create a Custom Hook:`
+⫸ `Create a Custom Hook without dependency:`
+- A ___custom Hook___ is a JavaScript function whose name starts with `”use”` and that may call other Hooks.
+- For example, `useProducts` and `useCart` are our custom hook.
 
 ``` JavaScript
 // In hooks/useProducts.js
@@ -792,4 +794,74 @@ const Shop = () => {
 export default Shop;
 ```
 
+## 53.4 Create useCart with products dependency and use it
+
+⫸ `Create a Custom Hook with dependency:`
+
+``` JavaScript
+// In hooks/useCart.js
+
+// Create a Custom Hook with dependency
+import { useEffect, useState } from "react"
+import { getStoredCart } from "../utilities/fakedb";
+
+const useCart = (products) => {
+    const [cart, setCart] = useState([]);
+
+    useEffect( () => {
+        const storedCart = getStoredCart();
+        const savedCart = [];
+        for (const id in storedCart) {
+            const addedProduct = products.find(product => product.id === id);
+            if (addedProduct) {
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
+                savedCart.push(addedProduct);
+            }
+        }
+        setCart(savedCart);
+    }, [products]);
+
+    return [cart, setCart];
+}
+
+export default useCart;
+```
+
+⫸ `Use a Custom Hook:`
+
+``` JavaScript
+// In Orders.js
+
+import React from 'react';
+import useCart from '../../hooks/useCart';
+import useProducts from '../../hooks/useProducts';
+
+const Orders = () => {
+    const [products, setProducts] = useProducts();
+    const [cart, setCart] = useCart(products);
+    return (
+        <div>
+            <h2>This is Orders: {products.length}</h2>
+            <p>Cart has: {cart.length}</p>
+        </div>
+    );
+};
+
+export default Orders;
+```
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import useCart from '../../hooks/useCart';
+
+const Shop = () => {
+    // using a custom hook
+    const [cart, setCart] = useCart(products);
+};
+
+export default Shop;
+```
 
