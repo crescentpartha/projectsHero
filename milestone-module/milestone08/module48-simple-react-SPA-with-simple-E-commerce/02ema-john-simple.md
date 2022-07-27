@@ -966,6 +966,7 @@ export default ReviewItem;
 import React from 'react';
 import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProducts';
+import { removeFromDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 
@@ -977,6 +978,7 @@ const Orders = () => {
         // console.log(product);
         const rest = cart.filter(pd => pd.id !== product.id);
         setCart(rest);
+        removeFromDb(product.id);
     }
 
     return (
@@ -1038,5 +1040,62 @@ const ReviewItem = (props) => {
 };
 
 export default ReviewItem;
+```
+
+## 53.8 Make Data consistent across UI and explore children props
+
+⫸ `Children Props:`
+- [Composition vs Inheritance](https://reactjs.org/docs/composition-vs-inheritance.html "React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components") | [Using Children Props](https://medium.com/@martin.crabtree/react-js-using-children-props-c83d5b259756 "React.js: Using Children Props - medium.com")
+- If I write anything inside the component, then send it as a special props called children. `{props.children}`
+
+
+``` JavaScript
+// In Cart.js
+const Cart = (props) => {
+    // console.log(props);
+    // console.log(props.children);
+
+    return (
+        <div className='cart'>
+            <h4>Order Summary</h4>
+            {props.children}
+        </div>
+    );
+};
+
+// In Orders.js
+const Orders = () => {
+    return (
+        <div className="shop-container">
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <Link to="/">
+                        <button>Proceed Checkout </button>
+                    </Link>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+// In Shop.js
+const Shop = () => {
+    return (
+        <div className='shop-container'>
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <p>Hello from Shop</p>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+// Output: for Shop.js
+    ▶ {cart: Array(5), children: {...}}
+        ▶ cart: (5) [{...}, {...}, {...}, {...}, {...}]
+        ▼ children:
+            ▶ props: {children: 'Hello from Shop'}
+               type: "p"
 ```
 
