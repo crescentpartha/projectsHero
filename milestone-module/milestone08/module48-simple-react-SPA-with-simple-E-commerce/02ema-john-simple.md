@@ -1129,3 +1129,49 @@ const Orders = () => {
 export default Orders;
 ```
 
+## `53.10 Quiz`
+
+1. If you ___clone a repository___ that does not contain ___node_modules___ , ___which command___ should you run?
+   - `npm install`
+2. Which ___property___ will you set on the Route to match with the url? <br> `<Route __?__ =”/profile”>`
+   - `path`
+3. A ___function___ can ___return___ _______.
+   - ___An Array, An Object, and A Number___
+4. Which ___props___ should you use to match exactly the path you gave for routing?
+   - ___no need of any props, by default all are exact___
+5. which ___React router hook___ will you use to access ___one or more parameters___ from the path? <br> `const { user ,id } = __?_();`
+   - `useParams()`
+6. If you want to ___add style___ to your ___Link___, which one should you use?
+   - `<NavLink>` & `Custom active link`
+7. Should you use `<Link>` ___outside of___ `<Router>`
+   - ___No___
+8. ___Object.values___ returns _______
+   - ___An Array___
+9.  What is the purpose of ___useEffect hook___? (Google it and then go to the reactjs.org link. And then also google what is ___side effect___. Learn it)
+    - ___Load external data or interact outside of the component___
+10.  If you ___miss the dependency___ how many times will it ___re-render___?
+     - ___Infinity Times___
+``` JavaScript
+useEffect( ()=> {
+    fetch(‘/https://jsonplaceholder.typicode.com/users’)
+    .then( res => res.json() )
+    .then(data => setData(data) )
+} ) 
+```
+
+11.  What will be the ___value of the item___?
+     - `[{id: "c222", name: "coffee"}, {id: "t333", name: "tea"}]`
+``` JavaScript
+const items= [
+    { id: "c222", name : "coffee"},
+    { id:"t333" , name : "tea" },
+    { id:"j555", name : "juice"}
+]
+
+const  item= items.filter(item => item.id != "j555")
+```
+
+12. What is the name of the ___node module___ that you ___installed___ to have the ___react router___ in your React web application?
+    - ___react-router-dom___
+
+
