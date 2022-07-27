@@ -917,9 +917,12 @@ export default Orders;
 
 ``` JavaScript
 <p className="product-name" title={name}>
+    // ternary operation
     {name.length > 20 ? name.slice(0, 20) + '...' : name}
 </p>
 ```
+
+⫸ `Implement ReviewItem style:`
 
 ``` JavaScript
 // In ReviewItem.js
@@ -944,6 +947,90 @@ const ReviewItem = (props) => {
                 </div>
                 <div className="delete-container">
                     <button>Delete</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ReviewItem;
+```
+
+## 53.7 More style of Review item and apply Remove Item handler
+
+⫸ `Add Remove Item Handler:` ___handleRemoveProduct___
+
+``` JavaScript
+// In Orders.js
+
+import React from 'react';
+import useCart from '../../hooks/useCart';
+import useProducts from '../../hooks/useProducts';
+import Cart from '../Cart/Cart';
+import ReviewItem from '../ReviewItem/ReviewItem';
+
+const Orders = () => {
+    const [products, setProducts] = useProducts();
+    const [cart, setCart] = useCart(products);
+
+    const handleRemoveProduct = product => {
+        // console.log(product);
+        const rest = cart.filter(pd => pd.id !== product.id);
+        setCart(rest);
+    }
+
+    return (
+        <div className="shop-container">
+            <div className="review-items-container">
+                {
+                    cart.map(product => <ReviewItem
+                        key={product.id}
+                        product={product}
+                        handleRemoveProduct={handleRemoveProduct}
+                    ></ReviewItem>)
+                }
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}></Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Orders;
+```
+
+⫸ `More style added in ReviewItem:`
+
+``` JavaScript
+// In ReviewItem.js
+
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import './ReviewItem.css';
+
+const ReviewItem = (props) => {
+    const {product, handleRemoveProduct} = props;
+    const { name, img, price, shipping, quantity } = product;
+    return (
+        <div className='review-item'>
+            <div>
+                <img src={img} alt="" />
+            </div>
+            <div className="review-item-details-container">
+                <div className="review-item-details">
+                    <p className="product-name" title={name}>
+                        {name.length > 20 ? name.slice(0, 20) + '...' : name}
+                    </p>
+                    <p>Price: <span className="orange-color">${price}</span></p>
+                    <p><small>Shipping: ${shipping}</small></p>
+                    <p><small>Quantity: {quantity}</small></p>
+                </div>
+                <div className="delete-container">
+                    <button onClick={() => handleRemoveProduct(product)} className='delete-button'>
+                        <FontAwesomeIcon className='delete-icon' icon={faTrashAlt}></FontAwesomeIcon>
+                    </button>
                 </div>
             </div>
         </div>
