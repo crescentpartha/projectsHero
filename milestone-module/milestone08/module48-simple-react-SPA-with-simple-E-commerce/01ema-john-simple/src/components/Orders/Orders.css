@@ -1,0 +1,10 @@
+.review-items-container {
+    margin: 0 auto;
+}
+.summary-button {
+    border: 1px solid rgba(235, 87, 87, 1);;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: rgba(235, 87, 87, 0.3);
+    font-weight: bold;
+}

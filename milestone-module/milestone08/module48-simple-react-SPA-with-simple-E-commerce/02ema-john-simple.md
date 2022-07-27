@@ -1046,14 +1046,14 @@ export default ReviewItem;
 
 ⫸ `Children Props:`
 - [Composition vs Inheritance](https://reactjs.org/docs/composition-vs-inheritance.html "React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components") | [Using Children Props](https://medium.com/@martin.crabtree/react-js-using-children-props-c83d5b259756 "React.js: Using Children Props - medium.com")
-- If I write anything inside the component, then send it as a special props called children. `{props.children}`
+- If I write anything inside the component, then send it as a ___special props___ called ___children___. `{props.children}`
 
 
 ``` JavaScript
 // In Cart.js
 const Cart = (props) => {
     // console.log(props);
-    // console.log(props.children);
+    console.log(props.children);
 
     return (
         <div className='cart'>
@@ -1097,5 +1097,35 @@ const Shop = () => {
         ▼ children:
             ▶ props: {children: 'Hello from Shop'}
                type: "p"
+```
+
+## 53.9 Module Summary, use navigate and recap custom hook
+
+⫸ [useNavigate():](https://reactrouter.com/docs/en/v6/hooks/use-navigate "useNavigate - React Router")
+
+``` JavaScript
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+const Orders = () => {
+    const [products, setProducts] = useProducts();
+    const [cart, setCart] = useCart(products);
+    const navigate = useNavigate();
+
+    return (
+        <div className="shop-container">
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    {/* <Link to="/shop">
+                        <button>Proceed Checkout </button>
+                    </Link> */}
+                    <button onClick={() => navigate('/shop')}>Proceed Checkout</button>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Orders;
 ```
 

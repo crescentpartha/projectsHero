@@ -5,6 +5,7 @@
     padding: 8px;
     width: 571px;
     display: flex;
+    margin: 20px;
 }
 .review-item img {
     width: 91px;
@@ -13,6 +14,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin: 0 10px;
 }
 
 .review-item-details p {
@@ -34,4 +36,11 @@
 .delete-icon {
     color: rgba(235, 87, 87, 1);
     font-size: 27px;
+}
+
+@media screen and (max-width:900px) {
+    .review-item {
+        width: 90%;
+        margin: 20px 10px;
+    }
 }
