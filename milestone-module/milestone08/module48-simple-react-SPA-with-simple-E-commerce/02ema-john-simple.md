@@ -865,3 +865,15 @@ const Shop = () => {
 export default Shop;
 ```
 
+## 53.5 Create review page structure and Display Shopping cart
+
+⫸ __Adding a CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically") Stylesheet:__
+- ___CSS Modules___ → `[name].module.css` file naming convention.
+  - Modules ___means___ use only this component, other component can't use it.
+  - If we don't name it `Shop.module.css`, then it access from other files.
+  - By default, ___CSS Class___ __name__ like `.products-container` accessible from all files, because React combine all together.
+- ___CSS Modules___ let you use the same CSS class name in different files without worrying about naming clashes.
+- A module ___encapsulates___ a set of related ___functions and components___ semantically related with its own functional responsibility.
+- [Why React developers should modularize their applications?](https://alexmngn.medium.com/why-react-developers-should-modularize-their-applications-d26d381854c1#:~:text=A%20module%20encapsulates%20a%20set,the%20rest%20of%20the%20application.)
+
+
