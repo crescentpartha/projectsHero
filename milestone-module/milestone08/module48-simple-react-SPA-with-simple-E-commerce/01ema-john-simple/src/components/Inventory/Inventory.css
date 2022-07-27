@@ -1,0 +1,13 @@
+.inventory-about-notFound {
+    background-color: antiquewhite;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 2px gray;
+    margin: 5% 10%;
+    padding: 20px;
+}
+.inventory-about-notFound h2 {
+    text-align: center;
+}
+.highlighted {
+    color: orange;
+}
