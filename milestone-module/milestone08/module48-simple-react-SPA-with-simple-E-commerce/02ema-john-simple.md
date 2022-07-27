@@ -876,4 +876,80 @@ export default Shop;
 - A module ___encapsulates___ a set of related ___functions and components___ semantically related with its own functional responsibility.
 - [Why React developers should modularize their applications?](https://alexmngn.medium.com/why-react-developers-should-modularize-their-applications-d26d381854c1#:~:text=A%20module%20encapsulates%20a%20set,the%20rest%20of%20the%20application.)
 
+``` JavaScript
+// In Orders.js
+
+import React from 'react';
+import useCart from '../../hooks/useCart';
+import useProducts from '../../hooks/useProducts';
+import Cart from '../Cart/Cart';
+import ReviewItem from '../ReviewItem/ReviewItem';
+
+const Orders = () => {
+    const [products, setProducts] = useProducts();
+    const [cart, setCart] = useCart(products);
+    return (
+        <div className="shop-container">
+            <div className="products-container">
+                {
+                    cart.map(product => <ReviewItem
+                        key={product.id}
+                        product={product}
+                    ></ReviewItem>)
+                }
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}></Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Orders;
+```
+
+## 53.6 Implement Review Item style with a lot of flex
+
+⫸ `Ternary Operation:` (___if name length is greater than 20___)
+- `{name.length > 20 ? name.slice(0, 20) + '...' : name}`
+- ___Output:___ `NMD_R1 V2 SHOES` | `LUNAR NEW YEAR ULTRA...`
+- Use `title` to show ___full name___.
+
+``` JavaScript
+<p className="product-name" title={name}>
+    {name.length > 20 ? name.slice(0, 20) + '...' : name}
+</p>
+```
+
+``` JavaScript
+// In ReviewItem.js
+import React from 'react';
+import './ReviewItem.css';
+
+const ReviewItem = (props) => {
+    const { name, img, price, shipping, quantity } = props.product;
+    return (
+        <div className='review-item'>
+            <div>
+                <img src={img} alt="" />
+            </div>
+            <div className="review-item-details-container">
+                <div className="review-item-details">
+                    <p className="product-name" title={name}>
+                        {name.length > 20 ? name.slice(0, 20) + '...' : name}
+                    </p>
+                    <p>Price: <span className="orange-color">{price}</span></p>
+                    <p><small>Shipping: {shipping}</small></p>
+                    <p><small>Quantity: {quantity}</small></p>
+                </div>
+                <div className="delete-container">
+                    <button>Delete</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ReviewItem;
+```
 
