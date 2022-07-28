@@ -18,8 +18,19 @@
   - Prop drilling is the ___unofficial term___ for ___passing data___ through several ___nested children components___.
   - The problem with this approach is that most of the components through which this data is passed have ___no actual need for this data___.
 - [Context API](https://reactjs.org/docs/context.html "reactjs.org") (used for ___props drilling___)
+- [Custom Active Link](https://reactrouter.com/docs/en/v6/examples/custom-link "reactjs.org")
 
 
 ## 54.1 Another Recap of Recap of React Router Setup
 
+⫸ `Common Stuff:`
+- React Router Setup
+- Create Components
+- Set Routes
+- Custom Active Link
+
+⫸ `For Styling in CSS files:` 
+- `<Link>` tag converted to `<a>` tag, that's why used <a> 
+- `<CustomLink>` converted to `<div>` tag, that's why used `<div>`
+- ___Demo:___ Header.css
 
