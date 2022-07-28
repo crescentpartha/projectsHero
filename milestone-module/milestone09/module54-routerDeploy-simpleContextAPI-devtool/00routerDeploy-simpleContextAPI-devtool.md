@@ -28,9 +28,54 @@
 - Create Components
 - Set Routes
 - Custom Active Link
+  - Used for ___styling the active link___ as like as (__underline__, __color__, __margin__, __padding__, __shadow__) etc.
+  - ___Demo:___ [CustomLink.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/CustomLink/CustomLink.js)
+
+``` JavaScript
+// In CustomLink.js
+
+return (
+    <div>
+    <Link
+        style={{ textDecoration: match ? "underline" : "none", color: match ? 'orange' : 'black' }}
+        to={to}
+        {...props}
+    >
+        {children}
+    </Link>
+    {match && " (active)"}
+    </div>
+);
+```
 
 ⫸ `For Styling in CSS files:` 
 - `<Link>` tag converted to `<a>` tag, that's why used <a> 
 - `<CustomLink>` converted to `<div>` tag, that's why used `<div>`
-- ___Demo:___ Header.css
+- ___Demo:___ [Header.css](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Header/Header.css) → used ___Chrome devtool___ to ___view effect___
+
+
+## 54.2 Recap Custom hook and load t-shirt data
+
+⫸ `Custom Hook without dependency:` useTShirts.js
+
+``` JavaScript
+import { useEffect, useState } from "react"
+
+// Custom Hook without dependency
+const useTShirts = () => {
+    const [tShirts, setTShirts] = useState([]);
+    useEffect( () => {
+        fetch('tshirts.json')
+        .then(res => res.json())
+        .then(data => setTShirts(data));
+    }, []);
+    return [tShirts, setTShirts];
+}
+
+export default useTShirts;
+```
+
+⫸ Custom Hook used in Home.js then TShirt.js
+
+
 
