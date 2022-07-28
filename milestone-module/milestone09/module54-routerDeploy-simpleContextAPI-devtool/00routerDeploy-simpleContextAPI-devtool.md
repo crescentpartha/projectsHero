@@ -56,7 +56,7 @@ return (
 
 ## 54.2 Recap Custom hook and load t-shirt data
 
-⫸ `Custom Hook without dependency:` useTShirts.js
+⫸ `Custom Hook without dependency:` [useTShirts.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/hooks/useTShirts.js)
 
 ``` JavaScript
 import { useEffect, useState } from "react"
@@ -75,7 +75,35 @@ const useTShirts = () => {
 export default useTShirts;
 ```
 
-⫸ Custom Hook used in Home.js then TShirt.js
+⫸ Custom Hook used in [Home.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Home/Home.js) then [TShirt.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/TShirt/TShirt.js)
+
+
+## 54.3 Recap Remove from cart and not allow duplicate
+
+⫸ `Common Stuff Done:`
+- [Home.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Home/Home.js) → ([Cart.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Cart/Cart.js) & [TShirt.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/TShirt/TShirt.js))
+- set ___useState()___ for ___cart___
+- ___handleAddToCart___
+- ___handleRemoveFromCart___
+- use ___rest operator___
+- use ___Destructuring___
+- use ___shortcut___ in ___cart___ ↓
+
+``` JavaScript
+// use shortcut in cart
+
+return (
+    <div>
+        <h2>Items Selected in Cart: {cart.length}</h2>
+        {
+            cart.map(tShirt => <p>
+                {tShirt.name}
+                <button onClick={() => handleRemoveFromCart(tShirt)}>X</button>
+            </p>)
+        }
+    </div>
+);
+```
 
 
 
