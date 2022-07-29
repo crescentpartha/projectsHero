@@ -349,4 +349,47 @@ export default Uncle;
 /* /index.html 200
 ```
 
+## 54.10 Quiz
+
+1. How will you ___get the `<h2>` element___ inside the Cart Component?
+   - `props.children`
+``` JavaScript
+<Cart>
+    <h2>Tumi jekhane , ami shekane. Khuje Pabe na! </h2> 
+</Cart>
+```
+2. Why do we ___not use anchor tags___ in our React Application?
+   - ___anchor tags reload the website___
+3. How will we ___get the dynamic parts___ inside the </Post> component?
+   - `const { blog, post } = useParams();`
+``` JavaScript
+<Route path = “/person/:blog/:id” >
+      <Post/>
+</Route>
+```
+4. Which ___router hook___ should you use to ___change the route path___ on a ___button click___?
+   - `useNavigate()`
+5. What will be the output of the ___result___?
+   - ___false___
+``` JavaScript
+const array = [“beautiful” , “nice”, “awesome”, ”beauty”];
+const result =  array.includes(“bea”);
+```
+6. What is the correct way to ___delete the data___ from the above ___state___? (think carefully)
+   - `setData([])`
+``` JavaScript
+const [data , setData] = useState( [ {name: “Chokina , tui amk bhule gesos kina”} ] )
+```
+7. If I want to render `< User />` when the user is ___true___ what will you write? <br> `user  ____?____ < User />`
+   - `&&`
+8. What do you think which one will be ___rendered___ to the UI?
+   - `</User>`
+``` JavaScript
+const admin = false;
+{ admin ? </ Admin> : </User> }
+```
+9. What is the ___state___ in react.js? (feel free to google it)
+   - ___The state object is where you store property values that belong to the component.___
+10. `<CategoryContext______ value = {[count, setCount]}>`
+    - `.Provider`
 
