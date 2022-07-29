@@ -11,10 +11,14 @@ const Header = () => {
                 <div>
                     <Link to='/home'>Home</Link>
                     <Link to='/orderReview'>Order Review</Link>
+                    <Link to='/grandpa'>GrandPa</Link>
+                    <Link to='/notFound'>NotFound</Link>
                 </div>
                 <div>
                     <CustomLink to='/home'>Home</CustomLink>
                     <CustomLink to='/orderReview'>Order Review</CustomLink>
+                    <CustomLink to='/grandpa'>GrandPa</CustomLink>
+                    <CustomLink to='/notFound'>NotFound</CustomLink>
                 </div>
             </nav>
         </div>
