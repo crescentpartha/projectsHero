@@ -10,7 +10,7 @@
 5. ___Set route___ by clicking an ___Event Handler of Button___
 
 ⫸ `Some other Topies:` (covered)
-- [Conditional Rendering](https://reactjs.org/docs/conditional-rendering.html "Conditional Rendering - reactjs.org") (3-4 system)
+- [Conditional Rendering](https://reactjs.org/docs/conditional-rendering.html "Conditional Rendering - reactjs.org") (3-4 different system)
   - ___Conditional rendering___ in React works the same way conditions work in JavaScript.
   -  Use JavaScript operators like `if` or the `conditional operator` to create elements ___representing the current state___, and let React update the UI to match them.
 - ___Data Sharing___ (secretly)
@@ -105,5 +105,51 @@ return (
 );
 ```
 
+## 54.4 Explore 4 ways to add Conditional Rendering in React
 
+⫸ [Conditional Rendering](https://reactjs.org/docs/conditional-rendering.html "Conditional Rendering - reactjs.org") (4 different system) → [Cart.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Cart/Cart.js)
+- [Fragments](https://reactjs.org/docs/fragments.html "Fragments - React")
+  - A common pattern in React is for ___a component___ to ___return multiple elements___.
+  - Fragments let you ___group a list of children___ `without adding extra nodes` to the DOM.
+
+``` JavaScript
+// In Cart.js
+
+// conditional rendering options
+    // 01. Element variable
+        // - element, we could make it as a single option, if (else if) condition is not needed.
+    let command;
+    if (cart.length === 0) {
+        command = <div>
+            <h5>Cart is empty!!!</h5>
+            <p>Please, Add at least one item!!!</p>
+        </div>
+    }
+    else if (cart.length === 1) {
+        command = <p>Please, Add more...</p>
+    }
+    else {
+        command = <p><small>Thanks for adding item</small></p>
+    }
+
+    // 02. ternary operator → condition ? true : false
+        // - true (could be set): empty string, empty element, react fragments
+        // - false (could be set): empty string, empty element, react fragments
+
+    // 03. && Operator (shorthand) → true (render one)
+
+    // 04. || Operator (shorthand) → false (render)
+
+    return (
+        <div>
+            {command}
+            {cart.length !== 4 ? <p>Keep adding...</p> : <button>Remove All</button>}
+            {cart.length === 3 && <div className='orange'>
+                <h3>Trigonal</h3>
+                <p>Which gift are you giving three of them?</p>    
+            </div>}
+            {cart.length === 0 || <p className='orange'>YAY! You are buying.</p>}
+        </div>
+    );
+```
 
