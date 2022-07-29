@@ -193,7 +193,7 @@ export const RingContext = createContext('Diamond');
    - The Provider component accepts a ___value___ prop to be passed to consuming components that are descendants of this Provider.
    - One Provider can be connected to ___many consumers___.
    - Providers can be ___nested to override values___ deeper within the tree.
-   - We can pass ___Array___, ___Object___, ___Event Handler___, ___Function___ and ___Variable___ as a property.value of ___value___.
+   - We can pass ___Single Value___, ___Static Value___, ___Dynamic Value___, ___Array___, ___Object___, ___Event Handler___, ___Function___ and ___Variable___ as a property-value of ___value___.
 
 ``` JavaScript
 // Demo:
@@ -310,7 +310,7 @@ import { RingContext } from '../Grandpa/Grandpa';
 const Uncle = () => {
     const [ , house, setHouse] = useContext(RingContext);
     // console.log(house);
-    
+
     const handleHouseIncrease = () => {
         const newHouseCount = house + 1;
         setHouse(newHouseCount);
@@ -327,9 +327,26 @@ const Uncle = () => {
 export default Uncle;
 ```
 
----
-
 ⫸ [React Developer Tools:](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en "React devtool extensions")
 
+
+## 54.9 Deploy react router project and fix router reload issue
+
+``` JavaScript
+// Dynamic {} | Conditional Rendering
+
+{ house >= 4 && <button onClick={() => setHouse(house + 1)}>Buy a House</button>}
+
+{ house < 3 || <button onClick={handleHouseIncrease}>Buy A House</button>}
+```
+
+⫸ `Page Not Found Error on Netlify:`
+- Links: [1](https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa "Page Not Found Error on Netlify Reactjs React Router solved - dev.to") - [2](https://rexben.medium.com/how-to-fix-page-not-found-on-netlify-with-react-router-dom-e0520692be5 "How to fix page not found on Netlify with react-router-dom - rexben.medium.com") - [3](https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router "Netlify renders 404 on page refresh (using React and react-router) - stackoverflow.com") - [4](https://docs.netlify.com/configure-builds/file-based-configuration/ "File-based configuration - netlify.com") - [5](https://res.cloudinary.com/practicaldev/image/fetch/s--_GIAh5QE--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://rajeshroyal.com/wp-content/uploads/2020/06/netlify-page-not-found-error-react-router-after-deploy.png "Page Not Found - Image")
+- To fix the issue, we need to create a file named `_redirects` without extension inside the ___public folder___.
+- `_redirects` file content: `/* /index.html 200`
+
+``` JavaScript
+/* /index.html 200
+```
 
 

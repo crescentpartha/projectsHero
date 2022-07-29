@@ -4,7 +4,7 @@ import { RingContext } from '../Grandpa/Grandpa';
 const Uncle = () => {
     const [ , house, setHouse] = useContext(RingContext);
     // console.log(house);
-    
+
     const handleHouseIncrease = () => {
         const newHouseCount = house + 1;
         setHouse(newHouseCount);
@@ -13,7 +13,7 @@ const Uncle = () => {
         <div>
             <h3>Uncle</h3>
             <p>House: {house}</p>
-            <button onClick={handleHouseIncrease}>Buy A House</button>
+            { house < 3 || <button onClick={handleHouseIncrease}>Buy A House</button>}
         </div>
     );
 };

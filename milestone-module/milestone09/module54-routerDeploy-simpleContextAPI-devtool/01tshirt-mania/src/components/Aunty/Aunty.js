@@ -8,7 +8,7 @@ const Aunty = () => {
             <h3>Aunty</h3>
             <p>House: {house}</p>
             <p><small>Gift: {ornament2}</small></p>
-            <button onClick={() => setHouse(house + 1)}>Buy a House</button>
+            { house >= 4 && <button onClick={() => setHouse(house + 1)}>Buy a House</button>}
         </div>
     );
 };
