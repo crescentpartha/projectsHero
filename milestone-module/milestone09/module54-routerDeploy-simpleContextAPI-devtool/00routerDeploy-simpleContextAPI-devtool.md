@@ -157,6 +157,75 @@ return (
 
 ## 54.6 Prop Drilling to pass data to a many level components
 
-⫸ ___Prop Drilling___ is a Problem.
+⫸ ___Prop Drilling___ is a Problem. 
+- There is a ___solution___ called ___Context API___.
+
+## 54.7 Simple Introduction to Context API to avoid Prop drilling
+
+⫸ [Context API:](https://reactjs.org/docs/context.html "Context - React | Description about how to use Context API")
+
+⫸ `Uses of Context API:` (so powerful)
+- To __avoid__ ___prop drilling___
+- ___State Management___
+- ___Theme uses___ purpose (dark theme, light theme)
+- ___Website Translate___ (English to Bengali)
+
+⫸ `Some Steps to use Context API:`
+- Context ___declare___ & ___export___
+- All consumer need to put inside ___Provider___
+- Accepts a context object that ___returned value___ using ___useContext Hook___
+
+⫸ `Steps for Context API:`
+
+1. [React.createContext](https://reactjs.org/docs/context.html#reactcreatecontext) 
+   - Creates a ___Context object___. ___([Grandps.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Grandpa/Grandpa.js "See the real demo of context API") & [Special.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone09/module54-routerDeploy-simpleContextAPI-devtool/01tshirt-mania/src/components/Special/Special.js "See the real demo of context API"))___
+
+``` JavaScript
+// Demo:
+const MyContext = React.createContext(defaultValue);
+
+// Example:
+export const RingContext = createContext('Diamond');
+```
+2. [Context.Provider](https://reactjs.org/docs/context.html#contextprovider)
+   - The Provider component accepts a ___value___ prop to be passed to consuming components that are descendants of this Provider.
+   - One Provider can be connected to ___many consumers___.
+   - Providers can be ___nested to override values___ deeper within the tree.
+   - We can pass ___Array___, ___Object___, ___Event Handler___, ___Function___ and ___Variable___ as a property.value of ___value___.
+
+``` JavaScript
+// Demo:
+<MyContext.Provider value={/* some value */}>
+
+// Or
+
+<MyContext.Provider value={/* some value */}>
+
+</MyContext.Provider>
+
+/* ------------------------------------------- */
+
+// Example:
+<MyContext.Provider value='Alur Ring'>
+
+</MyContext.Provider>
+
+// Or → (dynamic value) pass
+
+<MyContext.Provider value={ornament}>
+
+</MyContext.Provider>
+```
+
+3. [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext "useContext Hook")
+   - ___Accepts___ a ___context object___ (the value returned from React.createContext) and returns the ___current context value___ for that context.
+
+``` JavaScript
+// Demo:
+const value = useContext(MyContext);
+
+// Example:
+const ring = useContext(RingContext);
+```
 
 
