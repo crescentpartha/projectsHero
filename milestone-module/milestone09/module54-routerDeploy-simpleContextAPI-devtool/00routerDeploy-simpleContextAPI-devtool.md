@@ -17,7 +17,7 @@
 - ___Props Drilling___ [ [1](https://blog.logrocket.com/solving-prop-drilling-react-apps/#:~:text=Prop%20drilling%20is%20the%20unofficial,actual%20need%20for%20this%20data. "A better way of solving prop drilling in React apps - LogRocket.com") - [2](https://www.geeksforgeeks.org/what-is-prop-drilling-and-how-to-avoid-it/ "What is prop drilling and how to avoid it? - GeeksforGeeks.org") - [3](https://medium.com/swlh/avoid-prop-drilling-with-react-context-a00392ee3d8 "Avoid Prop Drilling with React Context - medium.com") - [4](https://dev.to/iamrishavraj1/what-is-react-prop-drilling-and-context-api-cjl "What is React Prop Drilling and Context API - dev.to") ]
   - Prop drilling is the ___unofficial term___ for ___passing data___ through several ___nested children components___.
   - The problem with this approach is that most of the components through which this data is passed have ___no actual need for this data___.
-- [Context API](https://reactjs.org/docs/context.html "reactjs.org") (used for ___props drilling___)
+- [Context API](https://reactjs.org/docs/context.html "reactjs.org") (used to avoid ___props drilling___)
 - [Custom Active Link](https://reactrouter.com/docs/en/v6/examples/custom-link "reactjs.org")
 
 
@@ -163,6 +163,8 @@ return (
 ## 54.7 Simple Introduction to Context API to avoid Prop drilling
 
 ⫸ [Context API:](https://reactjs.org/docs/context.html "Context - React | Description about how to use Context API")
+- ___One information___, we can share with ___multiple children component___.
+- ___Context API___ is used to avoid ___Prop Drilling___.
 
 ⫸ `Uses of Context API:` (so powerful)
 - To __avoid__ ___prop drilling___
@@ -171,9 +173,9 @@ return (
 - ___Website Translate___ (English to Bengali)
 
 ⫸ `Some Steps to use Context API:`
-- Context ___declare___ & ___export___
-- All consumer need to put inside ___Provider___
-- Accepts a context object that ___returned value___ using ___useContext Hook___
+- Context ___declare___ & store in ___uppercase variable___ & ___export___ it
+- All consumer need to ___wrap___ by using ___variable.Provider___
+- Accepts a context object that ___returned value___ using ___useContext Hook___ and ___pass a contextName___
 
 ⫸ `Steps for Context API:`
 
@@ -215,6 +217,12 @@ export const RingContext = createContext('Diamond');
 <MyContext.Provider value={ornament}>
 
 </MyContext.Provider>
+
+// Or → (dynamic value) pass
+
+<MyContext.Provider value={[ornament2, house, setHouse]}>
+
+</MyContext.Provider>
 ```
 
 3. [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext "useContext Hook")
@@ -227,5 +235,101 @@ const value = useContext(MyContext);
 // Example:
 const ring = useContext(RingContext);
 ```
+
+## 54.8 Recap Context API and introduction to react dev tool
+
+⫸ `Some Steps to use Context API:`
+1. Call ___createContext___ with a ___default value___
+2. Set a ___variable___ of the context with ___uppercase___
+3. Make sure you ___export___ the context to use it in other places
+4. ___Wrap___ your child content use ___variable.Provider___ (___RingContext.Provider___)
+5. Provide a ___value___
+   - we can pass ___dynamic value___ and ___static value___
+6. To ___consume the context___ from child component
+   - Use ___useContext hook___ and you will need to __pass__ the ___contextName___
+
+---
+
+⫸ `Setup Context API:`
+
+``` JavaScript
+// In Grandpa.js
+
+import React, { createContext, useState } from 'react';
+import Aunty from '../Aunty/Aunty';
+
+export const RingContext = createContext('Diamond');
+
+const Grandpa = () => {
+    const [house, setHouse] = useState(1);
+    const ornament2 = 'Golden Ring';
+
+    return (
+        <RingContext.Provider value={[ornament2, house, setHouse]}>
+            <div className='grandpa'>
+                <section style={{ display: 'flex' }}>
+                    <Aunty house={house}></Aunty>
+                </section>
+            </div>
+        </RingContext.Provider>
+    );
+};
+
+export default Grandpa;
+```
+
+⫸ `Consume Context API:`
+
+``` JavaScript
+// In Aunty.js
+
+import React, { useContext } from 'react';
+import { RingContext } from '../Grandpa/Grandpa';
+
+const Aunty = () => {
+    const [ornament2, house, setHouse] = useContext(RingContext);
+    return (
+        <div>
+            <h3>Aunty</h3>
+            <p>House: {house}</p>
+            <p><small>Gift: {ornament2}</small></p>
+            <button onClick={() => setHouse(house + 1)}>Buy a House</button>
+        </div>
+    );
+};
+
+export default Aunty;
+```
+
+``` JavaScript
+// In Uncle.js
+
+import React, { useContext } from 'react';
+import { RingContext } from '../Grandpa/Grandpa';
+
+const Uncle = () => {
+    const [ , house, setHouse] = useContext(RingContext);
+    // console.log(house);
+    
+    const handleHouseIncrease = () => {
+        const newHouseCount = house + 1;
+        setHouse(newHouseCount);
+    }
+    return (
+        <div>
+            <h3>Uncle</h3>
+            <p>House: {house}</p>
+            <button onClick={handleHouseIncrease}>Buy A House</button>
+        </div>
+    );
+};
+
+export default Uncle;
+```
+
+---
+
+⫸ [React Developer Tools:](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en "React devtool extensions")
+
 
 
