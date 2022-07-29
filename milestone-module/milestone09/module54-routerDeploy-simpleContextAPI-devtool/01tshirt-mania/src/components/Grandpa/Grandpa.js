@@ -21,8 +21,8 @@ const Grandpa = () => {
             <div className='grandpa'>
                 <h2>Grand Pa</h2>
                 <p>
-                    <button onClick={handleBuyAHouse}>Buy A House</button>
-                    House: {house}
+                    <button className='orange-button' onClick={handleBuyAHouse}>Buy A House</button>
+                    House: <span className='number-color'>{house}</span>
                 </p>
                 <section style={{ display: 'flex' }}>
                     <Father house={house} ornament={ornament}></Father>

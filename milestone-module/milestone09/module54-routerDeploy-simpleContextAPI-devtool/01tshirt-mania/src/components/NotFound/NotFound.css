@@ -1,0 +1,11 @@
+.orderReview-notFound {
+    background-color: #fdebd3;
+    margin: 40px 80px;
+    padding: 40px;
+    border-radius: 20px;
+}
+.orderReview-notFound p {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

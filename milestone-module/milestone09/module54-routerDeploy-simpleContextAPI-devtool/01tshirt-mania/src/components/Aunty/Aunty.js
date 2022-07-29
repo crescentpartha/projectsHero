@@ -6,9 +6,9 @@ const Aunty = () => {
     return (
         <div>
             <h3>Aunty</h3>
-            <p>House: {house}</p>
+            <p>House: <span className='number-color'>{house}</span></p>
             <p><small>Gift: {ornament2}</small></p>
-            { house >= 4 && <button onClick={() => setHouse(house + 1)}>Buy a House</button>}
+            { house >= 4 && <button className='orange-button' onClick={() => setHouse(house + 1)}>Buy a House</button>}
         </div>
     );
 };

@@ -8,8 +8,8 @@ const Special = ({ornament}) => {
             <h5>Special</h5>
             <p><small>Gift1: {ornament}</small></p>
             <p><small>Gift2: {ornament2}</small></p>
-            <p><small>House: {house}</small></p>
-            <button onClick={() => setHouse(house + 1)}>Buy A House</button>
+            <p><small>House: <span className='number-color'>{house}</span></small></p>
+            <button className='orange-button' onClick={() => setHouse(house + 1)}>Buy A House</button>
         </div>
     );
 };

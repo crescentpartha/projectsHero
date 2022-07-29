@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div>
-            <h2>Welcome to tShirt-Mania's Home!!!</h2>
+            <h2>Welcome to tShirt-Mania's <span className='number-color'>Home</span>!!!</h2>
             <div className='home-container'>
                 {/* .tshirt-container+.cart-container */}
                 <div className="tshirt-container">

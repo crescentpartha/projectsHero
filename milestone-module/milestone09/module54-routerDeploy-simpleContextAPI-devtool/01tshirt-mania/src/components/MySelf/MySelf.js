@@ -5,7 +5,7 @@ const MySelf = ({house, ornament}) => {
     return (
         <div>
             <h4>MySelf</h4>
-            <p><small>House: {house}</small></p>
+            <p><small>House: <span className='number-color'>{house}</span></small></p>
             <Special ornament={ornament}></Special>
         </div>
     );

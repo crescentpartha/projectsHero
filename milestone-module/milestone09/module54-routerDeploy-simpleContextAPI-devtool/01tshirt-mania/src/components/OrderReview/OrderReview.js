@@ -2,8 +2,8 @@ import React from 'react';
 
 const OrderReview = () => {
     return (
-        <div>
-            <h2>This is Order Review</h2>
+        <div className='orderReview-notFound'>
+            <h2>This is <span className='number-color'>Order Review</span></h2>
         </div>
     );
 };

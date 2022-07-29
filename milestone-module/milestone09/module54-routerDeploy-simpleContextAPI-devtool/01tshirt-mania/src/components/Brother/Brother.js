@@ -4,7 +4,7 @@ const Brother = ({house}) => {
     return (
         <div>
             <h4>Brother</h4>
-            <p><small>House: {house}</small></p>
+            <p><small>House: <span className='number-color'>{house}</span></small></p>
         </div>
     );
 };

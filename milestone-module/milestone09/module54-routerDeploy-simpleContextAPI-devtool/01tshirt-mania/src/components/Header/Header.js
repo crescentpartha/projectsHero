@@ -6,7 +6,7 @@ import CustomLink from '../CustomLink/CustomLink';
 const Header = () => {
     return (
         <div>
-            <h2>This is Header</h2>
+            <h2>This is <span className='number-color'>Header</span></h2>
             <nav>
                 <div>
                     <Link to='/home'>Home</Link>

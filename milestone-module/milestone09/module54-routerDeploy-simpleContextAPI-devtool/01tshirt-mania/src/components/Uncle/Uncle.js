@@ -12,8 +12,8 @@ const Uncle = () => {
     return (
         <div>
             <h3>Uncle</h3>
-            <p>House: {house}</p>
-            { house < 3 || <button onClick={handleHouseIncrease}>Buy A House</button>}
+            <p>House: <span className='number-color'>{house}</span></p>
+            { house < 3 || <button className='orange-button' onClick={handleHouseIncrease}>Buy A House</button>}
         </div>
     );
 };

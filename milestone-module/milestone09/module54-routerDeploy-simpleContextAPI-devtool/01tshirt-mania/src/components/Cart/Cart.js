@@ -26,7 +26,7 @@ const Cart = ({ cart, handleRemoveFromCart }) => {
 
     return (
         <div>
-            <h2>Items Selected in Cart: {cart.length}</h2>
+            <h2>Items Selected in <span className='number-color'>Cart</span>: <span className='number-color'>{cart.length}</span></h2>
             {
                 cart.map(tShirt => <p>
                     {tShirt.name}

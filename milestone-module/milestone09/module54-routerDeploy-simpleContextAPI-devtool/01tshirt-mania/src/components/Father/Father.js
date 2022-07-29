@@ -7,7 +7,7 @@ const Father = ({ house, ornament }) => {
     return (
         <div>
             <h3>Father</h3>
-            <p>House: {house}</p>
+            <p>House: <span className='number-color'>{house}</span></p>
             <div style={{display: 'flex'}}>
                 <MySelf house={house} ornament={ornament}></MySelf>
                 <Brother house={house}></Brother>
