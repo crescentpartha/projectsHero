@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.css';
 import partha from '../../images/partha.jpg';
 import CustomLink from '../CustomLink/CustomLink';
+import Repositories from '../Repositories/Repositories';
 
 const Home = () => {
     return (
@@ -17,7 +18,7 @@ const Home = () => {
                     <CustomLink to='/notFound'>Not Found</CustomLink>
                 </div>
                 <div className="home-body">
-                    <h2>home body</h2>
+                    <Repositories></Repositories>
                 </div>
             </div>
         </div>

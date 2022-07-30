@@ -1,0 +1,41 @@
+.repo {
+    border: 1px solid lightsteelblue;
+    border-radius: 5px;
+    margin: 2%;
+    text-align: left;
+    padding: 10px;
+}
+.repo h2 {
+    margin: 0;
+    font-size: 15px;
+    color: #0D37C3;
+}
+.repo a {
+    text-decoration: none;
+}
+.repo a:hover {
+    text-decoration: underline;
+}
+.repo p {
+    margin: 0;
+    padding: 2px 0;
+    font-size: 13px;
+}
+.repo-name {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.repo-name p {
+    margin-left: 15px;
+    font-size: 12px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 1px 5px;
+}
+.topics {
+    background-color: #21262D;
+    margin-right: 5px;
+    padding: 0 5px;
+    border-radius: 5px;
+}
