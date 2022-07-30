@@ -18,7 +18,7 @@
 ⫸ `Checklist:`
 
 1. ___Create React App___
-2. Setup __React Router__
+2. Setup ___React Router___
 3. Fix ___Page Not Found___ error or ___404___ error
 4. Install ___Tailwind CSS___ or ___Bootstrap___ with Create React App
 5. Use ___fontAwesomeIcons___ or ___ReactIcons___ or ___HeroIcons___
@@ -33,10 +33,10 @@
 3. ___Custom Hook___
 4. ___useNavigate()___
 5. ___useParams()___
-6. ___Ternary Operator___ - ___&& Operator___ - ___|| Operator___ - ___if-else condition___
-7. `name.slice(0, 20) + '...'` to display long name.
-8. ___Props Drilling___
-9. ___Conditional Rendering___ (4 ways)
+6. ___Props Drilling___
+7. ___Conditional Rendering___ (4 ways)
+8. ___name.[slice](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module48-simple-react-SPA-with-simple-E-commerce/01ema-john-simple/src/components/ReviewItem/ReviewItem.js "Demo: slice() method")(0, 20) + '...'___ to display long name. Add ___title___ property
+9. ___Ternary Operator___ - ___&& Operator___ - ___|| Operator___ - ___if-else condition___
 10. ___Static___ route - ___Dynamic___ route - ___Nested___ route - ___Not Found___ route
 11. ___Outlet___ (when use ___nested route___)
 

@@ -1,0 +1,36 @@
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 5%;
+}
+.home-image img {
+    width: 80%;
+    border-radius: 50%;
+}
+.home-routing {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    grid-row-gap: 10px;
+    margin-right: 5%;
+}
+.home-nav {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: 1px solid lightgray;
+}
+.home-nav a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #C3CBD4;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.home-nav a:hover {
+    color: #F0F6FC;
+    background-color: #1b1e22;
+}
+.home-body {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
