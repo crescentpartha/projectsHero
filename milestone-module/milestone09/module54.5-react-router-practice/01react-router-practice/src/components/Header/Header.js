@@ -12,7 +12,7 @@ const Header = () => {
                     <Link to='/notFound'>Not Found</Link>
                 </nav>
             </div>
-            <h2>Welcome to My React Router!!!</h2>
+            <h2>Welcome to My <span className='title-color'>GitHub</span> Demo!!!</h2>
         </div>
     );
 };

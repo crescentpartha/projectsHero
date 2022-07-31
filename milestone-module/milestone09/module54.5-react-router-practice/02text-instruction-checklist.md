@@ -38,7 +38,7 @@
 8. ___name.[slice](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module48-simple-react-SPA-with-simple-E-commerce/01ema-john-simple/src/components/ReviewItem/ReviewItem.js "Demo: slice() method")(0, 20) + '...'___ to display long name. Add ___title___ property
 9. ___Ternary Operator___ - ___&& Operator___ - ___|| Operator___ - ___if-else condition___
 10. ___Static___ route - ___Dynamic___ route - ___Nested___ route - ___Not Found___ route
-11. ___Outlet___ (when use ___nested route___)
+11. ___Outlet___ (when use [___nested route___](https://www.robinwieruch.de/react-router-nested-routes/ "Nested Routes in React Router in a simple way."))
 
 ---
 

@@ -17,3 +17,6 @@
     color: #F0F6FC;
     background-color: #21262D;
 }
+.title-color:hover {
+    color: tomato;
+}

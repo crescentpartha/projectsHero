@@ -14,10 +14,10 @@ const Repositories = () => {
     }, []);
     return (
         <div className='repositories-container'>
-            <h2>This is Repositories: {repository.length}</h2>
+            <h2>This is Repositories: <span className='title-color'>{repository.length}</span></h2>
             {
                 repository.map(repo => <Repository
-                    key={repo.id}
+                    key={repo.name}
                     repo={repo}
                 ></Repository>)
             }
