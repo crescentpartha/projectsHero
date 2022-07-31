@@ -23,6 +23,7 @@
 .repo > p {
     font-size: 12px;
     color: #8B949A;
+    margin-top: 2px;
 }
 .repo-name {
     display: flex;
@@ -30,7 +31,7 @@
     justify-content: left;
 }
 .repo-name p {
-    margin-left: 15px;
+    margin-left: 8px;
     font-size: 12px;
     border: 1px solid #30363D;
     border-radius: 10px;

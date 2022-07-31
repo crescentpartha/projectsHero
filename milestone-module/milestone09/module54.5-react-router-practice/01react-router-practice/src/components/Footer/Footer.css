@@ -1,0 +1,27 @@
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    border-top: 1px solid #30363D;
+    margin: 4% 3% 0;
+    padding: 3%;
+    position: relative;
+    bottom: 0;
+}
+.footer-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.footer-left img {
+    width: 28px;
+}
+.footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer-right a {
+    margin: 0 2%;
+    text-decoration: none;
+    color: #2085FF;
+}
