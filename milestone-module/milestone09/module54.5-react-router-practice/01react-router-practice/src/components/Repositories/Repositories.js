@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Repository from '../Repository/Repository';
+import './Repositories.css';
 
 const Repositories = () => {
     const [repository, setRepository] = useState([]);
@@ -12,7 +13,7 @@ const Repositories = () => {
 
     }, []);
     return (
-        <div>
+        <div className='repositories-container'>
             <h2>This is Repositories: {repository.length}</h2>
             {
                 repository.map(repo => <Repository

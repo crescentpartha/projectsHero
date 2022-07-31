@@ -8,9 +8,9 @@
     border-radius: 50%;
 }
 .home-routing {
-    display: grid;
+    /* display: grid;
     grid-template-rows: 1fr 5fr;
-    grid-row-gap: 10px;
+    grid-row-gap: 10px; */
     margin-right: 5%;
 }
 .home-nav {
@@ -18,6 +18,8 @@
     align-items: center;
     justify-content: left;
     border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 20px;
 }
 .home-nav a {
     margin-left: 10px;
@@ -29,8 +31,4 @@
 .home-nav a:hover {
     color: #F0F6FC;
     background-color: #1b1e22;
-}
-.home-body {
-    border: 1px solid lightgray;
-    border-radius: 5px;
 }

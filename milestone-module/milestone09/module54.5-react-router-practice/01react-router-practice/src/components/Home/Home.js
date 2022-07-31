@@ -2,7 +2,7 @@ import React from 'react';
 import './Home.css';
 import partha from '../../images/partha.jpg';
 import CustomLink from '../CustomLink/CustomLink';
-import Repositories from '../Repositories/Repositories';
+import { Outlet } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -13,13 +13,11 @@ const Home = () => {
                 <p>9 followers . 46 following</p>
             </div>
             <div className="home-routing">
-                <div className="home-nav">
-                    <CustomLink to='/repositories'>Repositories</CustomLink>
-                    <CustomLink to='/notFound'>Not Found</CustomLink>
-                </div>
-                <div className="home-body">
-                    <Repositories></Repositories>
-                </div>
+                <nav className="home-nav">
+                    <CustomLink to='repositories'>Repositories</CustomLink>
+                    <CustomLink to='notFound'>Not Found</CustomLink>
+                </nav>
+                <Outlet></Outlet>
             </div>
         </div>
     );
