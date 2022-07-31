@@ -25,3 +25,19 @@
     text-decoration: none;
     color: #2085FF;
 }
+
+@media only screen and (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+    .footer-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .footer-left {
+        justify-content: center;
+    }
+    .footer-left img {
+        margin-right: 10px;
+    }
+}

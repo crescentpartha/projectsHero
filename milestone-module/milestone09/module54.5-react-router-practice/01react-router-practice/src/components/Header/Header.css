@@ -28,3 +28,9 @@
 .title-color:hover {
     color: tomato;
 }
+
+@media only screen and (max-width: 900px) {
+    .header-container > h2 {
+        margin-top: 10%;
+    }
+}
