@@ -14,7 +14,7 @@ const Repositories = () => {
     }, []);
     return (
         <div className='repositories-container'>
-            <h2>This is Repositories: <span className='title-color'>{repository.length}</span></h2>
+            <h2>Total Repositories: <span className='title-color'>{repository.length}</span></h2>
             {
                 repository.map(repo => <Repository
                     key={repo.name}

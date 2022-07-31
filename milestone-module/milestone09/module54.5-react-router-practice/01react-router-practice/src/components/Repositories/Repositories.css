@@ -1,5 +1,8 @@
 .repositories-container {
-    border: 1px solid lightgray;
+    border: 1px solid #30363D;
     border-radius: 5px;
     margin-top: 10px;
+}
+.repositories-container > h2 {
+    font-size: 1.2rem;
 }

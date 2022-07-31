@@ -1,9 +1,10 @@
 .not-found {
-    border: 1px solid lightgray;
+    border: 1px solid #30363D;
     border-radius: 5px;
     margin-top: 10px;
     padding: 20px;
 }
 .not-found p {
     margin: 0;
+    color: #8B949E;
 }
