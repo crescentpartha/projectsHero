@@ -38,20 +38,20 @@
 8. ___name.[slice](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module48-simple-react-SPA-with-simple-E-commerce/01ema-john-simple/src/components/ReviewItem/ReviewItem.js "Demo: slice() method")(0, 20) + '...'___ to display long name. Add ___title___ property
 9. ___Ternary Operator___ - ___&& Operator___ - ___|| Operator___ - ___if-else condition___
 10. ___Static___ route - ___Dynamic___ route - ___Nested___ route - ___Not Found___ route
-11. ___Outlet___ (when use [___nested route___](https://www.robinwieruch.de/react-router-nested-routes/ "Nested Routes in React Router in a simple way."))
+11. ___Outlet___ (when use [___nested route___](https://www.robinwieruch.de/react-router-nested-routes/ "Static Nested Routes in React Router, use in a simple way."))
 
 ---
 
-1. ___Event Handler___ - ___route parameter___
-2. ___useState()___ - ___useEffect()___ - ___dependency Injection___
-3. useState() & useEffect() in a ___different file___ and ___export-import___ it
-4. ___fetch()___ or ___Axios___ (data load)
-5. ___Search implementation___ (search with any products name)
-6. ___Rechart___
-7. ___React Spring Animation___
-8. Use ___module___ to separate design uniquely (`Header.module.css`)
-9. Include ___localStorage database___
-10. Make ___data consistent___ across UI and explore ___children props___ `{props.children}`
-
+1. __[GitHub API:](https://docs.github.com/en/rest/users/followers#about-the-followers-api "GitHub API Docs - GitHub | Those API has 30 users limitation.")__ ___[Tutorial](https://codesnippet.io/github-api-tutorial/ "GitHub API Tutorial - {code:snippet}") - [followers](https://api.github.com/users/crescentpartha/followers "My 30 followers of GitHub") - [following](https://api.github.com/users/crescentpartha/following "My 30 following of GitHub")___
+2. ___Event Handler___ - ___route parameter___
+3. ___useState()___ - ___useEffect()___ - ___dependency Injection___
+4. useState() & useEffect() in a ___different file___ and ___export-import___ it
+5. ___fetch()___ or ___Axios___ (data load)
+6. ___Search implementation___ (search with any products name)
+7. ___Rechart___
+8. ___React Spring Animation___
+9. Use ___module___ to separate design uniquely (`Header.module.css`)
+10. Include ___localStorage database___
+11. Make ___data consistent___ across UI and explore ___children props___ `{props.children}`
 
 

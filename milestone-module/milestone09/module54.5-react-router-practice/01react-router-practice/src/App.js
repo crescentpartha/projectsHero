@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Repositories from './components/Repositories/Repositories';
 import Footer from './components/Footer/Footer';
 import Followers from './components/Followers/Followers';
+import Following from './components/Following/Following';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/home/' element={<Repositories></Repositories>}></Route>
           <Route path='repositories' element={<Repositories></Repositories>}></Route>
           <Route path='followers' element={<Followers></Followers>}></Route>
+          <Route path='following' element={<Following></Following>}></Route>
           <Route path='notFound' element={<NotFound></NotFound>}></Route>
           <Route path='*' element={<NotFound></NotFound>}></Route>
         </Route>

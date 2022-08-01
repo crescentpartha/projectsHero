@@ -14,6 +14,7 @@ const Home = () => {
                 <nav className="home-nav">
                     <CustomLink to='repositories'>Repositories</CustomLink>
                     <CustomLink to='followers'>Followers</CustomLink>
+                    <CustomLink to='following'>Following</CustomLink>
                     <CustomLink to='notFound'>Not Found</CustomLink>
                 </nav>
                 <Outlet></Outlet>
