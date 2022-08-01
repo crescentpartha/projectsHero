@@ -143,7 +143,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 54 01tshirt-mania](https://54-1tshirt-mania.netlify.app/ "React-App | Live-Server _-_ React Router Setup - 4 types of Conditional Rendering - Fragments - Props Drilling - Setup Context API (6 steps) - useContext Hook - Custom Active Link - Custom Hook - React Developer Tool - Event Handler, rest operator, Destructuring, dynamic block - Deploy and Fix router reload issue or Fix Page Not Found Error on Netlify")
 
-
+* [Module 54.5 01react-router-practice-github-demo](https://54-1react-router-practice-cp-githubdemo.netlify.app/home/repositories "React-App | Live-Server _-_ React Router, Static Nested Routing, fontAwesomeIcons, HeroIcons, Custom Active Link, Destructuring, Github API data load (30 users limitation), Deploy in Netlify")
 
 
 
