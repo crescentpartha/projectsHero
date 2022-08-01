@@ -8,10 +8,12 @@ const HomeLeftSide = () => {
     return (
         <div className='leftside-container'>
             <div className="leftside-body1">
-                <img src={partha} alt="Author" />
-                <div>
-                    <p className='body1-p1'><span className='light-color'>Crescent Partha</span></p>
-                    <p className='body1-p2'><span className='deem-color'>crescentpartha</span></p>
+                <div className='body1-part1'>
+                    <img src={partha} alt="Author" />
+                    <div>
+                        <p className='body1-p1'><span className='light-color'>Crescent Partha</span></p>
+                        <p className='body1-p2'><span className='deem-color'>crescentpartha</span></p>
+                    </div>
                 </div>
                 <button><span className='light-color'>Edit profile</span></button>
                 <p className='deem-color'><span className='light-color'>9</span> followers <span className='light-color'>. 46</span> following</p>

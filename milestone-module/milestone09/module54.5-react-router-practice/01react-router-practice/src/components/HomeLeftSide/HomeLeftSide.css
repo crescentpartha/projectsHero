@@ -61,3 +61,17 @@
 .body2-p2-2 {
     color: #56A2EA;
 }
+
+@media only screen and (max-width: 900px) {
+    .leftside-container {
+        margin: 2% 10%;
+    }
+    .body1-part1 {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        margin-bottom: 5px;
+    }
+    .body1-part1 > div {
+        margin-left: 15px;
+    }
+}

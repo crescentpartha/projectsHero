@@ -29,6 +29,8 @@
 @media only screen and (max-width: 900px) {
     .footer-container {
         grid-template-columns: 1fr;
+        font-size: 14px;
+        margin: 4% 5% 0;
     }
     .footer-right {
         flex-direction: row;
