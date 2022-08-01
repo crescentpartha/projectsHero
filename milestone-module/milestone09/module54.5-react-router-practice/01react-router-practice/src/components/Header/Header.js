@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import { TableIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -8,7 +9,7 @@ const Header = () => {
             <div className='header'>
                 <Link to='/home'>CRESCENT PARTHA</Link>
                 <nav>
-                    <Link to='/home'>Home</Link>
+                    <Link to='/home'><TableIcon className='icon'></TableIcon><span>Home</span></Link>
                     <Link to='/notFound'>Not Found</Link>
                 </nav>
             </div>

@@ -28,6 +28,21 @@
 .title-color:hover {
     color: tomato;
 }
+.header > nav {
+    display: flex;
+    align-items: center;
+}
+.header > nav > a {
+    text-align: center;
+    display: flex;
+}
+.icon {
+    width: 18px;
+    margin-right: 2px;
+}
+.icon > path {
+    padding-top: 20px;
+}
 
 @media only screen and (max-width: 900px) {
     .header-container > h2 {

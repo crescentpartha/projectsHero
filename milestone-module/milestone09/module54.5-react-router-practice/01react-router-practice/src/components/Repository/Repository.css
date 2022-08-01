@@ -38,6 +38,14 @@
     padding: 1px 5px;
     text-transform: capitalize;
 }
+.repo-name a svg {
+    color: #8B949A;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.repo p span svg {
+    font-size: 10px;
+}
 .topics {
     /* background-color: #21262D; */
     background-color: #13233A;

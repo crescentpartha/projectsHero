@@ -3,6 +3,8 @@ import './Home.css';
 import CustomLink from '../CustomLink/CustomLink';
 import { Outlet } from 'react-router-dom';
 import HomeLeftSide from '../HomeLeftSide/HomeLeftSide';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolder, faUserGroup, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
     return (
@@ -12,10 +14,10 @@ const Home = () => {
             </div>
             <div className="home-routing">
                 <nav className="home-nav">
-                    <CustomLink to='repositories'>Repositories</CustomLink>
-                    <CustomLink to='followers'>Followers</CustomLink>
-                    <CustomLink to='following'>Following</CustomLink>
-                    <CustomLink to='notFound'>Not Found</CustomLink>
+                    <CustomLink to='repositories'><FontAwesomeIcon icon={faFolder}></FontAwesomeIcon>Repositories</CustomLink>
+                    <CustomLink to='followers'><FontAwesomeIcon icon={faUserGroup}></FontAwesomeIcon>Followers</CustomLink>
+                    <CustomLink to='following'><FontAwesomeIcon icon={faUserGroup}></FontAwesomeIcon>Following</CustomLink>
+                    <CustomLink to='notFound'><FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>Not Found</CustomLink>
                 </nav>
                 <Outlet></Outlet>
             </div>
