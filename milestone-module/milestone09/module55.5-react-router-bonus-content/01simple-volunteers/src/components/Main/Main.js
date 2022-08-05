@@ -31,7 +31,7 @@ const Main = () => {
     // }
 
     return (
-        <div>
+        <div className='main-body'>
             <h2>Volunteer Activities: {searchResult.length}</h2>
             <div style={{'margin': '20px'}}>
                 <input onChange={handleSearchChange} type="text" placeholder='search' />

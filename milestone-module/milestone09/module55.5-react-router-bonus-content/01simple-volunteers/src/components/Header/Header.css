@@ -1,8 +1,17 @@
 nav {
-    margin: 20px;
+    margin-bottom: 20px;
     padding: 20px 0;
+    background-color: #e2dede;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
 nav a {
     text-decoration: none;
     margin-right: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3838fc;
 }

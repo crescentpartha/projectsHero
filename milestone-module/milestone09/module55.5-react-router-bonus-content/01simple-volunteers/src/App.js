@@ -12,10 +12,10 @@ function App() {
     <div className="App">
       <Header></Header>
       <Routes>
-        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/' element={<Main></Main>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/volunteers' element={<Volunteers></Volunteers>}></Route>
         <Route path='/main' element={<Main></Main>}></Route>
+        <Route path='/volunteers' element={<Volunteers></Volunteers>}></Route>
         <Route path='/notFound' element={<NotFound></NotFound>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>

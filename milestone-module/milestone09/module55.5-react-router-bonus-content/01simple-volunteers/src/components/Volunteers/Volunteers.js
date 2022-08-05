@@ -5,7 +5,7 @@ import Activity from '../Activity/Activity';
 const Volunteers = () => {
     const [volunteers] = useVolunteers();
     return (
-        <div>
+        <div className='main-body'>
             <h2>All Volunteers: {volunteers.length}</h2>
             <div className="activity-container">
                 {
