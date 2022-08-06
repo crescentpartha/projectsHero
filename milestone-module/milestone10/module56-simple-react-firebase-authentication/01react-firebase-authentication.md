@@ -33,8 +33,8 @@
 ⫸ `Firebase Authentication Steps:`
 1. Go to docs → Build → Authentication → Web → Get Started
 2. Clicked on → [install the Firebase JS SDK and initialize Firebase](https://firebase.google.com/docs/web/setup?authuser=0&hl=en#add-sdk-and-initialize "Add Firebase to your JavaScript project").<br>___Add Firebase to your JavaScript project___
-   - Step 1: Create a Firebase project and register your app
-   - Step 2: Install the SDK and initialize Firebase
+   - ___Step 1:___ Create a Firebase project and register your app
+   - ___Step 2:___ Install the SDK and initialize Firebase
 
 ___Note:___ Highly recommended to use commands from the main website!!!
 ``` JavaScript
@@ -97,12 +97,17 @@ var firebaseConfig = {
   measurementId: "G-MEASUREMENT_ID",
 };
 ```
-   - Step 3: Access Firebase in your app
-   - Step 4: Use a module bundler (webpack/Rollup) for size reduction
+  - ___Step 3:___ Access Firebase in your app
+  - ___Step 4:___ Use a module bundler (webpack/Rollup) for size reduction
+
+---
 
 ``` JavaScript
+// In App.js
+
 import logo from './logo.svg';
 import './App.css';
+
 // import app from firebase.init.js into your App.js (Step-6)
 import app from './firebase.init';
 import {getAuth} from 'firebase/auth';
@@ -120,7 +125,47 @@ function App() {
 
 export default App;
 ```
+
+``` JavaScript
+// In App.js
+
+import logo from './logo.svg';
+import './App.css';
+import app from './firebase.init';
+import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+
+const auth = getAuth(app);
+
+function App() {
+  // Create google provider (Step-9)
+  const provider = new GoogleAuthProvider();
+  
+  const handleGoogleSignIn = () => {
+    // console.log('working');
+
+    // To sign in with a pop-up window, call signInWithPopup: (step-10)
+    signInWithPopup(auth, provider)
+    .then( result => {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch( error => {
+      console.log('error', error);
+    })
+  }
+  return (
+    <div className="App">
+      <button onClick={handleGoogleSignIn}>Google Sign In</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
 ---
+
+## 46.3 set Firebase configuration and initialize firebase auth
 
 ⫸ `Steps to use firebase:` (___Recommended to Follow___)
 1. ___Create a project___ on console.firebase.google.com
@@ -130,8 +175,39 @@ export default App;
 5. ___export default app___
 6. import __app__ from ___firebase.init.js___ into your ___App.js___
 7. import ___getAuth___ from ___firebase/auth___ and create `auth = getAuth(app);`
-8. ___turn on___ google authentication
+8. ___turn on___ google authentication (___firebase > authentication > enable google sign-in___)
    - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
    - One account per email address (___if___ you need to create multiple user with same email address)
-9.  
+9. Create ___google provider object___
+10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___:
+
+
+## 56.4 Sign in with google, open google login popup
+
+⫸ `Error Fixing:`
+
+``` JavaScript
+ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it’s running React 17. 
+Learn more: https://reactjs.org/link/switch-to-createroot
+```
+
+- [Replacing render with createRoot](https://github.com/reactwg/react-18/discussions/5 "github.com")
+- [How to Upgrade to React 18](https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html "reactjs.org")
+- [ReactDOM.render is no longer supported in React 18](https://stackoverflow.com/questions/71668256/deprecation-notice-reactdom-render-is-no-longer-supported-in-react-18 "stackoverflow.com")
+
+``` JavaScript
+// Solution:
+
+// Before
+import { render } from 'react-dom';
+const container = document.getElementById('app');
+render(<App tab="home" />, container);
+
+// After
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App tab="home" />);
+```
+
 
