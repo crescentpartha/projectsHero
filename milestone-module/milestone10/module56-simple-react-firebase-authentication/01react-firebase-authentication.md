@@ -38,9 +38,39 @@
 
 ___Note:___ Highly recommended to use commands from the main website!!!
 ``` JavaScript
-// Install Firebase using npm:
+// Install Firebase using npm: (Step-1)
 npm install firebase
 ```
+
+`Real Example` ___Firebase Initialization:___
+
+``` JavaScript
+// In src/firebase.init.js (Step-2)
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAelu8_mP0dEuZQmPSXo6whVf0BbpYh_zI",
+  authDomain: "reactfirebase-authentica-be741.firebaseapp.com",
+  projectId: "reactfirebase-authentica-be741",
+  storageBucket: "reactfirebase-authentica-be741.appspot.com",
+  messagingSenderId: "589628173314",
+  appId: "1:589628173314:web:a00daba7fdeaa99d6a8b1b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+export default app;
+```
+---
+
+`Demo` ___Firebase Initialization:___
+
 ``` JavaScript
 // Initialize Firebase in your app and create a Firebase App object:
 import { initializeApp } from 'firebase/app';
@@ -70,5 +100,38 @@ var firebaseConfig = {
    - Step 3: Access Firebase in your app
    - Step 4: Use a module bundler (webpack/Rollup) for size reduction
 
+``` JavaScript
+import logo from './logo.svg';
+import './App.css';
+// import app from firebase.init.js into your App.js (Step-6)
+import app from './firebase.init';
+import {getAuth} from 'firebase/auth';
 
+// import getAuth from firebase/auth and create auth = getAuth(app); (Step-7)
+const auth = getAuth(app);
+
+function App() {
+  return (
+    <div className="App">
+      
+    </div>
+  );
+}
+
+export default App;
+```
+---
+
+⫸ `Steps to use firebase:` (___Recommended to Follow___)
+1. ___Create a project___ on console.firebase.google.com
+2. ___install___ firebase
+3. ___Register___ Web app in firebase
+4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___
+5. ___export default app___
+6. import __app__ from ___firebase.init.js___ into your ___App.js___
+7. import ___getAuth___ from ___firebase/auth___ and create `auth = getAuth(app);`
+8. ___turn on___ google authentication
+   - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
+   - One account per email address (___if___ you need to create multiple user with same email address)
+9.  
 
