@@ -18,4 +18,57 @@
 
 ## 56.2 Create firebase project and Install Firebase SDK
 
+⫸ `Google Analytics:`
+- A web analytics service
+- Track the traffic of the website and create report
+- It helps the user to determine the trend and pattern of visitor interaction with website.
+
+⫸ `SDK - Software Development Kit:`
+- It's a collection of software development tools in one package
+- It helps to make easy our tasks to create a certain application. 
+
+⫸ `Firebase SDK:`
+- It makes easy our tasks to handle Authentication System by combining one or more than one sign-in methods.
+
+⫸ `Firebase Authentication Steps:`
+1. Go to docs → Build → Authentication → Web → Get Started
+2. Clicked on → [install the Firebase JS SDK and initialize Firebase](https://firebase.google.com/docs/web/setup?authuser=0&hl=en#add-sdk-and-initialize "Add Firebase to your JavaScript project").<br>___Add Firebase to your JavaScript project___
+   - Step 1: Create a Firebase project and register your app
+   - Step 2: Install the SDK and initialize Firebase
+
+___Note:___ Highly recommended to use commands from the main website!!!
+``` JavaScript
+// Install Firebase using npm:
+npm install firebase
+```
+``` JavaScript
+// Initialize Firebase in your app and create a Firebase App object:
+import { initializeApp } from 'firebase/app';
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+  //...
+};
+
+const app = initializeApp(firebaseConfig);
+```
+After clicked `Firebase project configuration`:
+``` JavaScript
+var firebaseConfig = {
+  apiKey: "API_KEY",
+  authDomain: "PROJECT_ID.firebaseapp.com",
+  // The value of `databaseURL` depends on the location of the database
+  databaseURL: "https://DATABASE_NAME.firebaseio.com",
+  projectId: "PROJECT_ID",
+  storageBucket: "PROJECT_ID.appspot.com",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID",
+  // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+  measurementId: "G-MEASUREMENT_ID",
+};
+```
+   - Step 3: Access Firebase in your app
+   - Step 4: Use a module bundler (webpack/Rollup) for size reduction
+
+
 
