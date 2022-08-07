@@ -59,8 +59,8 @@ function App() {
           <button onClick={handleGithubSignIn}>Github Sign In</button>
         </>
       }
-      <h2>Name: {user.displayName}</h2>
-      <p>I know your email address: {user.email}</p>
+      <h2>Name: <span className='title-name'>{user.displayName}</span></h2>
+      <p>I know your <b>email address:</b> <span className='title-email'>{user.email}</span></p>
       <img src={user.photoURL} alt="" />
     </div>
   );

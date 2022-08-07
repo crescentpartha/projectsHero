@@ -147,3 +147,9 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 55.5 01simple-volunteers](https://55-5-1simple-volunteers-crescentpartha.netlify.app/ "React-App | Live-Server _-_ useState, useEffect, Custom Hook, Search Implementation")
 
+## Milestone 10
+
+* [Module 56 02simple-firebase-authentication](https://56-2simple-firebase-authentication-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Simple Firebase Authentication - Google & Github sign in methods - display user information")
+
+
+
