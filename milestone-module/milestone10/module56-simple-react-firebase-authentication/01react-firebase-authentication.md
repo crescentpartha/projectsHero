@@ -170,9 +170,9 @@ export default App;
 
 ⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
 1. ___Create a project___ on console.firebase.google.com
-2. npm ___install___ firebase
-3. ___Register___ Web app in firebase
-4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___
+2. ___Register___ Web app in firebase
+3. npm ___install___ firebase
+4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
 5. ___export default app___ from ___firebase.init.js___
 6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
 7. import __app__ from ___firebase.init.js___ into your ___App.js___
@@ -308,6 +308,7 @@ function App() {
     signInWithPopup(auth, githubProvider)
     .then( result => {
       const user = result.user;
+      setUser(user);
       console.log(user);
     })
     .catch( error => {
@@ -329,7 +330,7 @@ function App() {
     <div className="App">
       {
         // Conditional Rendering: { condition ? true : false }
-        user.email ? <button onClick={handleSignOut}>Sign Out</button>
+        user.uid ? <button onClick={handleSignOut}>Sign Out</button>
         : 
         // To return multiple value use div-tag or fragment-tag(empty tag)
         <>
@@ -354,7 +355,75 @@ export default App;
 - But, We can enable/allow, multiple accounts with the same email address 
   - It ___should not allows___ for actual application
 
+## 56.8 Module Summary and display user info
 
+## Quiz 56
+
+1. What is ___Authentication___?
+   - ___Verify the identity of a user___
+2. What is ___Google analytics___? Why should you use it? (google it)
+   - To know the ___website visitors___ and their ___usage pattern___
+3. Which CSS style will you use ___to hide an element___ from the DOM? (do not forget CSS)
+   - `display: none`
+4. What is ___password hashing___? (Google it)
+   - ___Store the password with encrypted text___ so that no one can understand
+5. What is true about ___firebase config___?
+   - It contains ___firebase cloud project___ related ___information___
+   - It includes ___Secret___ and ___API Key___ for the project
+   - You ___should not share your config___ with anyone
+6. How would you ___initialize___ a firebase app with ___firebase config___ <br> `_____?___(firebaseConfig);`
+   - ___initializeApp___
+7. `import { signInWithPopup } from   ____? _____`
+   - `'firebase/auth`
+8. `signInWithPopup( ) Method receives _____, ____ as arguments.`
+   - ___auth, provider___
+9.  How will you ___access the name___ of the logged-in person information after successful login?
+    - ___displayName___
+``` JavaScript
+signInWithPopup( auth , provider)
+ .then(result => {
+const { ___?____ } = res.user; 
+ }
+```
+10. ___Which method___ will you call to ___logout a user___ from firebase? (Search in the documentation)
+    - ___signOut___
+``` JavaScript
+const auth = getAuth();
+_____?____(auth)
+ .then(() =>  })
+ .catch((error) => {
+ });
+```
+11. We can ___implement Firebase authentication___ by using ______
+    - ___Gmail Account___
+    - ___Github___
+    - ___Facebook Account___
+12. Which one is true?
+    - Firebase provides ___Hosting___
+    - Firebase provides ___authentication___
+    - Firebase provides ___database___
+13. How will you ___access the email___ of the logged-in person information after successful login using firebase authentication?
+    - ___res.user___
+``` JavaScript
+firebase.auth().signInWithPopup(provider)
+.then(res => {
+const { email } = _______?______;
+console.log(email);
+}
+```
+14. What do you need ___to connect___ your ___firebase___ application to the ___GitHub___ application? 
+    - ___Client ID, Client Secret___
+15. Where you can ___add sign-in providers___ in firebase? 
+    - ___Authentication > Sign-in methods___
+
+---
+
+⫸ `Password Hashing:`
+- Password hashing is used to ___verify the integrity of your password___, sent during login, against the ___stored hash___ so that your actual password never has to be stored.
+
+⫸ `Firebase Config:`
+- Dynamically ___control & change___ the ___behavior & appearance___ of your app ___without republishing___. Provide a different app experience to different segments on the fly.
+- ___Firebase Remote Config___ is a ___cloud service___ that lets you change the behavior and appearance of your app ___without___ requiring users to ___download an app___ update.
 
 
 

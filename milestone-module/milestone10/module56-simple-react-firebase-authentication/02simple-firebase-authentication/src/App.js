@@ -29,6 +29,7 @@ function App() {
     signInWithPopup(auth, githubProvider)
     .then( result => {
       const user = result.user;
+      setUser(user);
       console.log(user);
     })
     .catch( error => {
@@ -50,7 +51,7 @@ function App() {
     <div className="App">
       {
         // Conditional Rendering: { condition ? true : false }
-        user.email ? <button onClick={handleSignOut}>Sign Out</button>
+        user.uid ? <button onClick={handleSignOut}>Sign Out</button>
         : 
         // To return multiple value use div-tag or fragment-tag(empty tag)
         <>
