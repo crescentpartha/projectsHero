@@ -36,7 +36,7 @@
    - ___Step 1:___ Create a Firebase project and register your app
    - ___Step 2:___ Install the SDK and initialize Firebase
 
-___Note:___ Highly recommended to use commands from the main website!!!
+___Note:___ Highly recommended to use commands from the ___main website___!!! and Follow these ___11 Steps___ to use firebase.
 ``` JavaScript
 // Install Firebase using npm: (Step-1)
 npm install firebase
@@ -150,7 +150,8 @@ function App() {
       console.log(user);
     })
     .catch( error => {
-      console.log('error', error);
+      // console.log('error', error);
+      console.error('error', error);
     })
   }
   return (
@@ -167,19 +168,20 @@ export default App;
 
 ## 46.3 set Firebase configuration and initialize firebase auth
 
-⫸ `Steps to use firebase:` (___Recommended to Follow___)
+⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
 1. ___Create a project___ on console.firebase.google.com
-2. ___install___ firebase
+2. npm ___install___ firebase
 3. ___Register___ Web app in firebase
 4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___
-5. ___export default app___
-6. import __app__ from ___firebase.init.js___ into your ___App.js___
-7. import ___getAuth___ from ___firebase/auth___ and create `auth = getAuth(app);`
+5. ___export default app___ from ___firebase.init.js___
+6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+7. import __app__ from ___firebase.init.js___ into your ___App.js___
 8. ___turn on___ google authentication (___firebase > authentication > enable google sign-in___)
    - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
    - One account per email address (___if___ you need to create multiple user with same email address)
-9. Create ___google provider object___
-10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___:
+9. Create ___google provider object___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
+10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___pass___ and ___provider___ parameters:
+11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
 
 ## 56.4 Sign in with google, open google login popup
@@ -210,4 +212,63 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(<App tab="home" />);
 ```
 
+## 56.5 Recap google popup sign in process with 11 steps
+
+## 56.6 Display logged in user info, Sign out, toggle sign in , sign out
+
+``` JavaScript
+// In App.js
+
+// import logo from './logo.svg';
+import './App.css';
+import app from './firebase.init';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { useState } from 'react';
+
+const auth = getAuth(app);
+
+function App() {
+  const [user, setUser] = useState({});
+  const provider = new GoogleAuthProvider();
+
+  const handleGoogleSignIn = () => {
+    // console.log('working');
+    signInWithPopup(auth, provider)
+      .then(result => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+      })
+      .catch(error => {
+        // console.log('error', error);
+        console.error('error', error);
+      })
+  }
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser({});
+      })
+      .catch(error => {
+        setUser({});
+      })
+  }
+
+  return (
+    <div className="App">
+      {
+        // Conditional Rendering: { condition ? true : false }
+        user.email ? <button onClick={handleSignOut}>Sign Out</button>
+        : <button onClick={handleGoogleSignIn}>Google Sign In</button>
+      }
+      <h2>Name: {user.displayName}</h2>
+      <p>I know your email address: {user.email}</p>
+      <img src={user.photoURL} alt="" />
+    </div>
+  );
+}
+
+export default App;
+```
 
