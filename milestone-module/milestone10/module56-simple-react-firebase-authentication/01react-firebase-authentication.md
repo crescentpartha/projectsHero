@@ -355,6 +355,15 @@ export default App;
 - But, We can enable/allow, multiple accounts with the same email address 
   - It ___should not allows___ for actual application
 
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+
+- __In Firebase:__
+  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the home page)
+- __In Github:__
+  - Settings → Developer settings → OAuth Apps → Clicked on Application → General → Homepage-URL (`https://56-2simple-firebase-authentication-crescentpartha.netlify.app/`)
+
+`Note:` Add domain in both ___Firebase & Github___. It is the ___Home page URL___.
+
 ## 56.8 Module Summary and display user info
 
 ## Quiz 56
