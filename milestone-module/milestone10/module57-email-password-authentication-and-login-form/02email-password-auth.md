@@ -207,3 +207,123 @@ function App() {
 export default App;
 ```
 
+## 57.5 Login form field validation using regular expression, slow error 
+
+⫸ [JavaScript Password Validation Regex (Regular Expression)](https://stackoverflow.com/questions/12090077/javascript-regular-expression-password-validation-having-special-characters "Javascript regular expression password validation having special characters - stackoverflow.com")
+
+⫸ `Regex for Password:`
+
+``` JavaScript
+/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+```
+- `Restrictions:` (___Note:___ I have used ___>>___ and ___<<___ to show the important characters)
+  1. ___Minimum 8___ characters ___{>>8,20}___
+  2. ___Maximum 20___ characters ___{8,>>20}___
+  3. At least ___one uppercase___ character ___(?=.*[A-Z])___
+  4. At least ___one lowercase___ character ___(?=.*[a-z])___
+  5. At least ___one digit___ __(?=.*\d)__
+  6. At least ___one special character___ __(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]__
+
+``` JavaScript
+// Regular Expression in JS
+
+/(?=.*?[0-9])/.test('asdsd') // false
+/(?=.*?[0-9])/.test('asdsd2') // true
+/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test('a4*Ap') // false
+/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test('a4*Apa') // true
+
+/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/.test('1Aa&6789') // true
+
+/(?=.*[!@#$%^&*])/.test('a') // false
+/(?=.*[!@#$%^&*])/.test('&') // true
+```
+
+``` JavaScript
+// import logo from './logo.svg';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import app from './firebase.init';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
+
+const auth = getAuth(app);
+
+function App() {
+  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailBlur = event => {
+    setEmail(event.target.value);
+  }
+
+  const handlePasswordBlur = event => {
+    setPassword(event.target.value);
+  }
+
+  const handleFormSubmit = event => {
+
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return;
+    }
+
+    if (!/(?=.*[!@#$%^&*])/.test(password)) {
+      setError('Password should contain at least one special character');
+      return;
+    }
+    setValidated(true);
+    setError('');
+    // console.log('form submitted', email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    event.preventDefault(); // to prevent reload;
+  }
+
+  return (
+    <div className="App">
+      <div className="registration w-50 mx-auto mt-5">
+        <h2 className="text-primary">Please Register</h2>
+        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid email.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid password.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <p className="text-danger">{error}</p>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
