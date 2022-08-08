@@ -15,9 +15,70 @@
 8. ___turn on___ google authentication (___firebase > authentication > enable Email/Password sign-in___)
    - Authentication → Get Started → ___Email/Password___ → ___Enable___ → Save
    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)
-9.  Create ___google provider object___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
+9.  Create ___a password-based account___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
     - Go to docs → Build → Authentication → Web → Get Started → ___Password Authentication___
 10. To sign in with ___a pop-up window___, call ___signInWithPopup___ with pass ___auth___ and ___provider___ parameters:
 11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
+## 57.2 Simple form, input, change, blur, submit, preventDefault
+
+``` JavaScript
+// import logo from './logo.svg';
+import './App.css';
+import { getAuth } from "firebase/auth";
+import app from './firebase.init';
+
+const auth = getAuth(app);
+
+function App() {
+
+  const handleEmailChange = event => {
+    console.log(event.target.value);
+  }
+
+  const handlePasswordChange = event => {
+    console.log(event.target.value);
+  }
+
+  /* ------------------------------------- */
+
+  const handleEmailBlur = event => {
+    console.log(event.target.value);
+  }
+
+  const handlePasswordBlur = event => {
+    console.log(event.target.value);
+  }
+
+  const handleFormSubmit = event => {
+    console.log('form submitted');
+    event.preventDefault(); // to prevent reload;
+  }
+
+  return (
+    <div className="App">
+      <form onSubmit={handleFormSubmit}>
+        // onChange method isn't efficient, it hits the methods multiple times.
+        <input onChange={handleEmailChange} type="email" name="" id="" />
+        <input onChange={handlePasswordChange} type="password" name="" id="" />
+
+        /* ----------------------------------------------------------------------- */
+
+        // Use onBlur for better efficiency.
+        <input onBlur={handleEmailBlur} type="email" name="" id="" />
+        <br />
+        <input onBlur={handlePasswordBlur} type="password" name="" id="" />
+        <br />
+        <input type="submit" value="LogIn" />
+      </form>
+    </div>
+  );
+}
+
+export default App;
+```
+
+``` Terminal
+npm install react-bootstrap bootstrap
+```
 
