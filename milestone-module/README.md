@@ -149,7 +149,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 ## Milestone 10
 
-* [Module 56 02simple-firebase-authentication](https://56-2simple-firebase-authentication-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Simple Firebase Authentication - Google & Github sign in methods - display user information")
+* [Module 56 02simple-firebase-authentication](https://56-2simple-firebase-authentication-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Simple Firebase Authentication - Implement Google & Github sign in methods - display user information")
 
-
+* [Module 57 01email-password-auth](https://57-01email-password-auth-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Implementation Email/Password Authentication as a sign-in methods - Register users - Sign-In users - got the value of name, email, password - Used JS Regex for password validation - Used onClick, onChange, onBlur input-event and some Event Handlers")
 

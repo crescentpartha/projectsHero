@@ -14,16 +14,17 @@
 4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
 5. ___export default app___ from ___firebase.init.js___
 6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
-   - Go to docs → Build → Authentication → Web → Get Started → ___Initialize Firebase Authentication___
+   - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
 7. import ___app___ from ___firebase.init.js___ into your ___App.js___
 8. ___turn on___ Email/Password authentication (___firebase > authentication > enable Email/Password sign-in___)
-   - Authentication → Get Started → ___Email/Password___ → ___Enable___ → Save
+   - Authentication > Get Started > ___Email/Password___ > ___Enable___ > Save
    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
 9.  Create ___a password-based account___
-    - Go to docs → Build → Authentication → Web → Get Started → ___Password Authentication___
+    - Go to docs > Build > Authentication > Web > Get Started > ___Password Authentication___
 10. Use ___Form___ to get ___name___, ___email___, and ___password___ and by using those, users can ___Register___ or ___Sign-In___. 
     - Call ___createUserWithEmailAndPassword___ and ___signInWithEmailAndPassword___ with ___auth___, ___email___ and ___password___ parameters.
-    - Use ___onClick___, ___onChange___, and ___onBlur___ methods to ___get value___ of ___PasswordReset___, ___RegisteredChange___, ___Name___, ___Email___, ___Password___ by setting ___Event Handler___ such as ___handlePasswordReset___, ___handleRegisteredChange___, ___handleNameBlur___, ___handleEmailBlur___, ___handlePasswordBlur___.
+    - Use ___onClick___, ___onChange___, and ___onBlur___ event handlers to ___get value___ of ___PasswordReset___, ___RegisteredChange___, ___Name___, ___Email___, ___Password___.
+    - Set some ___Event Handlers___ such as ___handlePasswordReset___, ___handleRegisteredChange___, ___handleNameBlur___, ___handleEmailBlur___, ___handlePasswordBlur___.
 11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
 ## 57.2 Simple form, input, change, blur, submit, preventDefault
@@ -778,4 +779,61 @@ function App() {
 
 export default App;
 ```
+
+## Quiz:
+
+1. ___Which file contains___ the information of ___packages of libraries___ that you have ___installed___ for your project using npm install?
+   - `package.json`
+2. Which ___input event___ will you use on an input tag to get notified every time a ___user changes something___?
+   - `onChange`
+3. Which ___method___ will you call to open the ___google auth provider___?
+   - `signInWithPopup`
+``` JavaScript
+__?__(auth, googleProvider)
+  .then(result => {
+  const {user}= result
+  }
+```
+4. Which ___Bootstrap class___ will you use to provide a ___responsive full-width container___?
+   - `.container-fluid`
+5. How will you get the ___input value___ from the ___checkbox___?
+   - `e.target.checked`
+6. How will you ___console the text___ an user typed on the ___email input box___?
+   - `e.target.value`
+``` JavaScript
+const handleEmailChange = ( e )=> { 
+  console.log(__?___) 
+}
+```
+7. What should you ___import___ to do ___firebase authentication___ with ___email___ and ___password___?
+   - `import {createUserWithEmailAndPassword} from 'firebase/auth';`
+8. ___What___ will the function ___console do___?
+   - `undefined`
+``` JavaScript
+const showName = (name) => {
+     return 
+     console.log(name)
+  }
+showName(“Crush”)
+```
+9. What is ___Regex___?
+   - `Regular Expression`
+10. Which ___method___ should you call to ___stop___ Form tag from ___reloading___?
+    - `e.preventDefault()`
+11. What ___event handler___ detects ___click outside___ of the ___input field___?
+    - `onBlur`
+12. Which ___third-party___ authentication provider ___is not available___ in firebase?
+    - `LinkedIn`
+13. Which one is the correct ___Regular Expression___ to check if a string contains ___at least one uppercase___ English Alphabet?
+    - `(?=.*?[A-Z])`
+14. What you need to pass as ___parameter___ in ___sendEmailVarification___? 
+    - `auth.currentUser`
+``` JavaScript
+const auth = getAuth(app)
+const emailVarification = () => {
+sendEmailVarification(___?___).then(() => console.log("Email send"))
+```
+15. ___Where___ you can ___edit the email template___ of "Email Address Verification" in firebase?
+    - `Build > Authentication > Templates > Email > Address Varification`
+
 
