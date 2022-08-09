@@ -180,7 +180,7 @@ export default App;
    - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
    - One account per email address (___if___ you need to create multiple user with same email address)
 9. Create ___google provider object___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
-10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___pass___ and ___provider___ parameters:
+10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters:
 11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
 
@@ -465,10 +465,160 @@ console.log(email);
 7. import ___app___ from ___firebase.init.js___ into your ___App.js___
 8. ___turn on___ Facebook authentication (___firebase > authentication > enable Facebook sign-in provider___)
    - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > Save
+   - [developers.facebook.com](https://developers.facebook.com/) > Create App (App-name & email) > Create Test App (for locally development) > Set up (Facebook Login) > Web > Facebook Login → Settings (Valid OAuth Redirect URIs) > Paste (OAuth redirect URI) > ___Save changes___
+   - Settings > Basic > Copy (App ID & App Secret (clicked Show)) > Paste in Configure Provider > ___Save___
    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
 9.  Create an instance of the ___Facebook provider object___ and ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___.
     - Go to docs > Build > Authentication > Web > ___Facebook Login___
 10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters.
 11. Handle ___.then___ (if successful) and ___.catch___ error (if error)
+
+---
+
+⫸ `Codes for Facebook Sign-in method Providers:`
+
+``` JavaScript
+// import logo from './logo.svg';
+import './App.css';
+import app from './firebase.init';
+import { FacebookAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/auth';
+import { useState } from 'react';
+
+const auth = getAuth(app);
+
+function App() {
+  const [user, setUser] = useState({});
+  const facebookProvider = new FacebookAuthProvider();
+
+  const handleFacebookSignIn = () => {
+    signInWithPopup(auth, facebookProvider)
+    .then( result => {
+      const user = result.user;
+      setUser(user);
+      console.log(user);
+    })
+    .catch( error => {
+      console.error(error);
+    })
+  }
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser({});
+      })
+      .catch(error => {
+        setUser({});
+      })
+  }
+
+  return (
+    <div className="App">
+      {
+        // Conditional Rendering: { condition ? true : false }
+        user.uid ? <button onClick={handleSignOut}>Sign Out</button>
+        : 
+        // To return multiple value use div-tag or fragment-tag(empty tag)
+        <>
+          <button onClick={handleFacebookSignIn}>Facebook Sign In</button>
+        </>
+      }
+      <h2>Name: <span className='title-name'>{user.displayName}</span></h2>
+      <p>I know your <b>email address:</b> <span className='title-email'>{user.email}</span></p>
+      <img src={user.photoURL} alt="" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `All Codes for Google, Github, and Facebook Sign-in methods Providers:`
+
+``` JavaScript
+// import logo from './logo.svg';
+import './App.css';
+import app from './firebase.init';
+import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { useState } from 'react';
+
+const auth = getAuth(app);
+
+function App() {
+  const [user, setUser] = useState({});
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+
+  const handleGoogleSignIn = () => {
+    // console.log('working');
+    signInWithPopup(auth, googleProvider)
+      .then(result => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+      })
+      .catch(error => {
+        // console.log('error', error);
+        console.error('error', error);
+      })
+  }
+
+  const handleGithubSignIn = () => {
+    signInWithPopup(auth, githubProvider)
+    .then( result => {
+      const user = result.user;
+      setUser(user);
+      console.log(user);
+    })
+    .catch( error => {
+      console.error(error);
+    })
+  }
+
+  const handleFacebookSignIn = () => {
+    signInWithPopup(auth, facebookProvider)
+    .then( result => {
+      const user = result.user;
+      setUser(user);
+      console.log(user);
+    })
+    .catch( error => {
+      console.error(error);
+    })
+  }
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser({});
+      })
+      .catch(error => {
+        setUser({});
+      })
+  }
+
+  return (
+    <div className="App">
+      {
+        // Conditional Rendering: { condition ? true : false }
+        user.uid ? <button onClick={handleSignOut}>Sign Out</button>
+        : 
+        // To return multiple value use div-tag or fragment-tag(empty tag)
+        <>
+          <button onClick={handleGoogleSignIn}>Google Sign In</button>
+          <button onClick={handleGithubSignIn}>Github Sign In</button>
+          <button onClick={handleFacebookSignIn}>Facebook Sign In</button>
+        </>
+      }
+      <h2>Name: <span className='title-name'>{user.displayName}</span></h2>
+      <p>I know your <b>email address:</b> <span className='title-email'>{user.email}</span></p>
+      <img src={user.photoURL} alt="" />
+    </div>
+  );
+}
+
+export default App;
+```
 
 
