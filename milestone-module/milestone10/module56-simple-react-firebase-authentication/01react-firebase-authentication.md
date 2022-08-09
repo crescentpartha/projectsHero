@@ -435,4 +435,40 @@ console.log(email);
 - ___Firebase Remote Config___ is a ___cloud service___ that lets you change the behavior and appearance of your app ___without___ requiring users to ___download an app___ update.
 
 
+# Module 57.5: Firebase Recap and Practice
+
+## 57.5.0 Text Instruction 
+
+> ___অথেনটিকেশন___ একটু ভালো করে প্রাকটিস করবে। অথার্ৎ সিম্পল ফায়ারবেজ দিয়ে ___গুগল, ফেইসবুক, গিটহাব এর লগইন সিস্টেম___ কিভাবে ___ইমপ্লিমেন্ট___ করবে। কিভাবে ___সাইন ইন মেথড enable___ করবে। প্রজেক্ট এ ___ওয়েব এপ যোগ___ করবে এবং সেই ওয়েব এপ এর জন্য ___ফায়ারবেজ কনফিগারেশন কপি___ করে নিয়ে আসবে। তারপর তোমার প্রজেক্টে এসে সেই কনফিগারেশন ___সেইভ___ করবে। প্রজেক্টে ___ফায়ারবেজ ইনস্টল___ করবে। ___লগইন বাটন ইমপ্লিমেন্ট___ করবে। <br /> `স্টেপ কিন্তু এই কয়টাই`। 
+
+⫸ `স্টেপগুলা ফলো করো:-`
+1. firebase এর authentication এ গিয়ে ___যে লগইন সিস্টেম___ ইমপ্লিমেন্ট করবে সেই প্রসেস ___এনাবেল___ করো। 
+2. google ছাড়া অন্য কোন ___থার্ডপার্টি___ যদি হয় তাহলে তাদের ___developer ওয়েবসাইটে___ যাও। সেখানে গিয়ে ___app তৈরি___ করো। সেখানে ___app id আর সিক্রেট___ দেখতে পাবে। সেই থার্ড পার্টি এপ এর আইডি আর সিক্রেট ___ফায়ারবেজ এ এনে বসিয়ে দাও___
+3. ফায়ারবেজ থেকে ___auth redirect url___ কপি করে ___থার্ডপার্টি app এর সেটিংসে___ বসিয়ে দাও। এইটা ইম্পরট্যান্ট। তাহলে ___লগইন সাকসেস___ হওয়ার পর বা ___ইউজার লগইন___ করার অনুমতি দেয়ার পর সেটা তোমার ওয়েবসাইট এ ___রিডাইরেক্ট হবে না___ বা লগিন হওয়ার পর তোমার ওয়েবসাইট এ ___আসবে না___। 
+4. তোমার ওয়েবসাইট এ ___লগইন বাটন ক্রিয়েট___ করে সেটার ___ইভেন্ট হ্যান্ডলার___ এর মধ্যে ___firebase এর ডকুমেন্টেশন___ থেকে ___কোড এনে বসিয়ে দাও___। 
+5. যদি ___লগইন সাকসেসফুল___ হয় তাহলে user এর ___স্টেট্ ডিক্লেয়ার___ করে সেটাকে ___দেখায় দাও___ বা ___ইউজ করতে পারো___। ___error খাইলে___ সেটাও দেখাতে পারো। 
+
+> `সিস্টেম মোটামুটি এইটাই`। <br /> সিম্পল ___অথেন্টিকেশন___ যেকোন ওয়েব ডেভেলপার এর জন্য গুরুত্বপূর্ণ। মোটামুটি মাঝারি মানের সব ওয়েবসাইট এই ___লগইন সিস্টেম___ থাকেই। তাই আমি বলবো এই অংশটুকু তুমি কয়েকবার প্রাকটিস করো। এবং একটা প্রজেক্ট দিয়ে তোমার প্রাকটিস শেষ হয়ে গেলে ফায়ারবেজ আরেকটা প্রজেক্ট খুলে প্রাকটিস করো কোন কারণে তোমার ___ফায়ারবেজ একাউন্ট এর কোটা শেষ হয়ে গেলে___ (30 projects), আরেকটা জিমেইল দিয়ে আবার নতুন করে ফায়ারবেজ এর প্রজেক্ট খুলে সেইভাবে চেষ্টা করো। দেখবে ঠিকই ___জিনিসগুলো কন্ট্রোলে চলে আসছে___। 
+
+
+## 57.5.1 Practice Firebase Authentication, Implement Facebook Authentication
+
+⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
+
+1. ___Create a project___ on console.firebase.google.com
+2. ___Register___ Web app in firebase
+3. ___npm install firebase___
+4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
+5. ___export default app___ from ___firebase.init.js___
+6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+   - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
+7. import ___app___ from ___firebase.init.js___ into your ___App.js___
+8. ___turn on___ Facebook authentication (___firebase > authentication > enable Facebook sign-in provider___)
+   - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > Save
+   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+9.  Create an instance of the ___Facebook provider object___ and ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___.
+    - Go to docs > Build > Authentication > Web > ___Facebook Login___
+10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters.
+11. Handle ___.then___ (if successful) and ___.catch___ error (if error)
+
 
