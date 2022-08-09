@@ -2,6 +2,10 @@
 
 ## 57.1 Login, Registration, Sign up, Sign in, project setup
 
+⫸ `Two things make confused:`
+- ___Sign In___, ___Log In___ (same)
+- ___Sign Up___, ___Register___, ___Registration___ (same)
+
 ⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
 
 1. ___Create a project___ on console.firebase.google.com
@@ -12,12 +16,14 @@
 6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
    - Go to docs → Build → Authentication → Web → Get Started → ___Initialize Firebase Authentication___
 7. import ___app___ from ___firebase.init.js___ into your ___App.js___
-8. ___turn on___ google authentication (___firebase > authentication > enable Email/Password sign-in___)
+8. ___turn on___ Email/Password authentication (___firebase > authentication > enable Email/Password sign-in___)
    - Authentication → Get Started → ___Email/Password___ → ___Enable___ → Save
-   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)
-9.  Create ___a password-based account___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
+   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+9.  Create ___a password-based account___
     - Go to docs → Build → Authentication → Web → Get Started → ___Password Authentication___
-10. To sign in with ___a pop-up window___, call ___signInWithPopup___ with pass ___auth___ and ___provider___ parameters:
+10. Use ___Form___ to get ___name___, ___email___, and ___password___ and by using those, users can ___Register___ or ___Sign-In___. 
+    - Call ___createUserWithEmailAndPassword___ and ___signInWithEmailAndPassword___ with ___auth___, ___email___ and ___password___ parameters.
+    - Use ___onClick___, ___onChange___, and ___onBlur___ methods to ___get value___ of ___PasswordReset___, ___RegisteredChange___, ___Name___, ___Email___, ___Password___ by setting ___Event Handler___ such as ___handlePasswordReset___, ___handleRegisteredChange___, ___handleNameBlur___, ___handleEmailBlur___, ___handlePasswordBlur___.
 11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
 ## 57.2 Simple form, input, change, blur, submit, preventDefault
@@ -449,6 +455,7 @@ export default App;
 ## 57.7 Handle Email Verification, Forget Password or Reset Password
 
 ⫸ `Manage Users > Send a user a verification email:`
+
 ⫸ `Manage Users > Send a password reset email:`
 
 ``` JavaScript
@@ -584,4 +591,191 @@ function App() {
 export default App;
 ```
 
+## 57.8 Module Summary and Update user name to firebase
+
+⫸ `Manage Users > Update a user's Profile:`
+
+``` JavaScript
+// import logo from './logo.svg';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import app from './firebase.init';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
+
+const auth = getAuth(app);
+
+function App() {
+  const [validated, setValidated] = useState(false);
+  const [registered, setRegistered] = useState(false);
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [resetPassword, setResetPassword] = useState('');
+
+  const handleNameBlur = event => {
+    setName(event.target.value);
+  }
+
+  const handleEmailBlur = event => {
+    setEmail(event.target.value);
+  }
+
+  const handlePasswordBlur = event => {
+    setPassword(event.target.value);
+  }
+
+  const handleRegisteredChange = event => {
+    // console.log(event.target.checked);
+    setRegistered(event.target.checked);
+  }
+
+  const handleFormSubmit = event => {
+
+    event.preventDefault(); // to prevent reload;
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return;
+    }
+
+    // Regular Expression: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+    if (!/(?=.*[a-z])/.test(password)) {
+      setError('Password should contain at least one lowercase character');
+      return;
+    }
+    else if (!/(?=.*[A-Z])/.test(password)) {
+      setError('Password should contain at least one uppercase character');
+      return;
+    }
+    else if (!/(?=.*\d)/.test(password)) {
+      setError('Password should contain at least one digit character');
+      return;
+    }
+    else if (!/(?=.*[!@#$%^&*])/.test(password)) {
+      setError('Password should contain at least one special character');
+      return;
+    }
+    else if (!/(?=.{8,20})/.test(password)) {
+      setError('Password length should be 8-20 character');
+      return;
+    }
+    setValidated(true);
+    setError('');
+
+    if (registered) {
+      // console.log(email, password);
+      signInWithEmailAndPassword(auth, email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+        })
+        .then(error => {
+          console.error(error);
+          setError(error.message);
+        })
+    }
+    else {
+      // console.log('form submitted', email, password);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+          setEmail('');
+          setPassword('');
+          verifyEmail();
+          setUserName();
+        })
+        .catch(error => {
+          console.error(error);
+          setError(error.message);
+        })
+    }
+    event.preventDefault(); // to prevent reload;
+  }
+
+  const handlePasswordReset = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log('email sent');
+        setResetPassword('Check email to reset password')
+      })
+  }
+
+  const setUserName = () => {
+    updateProfile(auth.currentUser, {
+      displayName: name
+    })
+      .then(() => {
+        console.log('Updating Name');
+      })
+      .catch( error => {
+        setError(error.message);
+      })
+  }
+
+  const verifyEmail = () => {
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        console.log('Email Verification Sent');
+        setSuccess('Verify your email address');
+      })
+  }
+
+  return (
+    <div className="App">
+      <div className="registration w-50 mx-auto mt-5">
+        <h2 className="text-primary">Please {registered ? 'LogIn' : 'Register'}!!</h2>
+        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+          {!registered && <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Your Name</Form.Label>
+            <Form.Control onBlur={handleNameBlur} type="text" placeholder="Enter Name" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide your name.
+            </Form.Control.Feedback>
+          </Form.Group>}
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid email.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid password.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <p className="text-danger">{error}</p>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check onChange={handleRegisteredChange} type="checkbox" label="Already Registered?" />
+          </Form.Group>
+
+          <p className="text-success">{success}</p>
+          <Button onClick={handlePasswordReset} variant="link">Forget Password?</Button>
+          <br />
+          <p className='text-danger'>{resetPassword}</p>
+          <Button variant="primary" type="submit">
+            {registered ? 'LogIn' : 'Register'}
+          </Button>
+        </Form>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
 

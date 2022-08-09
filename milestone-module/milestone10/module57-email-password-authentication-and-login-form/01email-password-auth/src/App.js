@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import app from './firebase.init';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -12,9 +12,16 @@ const auth = getAuth(app);
 function App() {
   const [validated, setValidated] = useState(false);
   const [registered, setRegistered] = useState(false);
+  const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [resetPassword, setResetPassword] = useState('');
+
+  const handleNameBlur = event => {
+    setName(event.target.value);
+  }
 
   const handleEmailBlur = event => {
     setEmail(event.target.value);
@@ -31,15 +38,32 @@ function App() {
 
   const handleFormSubmit = event => {
 
-    event.preventDefault();
+    event.preventDefault(); // to prevent reload;
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
       return;
     }
 
-    if (!/(?=.*[!@#$%^&*])/.test(password)) {
+    // Regular Expression: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+    if (!/(?=.*[a-z])/.test(password)) {
+      setError('Password should contain at least one lowercase character');
+      return;
+    }
+    else if (!/(?=.*[A-Z])/.test(password)) {
+      setError('Password should contain at least one uppercase character');
+      return;
+    }
+    else if (!/(?=.*\d)/.test(password)) {
+      setError('Password should contain at least one digit character');
+      return;
+    }
+    else if (!/(?=.*[!@#$%^&*])/.test(password)) {
       setError('Password should contain at least one special character');
+      return;
+    }
+    else if (!/(?=.{8,20})/.test(password)) {
+      setError('Password length should be 8-20 character');
       return;
     }
     setValidated(true);
@@ -66,6 +90,7 @@ function App() {
           setEmail('');
           setPassword('');
           verifyEmail();
+          setUserName();
         })
         .catch(error => {
           console.error(error);
@@ -77,15 +102,29 @@ function App() {
 
   const handlePasswordReset = () => {
     sendPasswordResetEmail(auth, email)
-    .then( () => {
-      console.log('email sent');
+      .then(() => {
+        console.log('email sent');
+        setResetPassword('Check email to reset password')
+      })
+  }
+
+  const setUserName = () => {
+    updateProfile(auth.currentUser, {
+      displayName: name
     })
+      .then(() => {
+        console.log('Updating Name');
+      })
+      .catch( error => {
+        setError(error.message);
+      })
   }
 
   const verifyEmail = () => {
     sendEmailVerification(auth.currentUser)
       .then(() => {
         console.log('Email Verification Sent');
+        setSuccess('Verify your email address');
       })
   }
 
@@ -94,6 +133,14 @@ function App() {
       <div className="registration w-50 mx-auto mt-5">
         <h2 className="text-primary">Please {registered ? 'LogIn' : 'Register'}!!</h2>
         <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+          {!registered && <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Your Name</Form.Label>
+            <Form.Control onBlur={handleNameBlur} type="text" placeholder="Enter Name" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide your name.
+            </Form.Control.Feedback>
+          </Form.Group>}
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required />
@@ -112,12 +159,16 @@ function App() {
               Please provide a valid password.
             </Form.Control.Feedback>
           </Form.Group>
+
+          <p className="text-danger">{error}</p>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check onChange={handleRegisteredChange} type="checkbox" label="Already Registered?" />
           </Form.Group>
-          <p className="text-danger">{error}</p>
+
+          <p className="text-success">{success}</p>
           <Button onClick={handlePasswordReset} variant="link">Forget Password?</Button>
           <br />
+          <p className='text-danger'>{resetPassword}</p>
           <Button variant="primary" type="submit">
             {registered ? 'LogIn' : 'Register'}
           </Button>
