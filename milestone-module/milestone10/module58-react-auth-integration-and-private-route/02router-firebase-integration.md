@@ -17,20 +17,127 @@
 
 ⫸ `If we want to share one special thing with multiple components:` (___2 options___)
 
-> If there are no relation, then we can't use props. We have 2 options to pass data with sibling or random components:
+> If there are ___no relation___, then we ___can't use props___. <br /> We have ___2 options to pass data___ with ___sibling or random components___:
+
 1. Use ___Context API___
    - Create ___Custom Hook___ to share data with multiple components.
 2. ___Simple System___
 
 > [6 Ways to Share and Reuse React Components](https://blog.bitsrc.io/6-ways-to-share-and-reuse-react-components-6d80e2fd16cd)
 
+---
+
 ⫸ `Destructuring:`
-1. ___Array Destructuring___ is ___position wise___. So, it is hard to maintain, because it is very ___sensitive about position___. We need to ___destructure everything___.
-2. ___Object Destructuring___ is ___non-position wise___. So, it is easy to maintain. It ___isn't mandatory___ to destructure everything.
+1. ___Array Destructuring___ 
+   - Array destructuring is ___position wise___. 
+   - It is hard to maintain, because it is very ___sensitive about position___. 
+   - We need to ___destructure almost everything___.
 
-> That's way we ___should return___ as a ___object___ rather than ___array___.
+``` JavaScript
+const [x, y, z, p, q, r] = [45, 89, 65, 12, 23, 56, 87, 22];
+console.log(p); // 12
+```
 
-## 58.3 Add Google Sign using custom hook with on State Change
+2. ___Object Destructuring___ 
+   - Object destructuring is ___non-position wise___. So, it is ___easy to maintain___. 
+   - It can ___destructure only one___ thing.
+
+``` JavaScript
+const {age} = {name: 'john', id: 223, age: 24, subject: 'IT'};
+console.log(age); // 24
+```
+
+> That's way we ___should return data___ as a ___object___ rather than ___array___.
+
+---
+
+⫸ `How to create Object by Shorthand:`
+
+``` JavaScript
+// How to create Object by Shorthand
+const [x, y, z, p, q, r] = [45, 89, 65, 12, 23, 56, 87, 22];
+console.log(p); // 12
+console.log(x); // 45
+
+{x:x, y:y} // {x: 45, y: 89}
+
+// shorthand of creating object
+{x, y} // {x: 45, y: 89}
+```
+
+## 58.3 Add Google Sign-in using custom hook with on State Change
+
+⫸ `Create Custom Hook that include Google Sign-In methods and return data as a Object:`
+
+``` JavaScript
+// In useFirebase.js
+
+import { useState } from "react";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import app from "../firebase.init";
+
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+const useFirebase = () => {
+    const [user, setUser] = useState({});
+
+    const signInWithGoogle = () => {
+
+        signInWithPopup(auth, googleProvider)
+        .then( result => {
+            const user = result.user;
+            setUser(user);
+            console.log(user);
+        })
+        .catch( error => {
+            console.error(error);
+        })
+    }
+
+    return {
+        user, 
+        setUser, 
+        signInWithGoogle
+    };
+}
+
+export default useFirebase;
+```
+
+⫸ `Conditional Rendering according to user.uid And destructuring from Custom Hook called useFirebase():`
+
+``` JavaScript
+// In Header.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useFirebase from '../../hooks/useFirebase';
+import './Header.css';
+
+const Header = () => {
+    const { user } = useFirebase();
+    return (
+        <div className='header'>
+            <nav>
+                <Link to='/home'>Home</Link>
+                <Link to='/products'>Products</Link>
+                <Link to='/orders'>Orders</Link>
+                <Link to='/register'>Register</Link>
+                {
+                    user.uid
+                    ?
+                    <button>Sign Out</button>
+                    :
+                    <Link to='/login'>Login</Link>
+                }
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
 
 ## 58.4 Implement Sign out and display user logged in User name
 
