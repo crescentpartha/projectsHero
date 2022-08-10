@@ -168,21 +168,34 @@ export default App;
 
 ## 46.3 set Firebase configuration and initialize firebase auth
 
-⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
+⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___Google Sign-in Provider___)
 1. ___Create a project___ on console.firebase.google.com
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
 2. ___Register___ Web app in firebase
-3. npm ___install___ firebase
-4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+3. Install the ___SDK___
+   - ___npm install firebase___
+4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
+   - ___copy___ SDK setup and configuration (firebase init with config) from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
 5. ___export default app___ from ___firebase.init.js___
-6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+6. ___Initialize Firebase Authentication___ and ___get a reference___ to the service
+   - import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+   - `In Firebase:` 
+     - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
 7. import __app__ from ___firebase.init.js___ into your ___App.js___
 8. ___turn on___ google authentication (___firebase > authentication > enable google sign-in___)
-   - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
-   - One account per email address (___if___ you need to create multiple user with same email address)
-9. Create ___google provider object___ and ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___.
+   - `In Firebase:`
+     - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
+   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+9.  Create an instance of the ___Google provider object___
+    - Set ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___ called ___Google Sign In___.
+    - `In Firebase:`
+      - Go to docs > Build > Authentication > Web > ___Google___
 10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters:
 11. handle ___.then___ (if successful) and ___.catch___ error (if error)
 
+⫸ `Note:` ___We can remove Google Permission___
+- ___myaccount.google.com___ > security > Signing in to other sites > Signing in with Google > Clicked on App > ___Remove Access___
 
 ## 56.4 Sign in with google, open google login popup
 
@@ -212,9 +225,53 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(<App tab="home" />);
 ```
 
+---
+
+⫸ `Real Example:`
+
+``` JavaScript
+// Problem
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+  document.getElementById('root')
+);
+
+reportWebVitals();
+```
+
+``` JavaScript
+// Solutions
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+reportWebVitals();
+```
+
 ## 56.5 Recap google popup sign in process with 11 steps
 
 ## 56.6 Display logged in user info, Sign out, toggle sign in , sign out
+
+⫸ ___To sign out a user, call `signOut`:___
 
 ``` JavaScript
 // In App.js
@@ -274,6 +331,66 @@ export default App;
 
 ## 56.7 Implementation github login system
 
+⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___GitHub Sign-in Provider___)
+1. ___Create a project___ on console.firebase.google.com
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
+2. ___Register___ Web app in firebase
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+3. Install the ___SDK___
+   - ___npm install firebase___
+4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
+   - ___copy___ SDK setup and configuration (firebase init with config) from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
+5. ___export default app___ from ___firebase.init.js___
+6. ___Initialize Firebase Authentication___ and ___get a reference___ to the service
+   - import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+   - `In Firebase:` 
+     - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
+7. import __app__ from ___firebase.init.js___ into your ___App.js___
+8. ___turn on___ Github authentication (___firebase > authentication > enable github sign-in___)
+   - `In Firebase:` 
+     - Authentication → Get Started → ___GitHub___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → ___Save___
+   - `In GitHub:` 
+     - Settings > Developer settings > OAuth Apps > New OAuth App > Application name > Homepage URL (___localhost___ for development | ___App URL___ after Deploy)> Application description > Authorization callback URL > ___Register Application___
+     - It gives ___Client ID___ & ___Client Secrets___ (Clicked on ___Generate a client secret___)
+   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+9.  Create an instance of the ___Google provider object___
+    - Set ___onClick Event Handler___ like `onClick={handleGithubSignIn}` in a ___button___ called ___GitHub Sign In___.
+    - `In Firebase:`
+      - Go to docs > Build > Authentication > Web > ___GitHub___
+10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters:
+11. handle ___.then___ (if successful) and ___.catch___ error (if error)
+
+⫸ `Note:` ___We can remove GitHub Permission___
+-  Settings > Applications > Authorized OAuth App > Clicked on App > ___Revoke Access___
+
+---
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+
+- __In Firebase:__
+  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the home page)
+- __In Github:__
+  - Settings → Developer settings → OAuth Apps → Clicked on Application → General → Homepage-URL (`https://56-2simple-firebase-authentication-crescentpartha.netlify.app/`)
+
+
+`Note:` Add domain in both ___Firebase & Github___. It is the ___Home page URL___.
+
+
+⫸ `One account per email address:`
+- Github & Google email address is same
+- We ___can't logged in___ with ___different logIn method___ by ___same email address___
+- One email address, One account
+- But, We can enable/allow, multiple accounts with the same email address 
+  - Otherwise gives error like <br /> ▸ ___FirebaseError:___ Firebase: Error (auth/account-exists-with-different-credential)
+  - `Setup:` Multiple account with per email address > Change > Allow > ___Save___
+  - It ___should not allows___ for actual application
+
+`Shortcut:` ___To Rename___ → Select + `Ctrl + F` + Rename + Enter
+
+---
+
+⫸ `Github Sign-In System:`
+
 ``` JavaScript
 // In App.js
 
@@ -332,7 +449,7 @@ function App() {
         // Conditional Rendering: { condition ? true : false }
         user.uid ? <button onClick={handleSignOut}>Sign Out</button>
         : 
-        // To return multiple value use div-tag or fragment-tag(empty tag)
+        // To return multiple value, as a single unit, use div-tag or fragment-tag(empty tag)
         <>
           <button onClick={handleGoogleSignIn}>Google Sign In</button>
           <button onClick={handleGithubSignIn}>Github Sign In</button>
@@ -347,22 +464,6 @@ function App() {
 
 export default App;
 ```
-
-⫸ `One account per email address:`
-- Github & Google email address is same
-- We ___can't logged in___ with ___different logIn method___ by ___same email address___
-- One email address, One account
-- But, We can enable/allow, multiple accounts with the same email address 
-  - It ___should not allows___ for actual application
-
-⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
-
-- __In Firebase:__
-  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the home page)
-- __In Github:__
-  - Settings → Developer settings → OAuth Apps → Clicked on Application → General → Homepage-URL (`https://56-2simple-firebase-authentication-crescentpartha.netlify.app/`)
-
-`Note:` Add domain in both ___Firebase & Github___. It is the ___Home page URL___.
 
 ## 56.8 Module Summary and display user info
 
@@ -453,25 +554,37 @@ console.log(email);
 
 ## 57.5.1 Practice Firebase Authentication, Implement Facebook Authentication
 
-⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___)
+⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___Facebook Sign-in Provider___)
 
 1. ___Create a project___ on console.firebase.google.com
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
 2. ___Register___ Web app in firebase
-3. ___npm install firebase___
-4. ___copy___ firebase init with config from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+3. Install the ___SDK___
+   - ___npm install firebase___
+4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
+   - ___copy___ SDK setup and configuration (firebase init with config) from ___firebase project settings___ into a file called ___firebase.init.js___ in ___src folder___
 5. ___export default app___ from ___firebase.init.js___
-6. import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
-   - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
-7. import ___app___ from ___firebase.init.js___ into your ___App.js___
-8. ___turn on___ Facebook authentication (___firebase > authentication > enable Facebook sign-in provider___)
-   - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > Save
-   - [developers.facebook.com](https://developers.facebook.com/) > Create App (App-name & email) > Create Test App (for locally development) > Set up (Facebook Login) > Web > Facebook Login → Settings (Valid OAuth Redirect URIs) > Paste (OAuth redirect URI) > ___Save changes___
-   - Settings > Basic > Copy (App ID & App Secret (clicked Show)) > Paste in Configure Provider > ___Save___
-   - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
-9.  Create an instance of the ___Facebook provider object___ and ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___.
-    - Go to docs > Build > Authentication > Web > ___Facebook Login___
+6. ___Initialize Firebase Authentication___ and ___get a reference___ to the service
+   - import ___getAuth___ from ___firebase/auth___ and create `const auth = getAuth(app);` in ___App.js___
+   - `In Firebase:` 
+     - Go to docs > Build > Authentication > Web > Get Started > ___Initialize Firebase Authentication___
+7. import __app__ from ___firebase.init.js___ into your ___App.js___
+8.  ___turn on___ Facebook authentication (___firebase > authentication > enable Facebook sign-in provider___)
+    - `In Firebase:` 
+      - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > Save
+    - `In Developers Facebook: `
+      - [developers.facebook.com](https://developers.facebook.com/) > Create App (App-name & email) > Create Test App (for locally development) > Set up (Facebook Login) > Web > Facebook Login → Settings (Valid OAuth Redirect URIs) > Paste (OAuth redirect URI) > ___Save changes___
+      - Settings > Basic > Copy (App ID & App Secret (clicked Show)) > Paste in Configure Provider > ___Save___
+    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+9. Create an instance of the ___Facebook provider object___
+    - Set ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___.
+    - `In Firebase:`
+      - Go to docs > Build > Authentication > Web > ___Facebook Login___
 10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters.
 11. Handle ___.then___ (if successful) and ___.catch___ error (if error)
+
+⫸ `Note:` ___We can remove Facebook Permission___
 
 ---
 
