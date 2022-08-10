@@ -139,7 +139,96 @@ const Header = () => {
 export default Header;
 ```
 
+> Problem is that `Login` header link ___doesn't change___ to `Sign Out` button after ___Google Sign-In___
+
 ## 58.4 Implement Sign out and display user logged in User name
+
+> `Solution is:` ___Get the currently signed-in user___ <br /> The recommended way to get the current user is by setting an observer on the Auth object: <br /> &nbsp;&nbsp;&nbsp;&nbsp; Set `onAuthStateChanged` inside the `useEffect`, It ___set the state change___ only ___one time___. <br /> <br /> ___signInWithGoogle___ can be ___trigger___ when ___Google Sign In___ button is ___clicked___. <br />That time signInWithGoogle ___function called___ and signInWithGoogle ___triggered___. <br /> <br /> We ___didn't manually tell___ that ___observe___ it or ___state change___. <br /> ___Only one time___ we need to ___tell___ that ___set the state___ if user is changed almost similar to ___API call___. <br /> <br /> Users ___value changed in 2 ways___. <br /> &nbsp;&nbsp; 1. User Login <br /> &nbsp;&nbsp; 2. User Sign Out
+
+⫸ `Implement onAuthStateChanged methods and signOut methods:`
+
+``` JavaScript
+// In useFirebase.js
+
+import { useEffect, useState } from "react";
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import app from "../firebase.init";
+
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+const useFirebase = () => {
+    const [user, setUser] = useState({});
+
+    const signInWithGoogle = () => {
+        // console.log('signing in soon');
+        signInWithPopup(auth, googleProvider)
+        .then( result => {
+            const user = result.user;
+            setUser(user);
+            console.log(user);
+        })
+        .catch( error => {
+            console.error(error);
+        })
+    }
+
+    const handleSignOut = () => {
+        signOut(auth)
+        .then( () => {})
+    }
+
+    useEffect( () => {
+        onAuthStateChanged(auth, user => {
+            setUser(user);
+        })
+    }, []);
+
+    return {
+        user, 
+        setUser, 
+        handleSignOut,
+        signInWithGoogle
+    };
+}
+
+export default useFirebase;
+```
+
+⫸ `Used Optional Chaining and display user-name:`
+
+``` JavaScript
+// In Header.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useFirebase from '../../hooks/useFirebase';
+import './Header.css';
+
+const Header = () => {
+    const { user, handleSignOut } = useFirebase();
+    return (
+        <div className='header'>
+            <nav>
+                <Link to='/home'>Home</Link>
+                <Link to='/products'>Products</Link>
+                <Link to='/orders'>Orders</Link>
+                <Link to='/register'>Register</Link>
+                <span>{user?.displayName && user.displayName}</span>
+                {
+                    user?.uid
+                    ?
+                    <button onClick={handleSignOut}>Sign Out</button>
+                    :
+                    <Link to='/login'>Login</Link>
+                }
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
 
 ## 58.5 Explore and Install React Firebase Hooks
 
