@@ -170,9 +170,9 @@ export default App;
 
 ⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___Google Sign-in Provider___)
 1. ___Create a project___ on console.firebase.google.com
-   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > ___Create Project___
 2. ___Register___ Web app in firebase
-   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > ___Register App___
 3. Install the ___SDK___
    - ___npm install firebase___
 4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
@@ -185,7 +185,7 @@ export default App;
 7. import __app__ from ___firebase.init.js___ into your ___App.js___
 8. ___turn on___ google authentication (___firebase > authentication > enable google sign-in___)
    - `In Firebase:`
-     - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → Save
+     - Authentication → Get Started → ___Google___ → ___Enable___ → give Project_name → Email Address (to receive issus's mail) → ___Save___
    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
 9.  Create an instance of the ___Google provider object___
     - Set ___onClick Event Handler___ like `onClick={handleGoogleSignIn}` in a ___button___ called ___Google Sign In___.
@@ -196,6 +196,11 @@ export default App;
 
 ⫸ `Note:` ___We can remove Google Permission___
 - ___myaccount.google.com___ > security > Signing in to other sites > Signing in with Google > Clicked on App > ___Remove Access___
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+
+- __In Firebase:__
+  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
 ## 56.4 Sign in with google, open google login popup
 
@@ -333,9 +338,9 @@ export default App;
 
 ⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___GitHub Sign-in Provider___)
 1. ___Create a project___ on console.firebase.google.com
-   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > ___Create Project___
 2. ___Register___ Web app in firebase
-   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > ___Register App___
 3. Install the ___SDK___
    - ___npm install firebase___
 4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
@@ -368,7 +373,7 @@ export default App;
 ⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
 
 - __In Firebase:__
-  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the home page)
+  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the ___Homepage URL___ | ___App URL___)
 - __In Github:__
   - Settings → Developer settings → OAuth Apps → Clicked on Application → General → Homepage-URL (`https://56-2simple-firebase-authentication-crescentpartha.netlify.app/`)
 
@@ -557,9 +562,9 @@ console.log(email);
 ⫸ `Steps to use firebase:` (___Recommended to Follow these 11 Steps___) (___Facebook Sign-in Provider___)
 
 1. ___Create a project___ on console.firebase.google.com
-   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > Create Project
+   - Clicked ___Add Project___ > Project-Name (30 words) > Continue > Enable Google Analytics (not mandatory) > ___Create Project___
 2. ___Register___ Web app in firebase
-   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > Register App
+   - Clicked ___Web Icon___ > App nickname > checkmark Firebase Hosting (not mandatory) > ___Register App___
 3. Install the ___SDK___
    - ___npm install firebase___
 4. ___Initialize Firebase___ in your App and Create a ___Firebase App object___
@@ -572,19 +577,24 @@ console.log(email);
 7. import __app__ from ___firebase.init.js___ into your ___App.js___
 8.  ___turn on___ Facebook authentication (___firebase > authentication > enable Facebook sign-in provider___)
     - `In Firebase:` 
-      - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > Save
+      - Authentication > Get Started > ___Facebook___ > ___Enable___ > Paste (App ID & App Secret) > Copy (OAuth redirect URI) > ___Save___
     - `In Developers Facebook: `
       - [developers.facebook.com](https://developers.facebook.com/) > Create App (App-name & email) > Create Test App (for locally development) > Set up (Facebook Login) > Web > Facebook Login → Settings (Valid OAuth Redirect URIs) > Paste (OAuth redirect URI) > ___Save changes___
       - Settings > Basic > Copy (App ID & App Secret (clicked Show)) > Paste in Configure Provider > ___Save___
     - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
 9. Create an instance of the ___Facebook provider object___
-    - Set ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___.
+    - Set ___onClick Event Handler___ like `onClick={handleFacebookSignIn}` in a ___button___ called ___Facebood Sign In___.
     - `In Firebase:`
       - Go to docs > Build > Authentication > Web > ___Facebook Login___
 10. To ___sign in___ with ___a pop-up window___, call ___signInWithPopup___ with ___auth___ and ___provider___ parameters.
 11. Handle ___.then___ (if successful) and ___.catch___ error (if error)
 
 ⫸ `Note:` ___We can remove Facebook Permission___
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+
+- __In Firebase:__
+  - Authentication → Settings → Add Domain → `https://56-2simple-firebase-authentication-crescentpartha.netlify.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
 ---
 
