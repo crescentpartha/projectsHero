@@ -178,6 +178,7 @@ const useFirebase = () => {
         .then( () => {})
     }
 
+    // Only one time we need to tell that set the state if user is changed (Result: toggle LogIn to SignOut)
     useEffect( () => {
         onAuthStateChanged(auth, user => {
             setUser(user);
@@ -231,6 +232,16 @@ export default Header;
 ```
 
 ## 58.5 Explore and Install React Firebase Hooks
+
+⫸ [useHooks - useAuth](https://usehooks.com/useAuth/ "useAuth - usehook.com | They basically create a context API and pass the auth info to the authContext and share with every components.")
+- A very common scenario is you have ___a bunch of components___ that need to ___render different___ depending on whether the ___current user is logged in___ and sometimes call ___authentication methods___ like ___signin___, ___signout___, ___sendPasswordResetEmail___, etc.
+- `useAuth hook` that enables any component to get the ___current auth state___ and ___re-render___ if it changes.
+- They basically create a ___context API___ and pass the ___auth info___ to the ___authContext___ and share with every components.
+- But this is ___harder option___ (`useAuth`), there are other ___easier option___ available (`react-firebase-hooks`).
+
+⫸ [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks "React Hooks for Firebase - GitHub | To use it, we need to install it first | Follow the link")
+
+⫸ `ShortCut:` "___Select word___ + `Ctrl + Shift + F`" → It tells us, we use this word in ___how many files___.
 
 ## 58.6 Use React Firebase Hook to manage user authentication
 

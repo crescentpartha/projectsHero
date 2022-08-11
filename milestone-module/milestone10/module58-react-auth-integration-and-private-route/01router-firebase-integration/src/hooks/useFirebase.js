@@ -26,6 +26,7 @@ const useFirebase = () => {
         .then( () => {})
     }
 
+    // Only one time we need to tell that set the state if user is changed (Result: toggle LogIn to SignOut)
     useEffect( () => {
         onAuthStateChanged(auth, user => {
             setUser(user);
