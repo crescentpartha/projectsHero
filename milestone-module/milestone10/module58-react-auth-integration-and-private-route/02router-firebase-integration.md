@@ -245,6 +245,142 @@ export default Header;
 
 ## 58.6 Use React Firebase Hook to manage user authentication
 
+⫸ We use ___react-firebase-hooks___ library rather than ___useFirebase()___ hook, because it is easier to implementation ___firebase authentication___ and ___much more___.
+- [Social Login Example](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#full-example-9 "Follow the link and implement Social Media Login system.")
+
+⫸ Replace ___useFirebase___ custom hook by ___react-firebase-hooks___ library: (it is ___easier to implement___)
+
+``` JavaScript
+// In Login.js
+
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+// import useFirebase from '../../hooks/useFirebase';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import app from '../../firebase.init';
+
+const auth = getAuth(app);
+
+const Login = () => {
+    // const {signInWithGoogle} = useFirebase();
+    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+    return (
+        <div>
+            <h3>Please Login Now!!!</h3>
+            <div style={{margin: '20px'}}>
+                {/* <button onClick={signInWithGoogle}>Google Sign In</button> */}
+                <button onClick={() => signInWithGoogle()}>Google Sign In</button>
+            </div>
+            <form>
+                <input type="email" placeholder='Your Email' />
+                <br />
+                <input type="password" placeholder='Your Password' />
+                <br />
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+⫸ Replace ___useFirebase___ custom hook by ___react-firebase-hooks___ library: (it is ___easier to implement___)
+
+``` JavaScript
+// In Header.js
+
+import { getAuth, signOut } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import app from '../../firebase.init';
+// import useFirebase from '../../hooks/useFirebase';
+import './Header.css';
+
+const auth = getAuth(app);
+
+const Header = () => {
+    // const { user, handleSignOut } = useFirebase();
+    const [user] = useAuthState(auth);
+    return (
+        <div className='header'>
+            <nav>
+                <Link to='/home'>Home</Link>
+                <Link to='/products'>Products</Link>
+                <Link to='/orders'>Orders</Link>
+                <Link to='/register'>Register</Link>
+                <span>{user?.displayName && user.displayName}</span>
+                {
+                    user?.uid
+                    ?
+                    // <button onClick={handleSignOut}>Sign Out</button>
+                    <button onClick={() => signOut(auth)}>Sign Out</button>
+                    :
+                    <Link to='/login'>Login</Link>
+                }
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
+
+⫸ Replace ___useFirebase___ custom hook by ___react-firebase-hooks___ library: (it is ___easier to implement___)
+
+``` JavaScript
+// In Home.js
+
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import app from '../../firebase.init';
+// import useFirebase from '../../hooks/useFirebase';
+
+const auth = getAuth(app);
+
+const Home = () => {
+    // const {user} = useFirebase();
+    const [user] = useAuthState(auth);
+    return (
+        <div>
+            <h2>This is Home</h2>
+            <p>Current user is: {user ? user.displayName : 'No body'}</p>
+        </div>
+    );
+};
+
+export default Home;
+```
+
+⫸ Replace ___useFirebase___ custom hook by ___react-firebase-hooks___ library: (it is ___easier to implement___)
+
+``` JavaScript
+// Products.js
+
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import app from '../../firebase.init';
+// import useFirebase from '../../hooks/useFirebase';
+
+const auth = getAuth(app);
+
+const Products = () => {
+    // const {user} = useFirebase();
+    const [user] = useAuthState(auth);
+    return (
+        <div>
+            <h2>Knock knock!! who is there</h2>
+            <h5>{user ? user.displayName : 'Vooooooooooot'}</h5>
+        </div>
+    );
+};
+
+export default Products;
+```
+
 ## 58.7 Introduction to Protected Route and Require Auth
 
 ## 58.8 Module Summary and Implement Auth Redirect
