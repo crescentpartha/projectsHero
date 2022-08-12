@@ -383,6 +383,79 @@ export default Products;
 
 ## 58.7 Introduction to Protected Route and Require Auth
 
+⫸ [React-Router > Authentication:](https://reactrouter.com/docs/en/v6/examples/auth#preview "This example demonstrates how to restrict access to routes to authenticated users")
+
+⫸ `Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___)
+- ___Login is mandatory___, if we ___wrap___ any component by ___RequireAuth___
+- Otherwise, it ___navigate___ us to ___Login page___
+- If any ___user Login___, then the user ___can access___ those ___wrapped component___ (which are ___wrapped by RequireAuth___)
+
+``` JavaScript
+// In App.js
+
+// import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header/Header';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import NotFound from './components/NotFound/NotFound';
+import Orders from './components/Orders/Orders';
+import Products from './components/Products/Products';
+import Register from './components/Register/Register';
+import RequireAuth from './components/RequireAuth/RequireAuth';
+
+function App() {
+  return (
+    <div className="App">
+      <Header></Header>
+      <Routes>
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/products' element={<Products></Products>}></Route>
+        <Route path='/orders' element={
+          <RequireAuth>
+            <Orders></Orders>
+          </RequireAuth>
+        }></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/notFound' element={<NotFound></NotFound>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `Create RequireAuth Component:` (___Create Protected Route___)
+- if any user ___doesn't login___ but ___want to access___ those component which are ___wrapped by RequireAuth___, then ___navigate___ to ___login page___
+
+``` JavaScript
+// In RequireAuth.js
+
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate, useLocation } from 'react-router-dom';
+import app from '../../firebase.init';
+
+const auth = getAuth(app);
+
+const RequireAuth = ({children}) => {
+    const [user] = useAuthState(auth);
+    const location = useLocation();
+    if(!user){
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    return children;
+};
+
+export default RequireAuth;
+```
+
 ## 58.8 Module Summary and Implement Auth Redirect
 
 ## Quiz 58
