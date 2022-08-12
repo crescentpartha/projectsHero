@@ -18,14 +18,19 @@ const Header = () => {
                 <Link to='/products'>Products</Link>
                 <Link to='/orders'>Orders</Link>
                 <Link to='/register'>Register</Link>
+                {
+                    user && <>
+                        <Link to="/vig">VIP</Link>
+                    </>
+                }
                 <span>{user?.displayName && user.displayName}</span>
                 {
                     user?.uid
-                    ?
-                    // <button onClick={handleSignOut}>Sign Out</button>
-                    <button onClick={() => signOut(auth)}>Sign Out</button>
-                    :
-                    <Link to='/login'>Login</Link>
+                        ?
+                        // <button onClick={handleSignOut}>Sign Out</button>
+                        <button onClick={() => signOut(auth)}>Sign Out</button>
+                        :
+                        <Link to='/login'>Login</Link>
                 }
             </nav>
         </div>

@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div>
             <h2>This is Home</h2>
-            <p>Current user is: {user ? user.displayName : 'No body'}</p>
+            <p>Current user is: <b>{user ? user.displayName : 'No body'}</b></p>
         </div>
     );
 };

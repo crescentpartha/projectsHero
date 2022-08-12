@@ -387,7 +387,7 @@ export default Products;
 
 ⫸ `Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___)
 - ___Login is mandatory___, if we ___wrap___ any component by ___RequireAuth___
-- Otherwise, it ___navigate___ us to ___Login page___
+- Otherwise, it ___Navigate or Redirect___ us to ___Login page___, but ___save___ the ___current location___ we were
 - If any ___user Login___, then the user ___can access___ those ___wrapped component___ (which are ___wrapped by RequireAuth___)
 
 ``` JavaScript
@@ -431,7 +431,7 @@ export default App;
 ```
 
 ⫸ `Create RequireAuth Component:` (___Create Protected Route___)
-- if any user ___doesn't login___ but ___want to access___ those component which are ___wrapped by RequireAuth___, then ___navigate___ to ___login page___
+- if any user ___doesn't login___ but ___want to access___ those component which are ___wrapped by RequireAuth___, then ___Redirect___ them to ___login page___
 
 ``` JavaScript
 // In RequireAuth.js
@@ -457,6 +457,123 @@ export default RequireAuth;
 ```
 
 ## 58.8 Module Summary and Implement Auth Redirect
+
+⫸ `Implement Authentication Redirect:`
+
+``` JavaScript
+// In Login.js
+
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+// import useFirebase from '../../hooks/useFirebase';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
+import app from '../../firebase.init';
+
+const auth = getAuth(app);
+
+const Login = () => {
+    // const {signInWithGoogle} = useFirebase();
+    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+    let location = useLocation();
+    let navigate = useNavigate();
+
+    const from = location?.state?.from?.pathname || '/';
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then( () => {
+            navigate(from, {replace: true});
+        })
+    }
+    return (
+        <div>
+            <h3>Please Login Now!!!</h3>
+            <div style={{margin: '20px'}}>
+                {/* <button onClick={signInWithGoogle}>Google Sign In</button> */}
+                {/* <button onClick={() => signInWithGoogle()}>Google Sign In</button> */}
+                <button onClick={handleGoogleSignIn}>Google Sign In</button>
+            </div>
+            <form>
+                <input type="email" placeholder='Your Email' />
+                <br />
+                <input type="password" placeholder='Your Password' />
+                <br />
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+`Some Notes:`
+- We try to use ___react-firebase-hooks___
+- ___Protected Route___ | ___Private Route___ | ___Required Auth___ (same)
+
+`Some Examples:`
+- `Facebook`
+  - without login, we ___can't use anything___
+- `YouTube`
+  - without login, we can ___watch videos___
+  - But we can't ___like & comment___ any videos and ___subscribe___ any channel
+- `Amazon`
+  - without login, we can ___see products___ and ___add to cart___
+  - But we need to login, when ___clicked___ on ___Buy Now___ button
+- `booking.com`
+  - without login, we can ___do anything___
+  - But we need to login, when we are `trying to book` ___Flight___, ___Hotel___, ___Car___ etc.
+- `Some Routes shows only for Logged in users`
+  - Example is given below
+
+
+⫸ `Create some Route only shows for Logged in User:` (like ___VIP___)
+
+``` JavaScript
+// In Header.js
+
+import { getAuth, signOut } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import app from '../../firebase.init';
+// import useFirebase from '../../hooks/useFirebase';
+import './Header.css';
+
+const auth = getAuth(app);
+
+const Header = () => {
+    // const { user, handleSignOut } = useFirebase();
+    const [user] = useAuthState(auth);
+    return (
+        <div className='header'>
+            <nav>
+                <Link to='/home'>Home</Link>
+                <Link to='/products'>Products</Link>
+                <Link to='/orders'>Orders</Link>
+                <Link to='/register'>Register</Link>
+                {
+                    user && <>
+                        <Link to="/vig">VIP</Link>
+                    </>
+                }
+                <span>{user?.displayName && user.displayName}</span>
+                {
+                    user?.uid
+                        ?
+                        // <button onClick={handleSignOut}>Sign Out</button>
+                        <button onClick={() => signOut(auth)}>Sign Out</button>
+                        :
+                        <Link to='/login'>Login</Link>
+                }
+            </nav>
+        </div>
+    );
+};
+
+export default Header;
+```
 
 ## Quiz 58
 
