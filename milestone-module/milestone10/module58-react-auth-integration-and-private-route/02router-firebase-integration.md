@@ -577,3 +577,89 @@ export default Header;
 
 ## Quiz 58
 
+1. Which one is ___not true___?
+   - [ ] getElementsByClassName will return an array of dom elements
+   - [ ] Use appendChild to add element to an existing element
+   - [x] ___querySelectorAll___ will return ___a node___
+   - [ ] With async function we will use await
+2. What is ___wrong with this code___? (see documentation)
+   - [ ] No Error
+   - [ ] It should be signInWithPopUp
+   - [ ] Google doesn't have Auth Provider
+   - [x] ___Auth variable___ will give an ___error___
+``` JavaScript
+const auth = getAuth ;
+const provider = new GoogleAuthProvider();
+signInWithPopup(auth, provider)
+ .then((result) => {
+    const user = result.user;
+})
+```
+3. Which one is ___not true___?
+   - [ ] Grid layout is a two dimensional layout
+   - [ ] Flexbox is one directional layout
+   - [ ] Float can be left or right
+   - [x] CSS box model ___does not include___ border
+4. what is the proper name of the operator to ___write an if-else in one line___ using the question mark (?) and a colon(:)?
+   - ___Ternary operator___
+5. which one is ___not a html5 element___ (google it)
+   - [ ] aside
+   - [ ] bdi
+   - [x] ___canva___
+   - [ ] nav
+6. Sign Out ___receives___ ________ as an ___argument___. (see documentation)
+   - [x] ___auth___
+   - [ ] user
+   - [ ] app secret
+   - [ ] nothing
+``` JavaScript
+signOut(__?__).then(() => {
+     // Sign-out successful.
+    }).catch((error) => {
+    // An error happened.
+         });
+```
+7. ___Which method___ will you call if you want ___Github Sign In___?(see documentation) <br /> const provider = _______?_______
+   - [ ] GithubAuthProvider()
+   - [ ] new GithubProvider()
+   - [ ] new Github()
+   - [x] ___new GithubAuthProvider()___
+8. Which is ___true___ about the ___Context API___?
+   - [ ] Context is designed to share data that can be considered "global" for a tree of React components
+   - [ ] We can pass data to two sibling component
+   - [ ] It solves the lifting state up issue
+   - [x] ___All of the above___
+9.  What will be the ___value of the rest___?
+    - [ ] { name: "Fakibaaz", job: "Practice kom kora", address: "janina" }
+    - [ ] { name: "Fakibaaz", address: "janina" }
+    - [x] ___{ name: "Fakibaaz", job: "Practice kom kora" }___
+    - [ ] { job: "Practice kom kora", address: "janina" }
+``` JavaScript
+const student = { name : “Fakibaaz”, job: “Practice Kom Kora” , address: “janina” }
+     const {address , … rest } = student
+```
+10.  Suppose you have a ___Component___ name called ___AuthContext___ that receives ___children as props___. What is the correct way to show it?
+     - [ ] const AuthContext = (props) => <div> {props.children} </div>
+     - [ ] const AuthContext = ({children}) => <div> {children} </div>
+     - [x] ___1 & 2___
+     - [ ] Neither of them
+11.  We can ___implement Firebase authentication___ by using ______
+     - [ ] Gmail Account
+     - [ ] Github
+     - [ ] Facebook Account
+     - [ ] ___All of the above___
+
+---
+
+⫸  `Notes:`
+- ___`getElementsByClassName` method:___
+  - The getElementsByClassName method of Document interface returns ___an array-like object of all child elements which have all of the given class name(s)___. When called on the document object, the ___complete document is searched___, including the ___root node___.
+  - The getElementsByClassName() method returns ___a collection of elements with a specified class name(s)___. The getElementsByClassName() method returns ___an HTMLCollection___.
+- ___`querySelectorAll()` method:___
+  - The querySelectorAll() method returns ___all elements that matches a CSS selector(s)___. The querySelectorAll() method returns ___a NodeList___.
+- Can we use `await for async function`?
+  - ___Async/await___ helps you write ___synchronous-looking___ JavaScript code that works ___asynchronously___. 
+  - ___Await___ is in an ___async function to ensure___ that ___all promises___ that are ___returned___ in the function are ___synchronized___.
+  - Use of async and await ___enables the use of ordinary try / catch blocks around asynchronous code___.
+  - The ___await keyword___ is only ___valid inside async functions___ within regular JavaScript code. If you use it outside of an async function's body, you will get a ___SyntaxError___.
+
