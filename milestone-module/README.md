@@ -153,7 +153,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 57 01email-password-auth](https://57-01email-password-auth-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Implementation Email/Password Authentication as a sign-in methods - Register users - Sign-In users - got the value of name, email, password - Used JS Regex for password validation - Used onClick, onChange, onBlur input-event and some Event Handlers")
 
-* [Module 58 01router-firebase-integration](https://58-1router-firebase-integration-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Router & Firebase integration - Project Setup - Implementation of Google Authentication - Register users - Google Sign-In users - Login users - display logged-in user name in header section - Custom Hook & Event Handlers - Conditional Rendering - Optional Chaining")
+* [Module 58 01router-firebase-integration](https://58-1router-firebase-integration-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Router & Firebase integration - Project Setup - Implementation of Google Authentication - Register users - Google Sign-In users - Login users - display logged-in user name in header section - Custom Hook & Event Handlers - Conditional Rendering - Optional Chaining - react-firebase-hooks library to manage user authentication and much more - Replace useFirebase custom hook by react-firebase-hooks library - Create Protected Route or Private Route or RequireAuth - Implement Auth Redirect - Create some Route only shows for Logged in User")
 
 
 

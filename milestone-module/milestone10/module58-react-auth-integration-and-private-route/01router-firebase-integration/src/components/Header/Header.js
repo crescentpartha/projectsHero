@@ -20,7 +20,7 @@ const Header = () => {
                 <Link to='/register'>Register</Link>
                 {
                     user && <>
-                        <Link to="/vig">VIP</Link>
+                        <Link to="/vip">VIP</Link>
                     </>
                 }
                 <span>{user?.displayName && <span style={{color: "Chocolate", marginRight: "5px"}}>{user.displayName}</span>}</span>
