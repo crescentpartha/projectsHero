@@ -1,3 +1,7 @@
+.header {
+    background-color: #c7c3c3;
+    padding: 15px;
+}
 .header nav a {
     margin-right: 20px;
     text-decoration: none;

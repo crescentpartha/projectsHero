@@ -23,7 +23,7 @@ const Header = () => {
                         <Link to="/vig">VIP</Link>
                     </>
                 }
-                <span>{user?.displayName && user.displayName}</span>
+                <span>{user?.displayName && <span style={{color: "Chocolate", marginRight: "5px"}}>{user.displayName}</span>}</span>
                 {
                     user?.uid
                         ?

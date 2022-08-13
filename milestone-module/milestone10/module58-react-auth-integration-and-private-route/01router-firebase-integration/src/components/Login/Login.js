@@ -22,7 +22,7 @@ const Login = () => {
         })
     }
     return (
-        <div>
+        <div style={{margin: "50px 20%", borderRadius: "20px", padding: "20px 0", boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.2)"}}>
             <h3>Please Login Now!!!</h3>
             <div style={{margin: '20px'}}>
                 {/* <button onClick={signInWithGoogle}>Google Sign In</button> */}
