@@ -1174,4 +1174,46 @@ const  item= items.filter(item => item.id != "j555")
 12. What is the name of the ___node module___ that you ___installed___ to have the ___react router___ in your React web application?
     - ___react-router-dom___
 
+---
+
+# Module 59: Private Route with Ema-John
+
+## 59.1 Module Introduction firebase setup and git clone
+
+⫸ [ema-john-with-router-module-53](https://github.com/ProgrammingHero1/ema-john-with-router-module-53 "Clone from 'ProgrammingHero1/ema-john-with-router-module-53', if needed")
+
+⫸ `If Clone any React Project:` (___Need to follow some steps___)
+1. `npm install` for ___node_modules___ folder, it installs all the ___dependency___ of this project.
+2. Create a ___new Repository___ 
+3. `git remote -v` (___to check remote URL___)
+   - It ___push___ all the ___commits___ in `https://github.com/ProgrammingHero1/eme-john-with-router-module-53.git` (It ___points___ to this repository)
+4. But I want to ___push___ all my ___commits___ in ___new Repository___
+   - ___set-url___ not add ___command___ `git remote set-url origin https://github.com/ProgrammingHero1/ema-john-simple-with-auth-module-59.git`
+5. `git remote -v` (___to check remote URL___)
+   - It ___points___ `https://github.com/ProgrammingHero1/ema-john-simple-with-auth-module-59.git` right now
+6. Now we can use ___git___ in a ___regular ways___.
+   - `git add .`
+   - `git commit -m "initial firebase setup"`
+   - `git push`
+   - `git status`
+
+
+⫸ `Authentication Steps or Auth_steps:`
+1. Create a ___new project___ in ___console.google.com___
+2. ___Register app___
+3. `npm install firebase`
+4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
+5. Firebase settings > Authentication > ___Enable___ Email/Password ___auth___
+
+
+⫸ `Hosting Steps:` (not mandatory right now!)
+1. ___Install Firebase CLI___ `npm install -g firebase-tools`
+2. ___Deploy to Firebase Hosting___
+   - `firebase login`
+   - `firebase init`
+   - `firebase deploy`
+
+`Note:` It could be needed in the next time.
+
+
 
