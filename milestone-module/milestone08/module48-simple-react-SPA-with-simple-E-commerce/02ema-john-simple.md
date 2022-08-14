@@ -285,28 +285,28 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 9. What does the package.json file do? (Search on Google Mama)
    - It records important metadata about a project
 10. Which is the correct way to call the function inside a button in React?
+    - `<button onClick={() => handleAdd(item)}> </button>`
 ``` JavaScript
 const handleAdd( item ){
     console.log(item)  
 }
 ```
-- `<button onClick={() => handleAdd(item)}> </button>`
 11.  How will you set a clickhandler on a Button using React?
+     - `onClick`
 ``` JavaScript
 <button ________= {handleClick}>Click me</button>
 ```
-- `onClick`
 12. How would you import a App.css file staying in the same folder of the App.js file? (if needed check the React Project that you have created)
+    - `"./App.css";`
 ``` JavaScript
 import ______?______;
 ```
-- `"./App.css";`
-13. Which ReactJS function renders HTML to the web page?
+13. Which ReactJS function ___renders HTML___ to the web page?
     - `ReactDOM.render()`
-14. What does transpile jsx in react?
-    - Babel
-15. Where we can call react hooks?
-    - At the top level of React function
+14. What does ___transpile jsx___ in react?
+    - ___Babel___
+15. ___Where___ we can ___call react hooks___?
+    - ___At the top level of React function___
 
 ---
 
@@ -317,21 +317,21 @@ import ______?______;
 ## 49.2 Run Github clone react project, Create Cart Component
 
 ⫸ `Run Github clone react Project:`
-- If we clone any react repository from github and try to execute command `npm start`, It will give an error message.
+- If we ___clone any react repository___ from github and try to execute command `npm start`, It will give an ___error message___.
 - If we clone any react repository, then we need to `install these dependencies`.
 - We don't find `node_modules` folder when we clone react repository.
-- To install these dependencies, we need to run `npm install` command. It will install all dependencies of that react project.
-- When we __push__ any react project into the github, we don't send __node_modules__ folder. We __ignore node_modules__ folder because __create-react-app__ makes this initial setting in __.gitignore__ file.
+- To ___install these dependencies___, we need to run `npm install` command. It will install all dependencies of that react project.
+- When we ___push___ any react project into the github, we don't send ___node_modules___ folder. We ___ignore node_modules___ folder because ___create-react-app___ makes this initial setting in ___.gitignore___ file.
 - After run `npm install`, we can run `npm start` command.
-- After that, we can also change our __project/folder name__.
+- After that, we can also change our ___project/folder name___.
 
 ---
 
 ⫸ `Access the Github clone react Project:`
-- When we `push` any clone repository into Github, It shows an error message that you __don't have access__. 
-- Run `git remote -v`, to check the __origin__ where to fetch and where did push.
+- When we `push` any clone repository into Github, It shows an error message that you ___don't have access___. 
+- Run `git remote -v`, to check the ___origin___ where to fetch and where did push.
 - If we want to send these into another Repository: (search: [__git remote set-url origin__](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories "Managing remote repositories | Switching remote URLs from SSH to HTTPS"))
-  - Create __repository__ and copy the __origin__ link.
+  - Create ___repository___ and copy the ___origin___ link.
   - run `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
   - Then, run `git remote -v` to verify that the remote URL has changed.
 
@@ -437,7 +437,7 @@ export {
 }
 ```
 
-- If any data load from outside, then it is __side effect__. You need to use `useEffect()`;
+- If any data load from outside, then it is ___side effect___. You need to use `useEffect()`;
 - There is 2 ways to find anythings → `filter` & `find`
 
 ``` JavaScript
@@ -457,14 +457,14 @@ useEffect( () => {
 
 ## 49.6 (advanced) Display local storage cart to the UI
 
-- __products load by fetch__ & __data load from Local Storage__ don't work sequentially. It would be __asynchronous__.
-- If we __load products before data fetch__/catch, then it shows __empty array__ because data don't loaded before data fetching. Solution is __dependency injection__.
-- __Dependency Injection__ means:
+- ___products load by fetch___ & ___data load from Local Storage___ don't work sequentially. It would be ___asynchronous___.
+- If we ___load products before data fetch___/catch, then it shows ___empty array___ because data don't loaded before data fetching. Solution is ___dependency injection___.
+- ___Dependency Injection___ means:
   - if keep empty array `useEffect( , [])`, then call it only once.
-  - __Local Storage__ depends on __one things__ or __many things__.
+  - ___Local Storage___ depends on ___one things___ or ___many things___.
     - for one things: `useEfect( , [products])`
     - for many things: `useEfect( , [products, cart])`
-- If we add dependency, then it __call this useEffect again__ for any little changes.
+- If we add dependency, then it ___call this useEffect again___ for any little changes.
 
 ``` JavaScript
 // In Shop.js
@@ -503,8 +503,8 @@ const Shop = () => {
 
 ## 49.7 (super advanced) Handle quantity from storage to cart
 
-- Use `for in` loop, if it is __object__.
-- Use `for of` loop, if it is __array__.
+- Use `for in` loop, if it is ___object___.
+- Use `for of` loop, if it is ___array___.
 
 ``` JavaScript
 // ONLY the changes things contains this code | In Cart.js
@@ -557,68 +557,68 @@ const Shop = () => {
 
 ## `Quiz:`
 
-1. What type of things can we send via props?
-   - __array, object, function, event handler__
+1. What ___type of things___ can we ___send via props___?
+   - ___array, object, function, event handler___
 
-2. What is true about localStorage? 
-   - __is not deleted__ after the browser has been closed
+2. What is ___true about localStorage___? 
+   - ___is not deleted___ after the browser has been closed
 
-3. What does it mean by __lifting up state__?
-   - Declare the __state in the parent component__ and pass __event handler to the child__
+3. What does it mean by ___lifting up state___?
+   - Declare the ___state in the parent component___ and pass ___event handler to the child___
+   - `onClick={ () => findDevice(parameter)}`
 
 ``` JavaScript
 // 4. if we want to add this function as an event handler to a button by passing a parameter, then which pattern is correct?
 
 const findDevice= (id) => testArr.find(p=> p.id===id);
 ```
-- `onClick={ () => findDevice(parameter)}`
 
-5. Which method is used to remove an item from local storage?
+5. Which ___method___ is used to ___remove an item___ from ___local storage___?
    - `localStorage.removeItem();`
 
+6. What will be the ___output___?
+   - ___NaN___
 ``` JavaScript
-// 6. What will be the output?
 const student1= {name: "rafique", marks: 79, result: "A+"};
 console.log(student1.mark + 1);
 ```
-- __NaN__
 
-7. How can we pass an event handler to the child component?
-   - __Using props__
+7. How can we ___pass an event handler___ to the ___child component___?
+   - ___Using props___
 
 8. What is the purpose of `npm i --save <packageName>`?
-   - Install and save the specified package 
-   - `--save`: Package will appear in your dependencies.
+   - ___Install___ and ___save___ the ___specified package___ 
+   - `--save`: ___Package will appear___ in your ___dependencies___.
 
-9. Where will you find information about all the packages that you have installed in your react app?
-   - __package.json__
+9. Where will you find ___information___ about ___all the packages___ that you have ___installed___ in your ___react app___?
+   - ___package.json___
 
-10. How can you pass a boolean value (true) as the prop named hero?
+10. How can you ___pass a boolean value___ (true) as the ___prop___ named ___hero___?
     - `<HeroComponent hero={true} />` & `<HeroComponent hero />`
 
-11. Suppose you are trying to access something from local storage using `localStorage.getItem()` method, and the item is not exist there. Then you will get___?
-    - __null__
+11. Suppose you are trying to ___access___ something from ___local storage___ using `localStorage.getItem()` method, and the item ___is not exist___ there. Then you will get___?
+    - ___null___
 
-12. What is the purpose of the dependency array in useEffect? 
-    - re-run the effect when the values within the array change across re-renders.
+12. What is the purpose of the ___dependency array___ in ___useEffect___? 
+    - ___re-run the effect___ when the ___values___ within the array ___change___ across ___re-renders___.
 
-13. If you want to set data into localStorage what two things should you do?
-    - Call __localStorage.setItem__ method and pass __name__ and __value__ as parameters
+13. If you want to ___set data___ into ___localStorage___ what two things should you do?
+    - Call ____localStorage.setItem____ method and pass ___name___ and ___value___ as parameters
 
-14. How we can access object properties?
-    - Using dot notation → `object.property` 
-    - Using square bracket notation → `object['property']` 
-    - By destructuring → `const {property} = object;`
+14. How we can ___access object properties___?
+    - Using ___dot notation___ → `object.property` 
+    - Using ___square bracket notation___ → `object['property']` 
+    - By ___destructuring___ → `const {property} = object;`
 
+15. How we can access __brand name__? 
+    - __props.brandName__
 ``` JavaScript
-// 15. How we can access __brand name__? 
 <Phone brandName="iPhone">
 
 const Phone = (props) => {
  return <h2>Phone Brand : { ___???____ }</h2>;
 }
 ```
-- __props.brandName__
 
 ---
 
@@ -1215,5 +1215,6 @@ const  item= items.filter(item => item.id != "j555")
 
 `Note:` It could be needed in the next time.
 
+## 59.2 Create Login component and style Login form
 
 
