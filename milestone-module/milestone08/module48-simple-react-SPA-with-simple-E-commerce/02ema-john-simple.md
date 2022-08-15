@@ -1204,6 +1204,8 @@ const  item= items.filter(item => item.id != "j555")
 3. `npm install firebase`
 4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
 5. Firebase settings > Authentication > ___Enable___ Email/Password ___auth___
+6. ___Create___ Login, SignUp component, ___setup route___
+7. Attach ___form field handler___ and form ___submit handler___
 
 
 ⫸ `Hosting Steps:` (not mandatory right now!)
@@ -1216,5 +1218,7 @@ const  item= items.filter(item => item.id != "j555")
 `Note:` It could be needed in the next time.
 
 ## 59.2 Create Login component and style Login form
+
+## 59.3 Style sign up component and access email, password
 
 
