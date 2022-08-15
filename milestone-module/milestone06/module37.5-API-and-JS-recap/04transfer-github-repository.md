@@ -67,3 +67,9 @@ git remote set-url origin https://github.com/crescentpartha/product-analysis-web
 
 git remote -v
 ```
+
+---
+
+⫸ `Create a Personal-Access-Token (PAT):` [GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token "create a personal access token - github docs") | [Video Tutorial](https://www.youtube.com/watch?v=ytSoabxSQ6E "Create a personal access token for alternative of github pass | Support for password authentication was removed Github Fixed using Token (August 13, 2021)")
+
+`Notes:` copy-paste doesn't work in terminal for ___personal-access-token___. ___Type___ rather than paste ___PAT___.
