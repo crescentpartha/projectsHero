@@ -40,7 +40,7 @@ const Orders = () => {
                     {/* <Link to="/shop">
                         <button>Proceed Checkout </button>
                     </Link> */}
-                    <button className='summary-button' onClick={() => navigate('/notFound')}>Proceed Checkout</button>
+                    <button className='summary-button' onClick={() => navigate('/shipment')}>Proceed Shipment</button>
                 </Cart>
             </div>
         </div>

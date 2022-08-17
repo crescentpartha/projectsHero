@@ -1635,7 +1635,7 @@ const RequireAuth = ({children}) => {
 export default RequireAuth;
 ```
 
-⫸ `Wrap component by RequireAuth component in element section for restricted access:`
+⫸ `Wrap Inventory component by RequireAuth component for restricted access:`
 
 ``` JavaScript
 // In App.js
@@ -1713,5 +1713,149 @@ const Header = () => {
 
 export default Header;
 ```
+
+## 59.7 Implement Sign out and Create a shipment form
+
+⫸ `Implement Sign Out from firebase/auth:`
+
+``` JavaScript
+// In Header.js
+
+import { signOut } from 'firebase/auth';
+import auth from '../../firebase.init';
+
+const Header = () => {
+
+    const handleSignOut = () => {
+        signOut(auth);
+    }
+
+    return (
+        <nav className='header'>
+            <div>
+                {
+                    user ? 
+                    <button onClick={handleSignOut}>Sign Out</button>
+                    :
+                    <Link to="/login">Login</Link>
+                }
+            </div>
+        </nav>
+    );
+};
+
+export default Header;
+```
+
+⫸ `Change navigate notFound to shipment route:`
+
+``` JavaScript
+// In Orders.js
+
+const Orders = () => {
+    return (
+        <div className="shop-container">
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <button className='summary-button' onClick={() => navigate('/shipment')}>Proceed Shipment</button>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Orders;
+```
+
+⫸ `Wrap Shipment component by RequireAuth component for restricted access:`
+
+``` JavaScript
+// In App.js
+
+import Shipment from './components/Shipment/Shipment';
+
+function App() {
+  return (
+    <div>
+      <Routes>
+        <Route path='/shipment' element={
+          <RequireAuth>
+            <Shipment></Shipment>
+          </RequireAuth>
+        }></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `Create Shipment component like SignUp component:`
+
+``` JavaScript
+// In Shipment.js
+
+import React, { useState } from 'react';
+
+const Shipment = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [error, setError] = useState('');
+    // const navigate = useNavigate();
+
+    const handleNameBlue = event => {
+        setName(event.target.value);
+    }
+    const handleEmailBlue = event => {
+        setEmail(event.target.value);
+    }
+
+    const handleAddressBlur = event => {
+        setAddress(event.target.value);
+    }
+
+    const handlePhoneNumberBlur = event => {
+        setPhone(event.target.value);
+    }
+
+    const handleCreateUser = event => {
+        event.preventDefault();
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <h2 className='form-title'>Shipping Information</h2>
+                <form onSubmit={handleCreateUser}>
+                    <div className="input-group">
+                        <label htmlFor="name">Your Name</label>
+                        <input onBlur={handleNameBlue} type="text" name="name" id="name" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="email">Your Email</label>
+                        <input onBlur={handleEmailBlue} type="email" name="email" id="email" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="address">Address</label>
+                        <input onBlur={handleAddressBlur} type="text" name="address" id="address" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="phone-number">Phone Number</label>
+                        <input onBlur={handlePhoneNumberBlur} type="number" name="phone-number" id="phone-number" required />
+                    </div>
+                    <p style={{ color: 'red' }}>{error}</p>
+                    <input className='form-submit' type="submit" value="Add Shipping" />
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Shipment;
+```
+
 
 
