@@ -1199,13 +1199,16 @@ const  item= items.filter(item => item.id != "j555")
 
 
 ⫸ `Authentication Steps or Auth_steps:`
-1. Create a ___new project___ in ___console.google.com___
+1. Create a ___new firebase project___ in ___console.firebase.google.com___
 2. ___Register app___
 3. `npm install firebase`
 4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
 5. Firebase settings > Authentication > ___Enable___ Email/Password ___auth___
 6. ___Create___ Login, SignUp component, ___setup route___
 7. Attach ___form field handler___ and form ___submit handler___
+8. `npm install --save react-firebase-hooks`
+9. ___useCreateUserWithEmailAndPassword___ from react-firebase-hooks
+
 
 
 ⫸ `Hosting Steps:` (not mandatory right now!)
@@ -1219,6 +1222,308 @@ const  item= items.filter(item => item.id != "j555")
 
 ## 59.2 Create Login component and style Login form
 
-## 59.3 Style sign up component and access email, password
+``` JavaScript
+// In Login.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Login.css';
+
+const Login = () => {
+    return (
+        <div className='form-container'>
+            <div>
+                <h2 className='form-title'>Login</h2>
+                <form>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" name="email" id="email" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" name="password" id="password" required/>
+                    </div>
+                    <input className='form-submit' type="submit" value="Login" />
+                </form>
+                <p>
+                    New to Ema-John? <Link className='form-link' to="/signup">Create an account</Link>
+                </p>
+                <div className='or-container'>
+                    <div>
+                        <hr />
+                    </div>
+                    <span>or</span>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+                <button>Continue with Google</button>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+``` JavaScript
+// In Login.css
+
+.form-container {
+    width: 600px;
+    margin: 50px auto;
+    border: 1px solid #95A0A7;
+    box-sizing: border-box;
+    box-shadow: -10px 10px 10px rgba(255, 153, 0, 0.3);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container > div > p {
+    text-align: center;
+}
+
+.form-title {
+    font-size: 35px;
+    color: #2A414F;
+    font-weight: 400;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-left: 5px;
+}
+
+.input-group input {
+    width: 415px;
+    height: 55px;
+    border: 1px solid #95A0A7;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.form-submit {
+    width: 415px;
+    height: 55px;
+    background-color: rgba(255, 153, 0, 0.3);
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.form-submit:hover {
+    background-color: rgba(255, 153, 0, 0.5);
+}
+
+.form-link {
+    color: #FF9900;
+    text-decoration: none;
+}
+
+.or-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.or-container > span {
+    text-align: center;
+}
+
+.or-container > div > hr {
+    background-color: 1px solid #95A0A7;
+}
+
+.form-container > div > button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #95A0A7;
+    margin-bottom: 30px;
+}
+```
+
+## 59.3 Style sign up component and access email, password using handler
+
+``` JavaScript
+// in SignUp.js
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './SignUp.css';
+
+const SignUp = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const handleEmailBlue = event => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+
+    const handleConfirmPasswordBlur = event => {
+        setConfirmPassword(event.target.value);
+    }
+
+    const handleCreateUser = event => {
+        event.preventDefault();
+        if(password !== confirmPassword) {
+            setError('Your two passwords did not match');
+            return;
+        }
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <h2 className='form-title'>SignUp</h2>
+                <form onSubmit={handleCreateUser}>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input onBlur={handleEmailBlue} type="email" name="email" id="email" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="confirm-password">Confirm Password</label>
+                        <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="confirm-password" required/>
+                    </div>
+                    <p style={{color: 'red'}}>{error}</p>
+                    <input className='form-submit' type="submit" value="SignUp" />
+                </form>
+                <p>
+                    Already have an account? <Link className='form-link' to="/login">Login</Link>
+                </p>
+                <div className='or-container'>
+                    <div>
+                        <hr />
+                    </div>
+                    <span>or</span>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+                <button>Continue with Google</button>
+            </div>
+        </div>
+    );
+};
+
+export default SignUp;
+```
+
+## 59.4 Install React firebase hook implement create user
+
+⫸ [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - github")
+
+``` JavaScript
+// In SignUp.js
+
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './SignUp.css';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init.js';
+
+const SignUp = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+
+    const handleEmailBlue = event => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+
+    const handleConfirmPasswordBlur = event => {
+        setConfirmPassword(event.target.value);
+    }
+
+    if (user) {
+        navigate('/shop');
+    }
+
+    const handleCreateUser = event => {
+        event.preventDefault();
+        if (password !== confirmPassword) {
+            setError('Your two passwords did not match');
+            return;
+        }
+        if (password.length < 6) {
+            setError('Password must be 6 characters or longer');
+            return;
+        }
+
+        createUserWithEmailAndPassword(email, password);
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <h2 className='form-title'>SignUp</h2>
+                <form onSubmit={handleCreateUser}>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input onBlur={handleEmailBlue} type="email" name="email" id="email" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="confirm-password">Confirm Password</label>
+                        <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="confirm-password" required/>
+                    </div>
+                    <p style={{color: 'red'}}>{error}</p>
+                    <input className='form-submit' type="submit" value="SignUp" />
+                </form>
+                <p>
+                    Already have an account? <Link className='form-link' to="/login">Login</Link>
+                </p>
+                <div className='or-container'>
+                    <div>
+                        <hr />
+                    </div>
+                    <span>or</span>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+                <button>Continue with Google</button>
+            </div>
+        </div>
+    );
+};
+
+export default SignUp;
+```
 
 
