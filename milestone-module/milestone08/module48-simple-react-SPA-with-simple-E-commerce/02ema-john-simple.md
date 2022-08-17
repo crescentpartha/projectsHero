@@ -1209,13 +1209,14 @@ const  item= items.filter(item => item.id != "j555")
 8. `npm install --save react-firebase-hooks`
 9. ___useCreateUserWithEmailAndPassword___ for create user from ___react-firebase-hooks___
 10. If user is ___created___, then ___redirect___ to the expected page
-11. ___useSignInWithEmailAndPassword___ for SignIn from ___react-firebase-hooks___
+11. ___useSignInWithEmailAndPassword___ for SignIn/LogIn from ___react-firebase-hooks___
 12. If user is ___LoggedIn___, then ___redirect___ to the expected page
 13. Create ___RequireAuth___ and ___Navigate___ from location
+    - Check ___user exists___ and also ___tract user location___
+14. In route, ___wrap protected component___ by using ___RequireAuth___ component
 
 
-
-⫸ `Hosting Steps:` (not mandatory right now!)
+⫸ `Firebase Hosting Steps:` (not mandatory right now!)
 1. ___Install Firebase CLI___ `npm install -g firebase-tools`
 2. ___Deploy to Firebase Hosting___
    - `firebase login`
@@ -1806,10 +1807,11 @@ const Shipment = () => {
     const [error, setError] = useState('');
     // const navigate = useNavigate();
 
-    const handleNameBlue = event => {
+    const handleNameBlur = event => {
         setName(event.target.value);
     }
-    const handleEmailBlue = event => {
+
+    const handleEmailBlur = event => {
         setEmail(event.target.value);
     }
 
@@ -1832,19 +1834,19 @@ const Shipment = () => {
                 <form onSubmit={handleCreateUser}>
                     <div className="input-group">
                         <label htmlFor="name">Your Name</label>
-                        <input onBlur={handleNameBlue} type="text" name="name" id="name" required />
+                        <input onBlur={handleNameBlur} type="text" name="name" id="name" required />
                     </div>
                     <div className="input-group">
                         <label htmlFor="email">Your Email</label>
-                        <input onBlur={handleEmailBlue} type="email" name="email" id="email" required />
+                        <input onBlur={handleEmailBlur} type="email" name="email" id="email" required />
                     </div>
                     <div className="input-group">
                         <label htmlFor="address">Address</label>
                         <input onBlur={handleAddressBlur} type="text" name="address" id="address" required />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="phone-number">Phone Number</label>
-                        <input onBlur={handlePhoneNumberBlur} type="number" name="phone-number" id="phone-number" required />
+                        <label htmlFor="phone">Phone Number</label>
+                        <input onBlur={handlePhoneNumberBlur} type="number" name="phone" id="phone" required />
                     </div>
                     <p style={{ color: 'red' }}>{error}</p>
                     <input className='form-submit' type="submit" value="Add Shipping" />
@@ -1857,5 +1859,42 @@ const Shipment = () => {
 export default Shipment;
 ```
 
+## 59.8 Module Summary and list to implement auth
 
+⫸ `Make Email field readOnly and set value={user?.email}`
+
+``` JavaScript
+// In Shipment.js
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+const Shipment = () => {
+    const [user] = useAuthState(auth);
+
+    // Remove handleEmailBlur handler
+
+    const handleCreateUser = event => {
+        event.preventDefault();
+        const shipping = {name, email, address, phone};
+        console.log(shipping);
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <form onSubmit={handleCreateUser}>
+                    <div className="input-group">
+                        <label htmlFor="email">Your Email</label>
+                        {/* <input onBlur={handleEmailBlur} type="email" name="email" id="email" required /> */}
+                        <input value={user?.email} readOnly type="email" name="email" id="email" required />
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Shipment;
+```
 

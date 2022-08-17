@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Shipment = () => {
+    const [user] = useAuthState(auth);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
@@ -8,11 +11,8 @@ const Shipment = () => {
     const [error, setError] = useState('');
     // const navigate = useNavigate();
 
-    const handleNameBlue = event => {
+    const handleNameBlur = event => {
         setName(event.target.value);
-    }
-    const handleEmailBlue = event => {
-        setEmail(event.target.value);
     }
 
     const handleAddressBlur = event => {
@@ -25,6 +25,8 @@ const Shipment = () => {
 
     const handleCreateUser = event => {
         event.preventDefault();
+        const shipping = {name, email, address, phone};
+        console.log(shipping);
     }
 
     return (
@@ -34,19 +36,20 @@ const Shipment = () => {
                 <form onSubmit={handleCreateUser}>
                     <div className="input-group">
                         <label htmlFor="name">Your Name</label>
-                        <input onBlur={handleNameBlue} type="text" name="name" id="name" required />
+                        <input onBlur={handleNameBlur} type="text" name="name" id="name" required />
                     </div>
                     <div className="input-group">
                         <label htmlFor="email">Your Email</label>
-                        <input onBlur={handleEmailBlue} type="email" name="email" id="email" required />
+                        {/* <input onBlur={handleEmailBlur} type="email" name="email" id="email" required /> */}
+                        <input value={user?.email} readOnly type="email" name="email" id="email" required />
                     </div>
                     <div className="input-group">
                         <label htmlFor="address">Address</label>
                         <input onBlur={handleAddressBlur} type="text" name="address" id="address" required />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="phone-number">Phone Number</label>
-                        <input onBlur={handlePhoneNumberBlur} type="number" name="phone-number" id="phone-number" required />
+                        <label htmlFor="phone">Phone Number</label>
+                        <input onBlur={handlePhoneNumberBlur} type="number" name="phone" id="phone" required />
                     </div>
                     <p style={{ color: 'red' }}>{error}</p>
                     <input className='form-submit' type="submit" value="Add Shipping" />
