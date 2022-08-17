@@ -1211,6 +1211,7 @@ const  item= items.filter(item => item.id != "j555")
 10. If user is ___created___, then ___redirect___ to the expected page
 11. ___useSignInWithEmailAndPassword___ for SignIn from ___react-firebase-hooks___
 12. If user is ___LoggedIn___, then ___redirect___ to the expected page
+13. Create ___RequireAuth___ and ___Navigate___ from location
 
 
 
@@ -1603,6 +1604,114 @@ const Login = () => {
 };
 
 export default Login;
+```
+
+## 59.6 Create Require Auth and Navigate from location
+
+⫸ [React-Router > Authentication:](https://reactrouter.com/docs/en/v6/examples/auth "Clicked on 'Open in StackBlitz' | This example demonstrates how to restrict access to routes to authenticated users.")
+
+⫸ `Create RequireAuth component:`
+
+``` JavaScript
+// In RequireAuth.js
+
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate, useLocation } from 'react-router-dom';
+import auth from '../../firebase.init';
+
+const RequireAuth = ({children}) => {
+    const [user] = useAuthState(auth);
+    const location = useLocation();
+
+    if (!user) {
+        // return <Navigate to="/login" state={{ from: location }} replace />;
+        return <Navigate to="/login" state={{from: location}} replace></Navigate>
+    }
+
+    return children;
+};
+
+export default RequireAuth;
+```
+
+⫸ `Wrap component by RequireAuth component in element section for restricted access:`
+
+``` JavaScript
+// In App.js
+
+// import logo from './logo.svg';
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Inventory from './components/Inventory/Inventory';
+import RequireAuth from './components/RequireAuth/RequireAuth';
+
+function App() {
+  return (
+    <div>
+      <Header></Header>
+      <Routes>
+        <Route path='/inventory' element={
+          <RequireAuth>
+            <Inventory></Inventory>
+          </RequireAuth>
+        }></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `Redirected to the expected location:`
+
+``` JavaScript
+// In Login.js
+
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    if (user) {
+        // navigate('/shop');
+        navigate(from, { replace: true });
+    }
+};
+
+export default Login;
+```
+
+⫸ `Conditional Rendering to toggle Login and Sign Out button:`
+
+``` JavaScript
+// In Header.js
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
+
+const Header = () => {
+    const [user] = useAuthState(auth);
+    return (
+        <nav className='header'>
+            <div>
+                {
+                    user ? 
+                    <button>Sign Out</button>
+                    :
+                    <Link to="/login">Login</Link>
+                }
+            </div>
+        </nav>
+    );
+};
+
+export default Header;
 ```
 
 
