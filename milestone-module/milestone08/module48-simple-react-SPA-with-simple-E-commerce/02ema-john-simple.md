@@ -1197,6 +1197,7 @@ const  item= items.filter(item => item.id != "j555")
    - `git push`
    - `git status`
 
+---
 
 ⫸ `Authentication Steps or Auth_steps:`
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
@@ -1215,15 +1216,35 @@ const  item= items.filter(item => item.id != "j555")
     - Check ___user exists___ and also ___tract user location___
 14. In route, ___wrap protected component___ by using ___RequireAuth___ component
 
+---
 
-⫸ `Firebase Hosting Steps:` (not mandatory right now!)
-1. ___Install Firebase CLI___ `npm install -g firebase-tools`
-2. ___Deploy to Firebase Hosting___
-   - `firebase login`
-   - `firebase init`
-   - `firebase deploy`
+⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
+1. ___Install Firebase CLI___ 
+   - `npm install -g firebase-tools` (___one time___ for your ___computer___)
+2. ___Initialize your Project___
+   - `firebase login` (___one time___ for your ___computer___)
+     - `Y` > Select Google Account > `Allow` > ___Firebase CLI___ Login Successful
+   - `firebase init` (___one time___ for ___each project___) (___Some questions need to face___)
+     - Are you ready to proceed? (Y/n) <br /> > `Y`
+     - Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `SpaceBar` to select or unselect)
+     - Use an existing project <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
+     - Select an existing project like `ema-john-simple-447ad` <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
+     - What do you want to use as your public directory? (public) <br /> > write `build` > (press `Enter`)
+     - Configure as a single-page app (rewrite all urls to /index.html)? (y/N) <br /> > `y`
+     - Set up automatic builds and deploys with GitHub? (y/N) <br /> > `N`
+     - File build/index.html already exists. Overwrite? (y/N) <br /> > `N` <br /> ___Firebase initialization complete!___
+3. ___Build your project___ according to ___latest change___ 
+   - `npm run build` (___every time___ you want to ___deploy___)
+4. ___Deploy to Firebase Hosting___
+   - `firebase deploy` (___every time___ you want to ___deploy___)
 
-`Note:` It could be needed in the next time.
+> `Note:` It could be needed in the next time.
+
+---
+
+⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+1. `npm run build`
+2. `firebase deploy`
 
 ## 59.2 Create Login component and style Login form
 
@@ -1897,4 +1918,34 @@ const Shipment = () => {
 
 export default Shipment;
 ```
+
+## 59.9 (bonus video) Host your react app to firebase
+
+⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
+1. ___Install Firebase CLI___ 
+   - `npm install -g firebase-tools` (___one time___ for your ___computer___)
+2. ___Initialize your Project___
+   - `firebase login` (___one time___ for your ___computer___)
+     - `Y` > Select Google Account > `Allow` > ___Firebase CLI___ Login Successful
+   - `firebase init` (___one time___ for ___each project___) (___Some questions need to face___)
+     - Are you ready to proceed? (Y/n) <br /> > `Y`
+     - Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `SpaceBar` to select or unselect)
+     - Use an existing project <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
+     - Select an existing project like `ema-john-simple-447ad` <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
+     - What do you want to use as your public directory? (public) <br /> > write `build` > (press `Enter`)
+     - Configure as a single-page app (rewrite all urls to /index.html)? (y/N) <br /> > `y`
+     - Set up automatic builds and deploys with GitHub? (y/N) <br /> > `N`
+     - File build/index.html already exists. Overwrite? (y/N) <br /> > `N` <br /> ___Firebase initialization complete!___
+3. ___Build your project___ according to ___latest change___ 
+   - `npm run build` (___every time___ you want to ___deploy___)
+4. ___Deploy to Firebase Hosting___
+   - `firebase deploy` (___every time___ you want to ___deploy___)
+
+> `Note:` It could be needed in the next time.
+
+---
+
+⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+1. `npm run build`
+2. `firebase deploy`
 
