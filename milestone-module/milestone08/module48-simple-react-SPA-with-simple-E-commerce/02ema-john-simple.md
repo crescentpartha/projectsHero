@@ -1949,3 +1949,81 @@ export default Shipment;
 1. `npm run build`
 2. `firebase deploy`
 
+## Quiz
+
+1. Which one is true about the ___React Hook rule___? (you will need to search online: Rules of hooks)
+   - [x] React hooks can be called from the ___inside___ of a React ___Functional Component___
+   - [ ] Hooks can be used with React Class Component as well
+   - [ ] You should call hooks inside loops and condition
+   - [ ] You can call hooks from regular javascript function (not a react component)
+2. What is the ___purpose of gitignore___? (google it)
+   - ___Ignore files to be sent to github___
+3. What is the ___use of Custom hook___ in react? (google it. And it will take you to the react js web site and you will find something called useYourImagination(). Read the first two paragraphs. Just read it. You do not have to understand anything.)
+   - [x] Custom hook can ___hide complex logic behind a simple interface___
+   - [ ] Custom hook allows you to pass state to any child component without props
+   - [ ] It prevents you to share logic between React components
+   - [ ] All the above
+4. What would be the ___right way of naming your custom hook___ that handles loading Books used in multiple components? (we created a few custom hooks, think about those)
+   - [ ] customBooks
+   - [ ] bookHook
+   - [x] ___useBooks___
+   - [ ] BookProvider
+5. Suppose you have placed your cursor on the Header, then pressing which ___shortcut key___ will take you to the ___Header component___?
+   - ___F12___
+``` JavaScript
+const Home = () => {
+ return (
+  <div>
+   <Header/>
+  </div>
+ );
+};
+```
+6. How will you get the ___currently signed in User in firebase___? (check out firebase doc. Under authentication > Web > Manage Users) 
+   - [x] ___onAuthStateChanged()___
+   - [ ] getAuth()
+   - [ ] auth.loggedInUser
+   - [ ] onFirebaseAuth()
+7. What is the ___purpose of Navigate___ in the following code snippet while creating ___PrivateRoute___?
+   - [ ] `<Navigate>` will be same as the Link component provided by react router
+   - [x] `<Navigate>` element ___changes the current location___ when it is ___rendered___.
+   - [ ] It can only take an object as the value of the `to` property
+   - [ ] All the above
+``` JavaScript
+<Navigate
+      to={{
+       pathname: "/login",
+       state: { from: location }
+      }}
+ />
+```
+8. Which react ___router hook___ gives you the `location` ___object___ that represents the current URL? (check react router docs. Under API you will see hooks. Check them out. [tai bole, abar o google !!!])
+   - ___useLocation___
+9.  Here, you will be ___redirected___ to the `/home` route. Because while using logical ___OR operator___?.
+    - ___If the left side is false then right side will be executed___
+``` JavaScript
+let url = "" || "/home";
+
+const navigate = useNavigate()
+navigate(url);
+```
+10.  What is the ___purpose of Private route___ / ___Protected Route___?
+     - [ ] ___To protect the sensitive routes in our website___
+     - [ ] There is nothing as Private Route
+     - [ ] ___To limit the unauthorized users to get to certain routes___
+     - [ ] All of the above
+     - [x] 1 and 3
+11.  What is the ___purpose of context API___? (if needed google it)
+     - [x] ___Share data without passing data using Props___
+     - [ ] Share more than one value using props
+     - [ ] Pass data using state in a context object
+
+---
+
+⫸ `Some Notes:`
+1. ___Rules of Hooks - React___
+   - ___Don't call___ Hooks ___inside loops___, ___conditions___, or ___nested functions___. <br /> Instead, always use Hooks at the ___top level of your React function___, before any early returns.
+2. ___Custom Hooks___
+   - Custom Hooks are ___a mechanism to reuse stateful logic___ (such as setting up a subscription and remembering the current value), but every time you use a custom Hook, ___all state and effects___ inside of it are ___fully isolated___. Each call to a Hook ___gets isolated state___.
+
+
