@@ -1207,7 +1207,10 @@ const  item= items.filter(item => item.id != "j555")
 6. ___Create___ Login, SignUp component, ___setup route___
 7. Attach ___form field handler___ and form ___submit handler___
 8. `npm install --save react-firebase-hooks`
-9. ___useCreateUserWithEmailAndPassword___ from react-firebase-hooks
+9. ___useCreateUserWithEmailAndPassword___ for create user from ___react-firebase-hooks___
+10. If user is ___created___, then ___redirect___ to the expected page
+11. ___useSignInWithEmailAndPassword___ for SignIn from ___react-firebase-hooks___
+12. If user is ___LoggedIn___, then ___redirect___ to the expected page
 
 
 
@@ -1435,7 +1438,7 @@ export default SignUp;
 
 ## 59.4 Install React firebase hook implement create user
 
-⫸ [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - github")
+⫸ [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - github | Install react-firebase-hooks")
 
 ``` JavaScript
 // In SignUp.js
@@ -1524,6 +1527,82 @@ const SignUp = () => {
 };
 
 export default SignUp;
+```
+
+## 59.5 Implement Login and redirect user after login
+
+``` JavaScript
+// In Login.js
+
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+    const handleEmailBlur = event => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+
+    if (user) {
+        navigate('/shop');
+    }
+
+    const handleUserSignIn = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(email, password);
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <h2 className='form-title'>Login</h2>
+                <form onSubmit={handleUserSignIn}>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input onBlur={handleEmailBlur} type="email" name="email" id="email" required/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required/>
+                    </div>
+                    <p style={{color: "red"}}>{error?.message}</p>
+                    {
+                        loading && <p>Loading...</p>
+                    }
+                    <input className='form-submit' type="submit" value="Login" />
+                </form>
+                <p>
+                    New to Ema-John? <Link className='form-link' to="/signup">Create an account</Link>
+                </p>
+                <div className='or-container'>
+                    <div>
+                        <hr />
+                    </div>
+                    <span>or</span>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+                <button>Continue with Google</button>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
 ```
 
 
