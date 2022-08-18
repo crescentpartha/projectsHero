@@ -285,3 +285,85 @@ const Header = () => {
 };
 ```
 
+## Quiz
+
+1. ___How many columns___ will be there? 
+   - `4`
+``` CSS
+grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+```
+2. `Height` and `width` ___can not be set___ in_____
+   - `inline element`
+3. How will you ___add blue color___ to all paragraph tags? 
+   - `p { color: blue; }`
+4. How would you ___apply style___ only to the ___second paragraph___ below?
+   - `#goat`
+``` HTML
+<p>I am your ex</p>
+<p id=”goat”> I am your next </p>
+```
+5. What ___style value___ will you write to put the ___text in the middle___ of the page? 
+   - `text-align: center;`
+6. Apply ___20px margin___ on the ___left and right___ side and ___10px___ on the ___top and bottom___ side of the elements with shundori class:
+   - `10px 20px;`
+``` HTML
+.shundori {
+	margin: ___?___
+}
+
+<h1 class=”title”>Awesome Heading</h1>
+```
+7. What is a ___universal selector___? (google it)
+   - `Selects all the elements` 
+     - `*` is the universal selector
+8. How would you ___add___ I Love you ___before all the paragraphs___?
+   - `p::before`
+``` JavaScript
+<style> 
+___________{
+	content: “I Love you”;
+}
+</style>
+```
+9. Which ___flex property___ will you use to flex items on ___multiple lines___ when the ___screen size shrinks___?
+   - `flex-wrap`
+10. Which ___flex property___ will you use to flex items along the ___y-axis___ when the ___flex-direction___ is set to ___row___?
+    - `align-items`
+11. What is true about justify-content: space-evenly? 
+    - `Items have equal space around them`
+12. Which one is true about ___CSS modules___? 
+    - [ ] ___CSS Modules let you use the same CSS class name in different files.___
+    - [ ] ___CSS module creates a random class name.___
+    - [ ] You cannot use the same class name while using CSS Modules.
+    - [x] 1 & 2
+13. What is the ___class infix___ of ___extra small___ screen size in react-bootstrap?
+    - [ ] xs
+    - [ ] xxs
+    - [ ] sx
+    - [x] ___None___
+14. In react-bootstrap ___grid layout___ how would you ___size columns___ based on the ___natural width of their content___?
+    - [ ] fluid
+    - [x] ___auto___
+    - [ ] flexible
+    - [ ] 100
+    - [ ] flex
+``` JavaScript
+<Col md="___?___">Variable width content</Col>
+```
+15. Which one will be the ___first___ in ___order___?
+    - [ ] Banana
+    - [x] ___Apple___
+    - [ ] Mango
+``` JavaScript
+<Container>
+   <Row>
+      <Col xs={{ order: 3 }}>Banana</Col>
+      <Col xs>Apple</Col>
+      <Col xs={{ order: 1 }}>Mango</Col>
+   </Row>
+</Container>
+```
+
