@@ -229,3 +229,12 @@ const services = [
 }
 ```
 
+## 60.6 Build Responsive React website using Bootstrap
+
+⫸ `Using Bootstrap:`
+- Bootstrap CDN link
+- Grid
+- Card
+- Gutters
+
+
