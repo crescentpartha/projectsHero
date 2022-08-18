@@ -155,5 +155,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 58 01router-firebase-integration](https://58-1router-firebase-integration-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Router & Firebase integration - Project Setup - Implementation of Google Authentication - Register users - Google Sign-In users - Login users - display logged-in user name in header section - Custom Hook & Event Handlers - Conditional Rendering - Optional Chaining - react-firebase-hooks library to manage user authentication and much more - Replace useFirebase custom hook by react-firebase-hooks library - Create Protected Route or Private Route or RequireAuth - Implement Auth Redirect - Create some Route only shows for Logged in User")
 
-
+* [Module 60 01genius-car-services](https://60-1genius-car-services-cp.netlify.app/ "React-App | Live-Server _-_ Create React App - React Router - Firebase - Responsive using (CSS Media Query, Bootstrap, and React-Bootstrap) - Create Image Slider using React Bootstrap - Use Card & Navbar from React Bootstrap - Dynamically year setup in footer section - Explore Image Resources & Image hosting - Setup _redirects & NotFound pages - Deploy in Netlify")
 
