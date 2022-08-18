@@ -148,10 +148,13 @@
 import carService from '../../../images/car-service.jpg';
 
 const services = [
-    { id: 1, name: 'oil change', price: 100, description: '', img: carService }
+   { id: 1, name: 'oil change', price: 100, description: '', img: carService },
+   { id: 1, name: 'oil change', price: 100, description: '', img: 'https://i.ibb.co/dGDkr4v/1.jpg' }
 ]
 ```
 > `Note:` we ___can't covert___ direct image to a ___JSON format___ because image information will be remove. That's why we should use ___image link___. <br /> [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") is a ___free image hosting___ website. We can ___upload and share___ own images with other or use to make ___custom data purposes___.
 
+
+## 60.4 Load fake data map services to display single services
 
 
