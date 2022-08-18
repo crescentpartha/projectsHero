@@ -163,7 +163,7 @@ const services = [
 
 ## 60.5 Make Services Responsive using CSS media query
 
-⫸ `CSS Media Query:` (___sample___)
+⫸ `CSS Media Query:` (___Vanilla CSS___) (___sample___)
 
 ``` JavaScript
 @media only screen and (max-width: 1200px){
@@ -236,5 +236,14 @@ const services = [
 - Grid
 - Card
 - Gutters
+
+## 60.7 React Bootstrap for responsive and image slider, banner
+
+⫸ `Using React-Bootstrap:`
+- Install React-Bootstrap
+- Carousels
+- [React Carousel libraries](https://react.libhunt.com/libs/carousel) | [14 Top React Carousel Components](https://alvarotrigo.com/blog/react-carousels/) | [10 Best React Carousel Libraries](https://openbase.com/categories/js/best-react-carousel-libraries)
+
+
 
 
