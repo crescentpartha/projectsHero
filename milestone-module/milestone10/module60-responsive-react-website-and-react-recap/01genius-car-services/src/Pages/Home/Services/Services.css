@@ -1,0 +1,34 @@
+.services-title {
+    text-align: center;
+    color: blue;
+}
+.services-title > span {
+    color: orange;
+}
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 20px;
+}
+
+/* Make services Responsive: (according to Bootstrap) */
+
+/* Small */
+@media only screen and (max-width: 576px) {
+    .services-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+/* Medium */
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+    .services-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* Large */
+@media only screen and (min-width: 993px) and (max-width: 1400px) {
+    .services-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

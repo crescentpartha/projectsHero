@@ -157,4 +157,75 @@ const services = [
 
 ## 60.4 Load fake data map services to display single services
 
+⫸ `Load & display Data:`
+- [services.json](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/public/services.json "Fake Data of services") - [Services.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Home/Services/Services.js "Services Component") - [Service.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Home/Service/Service.js "Service Component")
+
+
+## 60.5 Make Services Responsive using CSS media query
+
+⫸ `CSS Media Query:` (___sample___)
+
+``` JavaScript
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+}
+@media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+}
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+}
+```
+
+⫸ `Make services Responsive:` (___according to Bootstrap___)
+
+``` JavaScript
+/* Extra-small */
+@media only screen and (max-width: 576px) {
+
+}
+/* Small */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    
+}
+/* Medium */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    
+}
+/* Large */
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    
+}
+/* X-Large */
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+    
+}
+/* XX-Large */
+@media only screen and (min-width: 1401px) {
+    
+}
+```
+
+⫸ `Examples:`
+
+``` JavaScript
+/* small */
+@media only screen and (max-width: 576px) {
+    .services-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+/* Medium */
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+    .services-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* Large */
+@media only screen and (min-width: 993px) and (max-width: 1400px) {
+    .services-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+```
 
