@@ -232,18 +232,56 @@ const services = [
 ## 60.6 Build Responsive React website using Bootstrap
 
 ⫸ `Using Bootstrap:`
-- Bootstrap CDN link
-- Grid
-- Card
-- Gutters
+- ___Bootstrap CDN link___
+- ___Grid___
+- ___Card___
+- ___Gutters___
 
 ## 60.7 React Bootstrap for responsive and image slider, banner
 
 ⫸ `Using React-Bootstrap:`
-- Install React-Bootstrap
-- Carousels
+- ___Install React-Bootstrap___
+- ___Carousels___
 - [React Carousel libraries](https://react.libhunt.com/libs/carousel) | [14 Top React Carousel Components](https://alvarotrigo.com/blog/react-carousels/) | [10 Best React Carousel Libraries](https://openbase.com/categories/js/best-react-carousel-libraries)
 
 
+## 60.8 Module Summary, Add navbar and set footer dynamic date
 
+``` JavaScript
+// In Footer.js
+
+const Footer = () => {
+   // Get year value dynamically
+   const year = new Date().getFullYear();
+   return (
+      <footer>
+         <p><small>&copy;copyright reserved by Crescent_Partha in {year}</small></p>
+      </footer>
+   );
+};
+```
+
+⫸ `Header using React-Bootstrap & React-Router:`
+
+``` JavaScript
+// In Header.js
+
+const Header = () => {
+    return (
+        <>
+            <Navbar bg="primary" variant="dark" fixed="top" >
+                <Container className='d-flex flex-row justify-content-evenly align-items-center p-2'>
+                    <Navbar.Brand>
+                        <Link to='/home'><img src={logo} height='30' alt='' /></Link>
+                    </Navbar.Brand>
+                    <Nav className="me-auto d-flex flex-row justify-content-evenly align-items-center">
+                        <Link className='text-white text-decoration-none' to='/home'>Home</Link>
+                        <Link className='text-white text-decoration-none mx-2' to='/notFound'>Not Found</Link>
+                    </Nav>
+                </Container>
+            </Navbar>
+        </>
+    );
+};
+```
 

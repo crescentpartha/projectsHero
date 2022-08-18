@@ -2,9 +2,12 @@ import React from 'react';
 import './Footer.css';
 
 const Footer = () => {
+    const year = new Date().getFullYear();
+    // const today = new Date();
+    // const year2 = today.getFullYear();
     return (
         <footer>
-            <p><small>&copy;copyright reserved by Crescent_Partha in {new Date().getFullYear()}</small></p>
+            <p><small>&copy;copyright reserved by Crescent_Partha in {year}</small></p>
         </footer>
     );
 };
