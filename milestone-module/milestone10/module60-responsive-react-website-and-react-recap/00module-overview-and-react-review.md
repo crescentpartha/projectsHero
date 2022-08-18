@@ -135,3 +135,23 @@
 2. `firebase deploy`
 
 
+## 60.3 Collect, Edit, Optimize and host images for your website
+
+⫸ `Image Resources:`
+1. [freepik](https://www.freepik.com/ "freepik - illustration") - illustration
+2. [Unsplash](https://unsplash.com/ "Unsplash - free images & pictures") - free images & pictures
+3. [Photopea](https://www.photopea.com/ "Photopea - resize images") - resize images
+4. [TinyPNG](https://tinypng.com/ "TinyPNG - compress or optimize images") - compress/optimize images
+5. [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") - free image hosting
+
+``` JavaScript
+import carService from '../../../images/car-service.jpg';
+
+const services = [
+    { id: 1, name: 'oil change', price: 100, description: '', img: carService }
+]
+```
+> `Note:` we ___can't covert___ direct image to a ___JSON format___ because image information will be remove. That's why we should use ___image link___. <br /> [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") is a ___free image hosting___ website. We can ___upload and share___ own images with other or use to make ___custom data purposes___.
+
+
+
