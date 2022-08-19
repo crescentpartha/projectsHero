@@ -19,7 +19,10 @@ const Header = () => {
                         {/* <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="#features">Features</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-                        <Link className='text-white text-decoration-none' to='/home'>Home</Link>
+                        <Link className='text-white text-decoration-none mx-2' to='/home'>Home</Link>
+                        <Link className='text-white text-decoration-none mx-2' to='/about'>About</Link>
+                        <Link className='text-white text-decoration-none mx-2' to='/login'>SignIn</Link>
+                        <Link className='text-white text-decoration-none mx-2' to='/signup'>SignUp</Link>
                         <Link className='text-white text-decoration-none mx-2' to='/notFound'>Not Found</Link>
                     </Nav>
                 </Container>
