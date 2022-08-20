@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
@@ -13,10 +13,14 @@ const Login = () => {
 
     const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    if (loading) {
-        return 'loading...';
+    const from = location.state?.from?.pathname || '/';
+
+    if (user) {
+        navigate(from, { replace: true });
     }
+
     const handleEmailBlur = event => {
         setEmail(event.target.value);
     }
@@ -28,7 +32,6 @@ const Login = () => {
     const handleUserSignIn = event => {
         event.preventDefault();
         signInWithEmailAndPassword(email, password);
-        navigate('/home');
     }
 
     return (
@@ -44,7 +47,14 @@ const Login = () => {
                         <label htmlFor="password">Password</label>
                         <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required />
                     </div>
-                    <p>{loading}</p>
+                    {
+                        loading
+                        &&
+                        <div className="d-flex align-items-center">
+                            <strong>Loading...</strong>
+                            <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    }
                     <input className='submit-button' type="submit" value="Login" />
                 </form>
                 <p>

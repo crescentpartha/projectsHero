@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../src/firebase.init';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
@@ -13,9 +13,12 @@ const SignUp = () => {
 
     const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    if (loading) {
-        return 'Loading...';
+    const from = location.state?.from?.pathname || '/';
+
+    if (user) {
+        navigate(from, { replace: true });
     }
 
     const handleEmailBlur = event => {
@@ -41,7 +44,6 @@ const SignUp = () => {
         else {
             setError('');
             createUserWithEmailAndPassword(email, password);
-            navigate('/home');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
@@ -65,8 +67,16 @@ const SignUp = () => {
                         <label htmlFor="confirm-password">Confirm Password</label>
                         <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="confirm-password" required />
                     </div>
-                    <p style={{color: 'red'}}>{error}</p>
-                    <p>{loading}</p>
+                    <p style={{ color: 'red' }}>{error}</p>
+                    {
+                        loading
+                        &&
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    }
                     <input className='submit-button' type="submit" value="SignUp" />
                 </form>
                 <p>
