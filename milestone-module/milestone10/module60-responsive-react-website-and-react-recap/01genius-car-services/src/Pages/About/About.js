@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './About.css';
 
 const About = () => {
+    const navigate = useNavigate();
+
+    const handleRedirectToNotFound = () => {
+        navigate('/notFound');
+    }
+    
     return (
         <div className='about-container'>
             <h2 className='about-title'>Get in Touch with the Car Doctor Expert Team</h2>
@@ -9,12 +16,12 @@ const About = () => {
                 <div className="about-cart1">
                     <h2>Already touch on Expert Team?</h2>
                     <p>Have questions related to your current services or subscription? Click the button below.</p>
-                    <input type="button" value="I am one of the Car Doctor partner" />
+                    <input onClick={handleRedirectToNotFound} type="button" value="I am one of the Car Doctor partner" />
                 </div>
                 <div className="about-cart2">
                     <h2>New to The Car Doctor?</h2>
                     <p>Have a question or want to know more about how to become a partner on Car Doctor and grow your car services business? Click the button below.</p>
-                    <input type="button" value="I am new to The Car Doctor" />
+                    <input onClick={handleRedirectToNotFound} type="button" value="I am new to The Car Doctor" />
                 </div>
             </div>
             <div className='about-links'>

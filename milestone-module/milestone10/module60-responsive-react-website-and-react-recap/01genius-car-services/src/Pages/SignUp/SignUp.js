@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../../src/firebase.init';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
-import auth from '../../../src/firebase.init';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +11,12 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
+    const navigate = useNavigate();
+
+    if (loading) {
+        return 'Loading...';
+    }
 
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -36,6 +41,7 @@ const SignUp = () => {
         else {
             setError('');
             createUserWithEmailAndPassword(email, password);
+            navigate('/home');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
@@ -60,6 +66,7 @@ const SignUp = () => {
                         <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="confirm-password" required />
                     </div>
                     <p style={{color: 'red'}}>{error}</p>
+                    <p>{loading}</p>
                     <input className='submit-button' type="submit" value="SignUp" />
                 </form>
                 <p>
