@@ -9,9 +9,8 @@ import './Login.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
-    const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -54,6 +53,9 @@ const Login = () => {
                             <strong>Loading...</strong>
                             <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
                         </div>
+                    }
+                    {
+                        error && <p style={{color: 'red'}}>{error.message}</p>
                     }
                     <input className='submit-button' type="submit" value="Login" />
                 </form>
