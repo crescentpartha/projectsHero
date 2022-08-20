@@ -7,7 +7,7 @@ const Footer = () => {
     // const year2 = today.getFullYear();
     return (
         <footer>
-            <p><small>&copy;copyright reserved by Crescent_Partha in {year}</small></p>
+            <p><small>&copy;copyright reserved by <span>Crescent_Partha</span> in <span>{year}</span></small></p>
         </footer>
     );
 };
