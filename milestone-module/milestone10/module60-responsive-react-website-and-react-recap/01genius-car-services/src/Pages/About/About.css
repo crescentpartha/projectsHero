@@ -1,0 +1,38 @@
+.about-container {
+    margin: 90px 20px 50px;
+    padding: 20px;
+}
+.about-title {
+    text-align: center;
+    margin: 20px 0;
+}
+.about-carts {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 40px;
+    margin: 90px 0;
+}
+.about-cart1, .about-cart2 {
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    text-align: justify;
+}
+.about-cart1 input, .about-cart2 input {
+    background-color: rgba(250, 128, 114, 0.5);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: 500;
+}
+.about-cart1 input:hover, .about-cart2 input:hover {
+    background-color: rgba(250, 128, 114, 0.7);
+}
+.about-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    font-size: 14px;
+}
