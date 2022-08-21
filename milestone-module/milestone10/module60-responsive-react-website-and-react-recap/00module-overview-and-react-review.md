@@ -367,3 +367,173 @@ ___________{
 </Container>
 ```
 
+# Module 60.5: Firebase auth and private Route Recap
+
+## 60.5.1 Firebase auth and private Route Recap
+
+⫸ `Google Authentication with react-firebase-hooks:`
+
+``` JavaScript
+// Login.js 
+
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+const Login = () => {
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    const from = location.state?.from?.pathname || '/';
+
+    if (googleUser) {
+        navigate(from, { replace: true });
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <form onSubmit={handleUserSignIn}>
+                    {
+                        googleLoading
+                        &&
+                        <div className="d-flex align-items-center">
+                            <strong>Loading...</strong>
+                            <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    }
+                    {
+                        googleError && <p style={{color: 'red'}}>{googleError.message}</p>
+                    }
+                </form>
+                <div className="third-party-auth">
+                    <button onClick={() => signInWithGoogle()}>
+                        <img src={google} alt="google icon" />
+                        <span>Google</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+``` JavaScript
+// SignUp.js
+
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../../src/firebase.init';
+
+const SignUp = () => {
+
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    const from = location.state?.from?.pathname || '/';
+
+    if (googleUser) {
+        navigate(from, { replace: true });
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <form onSubmit={handleCreateUser}>
+                    {
+                        googleLoading
+                        &&
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    }
+                    {
+                        googleError && <p style={{color: 'red'}}>{googleError.message}</p>
+                    }
+                </form>
+                <div className='third-party-auth'>
+                    <button onClick={() => signInWithGoogle()}>
+                        <img src={google} alt="google icon" />
+                        <span>Google</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default SignUp;
+```
+
+## 60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks
+
+⫸ `Steps to use firebase & (Twitter Authentication):` (___Recommended to Follow these 09 Steps___) (___Twitter Sign-in Provider___)
+
+1. Create a ___new firebase project___ in ___console.firebase.google.com___
+2. ___Register app___
+3. `npm install firebase`
+4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
+5. Firebase settings > Authentication > Sign-in Method > Add new Provider > ___Enable___ Twitter ___authentication___
+    - `In Firebase:` 
+      - Paste (___App Key___ & ___App Secret___) > Copy (___callback URI___ to your Twitter app configuration) > ___Save___
+    - `In Developers Twitter: `
+      - [developer.twitter.com](https://developer.twitter.com/en) > Sign up > Overview > Add App > Development (next) > App name (next) > Copy & paste (API Key & API Key Secret) in (firebase auth Provider) > App settings > ___Edit___ Authentication settings > ___Enable___ 3-legged OAuth > Copy & Paste ___Callback URLs___ > Paste ___Website URL___ > ___Save___
+    - One account per email address (___if___ you need to create multiple user with same email address by using multiple sign in methods)<br />It ___should not be used___ in real application.
+6. ___Create___ Login, SignUp component, ___setup route___
+7. Attach ___form field handler___ and form ___submit handler___
+8. `npm install --save react-firebase-hooks`
+9. react-firebase-hooks > Authentication Hooks > [Social Login Example](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#social-login-example "Follow the Social Login Example Code")
+   
+``` JavaScript
+// Login.js
+
+import { useSignInWithTwitter } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+const Login = () => {
+    const [signInWithTwitter, TwitterUser, TwitterLoading, TwitterError] = useSignInWithTwitter(auth);
+
+    const from = location.state?.from?.pathname || '/';
+
+    if (TwitterUser) {
+        navigate(from, { replace: true });
+    }
+
+    return (
+        <div className='form-container'>
+            <div>
+                <form onSubmit={handleUserSignIn}>
+                    {
+                        TwitterLoading
+                        &&
+                        <div className="d-flex align-items-center">
+                            <strong>Loading...</strong>
+                            <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    }
+                    {
+                        TwitterError && <p style={{color: 'red'}}>{TwitterError.message}</p>
+                    }
+                </form>
+                <div className="third-party-auth">
+                    <button onClick={() => signInWithTwitter()}>
+                        <img src={twitter} alt="twitter icon" />
+                        <span>Twitter</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+⫸ `Note:` ___We can remove Twitter Permission___
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+
+- __In Firebase:__
+  - Authentication → Settings → Add Domain → `https://genius-car-services-a8da0.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
+
+
