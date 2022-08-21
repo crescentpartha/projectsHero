@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../src/firebase.init';
 import google from '../../images/googleIcon.jpg';
@@ -12,11 +12,16 @@ const SignUp = () => {
     const [error, setError] = useState('');
 
     const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
+    if (googleUser) {
+        navigate(from, { replace: true });
+    }
     if (user) {
         navigate(from, { replace: true });
     }
@@ -74,6 +79,18 @@ const SignUp = () => {
                             </div>
                         </div>
                     }
+                    {
+                        googleLoading
+                        &&
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    }
+                    {
+                        googleError && <p style={{color: 'red'}}>{googleError.message}</p>
+                    }
                     <input className='submit-button' type="submit" value="SignUp" />
                 </form>
                 <p>
@@ -85,7 +102,7 @@ const SignUp = () => {
                 </div>
                 <p>SignUp with one of the following:</p>
                 <div className='third-party-auth'>
-                    <button>
+                    <button onClick={() => signInWithGoogle()}>
                         <img src={google} alt="google icon" />
                         <span>Google</span>
                     </button>
