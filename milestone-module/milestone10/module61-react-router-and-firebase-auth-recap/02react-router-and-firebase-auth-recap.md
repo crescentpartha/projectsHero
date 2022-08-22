@@ -337,4 +337,83 @@ export default Banners;
 
 ---
 
+⫸ `Single-Bed Products Display in the Stays components:` 
+
+``` JavaScript
+// In Stays.js
+
+import React from 'react';
+import logo from '../../../images/trivago-logo.png';
+import useSingleBed from '../../../hooks/useSingleBed';
+import Stay from '../Stay/Stay';
+
+const Stays = () => {
+    const [singleBeds] = useSingleBed();
+    return (
+        <div>
+            <div className='d-flex flex-wrap gap-3 m-5 align-items-center justify-content-center'>
+                <img width={100} height={50} src={logo} alt="trivago" />
+                <div className='border-start border-2 border-secondary border-opacity-25 ps-3'>
+                    <h4>Deals from your favorite booking sites</h4>
+                    <p>Try searching for a city, a specific hotel, or even a landmark!</p>
+                </div>
+            </div>
+            <div className='mt-5'>
+                <h2 className='fs-3'>See what's popular Single Bed among {singleBeds.length} with other travelers!!!</h2>
+                <div className='container mb-5 align-items-center align-self-center'>
+                    <div className='row m-0 g-5 align-items-center'>
+                        {
+                            singleBeds.map(bed => <Stay
+                                key={bed.id}
+                                bed={bed}
+                            ></Stay>)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Stays;
+```
+
+``` JavaScript
+// In Stay.js
+
+import React from 'react';
+
+const Stay = ({ bed }) => {
+    const { name, company, distance, price, picture, email, phone, address, about } = bed;
+    return (
+        <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
+            <div className=''>
+                <div className='bg-secondary bg-opacity-25 rounded m-1 mx-3 p-3 flex-grow-1'>
+                    <img className='rounded' width={300} src={picture} alt="" />
+                </div>
+                <div className='text-start px-2 text-justify'>
+                    <div className='d-flex align-items-center justify-content-between '>
+                        <div className='bg-secondary bg-opacity-25 rounded m-1 p-3 flex-grow-1'>
+                            <h2>{name}</h2>
+                            <p><span>{company}</span> | <span>{price}</span></p>
+                            <p><b>Distance: </b>{distance}</p>
+                            <p><b>Email: </b>{email}</p>
+                            <p><b>Phone: </b>{phone}</p>
+                            <p><b>Address: </b>{address}</p>
+                            <button type="button" className="btn btn-success">View Deal</button>
+                        </div>
+                    </div>
+                    <div className='bg-secondary bg-opacity-25 rounded m-1 p-3 flex-grow-1'>
+                        <p><b>Description: </b>{about.length > 100 ? about.slice(0, 100) + '...' : about}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Stay;
+```
+
+---
 
