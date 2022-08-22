@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Stay = ({ bed }) => {
+const SingleBed = ({ bed }) => {
     const { name, company, distance, price, picture, email, phone, address, about } = bed;
     return (
         <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
@@ -29,4 +29,4 @@ const Stay = ({ bed }) => {
     );
 };
 
-export default Stay;
+export default SingleBed;

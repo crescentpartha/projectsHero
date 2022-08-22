@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from '../../../images/trivago-logo.png';
 import useSingleBed from '../../../hooks/useSingleBed';
-import Stay from '../Stay/Stay';
+import useDoubleBed from '../../../hooks/useDoubleBed';
+import SingleBed from '../SingleBed/SingleBed';
+import DoubleBed from '../DoubleBed/DoubleBed';
 
 const Stays = () => {
     const [singleBeds] = useSingleBed();
+    const [doubleBeds] = useDoubleBed();
     return (
         <div>
             <div className='d-flex flex-wrap gap-3 m-5 align-items-center justify-content-center'>
@@ -19,10 +22,23 @@ const Stays = () => {
                 <div className='container mb-5 align-items-center align-self-center'>
                     <div className='row m-0 g-5 align-items-center'>
                         {
-                            singleBeds.map(bed => <Stay
+                            singleBeds.map(bed => <SingleBed
                                 key={bed.id}
                                 bed={bed}
-                            ></Stay>)
+                            ></SingleBed>)
+                        }
+                    </div>
+                </div>
+            </div>
+            <div className='mt-5'>
+                <h2 className='fs-3'>See what's popular Double Bed among {doubleBeds.length} with other travelers!!!</h2>
+                <div className='container mb-5 align-items-center align-self-center'>
+                    <div className='row m-0 g-5 align-items-center'>
+                        {
+                            doubleBeds.map(bed => <DoubleBed
+                                key={bed.id}
+                                bed={bed}
+                            ></DoubleBed>)
                         }
                     </div>
                 </div>
