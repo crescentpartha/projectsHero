@@ -125,3 +125,46 @@ const Header = () => {
 export default Header;
 ```
 
+---
+
+⫸ `Install FontAwesomeIcons:`
+
+``` Terminal
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
+npm install --save @fortawesome/free-brands-svg-icons
+
+npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
+```
+
+⫸ `Footer Section:`
+
+``` JavaScript
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitter, faInstagram, faYoutube, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+<div className='d-flex justify-content-center m-5'>
+    <div className='d-flex flex-wrap align-items-center justify-content-center px-2'>
+        <p className='text-light text-uppercase m-0'>Download:</p>
+        <div className='d-flex flex-wrap align-items-center justify-content-center'>
+            <img className='m-2' src={google} alt="Google Download" />
+            <img className='m-2' src={store} alt="App Store Download" />
+        </div>
+    </div>
+    <div className='d-flex flex-wrap align-items-center justify-content-center px-2'>
+        <p className='text-light text-uppercase m-0'>Follow Us:</p>
+        <div className='d-flex flex-wrap align-items-center justify-content-center'>
+            <FontAwesomeIcon className='m-1 fs-4' icon={faFacebook}></FontAwesomeIcon>
+            <FontAwesomeIcon className='m-1 fs-4' icon={faTwitter}></FontAwesomeIcon>
+            <FontAwesomeIcon className='m-1 fs-4' icon={faInstagram}></FontAwesomeIcon>
+            <FontAwesomeIcon className='m-1 fs-4' icon={faYoutube}></FontAwesomeIcon>
+            <FontAwesomeIcon className='m-1 fs-4' icon={faLinkedin}></FontAwesomeIcon>
+        </div>
+    </div>
+</div>
+```
+
+
+
+
