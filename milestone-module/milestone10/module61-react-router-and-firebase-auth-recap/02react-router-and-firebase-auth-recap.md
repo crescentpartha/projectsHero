@@ -140,7 +140,7 @@ npm install --save @fortawesome/free-brands-svg-icons
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 ```
 
-⫸ `Footer Section:`
+⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons___ added)
 
 ``` JavaScript
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -167,6 +167,174 @@ import { faFacebook, faTwitter, faInstagram, faYoutube, faLinkedin } from '@fort
 </div>
 ```
 
+---
 
+⫸ `Create Custom Hooks:` (Custom ___useCountries___ hooks)
+
+``` JavaScript
+// hooks/useCountries.js
+
+import { useEffect, useState } from 'react';
+
+const useCountries = () => {
+    const [countries, setCountries] = useState([]);
+
+    useEffect( () => {
+        fetch('country.json')
+        .then(res => res.json())
+        .then(data => setCountries(data));
+    }, []);
+
+    return [countries, setCountries];
+}
+
+export default useCountries;
+```
+
+⫸ `Use Custom Hooks:` (___Countries___ Component)
+
+``` JavaScript
+// In Countries.js
+
+import React from 'react';
+import useCountries from '../../../hooks/useCountries';
+import Country from '../Country/Country';
+
+const Countries = () => {
+    const [countries] = useCountries();
+    return (
+        <div className='mt-5'>
+            <h2>Top {countries.length} popular Countries in the world!</h2>
+            <div className='container mb-5 align-items-center align-self-center'>
+                <div className='row m-0 g-5 align-items-center'>
+                    {
+                        countries.map(country => <Country
+                            key={country.id}
+                            country={country}
+                        ></Country>)
+                    }
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Countries;
+```
+
+⫸ `Use Custom Hooks:` (___Country___ Component)
+
+``` JavaScript
+// In Country.js
+
+import React from 'react';
+
+const Country = ({ country }) => {
+    const { countryName, city, price, picture, about } = country;
+    return (
+        <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
+            <div className='d-flex'>
+                <img className='rounded-start' width={300} src={picture} alt="" />
+                <div className='text-start px-2 text-justify'>
+                    <h2>{countryName}</h2>
+                    <p>{city}</p>
+                    <p>{price}</p>
+                    <p>{about.length > 100 ? about.slice(0, 100) + '...' : about}</p>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Country;
+```
+
+---
+
+⫸ `Banners Component:` (3 images ___Carousel___ added)
+
+``` JavaScript
+// In Banners.js
+
+import React, { useState } from 'react';
+import { Carousel } from 'react-bootstrap';
+import travel from '../../../images/banner/travel-tourism-banner.jpg';
+import airPlane from '../../../images/banner/airplane-banner.jpg';
+import winter from '../../../images/banner/winter-banner.jpg';
+
+const banners = [
+    {
+        "id": 1,
+        "name": "Travel & Tourism",
+        "picture": travel
+    },
+    {
+        "id": 2,
+        "name": "Air Plane",
+        "picture": airPlane
+    },
+    {
+        "id": 3,
+        "name": "Winter",
+        "picture": winter
+    }
+]
+
+const Banners = () => {
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+    return (
+        <div>
+            <Carousel activeIndex={index} onSelect={handleSelect}>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={banners[0].picture}
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>{banners[0].name}</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={banners[1].picture}
+                        alt="Second slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>{banners[1].name}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={banners[2].picture}
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>{banners[2].name}</h3>
+                        <p>
+                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                        </p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+        </div>
+    );
+};
+
+export default Banners;
+```
+
+---
 
 
