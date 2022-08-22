@@ -1,6 +1,6 @@
 # Module 61: React Router and Firebase Auth Recap
 
-## 61.1 Project Setup and Responsive Header sticky top
+## 61.0 Basic Project Setup
 
 ⫸ `Basic Project Setup:`
 - ___Create React App___
@@ -11,7 +11,7 @@
 - Create basic ___Components___ such as Home, Header, Login, NotFound
 - ____redirects___ file added
 - Create ___markdown___ file for documentation
-- Install ___React-Bootstrap___
+- Install ___React-Bootstrap___ and Add ___Bootstrap CDN Link___ in ___index.html___
 - ___CSS style___ added
 - Setup ___JSON data___ and ___images___
 
@@ -80,4 +80,48 @@
 1. `npm run build`
 2. `firebase deploy`
 
+
+## 61.1 Module Overview - Responsive Header Component - sticky top
+
+⫸ ___Navbar > [Responsive Behaviors](https://react-bootstrap.netlify.app/components/navbar/#responsive-behaviors): from React-Bootstrap___
+- Create ___multiple route component___
+- Create ___Header___ component and ___setup routes___
+
+``` JavaScript
+// Header.js 
+
+import React from 'react';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import logo from '../../../images/trivago-logo.png';
+
+const Header = () => {
+    return (
+        <>
+            <Navbar collapseOnSelect expand="lg" sticky='top' bg="success" variant="dark">
+                <Container>
+                    <Navbar.Brand as={Link} to="/">
+                        <img height={35} width={120} src={logo} alt="" />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/stays">Stays</Nav.Link>
+                            <Nav.Link as={Link} to="/cars">Cars</Nav.Link>
+                            <Nav.Link as={Link} to="/about">About</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </>
+    );
+};
+
+export default Header;
+```
 
