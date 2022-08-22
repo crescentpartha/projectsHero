@@ -1,0 +1,102 @@
+[
+    {
+      "id": "63033238bd0db8b0943f416f",
+      "name": "Toyota Corolla",
+      "company": "Corolla",
+      "price": "$1,326.15",
+      "picture": "https://i.ibb.co/yg4J4dh/toyota-corolla.png",
+      "bags": 5,
+      "passengers": 11,
+      "phone": "+1 (996) 520-3345"
+    },
+    {
+      "id": "63033238e270bad81b6ae446",
+      "name": "Volkswagen Jetty",
+      "company": "Cognicode",
+      "price": "$2,258.30",
+      "picture": "https://i.ibb.co/K0gDMnt/volkswagen-jetta.png",
+      "bags": 4,
+      "passengers": 9,
+      "phone": "+1 (918) 446-2795"
+    },
+    {
+      "id": "630332388d2db2aa7cf384b0",
+      "name": "Hyundai Sonata",
+      "company": "Jetty",
+      "price": "$1,266.65",
+      "picture": "https://i.ibb.co/Pw2NRCT/hyundai-sonata.png",
+      "bags": 3,
+      "passengers": 5,
+      "phone": "+1 (864) 529-2840"
+    },
+    {
+      "id": "63033238e42ca627e4ac08ca",
+      "name": "Toyota Camry",
+      "company": "Toyota",
+      "price": "$1,613.26",
+      "picture": "https://i.ibb.co/P5ykgjn/toyota-camry.png",
+      "bags": 4,
+      "passengers": 11,
+      "phone": "+1 (956) 466-2272"
+    },
+    {
+      "id": "63033238d94d4e0bc53d10ad",
+      "name": "Hyundai Elantra",
+      "company": "Elantra",
+      "price": "$1,275.13",
+      "picture": "https://i.ibb.co/WgqZXQw/hyundai-elantra.png",
+      "bags": 2,
+      "passengers": 10,
+      "phone": "+1 (960) 575-2567"
+    },
+    {
+      "id": "63033238960be4911c47f0d0",
+      "name": "Nissan Rogue",
+      "company": "Nissan",
+      "price": "$1,509.98",
+      "picture": "https://i.ibb.co/VTg9g5g/nissan-rogue.png",
+      "bags": 1,
+      "passengers": 6,
+      "phone": "+1 (868) 446-3072"
+    },
+    {
+      "id": "63033238ad86a500b394f037",
+      "name": "Jeep Cherokee",
+      "company": "Cherokee",
+      "price": "$2,643.59",
+      "picture": "https://i.ibb.co/pbBTS1g/jeep-cherokee.png",
+      "bags": 4,
+      "passengers": 11,
+      "phone": "+1 (818) 586-3639"
+    },
+    {
+      "id": "63033238796f567b536ed67f",
+      "name": "Ford Focus",
+      "company": "Overplex",
+      "price": "$3,952.27",
+      "picture": "https://i.ibb.co/s1c6RVZ/ford-focus.png",
+      "bags": 4,
+      "passengers": 7,
+      "phone": "+1 (999) 409-3287"
+    },
+    {
+      "id": "630332380c44d593ba1c8499",
+      "name": "Ford Taurus",
+      "company": "Pyramia",
+      "price": "$2,513.23",
+      "picture": "https://i.ibb.co/FbTJ9yF/ford-taurus.png",
+      "bags": 3,
+      "passengers": 12,
+      "phone": "+1 (822) 557-3113"
+    },
+    {
+      "id": "63033238e24af30195be90c8",
+      "name": "Hyundai Accent",
+      "company": "Hyundai",
+      "price": "$2,040.90",
+      "picture": "https://i.ibb.co/CVFR0st/hyundai-accent.png",
+      "bags": 3,
+      "passengers": 5,
+      "phone": "+1 (858) 496-2467"
+    }
+]

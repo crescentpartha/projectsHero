@@ -1,0 +1,122 @@
+[
+    {
+      "id": "63032dde685fdc7af562f554",
+      "name": "Golden Hill",
+      "company": "Rodemco",
+      "distance": "0.5 miles to Resort",
+      "price": "$2,000.01",
+      "picture": "https://i.ibb.co/4jspTVT/golden-hill.webp",
+      "email": "jodievelazquez@rodemco.com",
+      "phone": "+880 (896) 401-2403",
+      "address": "Dearborn Court, Kanauga",
+      "about": "Ullamco ut aliqua amet nisi aute eu sit ad ipsum in id laborum dolor irure. Laboris ipsum mollit nostrud sunt est velit do sint. Ad fugiat culpa officia aute ad ea in excepteur nostrud. Fugiat nostrud labore cillum minim pariatur reprehenderit Lorem. Quis fugiat tempor dolore ea aliqua sint cupidatat Lorem. Aliqua magna in ipsum occaecat aute consequat amet ullamco dolor aute magna laboris veniam."
+    },
+    {
+      "id": "63032dde9ac2bb77b10fa252",
+      "name": "Coastal Peace",
+      "company": "Imperium",
+      "distance": "0.8 miles to Resort",
+      "price": "$2,363.19",
+      "picture": "https://i.ibb.co/30RKC0V/coastal-peace.webp",
+      "email": "jodievelazquez@imperium.com",
+      "phone": "+880 (876) 478-3776",
+      "address": "Glenmore Avenue, Hartsville/Hartley",
+      "about": "Fugiat irure commodo irure elit cupidatat qui voluptate reprehenderit nulla commodo non. Reprehenderit anim aliquip esse amet eiusmod cupidatat in commodo dolor. Magna adipisicing occaecat exercitation qui incididunt elit tempor laboris. Reprehenderit et aute tempor culpa culpa id velit. Ex consectetur aliqua dolor sunt. Excepteur reprehenderit excepteur elit aliqua occaecat."
+    },
+    {
+      "id": "63032ddee23a506d643b9960",
+      "name": "Grace Smart",
+      "company": "Digitalus",
+      "distance": "1.5 miles to Resort",
+      "price": "$2,106.79",
+      "picture": "https://i.ibb.co/bbrDDBZ/grace-smart.webp",
+      "email": "jodievelazquez@digitalus.com",
+      "phone": "+880 (905) 579-3225",
+      "address": "Neptune Court, Kennedyville",
+      "about": "Ipsum fugiat duis ea excepteur adipisicing commodo. Dolore ut elit reprehenderit consequat dolor nulla fugiat qui labore ad. Amet aliquip sunt ad culpa eiusmod consectetur ipsum exercitation. Anim et laborum laborum velit commodo id Lorem cupidatat. Eu voluptate aliqua ullamco est excepteur amet occaecat eu ex esse Lorem. Laborum mollit excepteur aliqua deserunt eu aute laborum aliquip enim consectetur et ut et excepteur. Ipsum aliqua ipsum tempor amet adipisicing duis eu proident qui."
+    },
+    {
+      "id": "63032ddeb6407a15c3474e31",
+      "name": "Laguna Family",
+      "company": "Malathion",
+      "distance": "0.6 miles to Resort",
+      "price": "$1,822.42",
+      "picture": "https://i.ibb.co/rM47h7z/laguna-family.webp",
+      "email": "jodievelazquez@malathion.com",
+      "phone": "+880 (884) 423-2679",
+      "address": "Monroe Street, Bangor",
+      "about": "Laboris est cupidatat consectetur ad eu. Consequat do eiusmod et eu irure ipsum do nisi duis et non. Id aliquip aliqua quis sunt ex laborum aute non ullamco duis culpa ea consectetur. Exercitation qui dolore voluptate amet laboris voluptate deserunt eiusmod dolor officia mollit minim. Eu consectetur amet nostrud excepteur aliquip sint dolore ut. Proident adipisicing irure Lorem labore cupidatat cillum adipisicing elit."
+    },
+    {
+      "id": "63032dde70f51a7e0e368fe4",
+      "name": "Lighthouse Retreat",
+      "company": "Realysis",
+      "distance": "1.2 miles to Resort",
+      "price": "$1,191.07",
+      "picture": "https://i.ibb.co/SnZnTx5/lighthouse-retreat.webp",
+      "email": "jodievelazquez@realysis.com",
+      "phone": "+880 (864) 531-3394",
+      "address": "Albemarle Terrace, Sexton",
+      "about": "Ea proident ipsum aute duis esse veniam velit et excepteur cillum est cupidatat incididunt duis. Nulla duis elit consequat laborum ea esse exercitation dolor est voluptate. Dolore exercitation in sint do ad. Et incididunt incididunt magna exercitation nostrud. Ea voluptate esse quis anim eu Lorem sunt. Pariatur quis do ad elit labore cillum non enim ea."
+    },
+    {
+      "id": "63032ddedf108b1922ab4440",
+      "name": "Opera Beach",
+      "company": "Uni",
+      "distance": "0.2 miles to Resort",
+      "price": "$2,952.17",
+      "picture": "https://i.ibb.co/RbfRszm/opera-beach.webp",
+      "email": "jodievelazquez@uni.com",
+      "phone": "+880 (994) 436-2850",
+      "address": "Hill Street, Tuttle",
+      "about": "Minim et consectetur occaecat elit fugiat do cillum. Eiusmod non ipsum deserunt pariatur sit excepteur laboris. Et sint eu nulla in laborum consequat."
+    },
+    {
+      "id": "63032dde9dd465a9fe54e1df",
+      "name": "Prime Coastal",
+      "company": "Yogasm",
+      "distance": "0.5 miles to Resort",
+      "price": "$3,549.34",
+      "picture": "https://i.ibb.co/b5hbqfX/prime-coastal.webp",
+      "email": "jodievelazquez@yogasm.com",
+      "phone": "+880 (899) 551-2706",
+      "address": "Hart Street, Chilton",
+      "about": "Ea mollit occaecat et duis minim non eiusmod aliqua eu dolor nulla dolor ex. Cillum nulla esse ullamco cillum do adipisicing. In amet deserunt aliqua tempor adipisicing occaecat incididunt ad est."
+    },
+    {
+      "id": "63032dde0834425db7af3557",
+      "name": "Opera Ocean",
+      "company": "Cofine",
+      "distance": "0.9 miles to Resort",
+      "price": "$1,435.93",
+      "picture": "https://i.ibb.co/k0hBQkF/opera-ocean.webp",
+      "email": "jodievelazquez@cofine.com",
+      "phone": "+880 (896) 476-2892",
+      "address": "Dahlgreen Place, Silkworth",
+      "about": "Est fugiat ex commodo aute cillum anim pariatur fugiat consectetur nisi deserunt. Et ullamco ex non elit eiusmod. Dolore tempor excepteur esse sit irure pariatur tempor sunt deserunt. Officia proident consectetur sunt tempor quis reprehenderit fugiat eiusmod adipisicing. Magna quis qui sunt cillum minim laboris aute proident fugiat nisi."
+    },
+    {
+      "id": "63032dded4efc55d2becd8d7",
+      "name": "Prime Park",
+      "company": "Tasmania",
+      "distance": "1.5 miles to Resort",
+      "price": "$3,222.79",
+      "picture": "https://i.ibb.co/SfyvBph/prime-park.webp",
+      "email": "jodievelazquez@tasmania.com",
+      "phone": "+880 (988) 457-3416",
+      "address": "Carlton Avenue, Vallonia",
+      "about": "Et id consequat eiusmod et. Tempor nisi aliquip ea fugiat occaecat. Duis ipsum nostrud ea qui deserunt labore reprehenderit duis labore. Laborum occaecat labore sit commodo consectetur esse labore ullamco do laboris amet adipisicing dolore nulla."
+    },
+    {
+      "id": "63032ddee7b9fd4d52337c56",
+      "name": "Royal Bay Regal",
+      "company": "Turnabout",
+      "distance": "0.5 miles to Resort",
+      "price": "$2,924.26",
+      "picture": "https://i.ibb.co/hcbsSJX/royal-bay-regal.webp",
+      "email": "jodievelazquez@turnabout.com",
+      "phone": "+880 (970) 498-3965",
+      "address": "National Drive, Oasis",
+      "about": "Ullamco dolore quis culpa ad laborum labore reprehenderit culpa excepteur ullamco cillum. Duis veniam sit fugiat sit. Qui dolor eiusmod est reprehenderit sit occaecat magna et magna. Quis nisi occaecat esse pariatur aute duis ad."
+    }
+  ]

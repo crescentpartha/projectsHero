@@ -11,7 +11,9 @@
 - Create basic ___Components___ such as Home, Header, Login, NotFound
 - ____redirects___ file added
 - Create ___markdown___ file for documentation
+- Install ___React-Bootstrap___
 - ___CSS style___ added
+- Setup ___JSON data___ and ___images___
 
 ---
 
