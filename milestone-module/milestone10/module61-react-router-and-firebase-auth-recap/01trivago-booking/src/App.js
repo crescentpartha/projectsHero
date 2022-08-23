@@ -9,6 +9,9 @@ import Cars from './components/Cars/Cars/Cars';
 import About from './components/SinglePage/About/About';
 import Login from './components/SinglePage/Login/Login';
 import SignUp from './components/SinglePage/SignUp/SignUp';
+import CarDetail from './components/DynamicRoute/CarDetail/CarDetail';
+import SingleBedDetail from './components/DynamicRoute/SingleBedDetail/SingleBedDetail';
+import DoubleBedDetail from './components/DynamicRoute/DoubleBedDetail/DoubleBedDetail';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/stays' element={<Stays></Stays>}></Route>
         <Route path='/cars' element={<Cars></Cars>}></Route>
+        <Route path='/carDetail/:carDetailId' element={<CarDetail></CarDetail>}></Route>
+        <Route path='/singleBedDetail/:singleBedDetailId' element={<SingleBedDetail></SingleBedDetail>}></Route>
+        <Route path='/doubleBedDetail/:doubleBedDetailId' element={<DoubleBedDetail></DoubleBedDetail>}></Route>
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>

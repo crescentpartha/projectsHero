@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DoubleBed = ({bed}) => {
-    const { name, company, distance, price, picture, email, phone, address, about } = bed;
+    const { id, name, company, distance, price, picture, email, phone, address, about } = bed;
+    const navigate = useNavigate();
+    const handleNavigateToDoubleBedDetail = id => {
+        navigate(`/doubleBedDetail/${id}`);
+    }
     return (
         <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
             <div className=''>
@@ -17,7 +22,7 @@ const DoubleBed = ({bed}) => {
                             <p><b>Email: </b>{email}</p>
                             <p><b>Phone: </b>{phone}</p>
                             <p><b>Address: </b>{address}</p>
-                            <button type="button" className="btn btn-success">View Deal</button>
+                            <button onClick={() => handleNavigateToDoubleBedDetail(id)} type="button" className="btn btn-success">View Deal</button>
                         </div>
                     </div>
                     <div className='bg-secondary bg-opacity-25 rounded m-1 p-3 flex-grow-1'>

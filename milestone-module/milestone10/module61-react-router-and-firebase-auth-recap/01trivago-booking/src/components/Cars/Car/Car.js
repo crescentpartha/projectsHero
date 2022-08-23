@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Car = ({car}) => {
-    const {name, company, price, picture, bags, passengers, phone} = car;
+    const {id, name, company, price, picture, bags, passengers, phone} = car;
+    const navigate = useNavigate();
+    const handleNavigateToCarDetail = id => {
+        navigate(`/carDetail/${id}`);
+    }
     return (
         <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
             <div className=''>
@@ -15,7 +20,7 @@ const Car = ({car}) => {
                             <p><span>{company}</span> | <span>{price}</span></p>
                             <p><span><b>Bags: </b>{bags}</span> | <span><b>Passengers: </b>{passengers}</span></p>
                             <p><b>Phone: </b>{phone}</p>
-                            <button type="button" className="btn btn-success">View Deal</button>
+                            <button onClick={() => handleNavigateToCarDetail(id)} type="button" className="btn btn-success">View Deal</button>
                         </div>
                     </div>
                 </div>

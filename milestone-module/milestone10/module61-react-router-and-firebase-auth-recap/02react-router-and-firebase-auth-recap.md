@@ -597,5 +597,81 @@ const About = () => {
 export default About;
 ```
 
----
+## 61.2 Setup Dynamic Route and Access route params
+
+⫸ `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
+1. ___Set Nested Route___ inside of the App route (___route___)
+2. ___Set navigate___ in EventHandler (___parameter-&-click___)
+3. ___Get invoiceId___ by useParams(); (___getId___)
+
+> `Notes:` <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⫸ Implement `Dynamic Route` for the ___single product___ of ___Car___, ___Single-Bed___, and ___Double-Bed___
+
+--- 
+
+⫸ `01. Set Nested Route:` (___route___)
+
+``` JavaScript
+// In App.js
+
+import { Routes, Route } from 'react-router-dom';
+import CarDetail from './components/DynamicRoute/CarDetail/CarDetail';
+
+function App() {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path='/carDetail/:carDetailId' element={<CarDetail></CarDetail>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `02. Set navigate:` (___parameter-&-click___)
+
+``` JavaScript
+// In Car.js
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Car = ({car}) => {
+    const {id} = car;
+    const navigate = useNavigate();
+    const handleNavigateToCarDetail = id => {
+        navigate(`/carDetail/${id}`);
+    }
+    return (
+        <div>
+            <button onClick={() => handleNavigateToCarDetail(id)} type="button" className="btn btn-success">View Deal</button>
+        </div>
+    );
+};
+
+export default Car;
+```
+
+⫸ `03. Get invoiceId:` (___getId___)
+
+``` JavaScript
+// In CarDetail.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const CarDetail = () => {
+    const {carDetailId} = useParams();
+    return (
+        <div>
+            <h2>Welcome to CarDetail: {carDetailId}</h2>
+        </div>
+    );
+};
+
+export default CarDetail;
+```
+
+
 
