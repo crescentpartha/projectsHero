@@ -615,12 +615,16 @@ export default About;
 
 import { Routes, Route } from 'react-router-dom';
 import CarDetail from './components/DynamicRoute/CarDetail/CarDetail';
+import SingleBedDetail from './components/DynamicRoute/SingleBedDetail/SingleBedDetail';
+import DoubleBedDetail from './components/DynamicRoute/DoubleBedDetail/DoubleBedDetail';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='/carDetail/:carDetailId' element={<CarDetail></CarDetail>}></Route>
+        <Route path='/singleBedDetail/:singleBedDetailId' element={<SingleBedDetail></SingleBedDetail>}></Route>
+        <Route path='/doubleBedDetail/:doubleBedDetailId' element={<DoubleBedDetail></DoubleBedDetail>}></Route>
       </Routes>
     </div>
   );
@@ -673,5 +677,50 @@ const CarDetail = () => {
 export default CarDetail;
 ```
 
+## 61.3 Navigate to services, 404 page, Login Component
+
+⫸ `Navigate according to id in a single page:`
+
+``` JavaScript
+<Nav.Link href="home#services">Services</Nav.Link>
+<Nav.Link href="home#experts">Experts</Nav.Link>
+<Nav.Link href="#about">About</Nav.Link>
+
+return (
+    <div id="services" className='container'>
+        <div className='row'>
+            <h1 className='text-primary text-center mt-5'>Our Services</h1>
+            <div className='services-container'>
+                {
+
+                }
+            </div>
+        </div>
+    </div>
+);
+```
+
+---
+
+⫸ `NotFound component Modified:`
+
+``` JavaScript
+// In NotFound.js
+
+import React from 'react';
+import notFound from '../../../images/notFound.jpg';
+import notFound2 from '../../../images/notFound2.jpg';
+
+const NotFound = () => {
+    return (
+        <div className='d-flex flex-wrap align-items-center justify-content-center m-5'>
+            <img className='w-50 mh-100' src={notFound} alt="404 Not Found" />
+            <img className='w-50 mh-100' src={notFound2} alt="404 Not Found Sleeping" />
+        </div>
+    );
+};
+
+export default NotFound;
+```
 
 
