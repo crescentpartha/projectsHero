@@ -140,7 +140,7 @@ npm install --save @fortawesome/free-brands-svg-icons
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 ```
 
-⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the [Footer.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Footer/Footer.js "Footer component of 01trivago-booking App") component)
+⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the [Footer.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Footer/Footer.js "Footer component - 01trivago-booking App") component)
 
 ``` JavaScript
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -550,5 +550,52 @@ export default Car;
 
 ---
 
+⫸ `Implement Accordion from React-Bootstrap:` ([About.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/About/About.js "About component - 01trivago-booking App"))
 
+``` JavaScript
+// In About.js
+
+import React from 'react';
+import { Accordion } from 'react-bootstrap';
+
+const About = () => {
+    return (
+        <div className='d-flex flex-wrap flex-sm-wrap flex-md-wrap flex-lg-nowrap flex-xl-nowrap flex-xxl-nowrap align-items-center justify-content-center gap-5 m-5 pb-5'>
+            <div className='flex-grow-1 w-100'>
+                <h2 className='my-3'>How trivago Works</h2>
+                <div className='w-100'>
+                    <Accordion defaultActiveKey={['0']} alwaysOpen>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>What is the difference between trivago and a booking site? </Accordion.Header>
+                            <Accordion.Body>
+                                <div className='text-start'>
+                                    <p><b>trivago </b> works <span className='text-primary'>here</span>.</p>
+                                    <p><b>Meanwhile, a booking site</b> including travel suppliers.</p>
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="1">
+                            <Accordion.Header>What is trivago? </Accordion.Header>
+                            <Accordion.Body>
+                                <div className='text-start'>
+                                    <p><b>We are booking sites.</b> We compare and display different offers from many booking sites</p>
+                                    <p>trivago works with approximately 190 countries.</p>
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        
+                    </Accordion>
+                </div>
+            </div>
+            <div className='border border-secondary border-opacity-25 rounded p-3 text-start w-50'>
+                <p>trivago</p>
+            </div>
+        </div>
+    );
+};
+
+export default About;
+```
+
+---
 
