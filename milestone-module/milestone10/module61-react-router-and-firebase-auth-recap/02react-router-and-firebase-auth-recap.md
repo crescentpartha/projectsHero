@@ -140,23 +140,23 @@ npm install --save @fortawesome/free-brands-svg-icons
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 ```
 
-⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons___ added)
+⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the [Footer.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Footer/Footer.js "Footer component of 01trivago-booking App") component)
 
 ``` JavaScript
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faInstagram, faYoutube, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
-<div className='d-flex justify-content-center m-5'>
+<div className='d-flex flex-wrap justify-content-center m-5'>
     <div className='d-flex flex-wrap align-items-center justify-content-center px-2'>
         <p className='text-light text-uppercase m-0'>Download:</p>
-        <div className='d-flex flex-wrap align-items-center justify-content-center'>
+        <div className='d-flex align-items-center justify-content-center'>
             <img className='m-2' src={google} alt="Google Download" />
             <img className='m-2' src={store} alt="App Store Download" />
         </div>
     </div>
     <div className='d-flex flex-wrap align-items-center justify-content-center px-2'>
         <p className='text-light text-uppercase m-0'>Follow Us:</p>
-        <div className='d-flex flex-wrap align-items-center justify-content-center'>
+        <div className='d-flex align-items-center justify-content-center'>
             <FontAwesomeIcon className='m-1 fs-4' icon={faFacebook}></FontAwesomeIcon>
             <FontAwesomeIcon className='m-1 fs-4' icon={faTwitter}></FontAwesomeIcon>
             <FontAwesomeIcon className='m-1 fs-4' icon={faInstagram}></FontAwesomeIcon>
@@ -164,6 +164,11 @@ import { faFacebook, faTwitter, faInstagram, faYoutube, faLinkedin } from '@fort
             <FontAwesomeIcon className='m-1 fs-4' icon={faLinkedin}></FontAwesomeIcon>
         </div>
     </div>
+</div>
+<div className='text-light'>
+    <hr />
+    <h2>trivago</h2>
+    <p>Copyright &copy;{new Date().getFullYear()} | All rights reserved by <span className='text-warning'>trivago</span></p>
 </div>
 ```
 
@@ -337,7 +342,7 @@ export default Banners;
 
 ---
 
-⫸ `Single-Bed Products Display in the Stays components:` 
+⫸ `Single-Bed & Double-Bed Products Display in the Stays components:` 
 
 ``` JavaScript
 // In Stays.js
@@ -469,5 +474,81 @@ export default DoubleBed;
 ```
 
 ---
+
+⫸ `Cars Products Display in the Cars components:` 
+
+``` JavaScript
+// In Cars.js
+
+import React from 'react';
+import logo from '../../../images/trivago-logo.png';
+import useCars from '../../../hooks/useCars';
+import Car from '../Car/Car';
+
+const Cars = () => {
+    const [cars] = useCars();
+    return (
+        <div>
+            <div className='d-flex flex-wrap gap-3 m-5 align-items-center justify-content-center'>
+                <img width={100} height={50} src={logo} alt="trivago" />
+                <div className='border-start border-2 border-secondary border-opacity-25 ps-3'>
+                    <h4>Deals from your favorite booking sites</h4>
+                    <p>Try searching for a city, a specific hotel, or even a landmark!</p>
+                </div>
+            </div>
+            <div className='mt-5'>
+                <h2 className='fs-3'>See what's popular Cars available among {cars.length} with other travelers!!!</h2>
+                <div className='container mb-5 align-items-center align-self-center'>
+                    <div className='row m-0 g-5 align-items-center'>
+                        {
+                            cars.map(car => <Car
+                                key={car.id}
+                                car={car}
+                            ></Car>)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Cars;
+```
+
+``` JavaScript
+// In Car.js
+
+import React from 'react';
+
+const Car = ({car}) => {
+    const {name, company, price, picture, bags, passengers, phone} = car;
+    return (
+        <div className='col align-self-center border rounded border-success p-2 mx-2 border-opacity-25'>
+            <div className=''>
+                <div className='bg-secondary bg-opacity-25 rounded m-1 mx-3 p-3 flex-grow-1'>
+                    <img className='rounded' width={300} src={picture} alt="" />
+                </div>
+                <div className='text-start px-2 text-justify'>
+                    <div className='d-flex align-items-center justify-content-between '>
+                        <div className='bg-secondary bg-opacity-25 rounded m-1 p-3 flex-grow-1'>
+                            <h2>{name}</h2>
+                            <p><span>{company}</span> | <span>{price}</span></p>
+                            <p><span><b>Bags: </b>{bags}</span> | <span><b>Passengers: </b>{passengers}</span></p>
+                            <p><b>Phone: </b>{phone}</p>
+                            <button type="button" className="btn btn-success">View Deal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Car;
+```
+
+---
+
 
 

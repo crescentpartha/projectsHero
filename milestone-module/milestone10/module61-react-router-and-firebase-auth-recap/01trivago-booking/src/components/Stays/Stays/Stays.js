@@ -18,7 +18,7 @@ const Stays = () => {
                 </div>
             </div>
             <div className='mt-5'>
-                <h2 className='fs-3'>See what's popular Single Bed among {singleBeds.length} with other travelers!!!</h2>
+                <h2 className='fs-3'>See what's popular Single Bed are available among {singleBeds.length} with other travelers!!!</h2>
                 <div className='container mb-5 align-items-center align-self-center'>
                     <div className='row m-0 g-5 align-items-center'>
                         {
@@ -31,7 +31,7 @@ const Stays = () => {
                 </div>
             </div>
             <div className='mt-5'>
-                <h2 className='fs-3'>See what's popular Double Bed among {doubleBeds.length} with other travelers!!!</h2>
+                <h2 className='fs-3'>See what's popular Double Bed are available among {doubleBeds.length} with other travelers!!!</h2>
                 <div className='container mb-5 align-items-center align-self-center'>
                     <div className='row m-0 g-5 align-items-center'>
                         {
