@@ -1,11 +1,16 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const CarDetail = () => {
-    const {carDetailId} = useParams();
+    const { carDetailId } = useParams();
     return (
-        <div>
-            <h2>Welcome to CarDetail: {carDetailId}</h2>
+        <div className='m-5'>
+            <h2 className='text-center m-4'>Welcome to CarDetail: <span className='text-primary'>{carDetailId}</span></h2>
+            <div className='text-center'>
+                <Link to='/checkout'>
+                    <button className='btn btn-primary'>Proceed Checkout</button>
+                </Link>
+            </div>
         </div>
     );
 };

@@ -1262,4 +1262,48 @@ const Login = () => {
 export default Login;
 ```
 
+## 61.9 Create Checkout component and make it Protected Route
+
+``` JavaScript
+// In Checkout.js
+
+import React from 'react';
+
+const Checkout = () => {
+    return (
+        <div className='m-5'>
+            <h2 className='text-center'>Please Checkout your Booking</h2>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+⫸ `Create a Button in CarDetail, SingleBedDetail, and DoubleBedDetail components:`
+
+``` JavaScript
+// In CarDetail.js
+
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+const CarDetail = () => {
+    const { carDetailId } = useParams();
+    return (
+        <div className='m-5'>
+            <h2 className='text-center m-4'>Welcome to CarDetail: <span className='text-primary'>{carDetailId}</span></h2>
+            <div className='text-center'>
+                <Link to='/checkout'>
+                    <button className='btn btn-primary'>Proceed Checkout</button>
+                </Link>
+            </div>
+        </div>
+    );
+};
+
+export default CarDetail;
+```
+
+
 

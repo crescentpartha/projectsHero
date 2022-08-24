@@ -13,6 +13,7 @@ import CarDetail from './components/DynamicRoute/CarDetail/CarDetail';
 import SingleBedDetail from './components/DynamicRoute/SingleBedDetail/SingleBedDetail';
 import DoubleBedDetail from './components/DynamicRoute/DoubleBedDetail/DoubleBedDetail';
 import RequireAuth from './components/SinglePage/RequireAuth/RequireAuth';
+import Checkout from './components/SinglePage/Checkout/Checkout';
 
 function App() {
   return (
@@ -45,6 +46,11 @@ function App() {
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/checkout' element={
+          <RequireAuth>
+            <Checkout></Checkout>
+          </RequireAuth>
+        }></Route>
         <Route path='/notFound' element={<NotFound></NotFound>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>

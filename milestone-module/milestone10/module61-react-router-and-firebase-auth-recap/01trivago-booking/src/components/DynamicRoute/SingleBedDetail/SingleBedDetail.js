@@ -1,11 +1,16 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const SingleBedDetail = () => {
-    const {singleBedDetailId} = useParams();
+    const { singleBedDetailId } = useParams();
     return (
-        <div>
-            <h2>Welcome to SingleBedDetail: {singleBedDetailId}</h2>
+        <div className='m-5'>
+            <h2 className='text-center m-4'>Welcome to SingleBedDetail: <span className='text-primary'>{singleBedDetailId}</span></h2>
+            <div className='text-center'>
+                <Link to='/checkout'>
+                    <button className='btn btn-primary'>Proceed Checkout</button>
+                </Link>
+            </div>
         </div>
     );
 };
