@@ -723,19 +723,20 @@ const NotFound = () => {
 export default NotFound;
 ```
 
-## 61.4 Style Login form and use useRef hook to access input value
+## 61.4 Style Login form using React-Bootstrap and use useRef hook to access input value
 
 ⫸ `useRef Hook:` is a hook that ___return___ a ___mutable reference object___.
 - [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html "Hooks API Reference - reactjs.org") - [useRef](https://reactjs.org/docs/hooks-reference.html#useref "useRef - reactjs.org")
 
-⫸ `Style Login form:` (use `useRef` hook to ___access input value___)
+⫸ `Style Login form using Bootstrap:` (use `useRef` hook to ___access input value___)
+- If use `<Link>`, then doesn't need to use `navigate` (___only once___)
 
 ``` JavaScript
 // In Login.js
 
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -777,7 +778,8 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
-            <p className='text-center'>New to Trivago? <span className='text-danger cursor-pointer' onClick={navigateRegister}>Please Register</span></p>
+            <p className='text-center'>New to Trivago? <Link  to='/signup' className='text-danger cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
+            
         </div>
     );
 };
@@ -785,5 +787,43 @@ const Login = () => {
 export default Login;
 ```
 
+## 61.5 Create Register form and style it using Vanilla CSS
+
+⫸ `Style SignUp form using Vanilla CSS:`
+
+``` JavaScript
+// SignUp.js
+
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './SignUp.css';
+
+const SignUp = () => {
+    const navigate = useNavigate();
+
+    const navigateLogin = () => {
+        navigate('/login');
+    }
+
+    const handleRegister = event => {
+        event.preventDefault();
+    }
+
+    return (
+        <div className='register-form'>
+            <h2>Please Register</h2>
+            <form onSubmit={handleRegister}>
+                <input type="text" name="name" id="name" placeholder='Your Name' required />
+                <input type="email" name="email" id="email" placeholder='Email Address' required />
+                <input type="password" name="password" id="password" placeholder='Password' required />
+                <input type="submit" value="Register" />
+            </form>
+            <p className='text-center'>Already have an account? <Link  to='/login' className='text-danger cursor-pointer text-decoration-none' onClick={navigateLogin}>Login</Link></p>
+        </div>
+    );
+};
+
+export default SignUp;
+```
 
 
