@@ -1305,5 +1305,45 @@ const CarDetail = () => {
 export default CarDetail;
 ```
 
+## 61.10 Quiz
+
+1. How you can pass `'key'` as a ___parameter___ in ___react-router-dom___?
+   - `/:key`
+2. what does ___useParams() returns___? 
+   - `An object containing the parameters`
+3. If we try to ___access "/" route___, which component will be ___rendered___? 
+   - `<PageNotFound />`
+``` JavaScript
+<Routes>
+    <Route path='/home' element={<Home />} />
+    <Route path='/contact' element={<Contact />} />
+    <Route path='*' element={<PageNotFound />} />
+</Routes>
+```
+4. Is the ___return value of useRef___ `mutable`?
+   - `Yes`
+5. Which one is ___false___ about ___useRef()___
+   - [ ] useRef() creates a plain JavaScript object.
+   - [ ] useRef() doesn't notify you when its content changes.
+   - [x] ___Changing the .current property causes a re-render___
+   - [ ] None of the above
+6. What does ___useAuthState()___ from react-firebase-hooks ___returns___?
+   - [ ] [error, user, loading]
+   - [ ] [loading, user, error]
+   - [x] ___[user, loading, error]___
+   - [ ] [authState, user, error]
+7. What is the full form of `"ENV"`?
+   - `Environment Variable`
+8. You must create custom `environment variables` ___beginning with___ ____ ?____
+   - [ ] react_app_
+   - [ ] React_App_
+   - [ ] REACT_App_
+   - [x] ___REACT_APP____
+9.  How would you use `REACT_APP_SECRET_CODE=123456` in your code? 
+    - `process.env.REACT_APP_SECRET_CODE`
+10. How would you make `react-bootstrap` ___navbar stick to the top___ of the web page?
+    - `<Navbar sticky="top" />`
+
+
 
 
