@@ -61,7 +61,7 @@
      - `Y` > Select Google Account > `Allow` > ___Firebase CLI___ Login Successful
    - `firebase init` (___one time___ for ___each project___) (___Some questions need to face___)
      - Are you ready to proceed? (Y/n) <br /> > `Y`
-     - Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `SpaceBar` to select or unselect)
+     - Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `SpaceBar` to select or unselect) > (press `Enter`)
      - Use an existing project <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
      - Select an existing project like `ema-john-simple-447ad` <br /> > (Use `↓ or ↑ arrow key` to go up or down) > (press `Enter`)
      - What do you want to use as your public directory? (public) <br /> > write `build` > (press `Enter`)
@@ -1345,5 +1345,10 @@ export default CarDetail;
     - `<Navbar sticky="top" />`
 
 
+## Firebase & Netlify Deploy
+
+⫸ `Firebase Deploy:` [trivago-booking.web.app](https://trivago-booking.web.app/ "Firebase Hosting/Deploy - Live Website")
+
+⫸ `Netlify Deploy:` [61-1trivago-booking-crescentpartha.netlify.app](https://61-1trivago-booking-crescentpartha.netlify.app/ "Netlify Deploy - Live Website")
 
 
