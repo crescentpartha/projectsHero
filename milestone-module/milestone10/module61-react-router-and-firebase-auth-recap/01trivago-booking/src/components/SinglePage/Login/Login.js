@@ -1,18 +1,32 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
 
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error
+    ] = useSignInWithEmailAndPassword(auth);
+
     const handleSubmit = event => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(email, password);
+        // console.log(email, password);
 
+        signInWithEmailAndPassword(email, password);
+    }
+
+    if (user) {
+        navigate('/home');
     }
 
     const navigateRegister = event => {
@@ -35,6 +49,17 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
+
+                { error && <p className='text-danger text-center'>{error.message}</p>}
+                {
+                    loading &&
+                    <div className="d-flex justify-content-center my-2">
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                }
+                
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
@@ -42,7 +67,7 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
-            <p className='text-center'>New to Trivago? <Link  to='/signup' className='text-danger cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
+            <p className='text-center'>New to Trivago? <Link to='/signup' className='text-danger cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
         </div>
     );
 };

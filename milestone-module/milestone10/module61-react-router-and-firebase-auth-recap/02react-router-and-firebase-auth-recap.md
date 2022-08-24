@@ -952,7 +952,47 @@ const firebaseConfig = {
 };
 ```
 
-> `Note:` `.env.local` looks like ___dim___, that means it will be `.gitignore` file. So, it ___doesn't go___ to the ___gitHub repo___. <br /> In `firebase.init.js` file, `id` ___don't go directly___, although we can get these `value` by a harder process. But it is `90% safe process` to ___hide___ Firebase configuration.
+⫸ `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
+
+``` Terminal
+npm start
+```
+
+> ⫸ `Notes:` <br /> &nbsp;&nbsp;&nbsp;&nbsp; ▶ `.env.local` looks like ___dim___, that means it will be `.gitignore` file. So, it ___doesn't go___ to the ___gitHub repo___. <br /> &nbsp;&nbsp;&nbsp;&nbsp; ▶ In `firebase.init.js` file, `id` ___don't go directly___, although we can get these `value` by a harder process. But it is `90% safe process` to ___hide___ Firebase configuration.
+
+---
+
+⫸ `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
+
+- `Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).`
+
+``` JavaScript
+assert.ts:128 Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).
+    at createErrorInternal (assert.ts:128:1)
+    at _assert (assert.ts:153:1)
+    at register.ts:67:1
+    at Component.instanceFactory (register.ts:90:1)
+    at Provider.getOrInitializeService (provider.ts:318:1)
+    at Provider.initialize (provider.ts:242:1)
+    at initializeAuth (initialize.ts:66:1)
+    at getAuth (index.ts:44:1)
+    at ./src/firebase.init.js (firebase.init.js:20:1)
+    at options.factory (react refresh:6:1)
+```
+
+- `Solution:` (___But it doesn't work___)
+
+``` JavaScript
+try having the variable between "..."..like so {apiKey:"process.env.FIREBASE_API_KEY",}
+```
+
+- `After follow above solution, you could get new Error:`
+
+``` JavaScript
+https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_APP_apiKey 400
+```
+
+> ⫸ `Solution:` <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Only one solution is ___run___ `npm start`
 
 ---
 
@@ -967,5 +1007,167 @@ const firebaseConfig = {
    - `Ctrl + →` = go to the ___last position___ of ___every word___ and then ___type___
 7. `Shift + End` = ___select all___
 
+
+## 61.7 Email password based authentication with react firebase hooks
+
+⫸ `Initialize Firebase Code:` (___Project Overview > Project settings > Get Firebase Configuration Code___)
+
+---
+
+⫸ [Install react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - gitHub.com")
+
+``` Terminal
+npm install --save react-firebase-hooks
+```
+
+⫸ `useCreateUserWithEmailAndPassword from react-firebase-hooks:` ([SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SignUp/SignUp.js "SignUp.js - trivago-booking"))
+
+``` JavaScript
+// In SignUp.js
+
+import React, { useState } from 'react';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+
+const SignUp = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [error2, setError2] = useState('');
+
+    if (user) {
+        navigate('/home');
+    }
+
+    const handleRegister = event => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log(name, email, password);
+        
+        if (password.length !== 8) {
+            setError2('Password length should be 8 character long');
+            return;
+        }
+
+        createUserWithEmailAndPassword(email, password);
+    }
+
+    return (
+        <div className='register-form'>
+            <form onSubmit={handleRegister}>
+                { error2 ? <p className='text-danger text-center'>{error2}</p> : '' }
+                { error && <p className='text-danger text-center'>{error.message}</p>}
+                {
+                    loading &&
+                    <div className="d-flex align-items-center my-2">
+                        <strong>Loading...</strong>
+                        <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                }
+            </form>
+        </div>
+    );
+};
+
+export default SignUp;
+```
+
+⫸ `useSignInWithEmailAndPassword from react-firebase-hooks:` ([Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/Login/Login.js "Login.js - trivago-booking"))
+
+``` JavaScript
+// In Login.js
+
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+
+const Login = () => {
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const navigate = useNavigate();
+
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error
+    ] = useSignInWithEmailAndPassword(auth);
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        // console.log(email, password);
+
+        signInWithEmailAndPassword(email, password);
+    }
+
+    if (user) {
+        navigate('/home');
+    }
+
+    return (
+        <div className='container'>
+            <Form onSubmit={handleSubmit}>
+                { error && <p className='text-danger text-center'>{error.message}</p>}
+                {
+                    loading &&
+                    <div className="d-flex justify-content-center my-2">
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                }
+            </Form>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+⫸ `signOut from react-firebase-hooks:` ([Header.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Header/Header.js "Header.js - trivago-booking"))
+
+``` JavaScript
+// In Header.js
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
+import auth from '../../../firebase.init';
+
+const Header = () => {
+    const [user] = useAuthState(auth);
+
+    const logout = () => {
+        signOut(auth);
+    }
+    return (
+        <>
+            <Navbar collapseOnSelect expand="lg" sticky='top' bg="success" variant="dark">
+                <Container>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav>
+                            {
+                                user ? <button className='border border-light border-opacity-25 rounded text-light text-uppercase fw-normal bg-success' onClick={logout}>Sign Out</button>
+                                :
+                                    <>
+                                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                                        <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
+                                    </>
+                            }
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </>
+    );
+};
+
+export default Header;
+```
 
 
