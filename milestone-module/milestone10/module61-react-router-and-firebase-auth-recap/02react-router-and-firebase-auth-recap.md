@@ -1170,4 +1170,96 @@ const Header = () => {
 export default Header;
 ```
 
+## 61.8 Introduction to Protected Route and Require Auth
+
+⫸ `Create RequireAuth component:` (___Create Protected Route___) `Step-01`
+
+``` JavaScript
+// In RequiteAuth.js
+
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate, useLocation } from 'react-router-dom';
+import auth from '../../../firebase.init';
+
+const RequireAuth = ({children}) => {
+    const [user] = useAuthState(auth);
+    const location = useLocation();
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    return children;
+};
+
+export default RequireAuth;
+```
+
+⫸ `Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___) `Step-02`
+
+``` JavaScript
+// In App.js
+
+import RequireAuth from './components/SinglePage/RequireAuth/RequireAuth';
+
+function App() {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path='/cars' element={<Cars></Cars>}></Route>
+        <Route path='/carDetail/:carDetailId' element={
+          <RequireAuth>
+            <CarDetail></CarDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/singleBedDetail/:singleBedDetailId' element={
+          <RequireAuth>
+            <SingleBedDetail></SingleBedDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/doubleBedDetail/:doubleBedDetailId' element={
+          <RequireAuth>
+            <DoubleBedDetail></DoubleBedDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/about' element={
+          <RequireAuth>
+            <About></About>
+          </RequireAuth>
+        }></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `Implement Authentication Redirect:` `Step-03`
+
+``` JavaScript
+// In Login.js
+
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+
+const Login = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location?.state?.from?.pathname || '/';
+
+    if (user) {
+        navigate(from, {replace: true});
+    }
+
+    return (
+        <div>
+
+        </div>
+    );
+};
+
+export default Login;
+```
+
 

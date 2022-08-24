@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const from = location?.state?.from?.pathname || '/';
 
     const [
         signInWithEmailAndPassword,
@@ -26,7 +29,7 @@ const Login = () => {
     }
 
     if (user) {
-        navigate('/home');
+        navigate(from, {replace: true});
     }
 
     const navigateRegister = event => {
@@ -59,7 +62,7 @@ const Login = () => {
                         </div>
                     </div>
                 }
-                
+
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>

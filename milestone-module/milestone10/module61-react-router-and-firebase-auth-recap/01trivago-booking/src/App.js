@@ -12,6 +12,7 @@ import SignUp from './components/SinglePage/SignUp/SignUp';
 import CarDetail from './components/DynamicRoute/CarDetail/CarDetail';
 import SingleBedDetail from './components/DynamicRoute/SingleBedDetail/SingleBedDetail';
 import DoubleBedDetail from './components/DynamicRoute/DoubleBedDetail/DoubleBedDetail';
+import RequireAuth from './components/SinglePage/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -22,10 +23,26 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/stays' element={<Stays></Stays>}></Route>
         <Route path='/cars' element={<Cars></Cars>}></Route>
-        <Route path='/carDetail/:carDetailId' element={<CarDetail></CarDetail>}></Route>
-        <Route path='/singleBedDetail/:singleBedDetailId' element={<SingleBedDetail></SingleBedDetail>}></Route>
-        <Route path='/doubleBedDetail/:doubleBedDetailId' element={<DoubleBedDetail></DoubleBedDetail>}></Route>
-        <Route path='/about' element={<About></About>}></Route>
+        <Route path='/carDetail/:carDetailId' element={
+          <RequireAuth>
+            <CarDetail></CarDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/singleBedDetail/:singleBedDetailId' element={
+          <RequireAuth>
+            <SingleBedDetail></SingleBedDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/doubleBedDetail/:doubleBedDetailId' element={
+          <RequireAuth>
+            <DoubleBedDetail></DoubleBedDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/about' element={
+          <RequireAuth>
+            <About></About>
+          </RequireAuth>
+        }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/notFound' element={<NotFound></NotFound>}></Route>
