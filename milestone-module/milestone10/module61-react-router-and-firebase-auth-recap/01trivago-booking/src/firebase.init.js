@@ -6,12 +6,12 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",
-  authDomain: "trivago-booking.firebaseapp.com",
-  projectId: "trivago-booking",
-  storageBucket: "trivago-booking.appspot.com",
-  messagingSenderId: "766745666756",
-  appId: "1:766745666756:web:13fe113c97e48e7097d591"
+  apiKey:process.env.REACT_APP_apiKey,
+  authDomain:process.env.REACT_APP_authDomain,
+  projectId:process.env.REACT_APP_projectId,
+  storageBucket:process.env.REACT_APP_storageBucket,
+  messagingSenderId:process.env.REACT_APP_messagingSenderId,
+  appId:process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase

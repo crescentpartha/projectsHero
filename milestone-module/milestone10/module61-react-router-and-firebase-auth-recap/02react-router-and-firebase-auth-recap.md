@@ -127,16 +127,19 @@ export default Header;
 
 ---
 
-⫸ `Install FontAwesomeIcons:`
+⫸ `Install FontAwesomeIcons:` (___free-brands-svg-icons___)
+- ___Four steps to install___
 
 ``` Terminal
 npm i --save @fortawesome/fontawesome-svg-core
 npm install --save @fortawesome/free-solid-svg-icons
 npm install --save @fortawesome/react-fontawesome
 npm install --save @fortawesome/free-brands-svg-icons
+```
 
-<!-- OR -->
+- ___One step to install___ (`Alternative Solution`)
 
+``` Terminal
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 ```
 
@@ -825,5 +828,144 @@ const SignUp = () => {
 
 export default SignUp;
 ```
+
+## 61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways
+
+⫸ `Get Form data in 3 different ways:`
+1. State declare & onBlur EventHandler
+2. useRef hook
+3. event.target.email.value
+
+- [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Login/Login.js "Demo_Code: Get form data using State declare & onBlur EventHandler | Login.js - genius-car-services") (from ___genius-car-services___)
+
+``` JavaScript
+// 1st way
+
+import React, { useState } from 'react';
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailBlur = event => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+
+    const handleUserSignIn = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(email, password);
+    }
+
+    return (
+        <form onSubmit={handleUserSignIn}>
+            <input onBlur={handleEmailBlur} type="email" name="email" id="email" required />
+            <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required />
+        </form>
+    );
+};
+
+export default Login;
+```
+
+- [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/Login/Login.js "Demo_Code: Get form data using useRef hook | Login.js - trivago-booking") (from ___trivago-booking___)
+
+``` JavaScript
+// 2nd way
+
+import React, { useRef } from 'react';
+
+const Login = () => {
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const navigate = useNavigate();
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        // console.log(email, password);
+    }
+
+    return (
+        <Form.Control ref={emailRef} type="email" placeholder="Enter email" required />
+        <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
+    );
+};
+
+export default Login;
+```
+
+- [SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SignUp/SignUp.js "Demo_Code: Get form data using event.target.password.value | SignUp.js - trivago-booking") (from ___trivago-booking___)
+
+``` JavaScript
+// 3rd way
+
+const handleRegister = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    // console.log(name, email, password);
+
+    // Then you can go to the validation process
+}
+```
+
+---
+
+⫸ [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables for Firebase Config___)
+- Environment variables start/___declare___ with `REACT_APP_` like `REACT_APP_apiKey` 
+- Get ___access___ environment variables `process.env.` like `process.env.REACT_APP_apiKey`
+- Need to ___create a file___ in the ___root___ (___aside package.json___) of your project, ___start with___ `.env.` like `.env.local` or `.env.development.local` or `.env.test.local` or `.env.production.local` etc.
+- Set `REACT_APP_environmentVariable=value` (set ___all the value___ in this format from ___firebaseConfig___ file)
+  - `REACT_APP_apiKey=AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o`
+- Set `apiKey:process.env.REACT_APP_apiKey,` instead of `apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",` in ___firebaseConfig___ file
+
+⫸ `Set Environment Variables for Firebase Configuration in Create React App:`
+
+``` JavaScript
+// In .env.local
+
+REACT_APP_apiKey=AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o
+REACT_APP_authDomain=trivago-booking.firebaseapp.com
+REACT_APP_projectId=trivago-booking
+REACT_APP_storageBucket=trivago-booking.appspot.com
+REACT_APP_messagingSenderId=766745666756
+REACT_APP_appId=1:766745666756:web:13fe113c97e48e7097d591
+```
+
+``` JavaScript
+// In firebase.inti.js
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey:process.env.REACT_APP_apiKey,
+  authDomain:process.env.REACT_APP_authDomain,
+  projectId:process.env.REACT_APP_projectId,
+  storageBucket:process.env.REACT_APP_storageBucket,
+  messagingSenderId:process.env.REACT_APP_messagingSenderId,
+  appId:process.env.REACT_APP_appId,
+};
+```
+
+> `Note:` `.env.local` looks like ___dim___, that means it will be `.gitignore` file. So, it ___doesn't go___ to the ___gitHub repo___. <br /> In `firebase.init.js` file, `id` ___don't go directly___, although we can get these `value` by a harder process. But it is `90% safe process` to ___hide___ Firebase configuration.
+
+---
+
+⫸ `KeyBoard Shortcut:`
+1. `Shift + Alt + F` = ___alignment format___ in JavaScript file
+2. `Tab` = for ___right alignment___
+3. `Shift + Tab` = for ___left alignment___
+4. `Home` = to go ___starting position___ of any line
+5. `End` = to go ___ending position___ of any line
+6. `Ctrl + Alt + ↑` = ___multi-cursor on___
+   - `Alt + clicked` = ___multi-cursor on___ and ___multi-cursor off___
+   - `Ctrl + →` = go to the ___last position___ of ___every word___ and then ___type___
+7. `Shift + End` = ___select all___
+
 
 

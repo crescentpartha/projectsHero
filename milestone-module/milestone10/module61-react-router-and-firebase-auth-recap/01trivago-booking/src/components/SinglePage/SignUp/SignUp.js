@@ -11,6 +11,15 @@ const SignUp = () => {
 
     const handleRegister = event => {
         event.preventDefault();
+        // console.log(event.target);
+        // console.log(event.target.email);
+        // console.log(event.target.email.value);
+        // console.log(event.target.password.value);
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        // console.log(name, email, password);
+        
     }
 
     return (
