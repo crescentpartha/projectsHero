@@ -1352,3 +1352,33 @@ export default CarDetail;
 ⫸ `Netlify Deploy:` [61-1trivago-booking-crescentpartha.netlify.app](https://61-1trivago-booking-crescentpartha.netlify.app/ "Netlify Deploy - Live Website")
 
 
+---
+
+## 62.1 Module Overview and Social Login initial setup
+
+⫸ `Create SocialLogin Component:`
+
+``` JavaScript
+// In SocialLogin.js
+
+import React from 'react';
+
+const SocialLogin = () => {
+    return (
+        <div>
+            <div className='d-flex align-items-center justify-content-center'>
+                <div style={{height: '1px'}} className='bg-primary w-50'></div>
+                <p className='mt-2 mx-2'>or</p>
+                <div style={{height: '1px'}} className='bg-primary w-50'></div>
+            </div>
+            <div>
+                <button className='btn btn-primary w-50'>Google Sign In</button>
+            </div>
+        </div>
+    );
+};
+
+export default SocialLogin;
+```
+
+
