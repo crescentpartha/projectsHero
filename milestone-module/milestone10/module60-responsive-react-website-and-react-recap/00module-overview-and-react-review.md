@@ -592,4 +592,85 @@ const Header = () => {
 export default Header;
 ```
 
+## 61.2 Setup Dynamic Route and Access route params
+
+⫸ `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
+1. ___Set Nested Route___ inside of the App route (___route___)
+2. ___Set navigate___ in EventHandler (___parameter-&-click___)
+3. ___Get invoiceId___ by useParams(); (___getId___)
+
+
+> `Notes:` <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⫸ Implement `Dynamic Route` for the ___single product___ of ___Services___
+
+--- 
+
+⫸ `01. Set Nested Route:` (___route___)
+
+``` JavaScript
+// In App.js
+
+import ServiceDetail from './Pages/Home/ServiceDetail/ServiceDetail';
+
+function App() {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/service/:serviceDetailId' element={
+          <RequireAuth>
+            <ServiceDetail></ServiceDetail>
+          </RequireAuth>
+        }></Route>
+        <Route path='/about' element={<About></About>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+```
+
+⫸ `02. Set navigate:` (___parameter-&-click___)
+
+``` JavaScript
+// In Service.js
+
+import { useNavigate } from 'react-router-dom';
+
+const Service = ({service}) => {
+    const {id, name, img, description, price} = service;
+    const navigate = useNavigate();
+    const handleNavigateToServiceDetail = id => {
+        navigate(`/service/${id}`);
+    }
+    return (
+        <div className='service'>
+            <button onClick={() => handleNavigateToServiceDetail(id)} className='btn btn-primary'>Book: {name}</button>
+        </div>
+    );
+};
+
+export default Service;
+```
+
+⫸ `03. Get invoiceId:` (___getId___)
+
+``` JavaScript
+// In ServiceDetail.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const ServiceDetail = () => {
+    const {serviceDetailId} = useParams();
+    return (
+        <div>
+            <h2 className='text-center m-5'>Welcome to ServiceDetail: <span className='text-primary'>{serviceDetailId}</span></h2>
+        </div>
+    );
+};
+
+export default ServiceDetail;
+```
+
 
