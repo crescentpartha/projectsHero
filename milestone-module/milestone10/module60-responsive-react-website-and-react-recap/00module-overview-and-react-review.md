@@ -853,5 +853,9 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
    - `Ctrl + →` = go to the ___last position___ of ___every word___ and then ___type___
 7. `Shift + End` = ___select all___
 
+---
+
+⫸ `Issue:` [Navigate to #id in Layout component - stack overflow](https://stackoverflow.com/questions/65646065/navigate-to-id-in-layout-component)
+
 
 
