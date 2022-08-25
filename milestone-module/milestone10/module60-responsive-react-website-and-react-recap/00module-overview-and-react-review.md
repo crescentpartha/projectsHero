@@ -673,4 +673,185 @@ const ServiceDetail = () => {
 export default ServiceDetail;
 ```
 
+## 61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways
+
+⫸ `Get Form data in 3 different ways:`
+1. ___State declare & onBlur EventHandler___
+2. ___useRef hook___
+3. ___event.target.email.value___
+
+- [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Login/Login.js "Demo_Code: Get form data using State declare & onBlur EventHandler | Login.js - genius-car-services") (from ___genius-car-services___)
+
+``` JavaScript
+// 1st way
+import React, { useState } from 'react';
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleEmailBlur = event => {
+        setEmail(event.target.value);
+    }
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+    const handleUserSignIn = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(email, password);
+    }
+    return (
+        <form onSubmit={handleUserSignIn}>
+            <input onBlur={handleEmailBlur} type="email" name="email" id="email" required />
+            <input onBlur={handlePasswordBlur} type="password" name="password" id="password" required />
+        </form>
+    );
+};
+export default Login;
+```
+
+- [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/Login/Login.js "Demo_Code: Get form data using useRef hook | Login.js - trivago-booking") (from ___trivago-booking___)
+
+``` JavaScript
+// 2nd way
+import React, { useRef } from 'react';
+const Login = () => {
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const navigate = useNavigate();
+    const handleSubmit = event => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        // console.log(email, password);
+    }
+    return (
+        <Form.Control ref={emailRef} type="email" placeholder="Enter email" required />
+        <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
+    );
+};
+export default Login;
+```
+
+- [SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SignUp/SignUp.js "Demo_Code: Get form data using event.target.password.value | SignUp.js - trivago-booking") (from ___trivago-booking___)
+
+``` JavaScript
+// 3rd way
+const handleRegister = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    // console.log(name, email, password);
+    // Then you can go to the validation process
+}
+```
+
+---
+
+⫸ [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables for Firebase Config___)
+- Environment variables start/___declare___ with `REACT_APP_` like `REACT_APP_apiKey` 
+- Get ___access___ environment variables `process.env.` like `process.env.REACT_APP_apiKey`
+- Need to ___create a file___ in the ___root___ (___aside package.json___) of your project, ___start with___ `.env.` like `.env.local` or `.env.development.local` or `.env.test.local` or `.env.production.local` etc.
+- Set `REACT_APP_environmentVariable=value` (set ___all the value___ in this format from ___firebaseConfig___ file)
+  - `REACT_APP_apiKey=AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o`
+- Set `apiKey:process.env.REACT_APP_apiKey,` instead of `apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",` in ___firebaseConfig___ file
+
+
+⫸ `Without setup Environment Variables for Firebase Configuration:`
+
+``` JavaScript
+// In firebase.inti.js (Without Environment Variable)
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDzgkoX3nvHU_YpvGKWcucdui84gyQxZYg",
+  authDomain: "genius-car-services-a8da0.firebaseapp.com",
+  projectId: "genius-car-services-a8da0",
+  storageBucket: "genius-car-services-a8da0.appspot.com",
+  messagingSenderId: "386426605141",
+  appId: "1:386426605141:web:6767f2232f4e1e60304edc"
+};
+```
+
+⫸ `Set Environment Variables for Firebase Configuration in Create React App:`
+
+``` JavaScript
+// In .env.local
+
+REACT_APP_apiKey=AIzaSyDzgkoX3nvHU_YpvGKWcucdui84gyQxZYg
+REACT_APP_authDomain=genius-car-services-a8da0.firebaseapp.com
+REACT_APP_projectId=genius-car-services-a8da0
+REACT_APP_storageBucket=genius-car-services-a8da0.appspot.com
+REACT_APP_messagingSenderId=386426605141
+REACT_APP_appId=1:386426605141:web:6767f2232f4e1e60304edc
+```
+
+``` JavaScript
+// In firebase.inti.js
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey:process.env.REACT_APP_apiKey,
+  authDomain:process.env.REACT_APP_authDomain,
+  projectId:process.env.REACT_APP_projectId,
+  storageBucket:process.env.REACT_APP_storageBucket,
+  messagingSenderId:process.env.REACT_APP_messagingSenderId,
+  appId:process.env.REACT_APP_appId,
+};
+```
+
+⫸ `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
+
+``` Terminal
+npm start
+```
+
+> ⫸ `Notes:` <br /> &nbsp;&nbsp;&nbsp;&nbsp; ▶ `.env.local` looks like ___dim___, that means it will be `.gitignore` file. So, it ___doesn't go___ to the ___gitHub repo___. <br /> &nbsp;&nbsp;&nbsp;&nbsp; ▶ In `firebase.init.js` file, `id` ___don't go directly___, although we can get these `value` by a harder process. But it is `90% safe process` to ___hide___ Firebase configuration.
+
+---
+
+⫸ `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
+- `Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).`
+
+``` JavaScript
+assert.ts:128 Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).
+    at createErrorInternal (assert.ts:128:1)
+    at _assert (assert.ts:153:1)
+    at register.ts:67:1
+    at Component.instanceFactory (register.ts:90:1)
+    at Provider.getOrInitializeService (provider.ts:318:1)
+    at Provider.initialize (provider.ts:242:1)
+    at initializeAuth (initialize.ts:66:1)
+    at getAuth (index.ts:44:1)
+    at ./src/firebase.init.js (firebase.init.js:20:1)
+    at options.factory (react refresh:6:1)
+```
+
+- `Solution:` (___But it doesn't work___)
+
+``` JavaScript
+try having the variable between "..."..like so {apiKey:"process.env.FIREBASE_API_KEY",}
+```
+
+- `After follow above solution, you could get new Error:`
+
+``` JavaScript
+https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_APP_apiKey 400
+```
+
+> ⫸ `Solution:` <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Only one solution is ___run___ `npm start`
+
+---
+
+⫸ `KeyBoard Shortcut:`
+1. `Shift + Alt + F` = ___alignment format___ in JavaScript file
+2. `Tab` = for ___right alignment___
+3. `Shift + Tab` = for ___left alignment___
+4. `Home` = to go ___starting position___ of any line
+5. `End` = to go ___ending position___ of any line
+6. `Ctrl + Alt + ↑` = ___multi-cursor on___
+   - `Alt + clicked` = ___multi-cursor on___ and ___multi-cursor off___
+   - `Ctrl + →` = go to the ___last position___ of ___every word___ and then ___type___
+7. `Shift + End` = ___select all___
+
+
 
