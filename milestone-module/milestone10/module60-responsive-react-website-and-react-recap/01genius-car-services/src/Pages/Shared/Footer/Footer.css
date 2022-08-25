@@ -11,3 +11,11 @@ footer > p {
 footer span:hover {
     color: tomato;
 }
+
+/* Responsive Design */
+
+@media only screen and (max-width: 676px) {
+    footer > p {
+        font-size: 12px;
+    }
+}

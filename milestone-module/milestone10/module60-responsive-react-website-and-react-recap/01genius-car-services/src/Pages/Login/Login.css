@@ -86,3 +86,20 @@
     width: 25px;
     margin-right: 5px;
 }
+
+/* Responsive Design */
+
+@media only screen and (max-width: 676px) {
+    .form-container {
+        width: 90%;
+    }
+    .form-container > div {
+        padding: 20px;
+    }
+    .form-container p {
+        font-size: 14px;
+    }
+    .third-party-auth {
+        justify-content: space-around;
+    }
+}
