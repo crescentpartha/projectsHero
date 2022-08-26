@@ -1,8 +1,70 @@
+## Table of Contents
+
+- [Module 61: React Router and Firebase Auth Recap](#module-61-react-router-and-firebase-auth-recap)
+  - [61.0 Basic Project Setup](#610-basic-project-setup)
+    - [`Basic Project Setup:`](#basic-project-setup)
+    - [`If Clone any React Project:` (___Need to follow some steps___)](#if-clone-any-react-project-need-to-follow-some-steps)
+    - [`Authentication Steps or Auth_steps:`](#authentication-steps-or-auth_steps)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) <br /> (___Hosting > Get Started___)](#firebase-hostingdeploy-steps-for-1st-time--hosting--get-started)
+    - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times)
+  - [61.1 Module Overview - Responsive Header Component - sticky top](#611-module-overview---responsive-header-component---sticky-top)
+    - [___Navbar > Responsive Behaviors: from React-Bootstrap___](#navbar--responsive-behaviors-from-react-bootstrap)
+    - [`Install FontAwesomeIcons:` (___free-brands-svg-icons___)](#install-fontawesomeicons-free-brands-svg-icons)
+    - [`Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the Footer.js component)](#footer-components-section-fontawesomeicons--imageicons--dynamic-date-added-in-the-footerjs-component)
+    - [`Create Custom Hooks:` (Custom ___useCountries___ hooks)](#create-custom-hooks-custom-usecountries-hooks)
+    - [`Use Custom Hooks:` (___Countries___ Component)](#use-custom-hooks-countries-component)
+    - [`Use Custom Hooks:` (___Country___ Component)](#use-custom-hooks-country-component)
+    - [`Banners Component:` (3 images ___Carousel___ added)](#banners-component-3-images-carousel-added)
+    - [`Single-Bed & Double-Bed Products Display in the Stays components:`](#single-bed--double-bed-products-display-in-the-stays-components)
+    - [`Cars Products Display in the Cars components:`](#cars-products-display-in-the-cars-components)
+    - [`Implement Accordion from React-Bootstrap:` (About.js)](#implement-accordion-from-react-bootstrap-aboutjs)
+  - [61.2 Setup Dynamic Route and Access route params](#612-setup-dynamic-route-and-access-route-params)
+    - [`Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`)](#reading-url-params-steps-setup-route---parameter--click---getid)
+      - [`01. Set Nested Route:` (___route___)](#01-set-nested-route-route)
+      - [`02. Set navigate:` (___parameter-&-click___)](#02-set-navigate-parameter--click)
+      - [`03. Get invoiceId:` (___getId___)](#03-get-invoiceid-getid)
+  - [61.3 Navigate to services, 404 page, Login Component](#613-navigate-to-services-404-page-login-component)
+    - [`Navigate according to id in a single page:`](#navigate-according-to-id-in-a-single-page)
+    - [`NotFound component Modified:`](#notfound-component-modified)
+  - [61.4 Style Login form using React-Bootstrap and use useRef hook to access input value](#614-style-login-form-using-react-bootstrap-and-use-useref-hook-to-access-input-value)
+    - [`useRef Hook:` is a hook that ___return___ a ___mutable reference object___.](#useref-hook-is-a-hook-that-return-a-mutable-reference-object)
+    - [`Style Login form using Bootstrap:` (use `useRef` hook to ___access input value___)](#style-login-form-using-bootstrap-use-useref-hook-to-access-input-value)
+  - [61.5 Create Register form and style it using Vanilla CSS](#615-create-register-form-and-style-it-using-vanilla-css)
+    - [`Style SignUp form using Vanilla CSS:`](#style-signup-form-using-vanilla-css)
+  - [61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways](#616-optional-environment-variable-for-firebase-in-create-react-app--get-form-data-in-3-different-ways)
+    - [`Get Form data in 3 different ways:`](#get-form-data-in-3-different-ways)
+    - [Adding Custom Environment Variables: (___Set Environment Variables for Firebase Config___)](#adding-custom-environment-variables-set-environment-variables-for-firebase-config)
+    - [`Firebase Configuration without Environment Variables setup:`](#firebase-configuration-without-environment-variables-setup)
+    - [`Set Environment Variables for Firebase Configuration in Create React App:`](#set-environment-variables-for-firebase-configuration-in-create-react-app)
+    - [`After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)](#after-setup-environment-variable-run-npm-start-otherwise-get-some-error)
+    - [`Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)](#some-error-are-showing-below-you-could-get-this-kind-of-error-if-not-run-npm-start)
+    - [`KeyBoard Shortcut:`](#keyboard-shortcut)
+  - [61.7 Email password based authentication with react firebase hooks](#617-email-password-based-authentication-with-react-firebase-hooks)
+    - [`Initialize Firebase Code:` (___Project Overview > Project settings > Get Firebase Configuration Code___)](#initialize-firebase-code-project-overview--project-settings--get-firebase-configuration-code)
+    - [Install react-firebase-hooks](#install-react-firebase-hooks)
+    - [`useCreateUserWithEmailAndPassword from react-firebase-hooks:` (SignUp.js)](#usecreateuserwithemailandpassword-from-react-firebase-hooks-signupjs)
+    - [`useSignInWithEmailAndPassword from react-firebase-hooks:` (Login.js)](#usesigninwithemailandpassword-from-react-firebase-hooks-loginjs)
+    - [`signOut from react-firebase-hooks:` (Header.js)](#signout-from-react-firebase-hooks-headerjs)
+  - [61.8 Introduction to Protected Route and Require Auth](#618-introduction-to-protected-route-and-require-auth)
+    - [`Create RequireAuth component:` (___Create Protected Route___) `Step-01`](#create-requireauth-component-create-protected-route-step-01)
+    - [`Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___) `Step-02`](#wrap-the-component-with-requireauth-component-which-component-need-to-be-authenticate---create-protected-route-step-02)
+    - [`Implement Authentication Redirect:` `Step-03`](#implement-authentication-redirect-step-03)
+  - [61.9 Create Checkout component and make it Protected Route](#619-create-checkout-component-and-make-it-protected-route)
+    - [`Create a Button in CarDetail, SingleBedDetail, and DoubleBedDetail components:`](#create-a-button-in-cardetail-singlebeddetail-and-doublebeddetail-components)
+  - [61.10 Quiz](#6110-quiz)
+    - [Firebase & Netlify Deploy](#firebase--netlify-deploy)
+- [Module 62: Build a Authentication System for 60genius-car-services & 61trivago-booking](#module-62-build-a-authentication-system-for-60genius-car-services--61trivago-booking)
+  - [62.1 Module Overview and Social Login initial setup](#621-module-overview-and-social-login-initial-setup)
+  - [62.2 Style social login and share social login component](#622-style-social-login-and-share-social-login-component)
+  - [62.3 Implement Google Login System from react-firebase-hooks](#623-implement-google-login-system-from-react-firebase-hooks)
+  - [62.4 Implement Github Login System and Allow multiple account](#624-implement-github-login-system-and-allow-multiple-account)
+
+
 # Module 61: React Router and Firebase Auth Recap
 
 ## 61.0 Basic Project Setup
 
-⫸ `Basic Project Setup:`
+### `Basic Project Setup:`
 - ___Create React App___
 - Create a ___Firebase project___ and ___Register___ my app
 - Install the ___SDK___ and ___initialize Firebase___
@@ -17,7 +79,7 @@
 
 ---
 
-⫸ `If Clone any React Project:` (___Need to follow some steps___)
+### `If Clone any React Project:` (___Need to follow some steps___)
 1. `npm install` for ___node_modules___ folder, it installs all the ___dependency___ of this project.
 2. Create a ___new Repository___ 
 3. `git remote -v` (___to check remote URL___)
@@ -34,7 +96,7 @@
 
 ---
 
-⫸ `Authentication Steps or Auth_steps:`
+### `Authentication Steps or Auth_steps:`
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
 2. ___Register app___
 3. `npm install firebase`
@@ -53,7 +115,7 @@
 
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) <br /> (___Hosting > Get Started___)
+### `Firebase Hosting/Deploy Steps:` (for ___1st time___) <br /> (___Hosting > Get Started___)
 1. ___Install Firebase CLI___ 
    - `npm install -g firebase-tools` (___one time___ for your ___computer___)
 2. ___Initialize your Project___
@@ -71,19 +133,20 @@
 3. ___Build your project___ according to ___latest change___ 
    - `npm run build` (___every time___ you want to ___deploy___)
 4. ___Deploy to Firebase Hosting___
-   - `firebase deploy` (___every time___ you want to ___deploy___)
+   - `firebase deploy` (___every time___ you want to ___deploy___) 
 
-> `Note:` It could be needed in the deployment process time.
+⫸ `Note:` It could be needed in the deployment process time.
+
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+### `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
 1. `npm run build`
 2. `firebase deploy`
 
 
 ## 61.1 Module Overview - Responsive Header Component - sticky top
 
-⫸ ___Navbar > [Responsive Behaviors](https://react-bootstrap.netlify.app/components/navbar/#responsive-behaviors): from React-Bootstrap___
+### ___Navbar > [Responsive Behaviors](https://react-bootstrap.netlify.app/components/navbar/#responsive-behaviors): from React-Bootstrap___
 - Create ___multiple route component___
 - Create ___Header___ component and ___setup routes___
 
@@ -127,7 +190,7 @@ export default Header;
 
 ---
 
-⫸ `Install FontAwesomeIcons:` (___free-brands-svg-icons___)
+### `Install FontAwesomeIcons:` (___free-brands-svg-icons___)
 - ___Four steps to install___
 
 ``` Terminal
@@ -143,7 +206,7 @@ npm install --save @fortawesome/free-brands-svg-icons
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 ```
 
-⫸ `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the [Footer.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Footer/Footer.js "Footer component - 01trivago-booking App") component)
+### `Footer Component's Section:` (___FontAwesomeIcons & ImageIcons & Dynamic Date___ added in the [Footer.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Footer/Footer.js "Footer component - 01trivago-booking App") component)
 
 ``` JavaScript
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -177,7 +240,7 @@ import { faFacebook, faTwitter, faInstagram, faYoutube, faLinkedin } from '@fort
 
 ---
 
-⫸ `Create Custom Hooks:` (Custom ___useCountries___ hooks)
+### `Create Custom Hooks:` (Custom ___useCountries___ hooks)
 
 ``` JavaScript
 // hooks/useCountries.js
@@ -199,7 +262,7 @@ const useCountries = () => {
 export default useCountries;
 ```
 
-⫸ `Use Custom Hooks:` (___Countries___ Component)
+### `Use Custom Hooks:` (___Countries___ Component)
 
 ``` JavaScript
 // In Countries.js
@@ -230,7 +293,7 @@ const Countries = () => {
 export default Countries;
 ```
 
-⫸ `Use Custom Hooks:` (___Country___ Component)
+### `Use Custom Hooks:` (___Country___ Component)
 
 ``` JavaScript
 // In Country.js
@@ -260,7 +323,7 @@ export default Country;
 
 ---
 
-⫸ `Banners Component:` (3 images ___Carousel___ added)
+### `Banners Component:` (3 images ___Carousel___ added)
 
 ``` JavaScript
 // In Banners.js
@@ -345,7 +408,7 @@ export default Banners;
 
 ---
 
-⫸ `Single-Bed & Double-Bed Products Display in the Stays components:` 
+### `Single-Bed & Double-Bed Products Display in the Stays components:` 
 
 ``` JavaScript
 // In Stays.js
@@ -478,7 +541,7 @@ export default DoubleBed;
 
 ---
 
-⫸ `Cars Products Display in the Cars components:` 
+### `Cars Products Display in the Cars components:` 
 
 ``` JavaScript
 // In Cars.js
@@ -553,7 +616,7 @@ export default Car;
 
 ---
 
-⫸ `Implement Accordion from React-Bootstrap:` ([About.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/About/About.js "About component - 01trivago-booking App"))
+### `Implement Accordion from React-Bootstrap:` ([About.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/About/About.js "About component - 01trivago-booking App"))
 
 ``` JavaScript
 // In About.js
@@ -602,7 +665,7 @@ export default About;
 
 ## 61.2 Setup Dynamic Route and Access route params
 
-⫸ `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
+### `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
 1. ___Set Nested Route___ inside of the App route (___route___)
 2. ___Set navigate___ in EventHandler (___parameter-&-click___)
 3. ___Get invoiceId___ by useParams(); (___getId___)
@@ -611,7 +674,7 @@ export default About;
 
 --- 
 
-⫸ `01. Set Nested Route:` (___route___)
+#### `01. Set Nested Route:` (___route___)
 
 ``` JavaScript
 // In App.js
@@ -636,7 +699,7 @@ function App() {
 export default App;
 ```
 
-⫸ `02. Set navigate:` (___parameter-&-click___)
+#### `02. Set navigate:` (___parameter-&-click___)
 
 ``` JavaScript
 // In Car.js
@@ -660,7 +723,7 @@ const Car = ({car}) => {
 export default Car;
 ```
 
-⫸ `03. Get invoiceId:` (___getId___)
+#### `03. Get invoiceId:` (___getId___)
 
 ``` JavaScript
 // In CarDetail.js
@@ -682,7 +745,7 @@ export default CarDetail;
 
 ## 61.3 Navigate to services, 404 page, Login Component
 
-⫸ `Navigate according to id in a single page:`
+### `Navigate according to id in a single page:`
 
 ``` JavaScript
 <Nav.Link href="home#services">Services</Nav.Link>
@@ -705,7 +768,7 @@ return (
 
 ---
 
-⫸ `NotFound component Modified:`
+### `NotFound component Modified:`
 
 ``` JavaScript
 // In NotFound.js
@@ -728,10 +791,10 @@ export default NotFound;
 
 ## 61.4 Style Login form using React-Bootstrap and use useRef hook to access input value
 
-⫸ `useRef Hook:` is a hook that ___return___ a ___mutable reference object___.
+### `useRef Hook:` is a hook that ___return___ a ___mutable reference object___.
 - [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html "Hooks API Reference - reactjs.org") - [useRef](https://reactjs.org/docs/hooks-reference.html#useref "useRef - reactjs.org")
 
-⫸ `Style Login form using Bootstrap:` (use `useRef` hook to ___access input value___)
+### `Style Login form using Bootstrap:` (use `useRef` hook to ___access input value___)
 - If use `<Link>`, then doesn't need to use `navigate` (___only once___)
 
 ``` JavaScript
@@ -792,7 +855,7 @@ export default Login;
 
 ## 61.5 Create Register form and style it using Vanilla CSS
 
-⫸ `Style SignUp form using Vanilla CSS:`
+### `Style SignUp form using Vanilla CSS:`
 
 ``` JavaScript
 // SignUp.js
@@ -831,7 +894,7 @@ export default SignUp;
 
 ## 61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways
 
-⫸ `Get Form data in 3 different ways:`
+### `Get Form data in 3 different ways:`
 1. State declare & onBlur EventHandler
 2. useRef hook
 3. event.target.email.value
@@ -917,7 +980,7 @@ const handleRegister = event => {
 
 ---
 
-⫸ [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables for Firebase Config___)
+### [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables for Firebase Config___)
 - Environment variables start/___declare___ with `REACT_APP_` like `REACT_APP_apiKey` 
 - Get ___access___ environment variables `process.env.` like `process.env.REACT_APP_apiKey`
 - Need to ___create a file___ in the ___root___ (___aside package.json___) of your project, ___start with___ `.env.` like `.env.local` or `.env.development.local` or `.env.test.local` or `.env.production.local` etc.
@@ -925,7 +988,29 @@ const handleRegister = event => {
   - `REACT_APP_apiKey=AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o`
 - Set `apiKey:process.env.REACT_APP_apiKey,` instead of `apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",` in ___firebaseConfig___ file
 
-⫸ `Set Environment Variables for Firebase Configuration in Create React App:`
+---
+
+> `Get Initialize Firebase Code:` (___Project Overview > Project settings > Get Firebase Configuration Code___)
+
+### `Firebase Configuration without Environment Variables setup:`
+
+``` JavaScript
+// In firebase.inti.js
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",
+  authDomain: "trivago-booking.firebaseapp.com",
+  projectId: "trivago-booking",
+  storageBucket: "trivago-booking.appspot.com",
+  messagingSenderId: "766745666756",
+  appId: "1:766745666756:web:13fe113c97e48e7097d591"
+};
+```
+
+---
+
+### `Set Environment Variables for Firebase Configuration in Create React App:` 
 
 ``` JavaScript
 // In .env.local
@@ -952,7 +1037,7 @@ const firebaseConfig = {
 };
 ```
 
-⫸ `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
+### `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
 
 ``` Terminal
 npm start
@@ -962,7 +1047,7 @@ npm start
 
 ---
 
-⫸ `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
+### `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
 
 - `Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).`
 
@@ -996,7 +1081,7 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 ---
 
-⫸ `KeyBoard Shortcut:`
+### `KeyBoard Shortcut:`
 1. `Shift + Alt + F` = ___alignment format___ in JavaScript file
 2. `Tab` = for ___right alignment___
 3. `Shift + Tab` = for ___left alignment___
@@ -1010,17 +1095,17 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 ## 61.7 Email password based authentication with react firebase hooks
 
-⫸ `Initialize Firebase Code:` (___Project Overview > Project settings > Get Firebase Configuration Code___)
+### `Initialize Firebase Code:` (___Project Overview > Project settings > Get Firebase Configuration Code___)
 
 ---
 
-⫸ [Install react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - gitHub.com")
+### [Install react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "react-firebase-hooks - gitHub.com")
 
 ``` Terminal
 npm install --save react-firebase-hooks
 ```
 
-⫸ `useCreateUserWithEmailAndPassword from react-firebase-hooks:` ([SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SignUp/SignUp.js "SignUp.js - trivago-booking"))
+### `useCreateUserWithEmailAndPassword from react-firebase-hooks:` ([SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SignUp/SignUp.js "SignUp.js - trivago-booking"))
 
 ``` JavaScript
 // In SignUp.js
@@ -1077,7 +1162,7 @@ const SignUp = () => {
 export default SignUp;
 ```
 
-⫸ `useSignInWithEmailAndPassword from react-firebase-hooks:` ([Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/Login/Login.js "Login.js - trivago-booking"))
+### `useSignInWithEmailAndPassword from react-firebase-hooks:` ([Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/Login/Login.js "Login.js - trivago-booking"))
 
 ``` JavaScript
 // In Login.js
@@ -1130,7 +1215,7 @@ const Login = () => {
 export default Login;
 ```
 
-⫸ `signOut from react-firebase-hooks:` ([Header.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Header/Header.js "Header.js - trivago-booking"))
+### `signOut from react-firebase-hooks:` ([Header.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/Shared/Header/Header.js "Header.js - trivago-booking"))
 
 ``` JavaScript
 // In Header.js
@@ -1172,7 +1257,7 @@ export default Header;
 
 ## 61.8 Introduction to Protected Route and Require Auth
 
-⫸ `Create RequireAuth component:` (___Create Protected Route___) `Step-01`
+### `Create RequireAuth component:` (___Create Protected Route___) `Step-01`
 
 ``` JavaScript
 // In RequiteAuth.js
@@ -1194,7 +1279,7 @@ const RequireAuth = ({children}) => {
 export default RequireAuth;
 ```
 
-⫸ `Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___) `Step-02`
+### `Wrap the component with RequireAuth component:` (___which component___ need to be ___authenticate___) - (___Create Protected Route___) `Step-02`
 
 ``` JavaScript
 // In App.js
@@ -1235,7 +1320,7 @@ function App() {
 export default App;
 ```
 
-⫸ `Implement Authentication Redirect:` `Step-03`
+### `Implement Authentication Redirect:` `Step-03`
 
 ``` JavaScript
 // In Login.js
@@ -1280,7 +1365,7 @@ const Checkout = () => {
 export default Checkout;
 ```
 
-⫸ `Create a Button in CarDetail, SingleBedDetail, and DoubleBedDetail components:`
+### `Create a Button in CarDetail, SingleBedDetail, and DoubleBedDetail components:`
 
 ``` JavaScript
 // In CarDetail.js
@@ -1345,7 +1430,7 @@ export default CarDetail;
     - `<Navbar sticky="top" />`
 
 
-## Firebase & Netlify Deploy
+### Firebase & Netlify Deploy
 
 ⫸ `Firebase Deploy:` [trivago-booking.web.app](https://trivago-booking.web.app/ "Firebase Hosting/Deploy - Live Website")
 
@@ -1353,6 +1438,8 @@ export default CarDetail;
 
 
 ---
+
+# Module 62: Build a Authentication System for 60genius-car-services & 61trivago-booking
 
 ## 62.1 Module Overview and Social Login initial setup
 
