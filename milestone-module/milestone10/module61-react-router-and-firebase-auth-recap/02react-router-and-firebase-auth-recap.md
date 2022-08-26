@@ -59,7 +59,8 @@
   - [62.1 Module Overview and Social Login initial setup](#621-module-overview-and-social-login-initial-setup)
   - [62.2 Style social login and share social login component](#622-style-social-login-and-share-social-login-component)
   - [62.3 Implement Google Login System from react-firebase-hooks](#623-implement-google-login-system-from-react-firebase-hooks)
-  - [62.4 Implement Github Login System and Allow multiple account](#624-implement-github-login-system-and-allow-multiple-account)
+  - [62.4.1 Implement Github Login System and Allow multiple account](#6241-implement-github-login-system-and-allow-multiple-account)
+  - [62.4.2 Implement Facebook Login System from react-firebase-hooks](#6242-implement-facebook-login-system-from-react-firebase-hooks)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -1611,7 +1612,7 @@ export default SocialLogin;
   - Authentication → Settings → Authorized domains → Add Domain → `https://trivago-booking.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
 
-## 62.4 Implement Github Login System and Allow multiple account
+## 62.4.1 Implement Github Login System and Allow multiple account
 
 ⫸ `Steps to use firebase & (Github Authentication):` (___Recommended to Follow these 9 Steps___) (___Github Sign-in Provider___)
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
@@ -1696,6 +1697,107 @@ export default SocialLogin;
 ```
 
 ⫸ `Note:` ___We can remove Github Permission___
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+- __In Firebase:__
+  - Authentication → Settings → Authorized domains → Add Domain → `https://trivago-booking.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
+
+
+## 62.4.2 Implement Facebook Login System from react-firebase-hooks
+
+⫸ `Steps to use firebase & (Facebook Authentication):` (___Recommended to Follow these 9 Steps___) (___Facebook Sign-in Provider___)
+1. Create a ___new firebase project___ in ___console.firebase.google.com___
+2. ___Register app___
+3. `npm install firebase`
+4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
+5. Set ___Environment Variable___ for Firebase Configuration in Create React App
+6. Create ___Facebook Sign In___ button with ___icon image___
+7. Firebase settings > Authentication > Sign-in Method > Add new Provider > ___Enable___ Facebook ___authentication___
+    - `In Firebase:` 
+      - Enable > Paste ___App ID___ > Paste ___App secret___ > Copy ___OAuth redirect URI___ > ___Save___
+    - `In Developers Facebook: `
+      - [developers.facebook.com](https://developers.facebook.com/) > ___Create App___ > ___Business___ (Type) > Next > Display name > App contact email > Create app > Facebook Password > ___Submit___ 
+      - Clicked on App drop-down box > ___Create Test App___ (for locally development) > Test app name > Create test app > Facebook Password > ___Submit___
+      - ___Set up___ (Facebook Login) > Web > Facebook Login → Settings (Valid OAuth Redirect URIs) > Paste (OAuth redirect URI) > ___Save changes___
+      - Settings > Basic > Copy (App ID & App Secret (clicked Show)) > Paste in Configure Provider > ___Save___
+    - `One account per email address:` 
+      - If you need to create ___multiple user with same email address___ by using ___multiple sign in methods___
+        - ___Change___ > ___Allow___ creation of multiple accounts with the same email address > ___Save___
+      - Otherwise, ___get error___ like `Firebase: Error (auth/account-exists-with-different-credential).`
+      - But, it ___should not be used___ in real application.
+8. `npm install --save react-firebase-hooks` from [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "React Hooks for Firebase - github")
+9. ___Follow___ the steps of [useSignInWithFacebook](https://github.com/CSFrequency/react-firebase-hooks/blob/master/auth/README.md#usesigninwithfacebook) & [social login example](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#social-login-example)
+
+⫸ `Examples:` [SocialLogin.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SocialLogin/SocialLogin.js "SocialLogin.js - 01trivago-booking")
+
+``` JavaScript
+// In SocialLogin.js
+
+import React from 'react';
+import google from '../../../images/google30.png';
+import github from '../../../images/github30.png';
+import facebook from '../../../images/facebook30.png';
+import { useNavigate } from 'react-router-dom';
+import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import Spinner from 'react-bootstrap/Spinner';
+
+const SocialLogin = () => {
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    const [signInWithFacebook, user2, loading2, error2] = useSignInWithFacebook(auth);
+    const navigate = useNavigate();
+
+    let errorElement;
+    if (error || error1 || error2) {
+        errorElement = <div className='text-center'>
+            <p className='text-danger'>Error: {error?.message} {error1?.message} {error2?.message}</p>
+        </div>
+    }
+
+    if (user || user1 || user2) {
+        navigate('/home');
+    }
+
+    return (
+        <div>
+            {
+                (loading || loading1 || loading2) &&
+                <div className='text-center'>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>
+            }
+            {errorElement}
+            <div className=''>
+                <button
+                    onClick={() => signInWithGoogle()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={google} alt="" />
+                    <span className='px-2'>Google Sign In</span>
+                </button>
+                <button
+                    onClick={() => signInWithGithub()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={github} alt="" />
+                    <span className='px-2'>GitHub Sign In</span>
+                </button>
+                <button 
+                    onClick={() => signInWithFacebook()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={facebook} alt="" />
+                    <span className='px-2'>Facebook Sign In</span>
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default SocialLogin;
+```
+
+⫸ `Note:` ___We can remove Facebook Permission___
 
 ⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
 - __In Firebase:__
