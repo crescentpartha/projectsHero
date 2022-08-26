@@ -33,7 +33,7 @@ const SignUp = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         console.log(name, email, password);
-        
+
         if (password.length !== 8) {
             setError2('Password length should be 8 character long');
             return;
@@ -50,8 +50,8 @@ const SignUp = () => {
                 <input type="email" name="email" id="email-signup" placeholder='Email Address' required />
                 <input type="password" name="password" id="password" placeholder='Password' required />
 
-                { error2 ? <p className='text-danger text-center'>{error2}</p> : '' }
-                { error && <p className='text-danger text-center'>{error.message}</p>}
+                {error2 ? <p className='text-danger text-center'>{error2}</p> : ''}
+                {error && <p className='text-danger text-center'>{error.message}</p>}
                 {
                     loading &&
                     <div className="d-flex align-items-center my-2">
@@ -60,9 +60,13 @@ const SignUp = () => {
                     </div>
                 }
 
-                <input type="submit" value="Register" />
+                <div>
+                    <input type="checkbox" name="terms" id="terms" />
+                    <label htmlFor="terms">Accept Trivago-Booking Terms and Conditions</label>
+                </div>
+                <input className='w-50 mx-auto btn btn-primary mt-2' type="submit" value="Register" />
             </form>
-            <p className='text-center'>Already have an account? <Link to='/login' className='text-danger cursor-pointer text-decoration-none' onClick={navigateLogin}>Login</Link></p>
+            <p className='text-center'>Already have an account? <Link to='/login' className='text-primary cursor-pointer text-decoration-none' onClick={navigateLogin}>Login</Link></p>
             <SocialLogin></SocialLogin>
         </div>
     );

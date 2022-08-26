@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
@@ -20,6 +20,8 @@ const Login = () => {
         error
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
     const handleSubmit = event => {
         event.preventDefault();
         const email = emailRef.current.value;
@@ -30,11 +32,17 @@ const Login = () => {
     }
 
     if (user) {
-        navigate(from, {replace: true});
+        navigate(from, { replace: true });
     }
 
     const navigateRegister = event => {
         navigate('/signup');
+    }
+
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        await sendPasswordResetEmail(email);
+        alert('Sent email');
     }
 
     return (
@@ -51,7 +59,7 @@ const Login = () => {
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
 
-                { error && <p className='text-danger text-center'>{error.message}</p>}
+                {error && <p className='text-danger text-center'>{error.message}</p>}
                 {
                     loading &&
                     <div className="d-flex justify-content-center my-2">
@@ -61,14 +69,12 @@ const Login = () => {
                     </div>
                 }
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary w-50 mx-auto d-block mb-2" type="submit">
                     Submit
                 </Button>
             </Form>
-            <p className='text-center'>New to Trivago? <Link to='/signup' className='text-danger cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
+            <p className='text-center'>New to Trivago? <Link to='/signup' className='text-primary cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
+            <p className='text-center'>Forget Password? <Link to='/signup' className='text-primary cursor-pointer text-decoration-none' onClick={resetPassword}>Reset Password</Link></p>
             <SocialLogin></SocialLogin>
         </div>
     );

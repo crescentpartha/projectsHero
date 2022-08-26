@@ -62,6 +62,7 @@
   - [62.4.1 Implement Github Login System and Allow multiple account](#6241-implement-github-login-system-and-allow-multiple-account)
   - [62.4.2 Implement Facebook Login System from react-firebase-hooks](#6242-implement-facebook-login-system-from-react-firebase-hooks)
   - [62.4.3 Implement Twitter Login System from react-firebase-hooks](#6243-implement-twitter-login-system-from-react-firebase-hooks)
+  - [62.5 Handle Error related to login, accept terms and conditions and Reset Password](#625-handle-error-related-to-login-accept-terms-and-conditions-and-reset-password)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -1913,4 +1914,42 @@ export default SocialLogin;
   - Authentication → Settings → Authorized domains → Add Domain → `https://trivago-booking.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
 
+## 62.5 Handle Error related to login, accept terms and conditions and Reset Password
+
+⫸ `useSendPasswordResetEmail from react-firebase-hooks` (Password Reset)
+
+``` JavaScript
+// In Login.js
+
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+
+const Login = () => {
+
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+    const resetPassword = async() => {
+        const email = emailRef.current.value;
+        await sendPasswordResetEmail(email);
+        alert('Sent email');
+    }
+
+    return (
+        <div className=''>
+            <p className='text-center'>Forget Password? <Link to='/signup' className='text-primary cursor-pointer text-decoration-none' onClick={resetPassword}>Reset Password</Link></p>
+            <SocialLogin></SocialLogin>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+``` JavaScript
+// In SignUp.js
+
+<div>
+    <input type="checkbox" name="terms" id="terms" />
+    <label htmlFor="terms">Accept Trivago-Booking Terms and Conditions</label>
+</div>
+```
 
