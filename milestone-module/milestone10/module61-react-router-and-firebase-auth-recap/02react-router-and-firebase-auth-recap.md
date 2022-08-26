@@ -61,6 +61,7 @@
   - [62.3 Implement Google Login System from react-firebase-hooks](#623-implement-google-login-system-from-react-firebase-hooks)
   - [62.4.1 Implement Github Login System and Allow multiple account](#6241-implement-github-login-system-and-allow-multiple-account)
   - [62.4.2 Implement Facebook Login System from react-firebase-hooks](#6242-implement-facebook-login-system-from-react-firebase-hooks)
+  - [62.4.3 Implement Twitter Login System from react-firebase-hooks](#6243-implement-twitter-login-system-from-react-firebase-hooks)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -1798,6 +1799,114 @@ export default SocialLogin;
 ```
 
 ⫸ `Note:` ___We can remove Facebook Permission___
+
+⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
+- __In Firebase:__
+  - Authentication → Settings → Authorized domains → Add Domain → `https://trivago-booking.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
+
+## 62.4.3 Implement Twitter Login System from react-firebase-hooks
+
+⫸ `Steps to use firebase & (Twitter Authentication):` (___Recommended to Follow these 9 Steps___) (___Twitter Sign-in Provider___)
+1. Create a ___new firebase project___ in ___console.firebase.google.com___
+2. ___Register app___
+3. `npm install firebase`
+4. Create `firebase.init.js` file and ___import___ `getAuth` to ___export___ `auth`
+5. Set ___Environment Variable___ for Firebase Configuration in Create React App
+6. Create ___Twitter Sign In___ button with ___icon image___
+7. Firebase settings > Authentication > Sign-in Method > Add new Provider > ___Enable___ Twitter ___authentication___
+    - `In Firebase:` 
+      - Enable > Paste ___API Key___ > Paste ___API secret___ > Copy ___callback URL___ > ___Save___
+    - `In Developers Facebook: `
+      - [developer.twitter.com](https://developer.twitter.com/en) > Sign up > ___+Create Project___ > Project name > Building tools for businesses (use case) > Project description > Next | `Create Project`
+      - Development (App Environment) > App name >  | `Choose an App Environment - Create App`
+      - Generate (Access Token and Secret) > Client Id & Client Secret > Yes, I saved them | `Keys and tokens`
+      - Set up (User authentication settings) > Read (App permissions) > ___Native App___ or ___Web App, Automated App or Bot___ (Type of App) > Paste (Callback URI / Redirect URL) > Paste (Website URL) > Save | `User authentication settings`
+    - `One account per email address:` 
+      - If you need to create ___multiple user with same email address___ by using ___multiple sign in methods___
+        - ___Change___ > ___Allow___ creation of multiple accounts with the same email address > ___Save___
+      - Otherwise, ___get error___ like `Firebase: Error (auth/account-exists-with-different-credential).`
+      - But, it ___should not be used___ in real application.
+8. `npm install --save react-firebase-hooks` from [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks "React Hooks for Firebase - github")
+9. ___Follow___ the steps of [useSignInWithTwitter](https://github.com/CSFrequency/react-firebase-hooks/blob/master/auth/README.md#usesigninwithtwitter) & [social login example](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#social-login-example)
+
+⫸ `Examples:` [SocialLogin.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module61-react-router-and-firebase-auth-recap/01trivago-booking/src/components/SinglePage/SocialLogin/SocialLogin.js "SocialLogin.js - 01trivago-booking")
+
+``` JavaScript
+// In SocialLogin.js
+
+import React from 'react';
+import google from '../../../images/google30.png';
+import github from '../../../images/github30.png';
+import facebook from '../../../images/facebook30.png';
+import twitter from '../../../images/twitter30.png';
+import { useNavigate } from 'react-router-dom';
+import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook, useSignInWithTwitter } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import Spinner from 'react-bootstrap/Spinner';
+
+const SocialLogin = () => {
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    const [signInWithFacebook, user2, loading2, error2] = useSignInWithFacebook(auth);
+    const [signInWithTwitter, user3, loading3, error3] = useSignInWithTwitter(auth);
+    const navigate = useNavigate();
+
+    let errorElement;
+    if (error || error1 || error2 || error3) {
+        errorElement = <div className='text-center'>
+            <p className='text-danger'>Error: {error?.message} {error1?.message} {error2?.message} {error3?.message}</p>
+        </div>
+    }
+
+    if (user || user1 || user2 || user3) {
+        navigate('/home');
+    }
+
+    return (
+        <div>
+            {
+                (loading || loading1 || loading2 || loading3) &&
+                <div className='text-center'>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>
+            }
+            {errorElement}
+            <div className=''>
+                <button
+                    onClick={() => signInWithGoogle()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={google} alt="" />
+                    <span className='px-2'>Google Sign In</span>
+                </button>
+                <button
+                    onClick={() => signInWithGithub()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={github} alt="" />
+                    <span className='px-2'>GitHub Sign In</span>
+                </button>
+                <button 
+                    onClick={() => signInWithFacebook()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={facebook} alt="" />
+                    <span className='px-2'>Facebook Sign In</span>
+                </button>
+                <button 
+                    onClick={() => signInWithTwitter()}
+                    className='btn btn-info w-50 d-block mx-auto my-2'>
+                    <img src={twitter} alt="" />
+                    <span className='px-2'>Twitter Sign In</span>
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default SocialLogin;
+```
+
+⫸ `Note:` ___We can remove Twitter Permission___
 
 ⫸ `Add Authorized Domains:` (otherwise app doesn't work properly)
 - __In Firebase:__
