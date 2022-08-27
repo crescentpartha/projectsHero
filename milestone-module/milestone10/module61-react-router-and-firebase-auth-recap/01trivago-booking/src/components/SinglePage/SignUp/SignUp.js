@@ -6,6 +6,7 @@ import './SignUp.css';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
+    const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword,
         user,
@@ -39,7 +40,11 @@ const SignUp = () => {
             return;
         }
 
-        createUserWithEmailAndPassword(email, password);
+        // const agree = event.target.terms.checked;
+        if (agree) {
+            createUserWithEmailAndPassword(email, password);
+        }
+
     }
 
     return (
@@ -60,11 +65,16 @@ const SignUp = () => {
                     </div>
                 }
 
-                <div>
-                    <input type="checkbox" name="terms" id="terms" />
-                    <label htmlFor="terms">Accept Trivago-Booking Terms and Conditions</label>
+                <div className='text-start'>
+                    <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
+                    {/* <label className={agree ? 'ps-2 text-primary' : 'ps-2 text-danger'} htmlFor="terms">Accept Trivago Terms and Conditions</label> */}
+                    <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Trivago Terms and Conditions</label>
                 </div>
-                <input className='w-50 mx-auto btn btn-primary mt-2' type="submit" value="Register" />
+                <input
+                    disabled={!agree}
+                    className='w-50 mx-auto btn btn-primary mt-2'
+                    type="submit"
+                    value="Register" />
             </form>
             <p className='text-center'>Already have an account? <Link to='/login' className='text-primary cursor-pointer text-decoration-none' onClick={navigateLogin}>Login</Link></p>
             <SocialLogin></SocialLogin>

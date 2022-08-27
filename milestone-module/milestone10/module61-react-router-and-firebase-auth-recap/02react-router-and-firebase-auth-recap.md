@@ -63,6 +63,7 @@
   - [62.4.2 Implement Facebook Login System from react-firebase-hooks](#6242-implement-facebook-login-system-from-react-firebase-hooks)
   - [62.4.3 Implement Twitter Login System from react-firebase-hooks](#6243-implement-twitter-login-system-from-react-firebase-hooks)
   - [62.5 Handle Error related to login, accept terms and conditions and Reset Password](#625-handle-error-related-to-login-accept-terms-and-conditions-and-reset-password)
+  - [62.6 Conditional CSS Class and Conditional disabled](#626-conditional-css-class-and-conditional-disabled)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -1952,4 +1953,61 @@ export default Login;
     <label htmlFor="terms">Accept Trivago-Booking Terms and Conditions</label>
 </div>
 ```
+
+## 62.6 Conditional CSS Class and Conditional disabled
+
+⫸ `Conditional CSS Class:`
+
+``` JavaScript
+// normal conditional CSS
+className={agree ? 'ps-2 text-primary' : 'ps-2 text-danger'}
+// using Template String for conditional CSS
+className={`ps-2 ${agree ? '' : 'text-danger'}`}
+```
+
+⫸ `Conditional disabled:`
+
+``` JavaScript
+<input disabled={!agree} className='w-50 mx-auto btn btn-primary mt-2' type="submit" value="Register" />
+```
+
+⫸ `Conditional CSS Class and Conditional disabled:`
+
+``` JavaScript
+// In SignUp.js
+
+import React, { useState } from 'react';
+
+const SignUp = () => {
+    const [agree, setAgree] = useState(false);
+
+    const handleRegister = event => {
+        // const agree = event.target.terms.checked;
+        if (agree) {
+            createUserWithEmailAndPassword(email, password);
+        }
+    }
+
+    return (
+        <div className='register-form'>
+            <h2>Please Register</h2>
+            <form onSubmit={handleRegister}>
+                <div className='text-start'>
+                    <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
+                    {/* <label className={agree ? 'ps-2 text-primary' : 'ps-2 text-danger'} htmlFor="terms">Accept Trivago Terms and Conditions</label> */}
+                    <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Trivago Terms and Conditions</label>
+                </div>
+                <input
+                    disabled={!agree}
+                    className='w-50 mx-auto btn btn-primary mt-2'
+                    type="submit"
+                    value="Register" />
+            </form>
+        </div>
+    );
+};
+
+export default SignUp;
+```
+
 
