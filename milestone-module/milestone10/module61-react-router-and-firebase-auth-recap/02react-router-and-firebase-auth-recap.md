@@ -72,6 +72,7 @@
     - [Show the Reset Password alert using React-Toastify](#show-the-reset-password-alert-using-react-toastify)
     - [Responsive Sign In Button using (Container-row-col)](#responsive-sign-in-button-using-container-row-col)
   - [62.9 Deploy to Firebase & Netlify](#629-deploy-to-firebase--netlify)
+  - [62.10 Quiz](#6210-quiz)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -2241,4 +2242,46 @@ export default Login;
 
 ⫸ `Netlify Deploy:` [61-1trivago-booking-crescentpartha.netlify.app](https://61-1trivago-booking-crescentpartha.netlify.app/ "Netlify Deploy - Live Website")
 
+
+## 62.10 Quiz
+
+1. Can you use ___bootstrap classes inside react-bootstrap___?
+   - `Yes`
+2. Which utility will you use on flexbox containers to change the ___alignment of flex items___ on the cross axis (___Y-axis___) to the __center__?
+   - `align-items-center`
+3. Which ___image format___ preserves the ___background transparency___ of an image?
+   - `.png`
+4. What will happen if we ___close___ the ___social media login pop-up___?
+   - `It will generate an error`
+5. Can you ___create a user___ with the ___same credentials in firebase___? 
+   - `Yes, but you have to enable it manually` 
+   - ___multiple accounts with the same email address___
+6. What should you put as "___Homepage URL___" when you are registering a new ___OAuth application on GitHub___ for development purposes? (Assuming you are running react app on the ___default port___.)
+   - `http://localhost:3000/`
+7. How would you ___set the button type___ as ___danger___ based on the state of "___disable___"? 
+   - [ ] className=" disable ? "btn btn-danger" : "btn btn-primary" "
+   - [ ] ___className={ disable ? "btn btn-danger" : "btn btn-primary" }___
+   - [ ] ___className={\`btn ${ disable ? "btn-danger" : "btn-primary" }\`}___
+   - [x] `Both 2 and 3`
+``` JavaScript
+const [disable, setDisable] = useState(false)
+
+<button className="btn btn-primary" >Login</button>
+```
+8. How would you ___send email verification___ using ___react-firebase-hooks___?
+   - `useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});`
+9.  Justify the statement below: <br /> &nbsp;&nbsp;We ___should update___ user information ___inside an asynchronous function___ while using react-firebase-hooks.
+    - `True`
+10. While ___setting up Firebase for hosting___, what would you set as your ___public directory___?
+    - `build`
+11. How will you ___add 25 as the first element___ of the array?
+    - [x] `unshift()`
+    - [ ] shift()
+    - [ ] push()
+    - [ ] pop()
+``` JavaScript
+const numbers = [45, 12, 36, 84];
+```
+
+> `Notes:` <br /> &nbsp;&nbsp;&nbsp;&nbsp;If you need ___any level of transparency___ in your image, you must use either a `GIF` or a `PNG`. <br /> &nbsp;&nbsp;&nbsp;&nbsp;GIF images (and also PNG) support ___1-color transparency___. This basically means that you can ___save your image with a transparent background___.
 
