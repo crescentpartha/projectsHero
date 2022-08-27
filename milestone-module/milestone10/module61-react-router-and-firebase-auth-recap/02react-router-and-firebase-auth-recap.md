@@ -64,6 +64,9 @@
   - [62.4.3 Implement Twitter Login System from react-firebase-hooks](#6243-implement-twitter-login-system-from-react-firebase-hooks)
   - [62.5 Handle Error related to login, accept terms and conditions and Reset Password](#625-handle-error-related-to-login-accept-terms-and-conditions-and-reset-password)
   - [62.6 Conditional CSS Class and Conditional disabled](#626-conditional-css-class-and-conditional-disabled)
+  - [62.7 (advanced) Verify Email set display name and async await](#627-advanced-verify-email-set-display-name-and-async-await)
+    - [sendEmailVerification using react-firebase-hooks](#sendemailverification-using-react-firebase-hooks)
+    - [useUpdateProfile using react-firebase-hooks](#useupdateprofile-using-react-firebase-hooks)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -1983,9 +1986,13 @@ const SignUp = () => {
 
     const handleRegister = event => {
         // const agree = event.target.terms.checked;
-        if (agree) {
-            createUserWithEmailAndPassword(email, password);
-        }
+
+        // Use it, if not disabled the Register Button > disabled={!agree}
+        // if (agree) { 
+        //     createUserWithEmailAndPassword(email, password);
+        // }
+
+        createUserWithEmailAndPassword(email, password);
     }
 
     return (
@@ -2003,6 +2010,63 @@ const SignUp = () => {
                     type="submit"
                     value="Register" />
             </form>
+        </div>
+    );
+};
+
+export default SignUp;
+```
+
+## 62.7 (advanced) Verify Email set display name and async await
+
+### [sendEmailVerification using react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#usecreateuserwithemailandpassword)
+- Pass `{sendEmailVerification: true}` object as a parameter of ___useCreateUserWithEmailAndPassword___
+
+``` JavaScript
+// In SignUp.js
+
+const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error
+] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+```
+
+### [useUpdateProfile using react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth#useupdateprofile)
+
+``` JavaScript
+// In SignUp.js
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+
+const SignUp = () => {
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const navigate = useNavigate();
+
+    if (user) {
+        // navigate('/home');
+        console.log('user', user);
+    }
+
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        await createUserWithEmailAndPassword(email, password);
+        // await updateProfile({ name });
+        await updateProfile({ displayName: name });
+        console.log('Updated profile');
+        navigate('/home');
+    }
+
+    return (
+        <div className='register-form'>
+            <h2>Please Register</h2>
         </div>
     );
 };

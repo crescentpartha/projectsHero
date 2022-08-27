@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import './SignUp.css';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -12,7 +12,9 @@ const SignUp = () => {
         user,
         loading,
         error
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    // const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [updateProfile] = useUpdateProfile(auth);
     const [error2, setError2] = useState('');
     const navigate = useNavigate();
 
@@ -21,10 +23,11 @@ const SignUp = () => {
     }
 
     if (user) {
-        navigate('/home');
+        // navigate('/home');
+        console.log('user', user);
     }
 
-    const handleRegister = event => {
+    const handleRegister = async (event) => {
         event.preventDefault();
         // console.log(event.target);
         // console.log(event.target.email);
@@ -41,10 +44,17 @@ const SignUp = () => {
         }
 
         // const agree = event.target.terms.checked;
-        if (agree) {
-            createUserWithEmailAndPassword(email, password);
-        }
 
+        // Use it, if not disabled the Register Button
+        // if (agree) { 
+        //     createUserWithEmailAndPassword(email, password);
+        // }
+
+        await createUserWithEmailAndPassword(email, password);
+        // await updateProfile({ name });
+        await updateProfile({ displayName: name });
+        console.log('Updated profile');
+        navigate('/home');
     }
 
     return (
