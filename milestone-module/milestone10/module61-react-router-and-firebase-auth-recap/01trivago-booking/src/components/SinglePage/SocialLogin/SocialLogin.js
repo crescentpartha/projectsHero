@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook, useSignInWithTwitter } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import Spinner from 'react-bootstrap/Spinner';
+// import Loading from '../Loading/Loading';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -14,6 +15,10 @@ const SocialLogin = () => {
     const [signInWithFacebook, user2, loading2, error2] = useSignInWithFacebook(auth);
     const [signInWithTwitter, user3, loading3, error3] = useSignInWithTwitter(auth);
     const navigate = useNavigate();
+
+    // if (loading || loading1 || loading2 || loading3) {
+    //     return <Loading></Loading>
+    // }
 
     let errorElement;
     if (error || error1 || error2 || error3) {

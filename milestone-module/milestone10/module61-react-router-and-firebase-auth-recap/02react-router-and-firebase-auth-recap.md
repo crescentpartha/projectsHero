@@ -67,6 +67,9 @@
   - [62.7 (advanced) Verify Email set display name and async await](#627-advanced-verify-email-set-display-name-and-async-await)
     - [sendEmailVerification using react-firebase-hooks](#sendemailverification-using-react-firebase-hooks)
     - [useUpdateProfile using react-firebase-hooks](#useupdateprofile-using-react-firebase-hooks)
+  - [62.8 Fix Reload redirect to login page and Display Toast message](#628-fix-reload-redirect-to-login-page-and-display-toast-message)
+    - [Add Loading to fix redirect to login page when reload](#add-loading-to-fix-redirect-to-login-page-when-reload)
+    - [Show the Reset Password alert using React-Toastify](#show-the-reset-password-alert-using-react-toastify)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -2074,4 +2077,110 @@ const SignUp = () => {
 export default SignUp;
 ```
 
+## 62.8 Fix Reload redirect to login page and Display Toast message 
+
+### Add Loading to fix redirect to login page when reload
+
+⫸ `Create Loading component:`
+
+``` JavaScript
+// In Loading.js
+
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
+
+const Loading = () => {
+    return (
+        <div style={{height: '300px'}} className='w-100 d-flex align-items-center justify-content-center'>
+            <Spinner animation="border" variant="primary" />
+        </div>
+    );
+};
+
+export default Loading;
+```
+
+⫸ `Use Loading component:`
+
+``` JavaScript
+// In RequireAuth.js
+
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate, useLocation } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import Loading from '../Loading/Loading';
+
+const RequireAuth = ({children}) => {
+    const [user, loading] = useAuthState(auth);
+    // console.log('inside require auth', user);
+    const location = useLocation();
+    if (loading) {
+        return <Loading></Loading>
+    }
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    return children;
+};
+
+export default RequireAuth;
+```
+
+### Show the Reset Password alert using React-Toastify
+
+⫸ `Installation:` [React-Toastify](https://www.npmjs.com/package/react-toastify)
+
+``` JavaScript
+npm install --save react-toastify
+```
+
+⫸ `Display Toast & Display Loading Component:`
+
+``` JavaScript
+// In Login.js
+
+import React, { useRef } from 'react';
+import { useSignInWithEmailAndPassword, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Login = () => {
+    const emailRef = useRef('');
+
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+    if (sending) {
+        return <Loading></Loading>
+    }
+
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email to reset your Password');
+        }
+        else {
+            toast('Please enter your email address');
+        }
+    }
+
+    return (
+        <div className=''>
+            <Form.Control ref={emailRef} type="email" placeholder="Enter email" required />
+            <p className='d-flex align-items-center justify-content-center'>
+                <span>Forget Password?</span>
+                <button 
+                    className='btn btn-link p-2 text-primary cursor-pointer text-decoration-none' 
+                    onClick={resetPassword}>
+                    Reset Password
+                </button>
+            </p>
+            <ToastContainer />
+        </div>
+    );
+};
+
+export default Login;
+```
 

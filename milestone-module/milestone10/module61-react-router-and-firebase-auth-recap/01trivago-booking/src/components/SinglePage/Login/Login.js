@@ -4,6 +4,9 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useSignInWithEmailAndPassword, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from '../Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -20,8 +23,11 @@ const Login = () => {
         error
     ] = useSignInWithEmailAndPassword(auth);
 
-    // const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+    if (sending) {
+        return <Loading></Loading>
+    }
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -42,8 +48,13 @@ const Login = () => {
 
     const resetPassword = async () => {
         const email = emailRef.current.value;
-        await sendPasswordResetEmail(email);
-        alert('Sent email');
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email to reset your Password');
+        }
+        else {
+            toast('Please enter your email address');
+        }
     }
 
     return (
@@ -74,9 +85,17 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
-            <p className='text-center'>New to Trivago? <Link to='/signup' className='text-primary cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
-            <p className='text-center'>Forget Password? <Link to='/signup' className='text-primary cursor-pointer text-decoration-none' onClick={resetPassword}>Reset Password</Link></p>
+            <p className='text-center'>New to Trivago?<Link to='/signup' className='p-2 text-primary cursor-pointer text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
+            <p className='d-flex align-items-center justify-content-center'>
+                <span>Forget Password?</span>
+                <button
+                    className='btn btn-link p-2 text-primary cursor-pointer text-decoration-none'
+                    onClick={resetPassword}>
+                    Reset Password
+                </button>
+            </p>
             <SocialLogin></SocialLogin>
+            <ToastContainer />
         </div>
     );
 };
