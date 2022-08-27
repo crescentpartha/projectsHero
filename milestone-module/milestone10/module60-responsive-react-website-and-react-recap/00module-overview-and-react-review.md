@@ -1,8 +1,63 @@
+Table of Contents
+
+- [Module 60: Responsive React Website and React Recap](#module-60-responsive-react-website-and-react-recap)
+  - [60.1 Module Overview and simple review of React](#601-module-overview-and-simple-review-of-react)
+    - [`React Core Concepts:`](#react-core-concepts)
+    - [`React-Router Website:`](#react-router-website)
+    - [`Firebase:`](#firebase)
+    - [`Responsive React Website:`](#responsive-react-website)
+    - [`Conceptual Session:`](#conceptual-session)
+    - [`Conclusion:`](#conclusion)
+  - [60.2 Create Project Component setup and router setup](#602-create-project-component-setup-and-router-setup)
+    - [`Basic Project Setup:`](#basic-project-setup)
+    - [`If Clone any React Project:` (Need to follow some ___steps___)](#if-clone-any-react-project-need-to-follow-some-steps)
+    - [`Authentication Steps or Auth_steps:`](#authentication-steps-or-auth_steps)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___)](#firebase-hostingdeploy-steps-for-1st-time)
+    - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times)
+  - [60.3 Collect, Edit, Optimize and host images for your website](#603-collect-edit-optimize-and-host-images-for-your-website)
+    - [`Image Resources:`](#image-resources)
+  - [60.4 Load fake data map services to display single services](#604-load-fake-data-map-services-to-display-single-services)
+    - [`Load & display Data:`](#load--display-data)
+  - [60.5 Make Services Responsive using CSS media query](#605-make-services-responsive-using-css-media-query)
+    - [`CSS Media Query:` (___Vanilla CSS___) (___sample___)](#css-media-query-vanilla-css-sample)
+    - [`Make services Responsive:` (___according to Bootstrap___)](#make-services-responsive-according-to-bootstrap)
+    - [`Examples:`](#examples)
+  - [60.6 Build Responsive React website using Bootstrap](#606-build-responsive-react-website-using-bootstrap)
+    - [`Using Bootstrap:`](#using-bootstrap)
+  - [60.7 React Bootstrap for responsive and image slider, banner](#607-react-bootstrap-for-responsive-and-image-slider-banner)
+    - [`Using React-Bootstrap:`](#using-react-bootstrap)
+  - [60.8 Module Summary, Add navbar and set footer dynamic date](#608-module-summary-add-navbar-and-set-footer-dynamic-date)
+    - [`Header using React-Bootstrap & React-Router:`](#header-using-react-bootstrap--react-router)
+  - [Quiz](#quiz)
+- [Module 60.5: Firebase auth and private Route Recap](#module-605-firebase-auth-and-private-route-recap)
+  - [60.5.1 Firebase auth and private Route Recap](#6051-firebase-auth-and-private-route-recap)
+    - [`Google Authentication with react-firebase-hooks:`](#google-authentication-with-react-firebase-hooks)
+  - [60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks](#6052-practice-firebase-authentication-implement-twitter-authentication-with-react-firebase-hooks)
+    - [`Steps to use firebase & (Twitter Authentication): (___Twitter Sign-in Provider___)](#steps-to-use-firebase--twitter-authentication-twitter-sign-in-provider)
+  - [61.1 Responsive Header Component - sticky top](#611-responsive-header-component---sticky-top)
+  - [61.2 Setup Dynamic Route and Access route params](#612-setup-dynamic-route-and-access-route-params)
+    - [`Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`)](#reading-url-params-steps-setup-route---parameter--click---getid)
+      - [`01. Set Nested Route:` (___route___)](#01-set-nested-route-route)
+      - [`02. Set navigate:` (___parameter-&-click___)](#02-set-navigate-parameter--click)
+      - [`03. Get invoiceId:` (___getId___)](#03-get-invoiceid-getid)
+  - [61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways](#616-optional-environment-variable-for-firebase-in-create-react-app--get-form-data-in-3-different-ways)
+    - [`Get Form data in 3 different ways:`](#get-form-data-in-3-different-ways)
+    - [Adding Custom Environment Variables: (___Set Environment Variables___ for Firebase Config)](#adding-custom-environment-variables-set-environment-variables-for-firebase-config)
+    - [`Without setup Environment Variables for Firebase Configuration:`](#without-setup-environment-variables-for-firebase-configuration)
+    - [`Set Environment Variables for Firebase Configuration in Create React App:`](#set-environment-variables-for-firebase-configuration-in-create-react-app)
+    - [`After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)](#after-setup-environment-variable-run-npm-start-otherwise-get-some-error)
+    - [`Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)](#some-error-are-showing-below-you-could-get-this-kind-of-error-if-not-run-npm-start)
+    - [`KeyBoard Shortcut:`](#keyboard-shortcut)
+    - [`Issue:` Navigate to #id in Layout component - stack overflow](#issue-navigate-to-id-in-layout-component---stack-overflow)
+
+
+
 # Module 60: Responsive React Website and React Recap
 
 ## 60.1 Module Overview and simple review of React
 
-⫸ `React Core Concepts:`
+### `React Core Concepts:`
+
 1. How to create a ___React App___ by ___create-react-app___
    - ___Library VS Frameworks___
    - ___JSX___
@@ -24,7 +79,8 @@
 8. ___Custom Hooks___
 
 
-⫸ `React-Router Website:`
+### `React-Router Website:`
+
 1. Project ___set up___ and ___install___ React Router
 2. ___Wrap___ your ___app___ by ___BrowserRouter___ form ___react-router-dom___
 3. Set up ___routes___
@@ -32,24 +88,28 @@
 5. ___Authentication___ 
 
 
-⫸ `Firebase:`
+### `Firebase:`
+
 1. ___Firebase Authentication___
 2. ___Login System___ (google, github, facebook, twitter, Email/Password)
 
 
-⫸ `Responsive React Website:`
+### `Responsive React Website:`
+
 1. Make a Responsive React Website by using ___Media Query___
 2. Make a Responsive React Website by using ___Plain Bootstrap___
 3. Make a Responsive React Website by using ___React Bootstrap___
 
 
-⫸ `Conceptual Session:`
+### `Conceptual Session:`
+
 1. Integrate the ___Authentication System___ (steps)
 2. Watch again until the concepts is clear
 3. Try to catch the (main) ___concepts of particular topics___ by hardWork.
 
 
-⫸ `Conclusion:`
+### `Conclusion:`
+
 1. ___React___ Concepts
 2. ___React-Router___ Concepts
 3. ___Responsive___ React Website
@@ -57,7 +117,8 @@
 
 ## 60.2 Create Project Component setup and router setup
 
-⫸ `Basic Project Setup:`
+### `Basic Project Setup:`
+
 - ___Create React App___
 - Create a ___Firebase project___ and ___Register___ my app
 - Install the ___SDK___ and ___initialize Firebase___
@@ -70,7 +131,8 @@
 
 ---
 
-⫸ `If Clone any React Project:` (___Need to follow some steps___)
+### `If Clone any React Project:` (Need to follow some ___steps___)
+
 1. `npm install` for ___node_modules___ folder, it installs all the ___dependency___ of this project.
 2. Create a ___new Repository___ 
 3. `git remote -v` (___to check remote URL___)
@@ -87,7 +149,8 @@
 
 ---
 
-⫸ `Authentication Steps or Auth_steps:`
+### `Authentication Steps or Auth_steps:`
+
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
 2. ___Register app___
 3. `npm install firebase`
@@ -106,7 +169,10 @@
 
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) <br /> (___Hosting > Get Started___)
+### `Firebase Hosting/Deploy Steps:` (for ___1st time___) 
+
+&nbsp;&nbsp;&nbsp;(___Hosting > Get Started___)
+
 1. ___Install Firebase CLI___ 
    - `npm install -g firebase-tools` (___one time___ for your ___computer___)
 2. ___Initialize your Project___
@@ -130,14 +196,16 @@
 
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+### `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+
 1. `npm run build`
 2. `firebase deploy`
 
 
 ## 60.3 Collect, Edit, Optimize and host images for your website
 
-⫸ `Image Resources:`
+### `Image Resources:`
+
 1. [freepik](https://www.freepik.com/ "freepik - illustration") - illustration
 2. [Unsplash](https://unsplash.com/ "Unsplash - free images & pictures") - free images & pictures
 3. [Photopea](https://www.photopea.com/ "Photopea - resize images") - resize images
@@ -152,18 +220,19 @@ const services = [
    { id: 1, name: 'oil change', price: 100, description: '', img: 'https://i.ibb.co/dGDkr4v/1.jpg' }
 ]
 ```
-> `Note:` we ___can't covert___ direct image to a ___JSON format___ because image information will be remove. That's why we should use ___image link___. <br /> [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") is a ___free image hosting___ website. We can ___upload and share___ own images with other or use to make ___custom data purposes___.
+> `Note:` We ___can't covert___ direct image to a ___JSON format___ because image information will be remove. That's why we should use ___image link___. <br /> [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") is a ___free image hosting___ website. We can ___upload and share___ own images with other or use to make ___custom data purposes___.
 
 
 ## 60.4 Load fake data map services to display single services
 
-⫸ `Load & display Data:`
+### `Load & display Data:`
+
 - [services.json](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/public/services.json "Fake Data of services") - [Services.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Home/Services/Services.js "Services Component") - [Service.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Home/Service/Service.js "Service Component")
 
 
 ## 60.5 Make Services Responsive using CSS media query
 
-⫸ `CSS Media Query:` (___Vanilla CSS___) (___sample___)
+### `CSS Media Query:` (___Vanilla CSS___) (___sample___)
 
 ``` JavaScript
 @media only screen and (max-width: 1200px){
@@ -177,7 +246,7 @@ const services = [
 }
 ```
 
-⫸ `Make services Responsive:` (___according to Bootstrap___)
+### `Make services Responsive:` (___according to Bootstrap___)
 
 ``` JavaScript
 /* Extra-small */
@@ -206,7 +275,7 @@ const services = [
 }
 ```
 
-⫸ `Examples:`
+### `Examples:`
 
 ``` JavaScript
 /* small */
@@ -231,7 +300,7 @@ const services = [
 
 ## 60.6 Build Responsive React website using Bootstrap
 
-⫸ `Using Bootstrap:`
+### `Using Bootstrap:`
 - ___Bootstrap CDN link___
 - ___Grid___
 - ___Card___
@@ -239,7 +308,7 @@ const services = [
 
 ## 60.7 React Bootstrap for responsive and image slider, banner
 
-⫸ `Using React-Bootstrap:`
+### `Using React-Bootstrap:`
 - ___Install React-Bootstrap___
 - ___Carousels___
 - [React Carousel libraries](https://react.libhunt.com/libs/carousel) | [14 Top React Carousel Components](https://alvarotrigo.com/blog/react-carousels/) | [10 Best React Carousel Libraries](https://openbase.com/categories/js/best-react-carousel-libraries)
@@ -261,7 +330,7 @@ const Footer = () => {
 };
 ```
 
-⫸ `Header using React-Bootstrap & React-Router:`
+### `Header using React-Bootstrap & React-Router:`
 
 ``` JavaScript
 // In Header.js
@@ -371,7 +440,7 @@ ___________{
 
 ## 60.5.1 Firebase auth and private Route Recap
 
-⫸ `Google Authentication with react-firebase-hooks:`
+### `Google Authentication with react-firebase-hooks:`
 
 ``` JavaScript
 // Login.js 
@@ -467,7 +536,9 @@ export default SignUp;
 
 ## 60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks
 
-⫸ `Steps to use firebase & (Twitter Authentication):` (___Recommended to Follow these 09 Steps___) (___Twitter Sign-in Provider___)
+### `Steps to use firebase & (Twitter Authentication): (___Twitter Sign-in Provider___)
+
+&nbsp;&nbsp;&nbsp;(___Recommended to Follow these 09 Steps___)
 
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
 2. ___Register app___
@@ -594,7 +665,8 @@ export default Header;
 
 ## 61.2 Setup Dynamic Route and Access route params
 
-⫸ `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
+### `Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`) 
+
 1. ___Set Nested Route___ inside of the App route (___route___)
 2. ___Set navigate___ in EventHandler (___parameter-&-click___)
 3. ___Get invoiceId___ by useParams(); (___getId___)
@@ -604,7 +676,7 @@ export default Header;
 
 --- 
 
-⫸ `01. Set Nested Route:` (___route___)
+#### `01. Set Nested Route:` (___route___)
 
 ``` JavaScript
 // In App.js
@@ -630,7 +702,7 @@ function App() {
 export default App;
 ```
 
-⫸ `02. Set navigate:` (___parameter-&-click___)
+#### `02. Set navigate:` (___parameter-&-click___)
 
 ``` JavaScript
 // In Service.js
@@ -653,7 +725,7 @@ const Service = ({service}) => {
 export default Service;
 ```
 
-⫸ `03. Get invoiceId:` (___getId___)
+#### `03. Get invoiceId:` (___getId___)
 
 ``` JavaScript
 // In ServiceDetail.js
@@ -675,7 +747,7 @@ export default ServiceDetail;
 
 ## 61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways
 
-⫸ `Get Form data in 3 different ways:`
+### `Get Form data in 3 different ways:`
 1. ___State declare & onBlur EventHandler___
 2. ___useRef hook___
 3. ___event.target.email.value___
@@ -747,7 +819,8 @@ const handleRegister = event => {
 
 ---
 
-⫸ [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables for Firebase Config___)
+### [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables___ for Firebase Config)
+
 - Environment variables start/___declare___ with `REACT_APP_` like `REACT_APP_apiKey` 
 - Get ___access___ environment variables `process.env.` like `process.env.REACT_APP_apiKey`
 - Need to ___create a file___ in the ___root___ (___aside package.json___) of your project, ___start with___ `.env.` like `.env.local` or `.env.development.local` or `.env.test.local` or `.env.production.local` etc.
@@ -756,7 +829,7 @@ const handleRegister = event => {
 - Set `apiKey:process.env.REACT_APP_apiKey,` instead of `apiKey: "AIzaSyA2HadiuwqN7w-YroNe76VS8dVLMbmU1_o",` in ___firebaseConfig___ file
 
 
-⫸ `Without setup Environment Variables for Firebase Configuration:`
+### `Without setup Environment Variables for Firebase Configuration:`
 
 ``` JavaScript
 // In firebase.inti.js (Without Environment Variable)
@@ -772,7 +845,7 @@ const firebaseConfig = {
 };
 ```
 
-⫸ `Set Environment Variables for Firebase Configuration in Create React App:`
+### `Set Environment Variables for Firebase Configuration in Create React App:`
 
 ``` JavaScript
 // In .env.local
@@ -799,7 +872,7 @@ const firebaseConfig = {
 };
 ```
 
-⫸ `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
+### `After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)
 
 ``` Terminal
 npm start
@@ -809,7 +882,7 @@ npm start
 
 ---
 
-⫸ `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
+### `Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)
 - `Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).`
 
 ``` JavaScript
@@ -842,7 +915,7 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 ---
 
-⫸ `KeyBoard Shortcut:`
+### `KeyBoard Shortcut:`
 1. `Shift + Alt + F` = ___alignment format___ in JavaScript file
 2. `Tab` = for ___right alignment___
 3. `Shift + Tab` = for ___left alignment___
@@ -855,7 +928,7 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 ---
 
-⫸ `Issue:` [Navigate to #id in Layout component - stack overflow](https://stackoverflow.com/questions/65646065/navigate-to-id-in-layout-component)
+### `Issue:` [Navigate to #id in Layout component - stack overflow](https://stackoverflow.com/questions/65646065/navigate-to-id-in-layout-component)
 
 
 
