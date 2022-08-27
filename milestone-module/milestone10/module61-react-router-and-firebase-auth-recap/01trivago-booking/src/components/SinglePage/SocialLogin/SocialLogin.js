@@ -32,7 +32,7 @@ const SocialLogin = () => {
     }
 
     return (
-        <div>
+        <div className='container'>
             <div className='d-flex align-items-center justify-content-center'>
                 <div style={{ height: '1px' }} className='bg-secondary w-50'></div>
                 <p className='mt-2 mx-2'>or</p>
@@ -47,31 +47,45 @@ const SocialLogin = () => {
                 </div>
             }
             {errorElement}
-            <div className=''>
-                <button
-                    onClick={() => signInWithGoogle()}
-                    className='btn btn-info w-50 d-block mx-auto my-2'>
-                    <img src={google} alt="" />
-                    <span className='px-2'>Google Sign In</span>
-                </button>
-                <button 
-                    onClick={() => signInWithFacebook()}
-                    className='btn btn-info w-50 d-block mx-auto my-2'>
-                    <img src={facebook} alt="" />
-                    <span className='px-2'>Facebook Sign In</span>
-                </button>
-                <button
-                    onClick={() => signInWithGithub()}
-                    className='btn btn-info w-50 d-block mx-auto my-2'>
-                    <img src={github} alt="" />
-                    <span className='px-2'>GitHub Sign In</span>
-                </button>
-                <button 
-                    onClick={() => signInWithTwitter()}
-                    className='btn btn-info w-50 d-block mx-auto my-2'>
-                    <img src={twitter} alt="" />
-                    <span className='px-2'>Twitter Sign In</span>
-                </button>
+            <div className='row'>
+                <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+                    <button
+                        onClick={() => signInWithGoogle()}
+                        className='btn btn-info w-100 d-block mx-auto my-2'>
+                        <img src={google} alt="" />
+                        <span className='px-2'>Google Sign In</span>
+                    </button>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+                    <button
+                        onClick={() => signInWithFacebook()}
+                        className='btn btn-info w-100 d-block mx-auto my-2'>
+                        <img src={facebook} alt="" />
+                        <span className='px-2'>Facebook Sign In</span>
+                    </button>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+                    <button
+                        onClick={() => signInWithGithub()}
+                        className='btn btn-info w-100 d-block mx-auto my-2'>
+                        <img src={github} alt="" />
+                        <span className='px-2'>GitHub Sign In</span>
+                    </button>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+                    <button
+                        onClick={() => signInWithTwitter()}
+                        className='btn btn-info w-100 d-block mx-auto my-2'>
+                        <img src={twitter} alt="" />
+                        <span className='px-2'>Twitter Sign In</span>
+                    </button>
+                </div>
             </div>
         </div>
     );

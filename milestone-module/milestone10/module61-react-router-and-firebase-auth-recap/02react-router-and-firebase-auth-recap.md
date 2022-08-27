@@ -70,6 +70,8 @@
   - [62.8 Fix Reload redirect to login page and Display Toast message](#628-fix-reload-redirect-to-login-page-and-display-toast-message)
     - [Add Loading to fix redirect to login page when reload](#add-loading-to-fix-redirect-to-login-page-when-reload)
     - [Show the Reset Password alert using React-Toastify](#show-the-reset-password-alert-using-react-toastify)
+    - [Responsive Sign In Button using (Container-row-col)](#responsive-sign-in-button-using-container-row-col)
+  - [62.9 Deploy to Firebase & Netlify](#629-deploy-to-firebase--netlify)
 
 
 # Module 61: React Router and Firebase Auth Recap
@@ -2183,4 +2185,60 @@ const Login = () => {
 
 export default Login;
 ```
+
+### Responsive Sign In Button using (Container-row-col)
+
+``` JavaScript
+// In SocialLogin.js
+
+<div className='container'>
+    <div className='row'>
+        <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+            <button
+                onClick={() => signInWithGoogle()}
+                className='btn btn-info w-100 d-block mx-auto my-2'>
+                <img src={google} alt="" />
+                <span className='px-2'>Google Sign In</span>
+            </button>
+        </div>
+    </div>
+    <div className='row'>
+        <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+            <button
+                onClick={() => signInWithFacebook()}
+                className='btn btn-info w-100 d-block mx-auto my-2'>
+                <img src={facebook} alt="" />
+                <span className='px-2'>Facebook Sign In</span>
+            </button>
+        </div>
+    </div>
+    <div className='row'>
+        <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+            <button
+                onClick={() => signInWithGithub()}
+                className='btn btn-info w-100 d-block mx-auto my-2'>
+                <img src={github} alt="" />
+                <span className='px-2'>GitHub Sign In</span>
+            </button>
+        </div>
+    </div>
+    <div className='row'>
+        <div className='col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto'>
+            <button
+                onClick={() => signInWithTwitter()}
+                className='btn btn-info w-100 d-block mx-auto my-2'>
+                <img src={twitter} alt="" />
+                <span className='px-2'>Twitter Sign In</span>
+            </button>
+        </div>
+    </div>
+</div>
+```
+
+## 62.9 Deploy to Firebase & Netlify
+
+⫸ `Firebase Deploy:` [trivago-booking.web.app](https://trivago-booking.web.app/ "Firebase Hosting/Deploy - Live Website")
+
+⫸ `Netlify Deploy:` [61-1trivago-booking-crescentpartha.netlify.app](https://61-1trivago-booking-crescentpartha.netlify.app/ "Netlify Deploy - Live Website")
+
 
