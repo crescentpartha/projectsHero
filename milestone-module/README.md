@@ -161,4 +161,9 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 61 01trivago-booking](https://61-1trivago-booking-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Create React App - Firebase Initialization - React-Router install & setup - React-Bootstrap install and Bootstrap CDN added - _redirects file added - Create own JSON data - Responsive Header component with sticky top - FontAwesomeIcons install & brands icons added - Create Custom Hooks - Banners Carousel added - Implement Accordion from React-Bootstrap - Setup Dynamic Route and Access route params - 404 added - useRef() hook use to access input value - Get form data in 3 different ways - Environment Variable for Firebase Configuration - Key_Shortcut - Protected Route or RequireAuth (CarDetail, SingleBedDetail, DoubleBedDetail and About components are protected) - Deploy in Netlify") ⇔ [firebase-deploy](https://trivago-booking.web.app/ "React-App | Live-Server _-_ Deploy and Hosting in Firebase")
 
+* [Module 62.5 01travel-guru](https://62-5-1-travel-guru-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Create React App - Setup (React Router, File-Structure, _redirects, documentation, title & favicon, FontAwesomeIcons, React-Bootstrap, Add Bootstrap CDN) - Create JSON data - added images folder with resize & optimize images - Responsive Navber & Dynamic Footer - Conditional Rendering in Hearder - Opacity control for background image - Swiperjs Slider added - Dynamic Size free images added - react-router-hash-link setup - Deploy in Netlify")
+
+
+* [Module 62.5 02red-onion](https://62-5-1-red-onion-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Create React App - Setup (React Router, File-Structure, _redirects, documentation, title & favicon, FontAwesomeIcons, React-Bootstrap, Add Bootstrap CDN) - JSON data, Nested Route, Dynamic Footer added - Deploy in Netlify")
+
 
