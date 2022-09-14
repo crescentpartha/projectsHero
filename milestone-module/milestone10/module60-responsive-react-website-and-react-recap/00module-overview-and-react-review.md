@@ -1,4 +1,5 @@
 Table of Contents
+---
 
 - [Module 60: Responsive React Website and React Recap](#module-60-responsive-react-website-and-react-recap)
   - [60.1 Module Overview and simple review of React](#601-module-overview-and-simple-review-of-react)
@@ -33,7 +34,7 @@ Table of Contents
   - [60.5.1 Firebase auth and private Route Recap](#6051-firebase-auth-and-private-route-recap)
     - [`Google Authentication with react-firebase-hooks:`](#google-authentication-with-react-firebase-hooks)
   - [60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks](#6052-practice-firebase-authentication-implement-twitter-authentication-with-react-firebase-hooks)
-    - [`Steps to use firebase & (Twitter Authentication): (___Twitter Sign-in Provider___)](#steps-to-use-firebase--twitter-authentication-twitter-sign-in-provider)
+    - [`Steps to use firebase & (Twitter Authentication):` (___Twitter Sign-in Provider___)](#steps-to-use-firebase--twitter-authentication-twitter-sign-in-provider)
   - [61.1 Responsive Header Component - sticky top](#611-responsive-header-component---sticky-top)
   - [61.2 Setup Dynamic Route and Access route params](#612-setup-dynamic-route-and-access-route-params)
     - [`Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`)](#reading-url-params-steps-setup-route---parameter--click---getid)
@@ -42,13 +43,17 @@ Table of Contents
       - [`03. Get invoiceId:` (___getId___)](#03-get-invoiceid-getid)
   - [61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways](#616-optional-environment-variable-for-firebase-in-create-react-app--get-form-data-in-3-different-ways)
     - [`Get Form data in 3 different ways:`](#get-form-data-in-3-different-ways)
-    - [Adding Custom Environment Variables: (___Set Environment Variables___ for Firebase Config)](#adding-custom-environment-variables-set-environment-variables-for-firebase-config)
+    - [`Adding Custom Environment Variables:` (___Set Environment Variables___ for Firebase Config)](#adding-custom-environment-variables-set-environment-variables-for-firebase-config)
     - [`Without setup Environment Variables for Firebase Configuration:`](#without-setup-environment-variables-for-firebase-configuration)
     - [`Set Environment Variables for Firebase Configuration in Create React App:`](#set-environment-variables-for-firebase-configuration-in-create-react-app)
     - [`After Setup Environment Variable:` (___run___ `npm start`, otherwise get some ___Error___)](#after-setup-environment-variable-run-npm-start-otherwise-get-some-error)
     - [`Some Error are showing below:` (you could get this kind of error, if ___not run___ `npm start`)](#some-error-are-showing-below-you-could-get-this-kind-of-error-if-not-run-npm-start)
     - [`KeyBoard Shortcut:`](#keyboard-shortcut)
     - [`Issue:` Navigate to #id in Layout component - stack overflow](#issue-navigate-to-id-in-layout-component---stack-overflow)
+- [Module 63.5: Dynamic Title and Google Map](#module-635-dynamic-title-and-google-map)
+  - [63.5.1 Set favicon and search for title to be displayed on the website](#6351-set-favicon-and-search-for-title-to-be-displayed-on-the-website)
+    - [`How to Find & Setup Favicon.ico`](#how-to-find--setup-faviconico)
+    - [`Dynamic Title on your React App`](#dynamic-title-on-your-react-app)
 
 
 
@@ -436,6 +441,8 @@ ___________{
 </Container>
 ```
 
+<br />
+
 # Module 60.5: Firebase auth and private Route Recap
 
 ## 60.5.1 Firebase auth and private Route Recap
@@ -536,7 +543,7 @@ export default SignUp;
 
 ## 60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks
 
-### `Steps to use firebase & (Twitter Authentication): (___Twitter Sign-in Provider___)
+### `Steps to use firebase & (Twitter Authentication):` (___Twitter Sign-in Provider___)
 
 &nbsp;&nbsp;&nbsp;(___Recommended to Follow these 09 Steps___)
 
@@ -819,7 +826,7 @@ const handleRegister = event => {
 
 ---
 
-### [Adding Custom Environment Variables:](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables___ for Firebase Config)
+### [`Adding Custom Environment Variables:`](https://create-react-app.dev/docs/adding-custom-environment-variables/ "Create React App Environment Variables - create-react-app.dev") (___Set Environment Variables___ for Firebase Config)
 
 - Environment variables start/___declare___ with `REACT_APP_` like `REACT_APP_apiKey` 
 - Get ___access___ environment variables `process.env.` like `process.env.REACT_APP_apiKey`
@@ -929,6 +936,30 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 ---
 
 ### `Issue:` [Navigate to #id in Layout component - stack overflow](https://stackoverflow.com/questions/65646065/navigate-to-id-in-layout-component)
+
+<br />
+
+# Module 63.5: Dynamic Title and Google Map
+
+## 63.5.1 Set favicon and search for title to be displayed on the website
+
+### `How to Find & Setup Favicon.ico`
+
+⫸ ___Step by Step Implementation___
+
+- ___Google Search___ like ___Car Mechanic icon___
+- Images > ___Tools___ > ___Size___ (icon) > ___Usage Rights___ (Creative Commons licenses)
+- Click image > Download 
+- ___Photopea.com___ > Resize ___16:16___ > Download with ___ico extension___
+- Rename to ___favicon.ico___ > paste in ___public___ folder in your project
+
+### `Dynamic Title on your React App`
+
+⫸ ___React-Router set title based on Route___ (keyword)
+
+- [react router (react-router-dom) setting page title from current route (functional components)?](https://stackoverflow.com/questions/65705086/react-router-react-router-dom-setting-page-title-from-current-route-functiona "stackoverflow.com")
+- [How to add a dynamic title on your React app](https://dev.to/luispa/how-to-add-a-dynamic-title-on-your-react-app-1l7k "dev.to")
+- [2 Ways to Set Page Title Dynamically in React](https://www.kindacode.com/article/ways-to-set-page-title-dynamically-in-react/ "kindacode.com")
 
 
 
