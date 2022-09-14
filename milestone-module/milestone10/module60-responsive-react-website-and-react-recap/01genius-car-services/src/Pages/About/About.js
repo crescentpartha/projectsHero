@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './About.css';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const About = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const About = () => {
     
     return (
         <div className='about-container'>
+            <PageTitle title="About"></PageTitle>
             <h2 className='about-title'>Get in Touch with the Car Doctor Expert Team</h2>
             <div className='about-carts'>
                 <div className="about-cart1">

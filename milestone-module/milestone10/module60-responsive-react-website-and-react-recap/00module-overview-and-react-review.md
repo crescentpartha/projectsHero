@@ -53,7 +53,13 @@ Table of Contents
 - [Module 63.5: Dynamic Title and Google Map](#module-635-dynamic-title-and-google-map)
   - [63.5.1 Set favicon and search for title to be displayed on the website](#6351-set-favicon-and-search-for-title-to-be-displayed-on-the-website)
     - [`How to Find & Setup Favicon.ico`](#how-to-find--setup-faviconico)
-    - [`Dynamic Title on your React App`](#dynamic-title-on-your-react-app)
+    - [`Dynamic Title on your React App` (Resources & Information)](#dynamic-title-on-your-react-app-resources--information)
+    - [`Set Dynamic page title based on Route using react-helmet-async`](#set-dynamic-page-title-based-on-route-using-react-helmet-async)
+      - [___Install react-helmet-async___ (`Step-01`)](#install-react-helmet-async-step-01)
+      - [___Wrap the index.js file___ (`Step-02`)](#wrap-the-indexjs-file-step-02)
+      - [___Set Helmet & title, where (In which Route) you want to use___ (`Step-03`)](#set-helmet--title-where-in-which-route-you-want-to-use-step-03)
+      - [___Create a Component in Shared folder called `PageTitle`:___ (Simple ___way-01___) (`Step-03`)](#create-a-component-in-shared-folder-called-pagetitle-simple-way-01-step-03)
+      - [___More Efficient: (way-02)___ (`Step-03`)](#more-efficient-way-02-step-03)
 
 
 
@@ -953,13 +959,116 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 - ___Photopea.com___ > Resize ___16:16___ > Download with ___ico extension___
 - Rename to ___favicon.ico___ > paste in ___public___ folder in your project
 
-### `Dynamic Title on your React App`
+### `Dynamic Title on your React App` (Resources & Information)
 
 ⫸ ___React-Router set title based on Route___ (keyword)
 
 - [react router (react-router-dom) setting page title from current route (functional components)?](https://stackoverflow.com/questions/65705086/react-router-react-router-dom-setting-page-title-from-current-route-functiona "stackoverflow.com")
 - [How to add a dynamic title on your React app](https://dev.to/luispa/how-to-add-a-dynamic-title-on-your-react-app-1l7k "dev.to")
 - [2 Ways to Set Page Title Dynamically in React](https://www.kindacode.com/article/ways-to-set-page-title-dynamically-in-react/ "kindacode.com")
+
+### `Set Dynamic page title based on Route using react-helmet-async`
+
+- [react-helmet-async](https://www.npmjs.com/package/react-helmet-async "npm react-helmet-async - website")
+
+#### ___Install react-helmet-async___ (`Step-01`)
+
+``` Terminal
+npm i react-helmet-async
+```
+
+#### ___Wrap the index.js file___ (`Step-02`)
+
+``` JavaScript
+// In src/index.js
+
+import { HelmetProvider } from 'react-helmet-async';
+
+root.render(
+  <HelmetProvider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </HelmetProvider>
+);
+```
+
+OR
+
+``` JavaScript
+// In src/index.js
+
+import { HelmetProvider } from 'react-helmet-async';
+
+root.render(
+  <HelmetProvider>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
+  </HelmetProvider>
+);
+```
+
+#### ___Set Helmet & title, where (In which Route) you want to use___ (`Step-03`)
+
+``` JavaScript
+// In About.js
+
+import { Helmet } from 'react-helmet-async';
+
+<div className='about-container'>
+    <Helmet>
+        <title>About - Genius Car Service</title>
+    </Helmet>
+    <h2 className='about-title'>Get in Touch with the Car Doctor Expert Team</h2>
+</div>
+```
+
+> `Notes:` In this way, we need to set ___Helmet___ & ___title___ (`Make Repetition`) in every Route, where we want to display dynamic title. But, we can solve it in a ___two ways___.
+
+---
+
+#### ___Create a Component in Shared folder called `PageTitle`:___ (Simple ___way-01___) (`Step-03`)
+
+``` JavaScript
+// In PageTitle.js | Create Component
+
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+
+const PageTitle = ({title}) => {
+    return (
+        <Helmet>
+            <title>{title} - Genius Car Service</title>
+        </Helmet>
+    );
+};
+
+export default PageTitle;
+```
+
+``` JavaScript
+// In About.js | Import Component
+
+import PageTitle from '../Shared/PageTitle/PageTitle';
+
+<div className='about-container'>
+    <PageTitle title="About"></PageTitle>
+    <h2 className='about-title'>Get in Touch with the Car Doctor Expert Team</h2>
+</div>
+```
+
+#### ___More Efficient: (way-02)___ (`Step-03`)
+
+- Create a component like RequireAuth called ___RouteWithTitle___
+- In RouteWithTitle, Set ___Helmet & title___
+- ___Replace___ Route by RouteWithTitle in App.js and ___pass the props___ like `title="Home"`
+- Then, Others ___attribute___ like path, element need to ___pass___ to the Route component.
+- In this way, We can ___reduce___ the ___duplication___ and ___increase___ the ___customization___ or ___optimization___.
 
 
 
