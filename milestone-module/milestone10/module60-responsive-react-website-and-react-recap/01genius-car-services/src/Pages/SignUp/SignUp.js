@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../src/firebase.init';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -54,6 +55,7 @@ const SignUp = () => {
 
     return (
         <div className='form-container'>
+            <PageTitle title="Sign Up"></PageTitle>
             <div>
                 <form onSubmit={handleCreateUser}>
                     <h1 className='form-title'>SignUp</h1>

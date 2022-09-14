@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 import './Login.css';
 
 const Login = () => {
@@ -40,6 +41,7 @@ const Login = () => {
 
     return (
         <div className='form-container'>
+            <PageTitle title="Login"></PageTitle>
             <div>
                 <form onSubmit={handleUserSignIn}>
                     <h1 className='form-title'>Login</h1>

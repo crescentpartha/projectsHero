@@ -54,12 +54,16 @@ Table of Contents
   - [63.5.1 Set favicon and search for title to be displayed on the website](#6351-set-favicon-and-search-for-title-to-be-displayed-on-the-website)
     - [`How to Find & Setup Favicon.ico`](#how-to-find--setup-faviconico)
     - [`Dynamic Title on your React App` (Resources & Information)](#dynamic-title-on-your-react-app-resources--information)
-    - [`Set Dynamic page title based on Route using react-helmet-async`](#set-dynamic-page-title-based-on-route-using-react-helmet-async)
-      - [___Install react-helmet-async___ (`Step-01`)](#install-react-helmet-async-step-01)
-      - [___Wrap the index.js file___ (`Step-02`)](#wrap-the-indexjs-file-step-02)
-      - [___Set Helmet & title, where (In which Route) you want to use___ (`Step-03`)](#set-helmet--title-where-in-which-route-you-want-to-use-step-03)
-      - [___Create a Component in Shared folder called `PageTitle`:___ (Simple ___way-01___) (`Step-03`)](#create-a-component-in-shared-folder-called-pagetitle-simple-way-01-step-03)
-      - [___More Efficient: (way-02)___ (`Step-03`)](#more-efficient-way-02-step-03)
+  - [63.5.2 Set Dynamic page title based on Route using react-helmet-async](#6352-set-dynamic-page-title-based-on-route-using-react-helmet-async)
+    - [`Install react-helmet-async` - (`Step-01`)](#install-react-helmet-async---step-01)
+    - [`Wrap the index.js file` - (`Step-02`)](#wrap-the-indexjs-file---step-02)
+    - [`Set Helmet & title, where (In which Route) you want to use` - (`Step-03`)](#set-helmet--title-where-in-which-route-you-want-to-use---step-03)
+    - [`Create a Component in Shared folder called PageTitle:` - (Simple `way-01`) - (`Step-03`)](#create-a-component-in-shared-folder-called-pagetitle---simple-way-01---step-03)
+    - [`More Efficient:` - (`way-02`) - (`Step-03`)](#more-efficient---way-02---step-03)
+  - [63.5.3 Do not allow protected route without email verification](#6353-do-not-allow-protected-route-without-email-verification)
+    - [`Concepts of Email Verification`](#concepts-of-email-verification)
+    - [`Main Functionality`](#main-functionality)
+    - [`Full Example`](#full-example)
 
 
 
@@ -967,17 +971,17 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 - [How to add a dynamic title on your React app](https://dev.to/luispa/how-to-add-a-dynamic-title-on-your-react-app-1l7k "dev.to")
 - [2 Ways to Set Page Title Dynamically in React](https://www.kindacode.com/article/ways-to-set-page-title-dynamically-in-react/ "kindacode.com")
 
-### `Set Dynamic page title based on Route using react-helmet-async`
+## 63.5.2 Set Dynamic page title based on Route using react-helmet-async
 
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async "npm react-helmet-async - website")
 
-#### ___Install react-helmet-async___ (`Step-01`)
+### `Install react-helmet-async` - (`Step-01`)
 
 ``` Terminal
 npm i react-helmet-async
 ```
 
-#### ___Wrap the index.js file___ (`Step-02`)
+### `Wrap the index.js file` - (`Step-02`)
 
 ``` JavaScript
 // In src/index.js
@@ -1013,7 +1017,7 @@ root.render(
 );
 ```
 
-#### ___Set Helmet & title, where (In which Route) you want to use___ (`Step-03`)
+### `Set Helmet & title, where (In which Route) you want to use` - (`Step-03`)
 
 ``` JavaScript
 // In About.js
@@ -1032,7 +1036,7 @@ import { Helmet } from 'react-helmet-async';
 
 ---
 
-#### ___Create a Component in Shared folder called `PageTitle`:___ (Simple ___way-01___) (`Step-03`)
+### `Create a Component in Shared folder called PageTitle:` - (Simple `way-01`) - (`Step-03`)
 
 ``` JavaScript
 // In PageTitle.js | Create Component
@@ -1062,13 +1066,116 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 </div>
 ```
 
-#### ___More Efficient: (way-02)___ (`Step-03`)
+### `More Efficient:` - (`way-02`) - (`Step-03`)
 
 - Create a component like RequireAuth called ___RouteWithTitle___
 - In RouteWithTitle, Set ___Helmet & title___
 - ___Replace___ Route by RouteWithTitle in App.js and ___pass the props___ like `title="Home"`
 - Then, Others ___attribute___ like path, element need to ___pass___ to the Route component.
 - In this way, We can ___reduce___ the ___duplication___ and ___increase___ the ___customization___ or ___optimization___.
+
+
+## 63.5.3 Do not allow protected route without email verification
+
+### `Concepts of Email Verification` 
+
+- If `user exists`, but Email `doesn't verify`, then We `don't give the entry/access` in our Protected Route.
+- `Send verification email` to verify user email and secure access to protected route.
+- Send verification email when user `Sign-In`, `Login`, and Click the `Send Verification Email Again` Button.
+
+### `Main Functionality` 
+
+``` JavaScript
+// In RequireAuth.js
+
+import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import Loading from '../Loading/Loading';
+
+const RequireAuth = ({ children }) => {
+    const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
+
+    if (sending) {
+        return <Loading></Loading>
+    }
+
+    if (error) {
+        return <p className='text-danger'>{error.message}</p>
+    }
+
+    if (!user.emailVerified) {
+        return <div className='m-5' style={{textAlign: 'center'}}>
+            <h3 className='text-danger'>Your Email is not verified!!</h3>
+            <h5 className='text-success'>Please, Verify your email address</h5>
+            <button
+                className='btn btn-primary'
+                onClick={async () => {
+                    await sendEmailVerification();
+                    alert('Sent email');
+                }}
+            >
+                Send Verification Email Again
+            </button>
+        </div>
+    }
+
+    return children;
+};
+
+export default RequireAuth;
+```
+
+### `Full Example`
+
+``` JavaScript
+// In RequireAuth.js
+
+import React from 'react';
+import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
+import { Navigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import auth from '../../../firebase.init';
+import Loading from '../Loading/Loading';
+
+const RequireAuth = ({ children }) => {
+    const [user, loading] = useAuthState(auth);
+    const location = useLocation();
+    const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
+
+    if (loading || sending) {
+        return <Loading></Loading>
+    }
+
+    if (error) {
+        return <p className='text-danger'>{error.message}</p>
+    }
+
+    if (!user) {
+        return <Navigate to='/login' state={{ from: location }} replace ></Navigate>
+    }
+
+    if (!user.emailVerified) {
+        return <div className='m-5' style={{textAlign: 'center'}}>
+            <h3 className='text-danger'>Your Email is not verified!!</h3>
+            <h5 className='text-success'>Please, Verify your email address</h5>
+            <button
+                className='btn btn-primary'
+                onClick={async () => {
+                    await sendEmailVerification();
+                    toast('Sent email');
+                }}
+            >
+                Send Verification Email Again
+            </button>
+            <ToastContainer></ToastContainer>
+        </div>
+    }
+
+    return children;
+};
+
+export default RequireAuth;
+```
 
 
 
