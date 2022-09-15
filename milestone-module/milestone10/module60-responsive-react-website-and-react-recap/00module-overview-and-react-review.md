@@ -35,7 +35,7 @@ Table of Contents
     - [`Google Authentication with react-firebase-hooks:`](#google-authentication-with-react-firebase-hooks)
   - [60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks](#6052-practice-firebase-authentication-implement-twitter-authentication-with-react-firebase-hooks)
     - [`Steps to use firebase & (Twitter Authentication):` (___Twitter Sign-in Provider___)](#steps-to-use-firebase--twitter-authentication-twitter-sign-in-provider)
-- [61 React Router and Firebase Auth Recap](#61-react-router-and-firebase-auth-recap)
+- [Module 61: React Router and Firebase Auth Recap](#module-61-react-router-and-firebase-auth-recap)
   - [61.1 Responsive Header Component - sticky top](#611-responsive-header-component---sticky-top)
   - [61.2 Setup Dynamic Route and Access route params](#612-setup-dynamic-route-and-access-route-params)
     - [`Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`)](#reading-url-params-steps-setup-route---parameter--click---getid)
@@ -72,6 +72,9 @@ Table of Contents
     - [`Get your own location from Google_Map`](#get-your-own-location-from-google_map)
     - [`Set My Location on Maps`](#set-my-location-on-maps)
     - [`Set Directions`](#set-directions)
+  - [63.5.5 Display Dynamic Driving Direction and Route on Google Map](#6355-display-dynamic-driving-direction-and-route-on-google-map)
+    - [`Set Directions`](#set-directions-1)
+    - [`Take origin & destination input form user`](#take-origin--destination-input-form-user)
 
 
 
@@ -634,7 +637,7 @@ export default Login;
 
 <br />
 
-# 61 React Router and Firebase Auth Recap
+# Module 61: React Router and Firebase Auth Recap
 
 ## 61.1 Responsive Header Component - sticky top
 
@@ -1300,5 +1303,132 @@ export default Direction;
 > `Notes:` If we want to use `Direction`. Then, we need to use ___DirectionsService___ and ___DirectionsRenderer___
 
 
+## 63.5.5 Display Dynamic Driving Direction and Route on Google Map
+
+### `Set Directions`
+
+``` JavaScript
+// In Direction.js
+
+import React, { useState } from 'react';
+import { DirectionsService, DirectionsRenderer, GoogleMap, LoadScript } from '@react-google-maps/api';
+
+const Direction = ({origin, destination}) => {
+    const [response, setResponse] = useState(null);
+    // const origin = 'mirpur 10 circle dhaka';
+    // const destination = 'gulshan 1 circle dhaka';
+
+    const directionsCallback = (res) => {
+        console.log(res)
+
+        if (res !== null) {
+            if (res.status === 'OK') {
+                setResponse(res);
+            } else {
+                console.log('response: ', res)
+            }
+        }
+    }
+
+    return (
+        <div>
+            <LoadScript
+                //   googleMapsApiKey="YOUR_API_KEY"
+                googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+            >
+                <GoogleMap
+                    // required
+                    id='direction-example'
+                    // required
+                    mapContainerStyle={{
+                        height: '100vh',
+                        width: '100%'
+                    }}
+                    // required
+                    zoom={14}
+                    // required
+                    center={{
+                        lat: 0,
+                        lng: -180
+                    }}
+                >
+                    {
+                        (
+                            destination !== '' &&
+                            origin !== ''
+                        ) && (
+                            <DirectionsService
+                                // required
+                                options={{
+                                    destination: destination,
+                                    origin: origin,
+                                    travelMode: 'DRIVING'
+                                }}
+                                // required
+                                callback={directionsCallback}
+                            />
+                        )
+                    }
+
+                    {
+                        response !== null && (
+                            <DirectionsRenderer
+                                // required
+                                options={{
+                                    directions: response
+                                }}
+                            />
+                        )
+                    }
+                </GoogleMap>
+            </LoadScript>
+        </div>
+    );
+};
+
+export default Direction;
+```
+
+### `Take origin & destination input form user`
+
+``` JavaScript
+// In Map.js
+
+import React, { useState } from 'react';
+// import Direction from '../Direction/Direction';
+// import MyLocation from '../MyLocation/MyLocation';
+
+const Maps = () => {
+    const [origin, setOrigin] = useState('');
+    const [destination, setDestination] = useState('');
+
+    const displayDirection = event => {
+        event.preventDefault();
+        const start = event.target.origin.value;
+        const end = event.target.destination.value;
+
+        setOrigin(start);
+        setDestination(end);
+
+        // console.log(start, end);
+    }
+    return (
+        <div>
+            <h2 className='text-center my-4'>Google Maps</h2>
+            <form onSubmit={displayDirection} className='d-flex flex-column w-25 m-4 mx-auto align-items-center'>
+                <input type="text" name="origin" required />
+                <br />
+                <input type="text" name="destination" required />
+                <br />
+                <input type="submit" value="Show Direction" />
+            </form>
+            {/* <Direction origin={origin} destination={destination}></Direction> */}
+            {/* <MyLocation></MyLocation> */}
+        </div>
+    );
+};
+
+export default Maps;
+```
 
 
