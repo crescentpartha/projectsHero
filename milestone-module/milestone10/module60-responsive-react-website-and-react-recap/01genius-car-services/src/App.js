@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './Pages/About/About';
+import Maps from './Pages/GoogleMaps/Maps/Maps';
 import Checkout from './Pages/Home/Checkout/Checkout';
 import Home from './Pages/Home/Home/Home';
 import ServiceDetail from './Pages/Home/ServiceDetail/ServiceDetail';
@@ -33,6 +34,7 @@ function App() {
             <About></About>
           </RequireAuth>
         }></Route>
+        <Route path='/googleMaps' element={<Maps></Maps>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/notFound' element={<NotFound></NotFound>}></Route>

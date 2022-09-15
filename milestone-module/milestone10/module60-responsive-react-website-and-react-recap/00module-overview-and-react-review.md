@@ -35,6 +35,7 @@ Table of Contents
     - [`Google Authentication with react-firebase-hooks:`](#google-authentication-with-react-firebase-hooks)
   - [60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks](#6052-practice-firebase-authentication-implement-twitter-authentication-with-react-firebase-hooks)
     - [`Steps to use firebase & (Twitter Authentication):` (___Twitter Sign-in Provider___)](#steps-to-use-firebase--twitter-authentication-twitter-sign-in-provider)
+- [61 React Router and Firebase Auth Recap](#61-react-router-and-firebase-auth-recap)
   - [61.1 Responsive Header Component - sticky top](#611-responsive-header-component---sticky-top)
   - [61.2 Setup Dynamic Route and Access route params](#612-setup-dynamic-route-and-access-route-params)
     - [`Reading URL Params (Steps):` (___Setup:___ `route` - `parameter-&-click` - `getId`)](#reading-url-params-steps-setup-route---parameter--click---getid)
@@ -64,6 +65,13 @@ Table of Contents
     - [`Concepts of Email Verification`](#concepts-of-email-verification)
     - [`Main Functionality`](#main-functionality)
     - [`Full Example`](#full-example)
+  - [63.5.4 How to display a location and a Marker on a Google Map](#6354-how-to-display-a-location-and-a-marker-on-a-google-map)
+    - [`Maps Resources` (free and paid)](#maps-resources-free-and-paid)
+    - [`Install @react-google-maps/api`](#install-react-google-mapsapi)
+    - [`Protect you Google API Key`](#protect-you-google-api-key)
+    - [`Get your own location from Google_Map`](#get-your-own-location-from-google_map)
+    - [`Set My Location on Maps`](#set-my-location-on-maps)
+    - [`Set Directions`](#set-directions)
 
 
 
@@ -624,6 +632,9 @@ export default Login;
 - __In Firebase:__
   - Authentication → Settings → Add Domain → `https://genius-car-services-a8da0.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
+<br />
+
+# 61 React Router and Firebase Auth Recap
 
 ## 61.1 Responsive Header Component - sticky top
 
@@ -1081,7 +1092,7 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 
 - If `user exists`, but Email `doesn't verify`, then We `don't give the entry/access` in our Protected Route.
 - `Send verification email` to verify user email and secure access to protected route.
-- Send verification email when user `Sign-In`, `Login`, and Click the `Send Verification Email Again` Button.
+- Send verification email when user `Register`, `Sign-Up`, and Click the `Send Verification Email Again` Button.
 
 ### `Main Functionality` 
 
@@ -1176,6 +1187,118 @@ const RequireAuth = ({ children }) => {
 
 export default RequireAuth;
 ```
+
+## 63.5.4 How to display a location and a Marker on a Google Map
+
+### `Maps Resources` (free and paid)
+
+- [React Leaflet](https://react-leaflet.js.org/ "React Leaflet - with Open Source Project (Free)")
+- [@react-google-maps/api](https://www.npmjs.com/package/@react-google-maps/api "Google Maps Library for React - with Paid API Key") | [React Google Maps Api Style Guide](https://react-google-maps-api-docs.netlify.app/ "Homepage - Style Guide of React Google Maps API")
+  - We have to have an `API Key` (___Paid___ version)
+  - ___As a user___, We can use Google Map free. But, ___as a developer___, We need to pay for it.
+- [Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/get-api-key "Create Google Developer Profile | Buy API Key | Set Payment Gateway | etc.")
+  - Search ___google map api key___ (keyword)
+  - Create ___Google Developer Profile___ > Get Started > Clicked on ___Select a project___ 
+  - If we don't ___set payment gateway___, then they don't give our API Key
+  - ___Go To GOOGLE MAPS PLATFORM___ (to set direction, geo-location)
+  - Set ___RESTRICT KEY___ (So that, others can't use my API Key)
+  - Directions API > ___Enable___
+  - Maps JavaScript API > ___Enable___
+
+### `Install @react-google-maps/api`
+
+``` Terminal
+npm install --save @react-google-maps/api
+```
+
+### `Protect you Google API Key`
+
+> `Notes:` Set API key in `.env.local` like `REACT_APP_GOOGLE_API_KEY=Your-API-Key`. Then, get API key by using `{process.env.REACT_APP_GOOGLE_API_KEY}`
+
+### `Get your own location from Google_Map`
+
+- Go to the ___Google Maps___ > Search ___Location___ > ___Right clicked___ on ___Location Icon___ (red color) > ___Copy___ (latitude and longitude)
+- ___Set___ (latitude and longitude) in your Map as a ___Center___
+
+### `Set My Location on Maps`
+
+``` JavaScript
+// In MyLocation.js
+
+import React from 'react'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+
+const containerStyle = {
+    // width: '400px',
+    width: '100vw',
+    // height: '400px'
+    height: '100vh'
+};
+
+// const center = {
+//   lat: -3.745,
+//   lng: -38.523
+// };
+
+// Location of Sylhet
+const center = {
+    lat: 24.8998373,
+    lng: 91.8259622
+};
+
+function MyComponent() {
+    return (
+        <LoadScript
+            //   googleMapsApiKey="YOUR_API_KEY"
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        >
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                // zoom={10}
+                zoom={16}
+            >
+                { /* Child components, such as markers, info windows, etc. */}
+                {/* <></> */}
+                <Marker
+                    // onLoad={onLoad} // We can say anything using javaScript function;
+                    // position={position} // Replace by center - center (position) is declared above
+                    position={center}
+                />
+            </GoogleMap>
+        </LoadScript>
+    )
+}
+
+export default React.memo(MyComponent)
+```
+
+> `Notes:` We can use `Marker`, `Polygon` etc in our location maps.
+
+### `Set Directions`
+
+- DirectionsRenderer and DirectionsService example > `VIEW CODE`
+- In this example, We can understand that how to `extract code` from ___class component___ to ___functional component___
+
+``` JavaScript
+// In Direction.js
+
+import React from 'react';
+import { DirectionsService, DirectionsRenderer, GoogleMap, LoadScript } from '@react-google-maps/api';
+
+const Direction = () => {
+    return (
+        <div>
+            
+        </div>
+    );
+};
+
+export default Direction;
+```
+
+> `Notes:` If we want to use `Direction`. Then, we need to use ___DirectionsService___ and ___DirectionsRenderer___
+
 
 
 
