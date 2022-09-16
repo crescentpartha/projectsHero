@@ -6,6 +6,9 @@
     - [`What is Node?`](#what-is-node)
     - [`JavaScript vs Node.js`](#javascript-vs-nodejs)
     - [`When should I use Node.js?`](#when-should-i-use-nodejs)
+  - [64.2 Getting started with Node and Express, your first app](#642-getting-started-with-node-and-express-your-first-app)
+    - [`Steps:` (Getting Started - Express)](#steps-getting-started---express)
+    - [`Steps for Express/Node server` (Next: Hello World)](#steps-for-expressnode-server-next-hello-world)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -40,5 +43,77 @@
 - [Express](https://expressjs.com/ "Express.js - Framework of Node.js") - Node.js web application ___framework___
   - Express is a ___minimal and flexible___ Node.js web application framework that provides ___a robust set of features___ for web and mobile applications.
 
+## 64.2 Getting started with Node and Express, your first app
 
+### `Steps:` ([Getting Started - Express](https://expressjs.com/en/starter/installing.html))
+
+1. ___Create a folder/directory___ to hold your application (___manually___ or ___mkdir___)
+
+``` Terminal
+mkdir myApp
+cd myApp
+```
+2. Open command line to ___open that folder___ in VSCode
+
+``` Terminal
+code .
+```
+3. Use the ___npm init___ command to create a ___package.json___ file for your application.
+
+``` Terminal
+npm init
+```
+
+⫸ ___Some questions need to be answered:___
+- Press `^C` at any time to ___quit___.
+- package name: (02my-first-node) > `Enter`
+- version: (1.0.0) > `Enter`
+- description: > (you can write something) or `Enter`
+- entry point: (index.js) > `Enter`
+- test command: > `Enter`
+- git repository: > `Enter`
+- keywords: > `Enter`
+- author: > `Enter`
+- license: (ISC) > `Enter`
+- About to write to c:\projects\02my-first-node\package.json: > `Enter`
+
+``` JSON
+{
+  "name": "02my-first-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+```
+- Is this OK? (yes) > `Enter`
+
+4. ___Install___ Express and ___save___ it in the dependencies list
+
+``` Terminal
+npm install express
+```
+5. Create ___index.js___ file
+
+⫸ ___package-lock.json:___ 
+- The package-lock.json is solely used to ___lock dependencies___ to ___a specific version number___.
+- So that when ___teammates clone___ your work their ___dependency versions___ are the ___same___ as yours, or vice versa.
+- It ___manages___ (package install, update, change or change to the old version)
+
+
+### `Steps for Express/Node server` ([Next: Hello World](https://expressjs.com/en/starter/hello-world.html))
+
+> `require` is the previous version of `import`. <br />We can also use ___ES6 modules (ES6 import) in Node___. In this reason, we need to change `package.json` or file name `.mjs` other than `.js` <br /><br /> `Node use ES6 Module`: [1](https://www.geeksforgeeks.org/how-to-use-an-es6-import-in-node-js/ "How to use an ES6 import in Node.js? - geeksforgeeks.org") - [2](https://codesource.io/how-to-use-es6-import-in-node/ "How to use ES6 import in Node - codesource.io") - [3](https://nodejs.org/api/esm.html "Node.js v18.9.0 documentation - nodejs.org") - [4](https://stackoverflow.com/questions/45854169/how-can-i-use-an-es6-import-in-node-js "How can I use an ES6 import in Node.js? [duplicate] - stackoverflow.com")
+
+1. require express
+2. create app variable
+3. declare port
+4. set app.get('/')
+5. listen to port 
+6. node index.js (___Run the app___ with the following command)
+7. check your browser for that port
 
