@@ -4,9 +4,9 @@ const app = express();
 const port = 5000;
 
 app.get('/', (req, res) => {
-    res.send('Look Mama! I can code Node now!!!')
-})
+    res.send('Look Mama! I can run code with Nodemon now!!!');
+});
 
 app.listen(port, () => {
     console.log('Listening to port', port);
-})
+});

@@ -9,6 +9,11 @@
   - [64.2 Getting started with Node and Express, your first app](#642-getting-started-with-node-and-express-your-first-app)
     - [`Steps:` (Getting Started - Express)](#steps-getting-started---express)
     - [`Steps for Express/Node server` (Next: Hello World)](#steps-for-expressnode-server-next-hello-world)
+  - [(Recap) Node express and install nodemon for auto restart](#recap-node-express-and-install-nodemon-for-auto-restart)
+    - [nodemon:](#nodemon)
+    - [`Installation:`](#installation)
+    - [`Modify scripts of package.json:`](#modify-scripts-of-packagejson)
+    - [`Run app with nodemon:`](#run-app-with-nodemon)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -58,24 +63,33 @@ cd myApp
 ``` Terminal
 code .
 ```
-3. Use the ___npm init___ command to create a ___package.json___ file for your application.
+3. Use the ___npm init___ or ___npm init -y___ command to create a ___package.json___ file for your application.
+   
+⫸ ___Create package.json file directly without any questions:___
+- `-y` ___flag___ used for that we ___agree with your all questions___ 
+
+``` Terminal
+npm init -y
+```
+
+⫸ ___Create package.json file with some questions:___
 
 ``` Terminal
 npm init
 ```
 
-⫸ ___Some questions need to be answered:___
-- Press `^C` at any time to ___quit___.
-- package name: (02my-first-node) > `Enter`
-- version: (1.0.0) > `Enter`
-- description: > (you can write something) or `Enter`
-- entry point: (index.js) > `Enter`
-- test command: > `Enter`
-- git repository: > `Enter`
-- keywords: > `Enter`
-- author: > `Enter`
-- license: (ISC) > `Enter`
-- About to write to c:\projects\02my-first-node\package.json: > `Enter`
+- ___Some questions need to be answered:___
+  - Press `^C` at any time to ___quit___.
+  - package name: (02my-first-node) > `Enter`
+  - version: (1.0.0) > `Enter`
+  - description: > (you can write something) or `Enter`
+  - entry point: (index.js) > `Enter`
+  - test command: > `Enter`
+  - git repository: > `Enter`
+  - keywords: > `Enter`
+  - author: > `Enter`
+  - license: (ISC) > `Enter`
+  - About to write to c:\projects\02my-first-node\package.json: > `Enter`
 
 ``` JSON
 {
@@ -102,7 +116,7 @@ npm install express
 ⫸ ___package-lock.json:___ 
 - The package-lock.json is solely used to ___lock dependencies___ to ___a specific version number___.
 - So that when ___teammates clone___ your work their ___dependency versions___ are the ___same___ as yours, or vice versa.
-- It ___manages___ (package install, update, change or change to the old version)
+- It ___manages___ (package install, update, change or version control)
 
 
 ### `Steps for Express/Node server` ([Next: Hello World](https://expressjs.com/en/starter/hello-world.html))
@@ -110,10 +124,60 @@ npm install express
 > `require` is the previous version of `import`. <br />We can also use ___ES6 modules (ES6 import) in Node___. In this reason, we need to change `package.json` or file name `.mjs` other than `.js` <br /><br /> `Node use ES6 Module`: [1](https://www.geeksforgeeks.org/how-to-use-an-es6-import-in-node-js/ "How to use an ES6 import in Node.js? - geeksforgeeks.org") - [2](https://codesource.io/how-to-use-es6-import-in-node/ "How to use ES6 import in Node - codesource.io") - [3](https://nodejs.org/api/esm.html "Node.js v18.9.0 documentation - nodejs.org") - [4](https://stackoverflow.com/questions/45854169/how-can-i-use-an-es6-import-in-node-js "How can I use an ES6 import in Node.js? [duplicate] - stackoverflow.com")
 
 1. require express
+   - using snippet: `req` > ___Enter___ > write ___express___
 2. create app variable
 3. declare port
 4. set app.get('/')
+   - app.get(Route, callback function (request, response))
 5. listen to port 
+   - app.listen(port, callback function)
+   - here, callback function is optional. We can write or don't write, doesn't matter.
 6. node index.js (___Run the app___ with the following command)
 7. check your browser for that port
+
+## (Recap) Node express and install nodemon for auto restart
+
+### [nodemon:](https://www.npmjs.com/package/nodemon "restarting the node application when file changes in the directory are detected")
+
+- nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+
+### `Installation:`
+
+- `-g` flag stands for ___global___ | we can find it anywhere in our computer.
+
+``` Terminal
+npm install -g nodemon
+```
+
+### `Modify scripts of package.json:`
+
+- `"start": "node index.js",` should be ___added___
+- `"start-dev": "nodemon index.js",` should be ___added___
+
+``` JSON
+// Before
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+``` JSON
+// After adding the script
+
+"scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+### `Run app with nodemon:`
+
+``` Terminal
+nodemon index.js
+```
+
+> `Notes:` `Nodemon` ___monitor___ the ___directory changes___ and then ___auto restart the server___ again and again. <br /> `mon` comes from `monitor` | ___nodemon___
+
 
