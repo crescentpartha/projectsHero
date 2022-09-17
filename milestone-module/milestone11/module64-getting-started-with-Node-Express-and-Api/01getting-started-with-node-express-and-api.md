@@ -27,8 +27,14 @@
       - [`Example Code:`](#example-code)
     - [`Create POST method` (Send data to the server)](#create-post-method-send-data-to-the-server)
     - [`Express post body is undefined (Solution)`](#express-post-body-is-undefined-solution)
+    - [`How does middleware works in node.js?`](#how-does-middleware-works-in-nodejs)
     - [`Complete Example`](#complete-example)
     - [`Output of Complete Example`](#output-of-complete-example)
+  - [64.7 Display POST data on the UI and explore query parameter](#647-display-post-data-on-the-ui-and-explore-query-parameter)
+    - [`Display POST data on the UI`](#display-post-data-on-the-ui)
+    - [`Search query or query parameter`](#search-query-or-query-parameter)
+    - [`Explore Search query or query parameter`](#explore-search-query-or-query-parameter)
+    - [`Complete Example`](#complete-example-1)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -402,8 +408,6 @@ fetch('https://example.com/profile', {
   .catch((error) => {
     console.error('Error:', error);
   });
-
-<form onSubmit={handleAddUser}>
 ```
 
 #### `Example Code:`
@@ -433,6 +437,8 @@ const handleAddUser = event => {
         console.log(data);
       })
   }
+
+<form onSubmit={handleAddUser}>
 ```
 
 ### `Create POST method` (Send data to the server)
@@ -459,6 +465,15 @@ app.post('/user', (req, res) => {
     - `app.use(bodyParser.json());`
   - `Another Solution: (shortcut)` We can use ___express.json___ as a ___middleware___
     - like `app.use(express.json());`
+
+### `How does middleware works in node.js?`
+  - ___Middleware___ is a function that will have ___all the access___ for ___requesting an object___, ___responding to an object___, and ___moving to the next middleware function___ in the application ___request-response cycle___.
+  - Middleware literally means ___anything you put in the middle___ of one layer of the software and another.
+  - Middleware are functions that ___execute during the lifecycle___ of ___a request to the server___.
+  - Each middleware has access to the ___HTTP request___ and ___response___ for ___each route___.
+  - ___Example:___ 
+    - We didn't find value of `req.body` (___undefined___). That's why we use a ___middleware___ called `body-parser` or `express.json()`
+    - Here, Middleware ___convert___ the data to ___JSON format___.
 
 ### `Complete Example`
 
@@ -585,5 +600,214 @@ export default App;
 
 - ___Takes input___ form users like `Name` & `Email`. Then send data by clicking ___Add User___ button.
 - ___Output:___ `request { name: 'Sabila Nur', email: 'sabilanur@gmail.com' }`
+
+
+## 64.7 Display POST data on the UI and explore query parameter
+
+### `Display POST data on the UI`
+
+``` JavaScript
+// In index.js
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    // res.send('post method success');
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    res.send(user);
+})
+```
+
+``` JavaScript
+// In App.js
+
+// post data to server
+fetch('http://localhost:5000/user', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(user)
+})
+  .then((response) => response.json())
+  .then((data) => {
+    const newUsers = [...users, data];
+    setUsers(newUsers);
+    console.log(data);
+  })
+```
+
+### `Search query or query parameter`
+
+- ___localhost:5000/users?name=sub___ // `query { name: 'sub' }`
+- ___localhost:5000/users?name=sub&time=45___ // `query { name: 'sub', time: '45' }`
+- http://localhost:5000/users?name=sub&time=45&email=gmail // `query { name: 'sub', time: '45', email: 'gmail' }`
+- That type of response, we can get in the backend in `req.query`
+- We can ___filter___ in two ways: `id/parameter/params` & `query`
+  - ___filter users___ in the browser using `search query`
+  - ___filter users___ from the server using `search query` or `id/parameter/params`
+- http://localhost:5000/users // `query {}`
+
+### `Explore Search query or query parameter`
+
+``` JavaScript
+// In index.js
+
+app.get('/users', (req, res) => {
+    // console.log('query', req.query);
+    // res.send(users);
+
+    // filter by query parameter or search query
+    if (req.query.name) {
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search));
+        res.send(matched);
+    }
+    else {
+        res.send(users);
+    }
+});
+```
+
+### `Complete Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+// const port = precess.env.PORT || 5000;
+const port = 5000;
+
+app.use(cors());
+app.use(express.json()); // Solution of "Express.js req.body undefined";
+
+app.get('/', (req, res) => {
+    res.send('Look Mama! I can run code with Nodemon now!!!');
+});
+
+const users = [
+    { id: 1, name: 'Sabana', email: 'sabana@gmail.com', phone: '01788888888' },
+    { id: 2, name: 'Shabnoor', email: 'shabnoor@gmail.com', phone: '01788888888' },
+    { id: 3, name: 'Suchorita', email: 'suchorita@gmail.com', phone: '01788888888' },
+    { id: 4, name: 'Srabonti', email: 'srabonti@gmail.com', phone: '01788888888' },
+    { id: 5, name: 'Suchonda', email: 'suchonda@gmail.com', phone: '01788888888' },
+    { id: 6, name: 'Sabila', email: 'sabila@gmail.com', phone: '01788888888' },
+    { id: 7, name: 'Sohana', email: 'sohana@gmail.com', phone: '01788888888' },
+];
+
+app.get('/users', (req, res) => {
+    // res.send('Hello from user');
+    // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
+
+    // console.log('query', req.query);
+    // res.send(users);
+
+    // filter by query parameter or search query
+    if (req.query.name) {
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search));
+        res.send(matched);
+    }
+    else {
+        res.send(users);
+    }
+});
+
+// Create dynamic api
+app.get('/user/:id', (req, res) => { // api parameter
+    console.log(req.params); // access params
+    const id = parseInt(req.params.id);
+    // const user = users[id];
+    const user = users.find(u => u.id === id);
+    // res.send('finding user');
+    res.send(user);
+});
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    // res.send('post method success');
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    res.send(user);
+})
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Sour soud fazle flavor');
+})
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+``` JavaScript
+// In App.js
+
+import { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, []);
+
+  const handleAddUser = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    // console.log(name, email);
+
+    // const user = {name: name, email: email};
+    const user = { name, email };
+
+    // post data to server
+    fetch('http://localhost:5000/user', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const newUsers = [...users, data];
+        setUsers(newUsers);
+        console.log(data);
+      })
+  }
+
+  return (
+    <div className="App">
+      <h1>My Own data: {users.length}</h1>
+      <form onSubmit={handleAddUser}>
+        <input type="text" name="name" placeholder='Name' required />
+        <input type="text" name="email" placeholder='Email' required />
+        <input type="submit" value="Add User" />
+      </form>
+      <ul>
+        {
+          users.map(user => <li key={user.id}>id: {user.id} name: {user.name} email: {user.email}</li>)
+        }
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
 
 

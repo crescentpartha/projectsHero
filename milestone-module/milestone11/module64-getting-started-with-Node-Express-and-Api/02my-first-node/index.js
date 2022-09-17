@@ -24,7 +24,19 @@ const users = [
 app.get('/users', (req, res) => {
     // res.send('Hello from user');
     // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
-    res.send(users);
+
+    // console.log('query', req.query);
+    // res.send(users);
+
+    // filter by query parameter or search query
+    if (req.query.name) {
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search));
+        res.send(matched);
+    }
+    else {
+        res.send(users);
+    }
 });
 
 // Create dynamic api
@@ -40,7 +52,11 @@ app.get('/user/:id', (req, res) => { // api parameter
 app.post('/user', (req, res) => {
     // console.log('request', req);
     console.log('request', req.body);
-    res.send('post method success');
+    // res.send('post method success');
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    res.send(user);
 })
 
 app.get('/fruits', (req, res) => {
