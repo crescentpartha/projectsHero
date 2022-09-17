@@ -5,6 +5,7 @@ const app = express();
 const port = 5000;
 
 app.use(cors());
+app.use(express.json()); // Solution of "Express.js req.body undefined";
 
 app.get('/', (req, res) => {
     res.send('Look Mama! I can run code with Nodemon now!!!');
@@ -35,6 +36,12 @@ app.get('/user/:id', (req, res) => { // api parameter
     // res.send('finding user');
     res.send(user);
 });
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    res.send('post method success');
+})
 
 app.get('/fruits', (req, res) => {
     res.send(['mango', 'apple', 'oranges']);

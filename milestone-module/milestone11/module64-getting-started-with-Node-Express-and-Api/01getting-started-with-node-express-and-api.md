@@ -20,6 +20,15 @@
     - [`cors installation`](#cors-installation)
     - [`require cors`](#require-cors)
     - [`Full Example`](#full-example)
+  - [64.6 Create React form and Post API and send data to the server](#646-create-react-form-and-post-api-and-send-data-to-the-server)
+    - [`Create React form`](#create-react-form)
+    - [`POST (JSON-encoded) data using Fetch API`](#post-json-encoded-data-using-fetch-api)
+      - [`Demo/Sample Code:`](#demosample-code)
+      - [`Example Code:`](#example-code)
+    - [`Create POST method` (Send data to the server)](#create-post-method-send-data-to-the-server)
+    - [`Express post body is undefined (Solution)`](#express-post-body-is-undefined-solution)
+    - [`Complete Example`](#complete-example)
+    - [`Output of Complete Example`](#output-of-complete-example)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -341,6 +350,7 @@ function App() {
     .then(res => res.json())
     .then(data => setUsers(data));
   }, []);
+
   return (
     <div className="App">
       <h1>My Own data: {users.length}</h1>
@@ -355,5 +365,225 @@ function App() {
 
 export default App;
 ```
+
+## 64.6 Create React form and Post API and send data to the server
+
+### `Create React form`
+
+``` JavaScript
+<form onSubmit={handleAddUser}>
+  <input type="text" name="name" placeholder='Name' required />
+  <input type="text" name="email" placeholder='Email' required />
+  <input type="submit" value="Add User" />
+</form>
+```
+
+### `POST (JSON-encoded) data using Fetch API`
+
+- [fetch post data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data "Using the Fetch API - developer.mozilla.org")
+  - [Uploading JSON data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data "post (JSON-encoded) data using Fetch API - developer.mozilla.org")
+
+#### `Demo/Sample Code:`
+
+``` JavaScript
+const data = { username: 'example' };
+
+fetch('https://example.com/profile', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+<form onSubmit={handleAddUser}>
+```
+
+#### `Example Code:`
+
+``` JavaScript
+// In App.js
+
+const handleAddUser = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    // console.log(name, email);
+
+    // const user = {name: name, email: email};
+    const user = { name, email };
+
+    // post data to server
+    fetch('http://localhost:5000/user', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+  }
+```
+
+### `Create POST method` (Send data to the server)
+
+``` JavaScript
+// In index.js
+
+app.use(express.json()); // Solution of "Express.js req.body undefined";
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    res.send('post method success');
+})
+```
+
+### `Express post body is undefined (Solution)`
+
+- [express post body is undefined](https://stackoverflow.com/questions/9177049/express-js-req-body-undefined "Express.js req.body undefined - stackoverflow.com")
+- [Express middleware](https://expressjs.com/en/resources/middleware.html "Express middleware - expressjs.com") - [body-parser](https://expressjs.com/en/resources/middleware/body-parser.html "body-parser - expressjs.com")
+  - Solution: 
+    - `npm install body-parser`
+    - `let bodyParser = require('body-parser');`
+    - `app.use(bodyParser.json());`
+  - `Another Solution: (shortcut)` We can use ___express.json___ as a ___middleware___
+    - like `app.use(express.json());`
+
+### `Complete Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+// const port = precess.env.PORT || 5000;
+const port = 5000;
+
+app.use(cors());
+app.use(express.json()); // Solution of "Express.js req.body undefined";
+
+app.get('/', (req, res) => {
+    res.send('Look Mama! I can run code with Nodemon now!!!');
+});
+
+const users = [
+    { id: 1, name: 'Sabana', email: 'sabana@gmail.com', phone: '01788888888' },
+    { id: 2, name: 'Shabnoor', email: 'shabnoor@gmail.com', phone: '01788888888' },
+    { id: 3, name: 'Suchorita', email: 'suchorita@gmail.com', phone: '01788888888' },
+    { id: 4, name: 'Srabonti', email: 'srabonti@gmail.com', phone: '01788888888' },
+    { id: 5, name: 'Suchonda', email: 'suchonda@gmail.com', phone: '01788888888' },
+    { id: 6, name: 'Sabila', email: 'sabila@gmail.com', phone: '01788888888' },
+    { id: 7, name: 'Sohana', email: 'sohana@gmail.com', phone: '01788888888' },
+];
+
+app.get('/users', (req, res) => {
+    // res.send('Hello from user');
+    // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
+    res.send(users);
+});
+
+// Create dynamic api
+app.get('/user/:id', (req, res) => { // api parameter
+    console.log(req.params); // access params
+    const id = parseInt(req.params.id);
+    // const user = users[id];
+    const user = users.find(u => u.id === id);
+    // res.send('finding user');
+    res.send(user);
+});
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    res.send('post method success');
+})
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Sour soud fazle flavor');
+})
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+``` JavaScript
+// In App.js
+
+import { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, []);
+
+  const handleAddUser = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    // console.log(name, email);
+
+    // const user = {name: name, email: email};
+    const user = { name, email };
+
+    // post data to server
+    fetch('http://localhost:5000/user', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+  }
+
+  return (
+    <div className="App">
+      <h1>My Own data: {users.length}</h1>
+      <form onSubmit={handleAddUser}>
+        <input type="text" name="name" placeholder='Name' required />
+        <input type="text" name="email" placeholder='Email' required />
+        <input type="submit" value="Add User" />
+      </form>
+      <ul>
+        {
+          users.map(user => <li key={user.id}>id: {user.id} name: {user.name} email: {user.email}</li>)
+        }
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### `Output of Complete Example`
+
+- ___Takes input___ form users like `Name` & `Email`. Then send data by clicking ___Add User___ button.
+- ___Output:___ `request { name: 'Sabila Nur', email: 'sabilanur@gmail.com' }`
 
 
