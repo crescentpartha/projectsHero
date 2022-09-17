@@ -1,5 +1,5 @@
 const express = require('express');
-const cros = require('cros');
+const cors = require('cors');
 const app = express();
 // const port = precess.env.PORT || 5000;
 const port = 5000;
@@ -35,6 +35,14 @@ app.get('/user/:id', (req, res) => { // api parameter
     // res.send('finding user');
     res.send(user);
 });
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Sour soud fazle flavor');
+})
 
 app.listen(port, () => {
     console.log('Listening to port', port);

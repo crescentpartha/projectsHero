@@ -247,9 +247,13 @@ app.listen(port, () => {
 - [No 'Access-Control-Allow-Origin' - Node / Apache Port Issue](https://stackoverflow.com/questions/18310394/no-access-control-allow-origin-node-apache-port-issue)
 - [Middleware](https://expressjs.com/en/guide/using-middleware.html)
 - [Express middleware](https://expressjs.com/en/resources/middleware.html) - [cors](http://expressjs.com/en/resources/middleware/cors.html)
-  - Has the access to the request object
-  - Responses object
-  - Can process the request before the server sends a response
+  - Has the ___access___ to the ___request object___
+  - ___Responses object___
+  - Can ___process the request___ before the ___server___ sends a ___response___
+- [Cannot find module 'cors' error in Node.js](https://bobbyhadz.com/blog/node-cannot-find-module-cors#:~:text=To%20solve%20the%20error%20%22Cannot,%2DD%20%40types%2Fcors%20. "bobbyhadz.com")
+  - Check your ___typing mistake___ first, if you got error.
+- [Error: Cannot find module 'cors'](https://stackoverflow.com/questions/47706022/error-cannot-find-module-cors "stackoverflow.com")
+
 
 ### `cors installation`
 
@@ -262,7 +266,7 @@ npm install cors
 ``` JavaScript
 // In index.js
 
-const cros = require('cros');
+const cors = require('cors');
 
 app.use(cors());
 ```
@@ -273,7 +277,7 @@ app.use(cors());
 // In index.js
 
 const express = require('express');
-const cros = require('cros');
+const cors = require('cors');
 const app = express();
 // const port = precess.env.PORT || 5000;
 const port = 5000;
@@ -309,6 +313,14 @@ app.get('/user/:id', (req, res) => { // api parameter
     // res.send('finding user');
     res.send(user);
 });
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Sour soud fazle flavor');
+})
 
 app.listen(port, () => {
     console.log('Listening to port', port);
