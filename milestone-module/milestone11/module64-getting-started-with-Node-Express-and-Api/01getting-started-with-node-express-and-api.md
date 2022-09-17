@@ -7,7 +7,8 @@
     - [`JavaScript vs Node.js`](#javascript-vs-nodejs)
     - [`When should I use Node.js?`](#when-should-i-use-nodejs)
   - [64.2 Getting started with Node and Express, your first app](#642-getting-started-with-node-and-express-your-first-app)
-    - [`Steps:` (Getting Started - Express)](#steps-getting-started---express)
+    - [`Basic Server Setup Steps:` (Getting Started - Express)](#basic-server-setup-steps-getting-started---express)
+    - [`package-lock.json`](#package-lockjson)
     - [`Steps for Express/Node server` (Next: Hello World)](#steps-for-expressnode-server-next-hello-world)
   - [(Recap) Node express and install nodemon for auto restart](#recap-node-express-and-install-nodemon-for-auto-restart)
     - [`nodemon:`](#nodemonhttpswwwnpmjscompackagenodemon-restarting-the-node-application-when-file-changes-in-the-directory-are-detected)
@@ -17,7 +18,7 @@
   - [64.4 Create dynamic api, api parameter, access params](#644-create-dynamic-api-api-parameter-access-params)
   - [64.5 Use fetch to load data from server, middleware, handle cors](#645-use-fetch-to-load-data-from-server-middleware-handle-cors)
     - [`Resources`](#resources)
-    - [`cors installation`](#cors-installation)
+    - [`cors middleware installation`](#cors-middleware-installation)
     - [`require cors`](#require-cors)
     - [`Full Example`](#full-example)
   - [64.6 Create React form and Post API and send data to the server](#646-create-react-form-and-post-api-and-send-data-to-the-server)
@@ -26,7 +27,7 @@
       - [`Demo/Sample Code:`](#demosample-code)
       - [`Example Code:`](#example-code)
     - [`Create POST method` (Send data to the server)](#create-post-method-send-data-to-the-server)
-    - [`Express post body is undefined (Solution)`](#express-post-body-is-undefined-solution)
+    - [`Express post body is undefined` (Solution)](#express-post-body-is-undefined-solution)
     - [`How does middleware works in node.js?`](#how-does-middleware-works-in-nodejs)
     - [`Complete Example`](#complete-example)
     - [`Output of Complete Example`](#output-of-complete-example)
@@ -35,6 +36,9 @@
     - [`Search query or query parameter`](#search-query-or-query-parameter)
     - [`Explore Search query or query parameter`](#explore-search-query-or-query-parameter)
     - [`Complete Example`](#complete-example-1)
+  - [64.8 Module summary, git ignore for node project](#648-module-summary-git-ignore-for-node-project)
+    - [`git ignore for node project`](#git-ignore-for-node-project)
+    - [`Final completed code`](#final-completed-code)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -71,7 +75,7 @@
 
 ## 64.2 Getting started with Node and Express, your first app
 
-### `Steps:` ([Getting Started - Express](https://expressjs.com/en/starter/installing.html))
+### `Basic Server Setup Steps:` ([Getting Started - Express](https://expressjs.com/en/starter/installing.html))
 
 1. ___Create a folder/directory___ to hold your application (___manually___ or ___mkdir___)
 
@@ -134,7 +138,8 @@ npm install express
 ```
 5. Create ___index.js___ file
 
-⫸ ___package-lock.json:___ 
+### `package-lock.json`
+
 - The package-lock.json is solely used to ___lock dependencies___ to ___a specific version number___.
 - So that when ___teammates clone___ your work their ___dependency versions___ are the ___same___ as yours, or vice versa.
 - It ___manages___ (package install, update, change or version control)
@@ -144,23 +149,23 @@ npm install express
 
 > `require` is the previous version of `import`. <br />We can also use ___ES6 modules (ES6 import) in Node___. In this reason, we need to change `package.json` or file name `.mjs` other than `.js` <br /><br /> `Node use ES6 Module`: [1](https://www.geeksforgeeks.org/how-to-use-an-es6-import-in-node-js/ "How to use an ES6 import in Node.js? - geeksforgeeks.org") - [2](https://codesource.io/how-to-use-es6-import-in-node/ "How to use ES6 import in Node - codesource.io") - [3](https://nodejs.org/api/esm.html "Node.js v18.9.0 documentation - nodejs.org") - [4](https://stackoverflow.com/questions/45854169/how-can-i-use-an-es6-import-in-node-js "How can I use an ES6 import in Node.js? [duplicate] - stackoverflow.com")
 
-1. require express
+1. ___require express___
    - using snippet: `req` > ___Enter___ > write ___express___
-2. create app variable
-3. declare port
-4. set app.get('/')
+2. ___create app variable___
+3. ___declare port___
+4. ___set app.get('/')___
    - app.get(Route, callback function (request, response))
-5. listen to port 
+5. ___listen to port___
    - app.listen(port, callback function)
    - here, callback function is optional. We can write or don't write, doesn't matter.
-6. node index.js (___Run the app___ with the following command)
-7. check your browser for that port
+6. ___node index.js___ | ___nodemon index.js___ (___Run the app___ with the following command)
+7. ___check your browser for that port___
 
 ## (Recap) Node express and install nodemon for auto restart
 
 ### `[nodemon:](https://www.npmjs.com/package/nodemon "restarting the node application when file changes in the directory are detected")`
 
-- nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+- ___nodemon___ is a tool that helps develop Node.js based applications by ___automatically restarting___ the node application when ___file changes___ in the directory are detected.
 
 ### `Installation:`
 
@@ -270,7 +275,7 @@ app.listen(port, () => {
 - [Error: Cannot find module 'cors'](https://stackoverflow.com/questions/47706022/error-cannot-find-module-cors "stackoverflow.com")
 
 
-### `cors installation`
+### `cors middleware installation`
 
 ``` Terminal
 npm install cors
@@ -455,10 +460,10 @@ app.post('/user', (req, res) => {
 })
 ```
 
-### `Express post body is undefined (Solution)`
+### `Express post body is undefined` (Solution)
 
 - [express post body is undefined](https://stackoverflow.com/questions/9177049/express-js-req-body-undefined "Express.js req.body undefined - stackoverflow.com")
-- [Express middleware](https://expressjs.com/en/resources/middleware.html "Express middleware - expressjs.com") - [body-parser](https://expressjs.com/en/resources/middleware/body-parser.html "body-parser - expressjs.com")
+- [Express middleware](https://expressjs.com/en/resources/middleware.html "Express middleware - expressjs.com") - [body-parser](https://expressjs.com/en/resources/middleware/body-parser.html "body-parser middleware - expressjs.com")
   - Solution: 
     - `npm install body-parser`
     - `let bodyParser = require('body-parser');`
@@ -472,7 +477,7 @@ app.post('/user', (req, res) => {
   - Middleware are functions that ___execute during the lifecycle___ of ___a request to the server___.
   - Each middleware has access to the ___HTTP request___ and ___response___ for ___each route___.
   - ___Example:___ 
-    - We didn't find value of `req.body` (___undefined___). That's why we use a ___middleware___ called `body-parser` or `express.json()`
+    - We didn't find value of `req.body` (___undefined___). That's why we use a ___middleware___ called `body-parser` or `express.json()` (___shortcut___)
     - Here, Middleware ___convert___ the data to ___JSON format___.
 
 ### `Complete Example`
@@ -810,4 +815,155 @@ function App() {
 export default App;
 ```
 
+## 64.8 Module summary, git ignore for node project
 
+### `git ignore for node project`
+
+- create `.gitignore` file ___inside___ the ___node project___
+- In `.gitignore`, write `node_modules`, that's it. Otherwise, ___node_modules___ file also ___push___ in the github repository.
+
+### `Final completed code`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+// const port = precess.env.PORT || 5000;
+const port = 5000;
+
+app.use(cors());
+app.use(express.json()); // Solution of "Express.js req.body undefined";
+
+app.get('/', (req, res) => {
+    res.send('Look Mama! I can run code with Nodemon now!!!');
+});
+
+const users = [
+    { id: 1, name: 'Sabana', email: 'sabana@gmail.com', phone: '01788888888' },
+    { id: 2, name: 'Shabnoor', email: 'shabnoor@gmail.com', phone: '01788888888' },
+    { id: 3, name: 'Suchorita', email: 'suchorita@gmail.com', phone: '01788888888' },
+    { id: 4, name: 'Srabonti', email: 'srabonti@gmail.com', phone: '01788888888' },
+    { id: 5, name: 'Suchonda', email: 'suchonda@gmail.com', phone: '01788888888' },
+    { id: 6, name: 'Sabila', email: 'sabila@gmail.com', phone: '01788888888' },
+    { id: 7, name: 'Sohana', email: 'sohana@gmail.com', phone: '01788888888' },
+];
+
+// app.get('/users', (req, res) => {
+//     res.send(users);
+// });
+
+// app.get('/users', (req, res) => {
+//     // res.send('Hello from user');
+//     // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
+
+//     // console.log('query', req.query);
+//     res.send(users);
+// });
+
+// filter by query parameter or search query
+app.get('/users', (req, res) => {
+    if (req.query.name) {
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search));
+        res.send(matched);
+    }
+    else {
+        res.send(users);
+    }
+});
+
+// Create dynamic api
+app.get('/user/:id', (req, res) => { // api parameter
+    console.log(req.params); // access params
+    const id = parseInt(req.params.id);
+    // const user = users[id];
+    const user = users.find(u => u.id === id);
+    // res.send('finding user');
+    res.send(user);
+});
+
+app.post('/user', (req, res) => {
+    // console.log('request', req);
+    console.log('request', req.body);
+    // res.send('post method success');
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    res.send(user);
+})
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Sour soud fazle flavor');
+})
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+``` JavaScript
+// In App.js
+
+import { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  // load data
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, []);
+
+  const handleAddUser = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    // console.log(name, email);
+
+    // const user = {name: name, email: email};
+    const user = { name, email };
+
+    // post data to server
+    fetch('http://localhost:5000/user', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const newUsers = [...users, data];
+        setUsers(newUsers);
+        console.log(data);
+      })
+  }
+
+  return (
+    <div className="App">
+      <h1>My Own data: {users.length}</h1>
+      <form onSubmit={handleAddUser}>
+        <input type="text" name="name" placeholder='Name' required />
+        <input type="text" name="email" placeholder='Email' required />
+        <input type="submit" value="Add User" />
+      </form>
+      <ul>
+        {
+          users.map(user => <li key={user.id}>id: {user.id} name: {user.name} email: {user.email}</li>)
+        }
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```

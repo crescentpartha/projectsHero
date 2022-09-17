@@ -21,14 +21,20 @@ const users = [
     { id: 7, name: 'Sohana', email: 'sohana@gmail.com', phone: '01788888888' },
 ];
 
+// app.get('/users', (req, res) => {
+//     res.send(users);
+// });
+
+// app.get('/users', (req, res) => {
+//     // res.send('Hello from user');
+//     // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
+
+//     // console.log('query', req.query);
+//     res.send(users);
+// });
+
+// filter by query parameter or search query
 app.get('/users', (req, res) => {
-    // res.send('Hello from user');
-    // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
-
-    // console.log('query', req.query);
-    // res.send(users);
-
-    // filter by query parameter or search query
     if (req.query.name) {
         const search = req.query.name.toLowerCase();
         const matched = users.filter(user => user.name.toLowerCase().includes(search));
