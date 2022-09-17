@@ -1,7 +1,10 @@
 const express = require('express');
+const cros = require('cros');
 const app = express();
 // const port = precess.env.PORT || 5000;
 const port = 5000;
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Look Mama! I can run code with Nodemon now!!!');

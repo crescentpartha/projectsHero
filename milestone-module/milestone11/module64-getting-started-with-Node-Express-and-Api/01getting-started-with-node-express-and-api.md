@@ -15,6 +15,11 @@
     - [`Modify scripts of package.json:`](#modify-scripts-of-packagejson)
     - [`Run app with nodemon:`](#run-app-with-nodemon)
   - [64.4 Create dynamic api, api parameter, access params](#644-create-dynamic-api-api-parameter-access-params)
+  - [64.5 Use fetch to load data from server, middleware, handle cors](#645-use-fetch-to-load-data-from-server-middleware-handle-cors)
+    - [`Resources`](#resources)
+    - [`cors installation`](#cors-installation)
+    - [`require cors`](#require-cors)
+    - [`Full Example`](#full-example)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -222,8 +227,121 @@ app.get('/user/:id', (req, res) => { // api parameter
     res.send(user);
 });
 
+app.get('/fruits', (req, res) => {
+  res.send(['mango','apple', 'oranges']);
+})
+
+app.get('/fruits/mango/fazle', (req, res) => {
+  res.send('Sour soud fazle flavor');
+})
+
 app.listen(port, () => {
     console.log('Listening to port', port);
 });
 ```
+
+## 64.5 Use fetch to load data from server, middleware, handle cors
+
+### `Resources`
+
+- [No 'Access-Control-Allow-Origin' - Node / Apache Port Issue](https://stackoverflow.com/questions/18310394/no-access-control-allow-origin-node-apache-port-issue)
+- [Middleware](https://expressjs.com/en/guide/using-middleware.html)
+- [Express middleware](https://expressjs.com/en/resources/middleware.html) - [cors](http://expressjs.com/en/resources/middleware/cors.html)
+  - Has the access to the request object
+  - Responses object
+  - Can process the request before the server sends a response
+
+### `cors installation`
+
+``` Terminal
+npm install cors
+```
+
+### `require cors`
+
+``` JavaScript
+// In index.js
+
+const cros = require('cros');
+
+app.use(cors());
+```
+
+### `Full Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cros = require('cros');
+const app = express();
+// const port = precess.env.PORT || 5000;
+const port = 5000;
+
+app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send('Look Mama! I can run code with Nodemon now!!!');
+});
+
+const users = [
+    { id: 1, name: 'Sabana', email: 'sabana@gmail.com', phone: '01788888888' },
+    { id: 2, name: 'Shabnoor', email: 'shabnoor@gmail.com', phone: '01788888888' },
+    { id: 3, name: 'Suchorita', email: 'suchorita@gmail.com', phone: '01788888888' },
+    { id: 4, name: 'Srabonti', email: 'srabonti@gmail.com', phone: '01788888888' },
+    { id: 5, name: 'Suchonda', email: 'suchonda@gmail.com', phone: '01788888888' },
+    { id: 6, name: 'Sabila', email: 'sabila@gmail.com', phone: '01788888888' },
+    { id: 7, name: 'Sohana', email: 'sohana@gmail.com', phone: '01788888888' },
+];
+
+app.get('/users', (req, res) => {
+    // res.send('Hello from user');
+    // res.send({ id: 1, name: 'Abdul Alim', job: 'Khai shudhu halim' });
+    res.send(users);
+});
+
+// Create dynamic api
+app.get('/user/:id', (req, res) => { // api parameter
+    console.log(req.params); // access params
+    const id = parseInt(req.params.id);
+    // const user = users[id];
+    const user = users.find(u => u.id === id);
+    // res.send('finding user');
+    res.send(user);
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+``` JavaScript
+// In App.js
+
+import { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect( () => {
+    fetch('http://localhost:5000/users')
+    .then(res => res.json())
+    .then(data => setUsers(data));
+  }, []);
+  return (
+    <div className="App">
+      <h1>My Own data: {users.length}</h1>
+      <ul>
+        {
+          users.map(user => <li key={user.id}>id: {user.id} name: {user.name} email: {user.email}</li>)
+        }
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
 
