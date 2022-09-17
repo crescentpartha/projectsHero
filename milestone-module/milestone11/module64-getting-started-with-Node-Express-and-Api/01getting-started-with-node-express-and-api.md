@@ -39,6 +39,7 @@
   - [64.8 Module summary, git ignore for node project](#648-module-summary-git-ignore-for-node-project)
     - [`git ignore for node project`](#git-ignore-for-node-project)
     - [`Final completed code`](#final-completed-code)
+  - [Quiz](#quiz)
 
 # Module 64: Getting Started with Node, Express and API
 
@@ -266,7 +267,7 @@ app.listen(port, () => {
 
 - [No 'Access-Control-Allow-Origin' - Node / Apache Port Issue](https://stackoverflow.com/questions/18310394/no-access-control-allow-origin-node-apache-port-issue)
 - [Middleware](https://expressjs.com/en/guide/using-middleware.html)
-- [Express middleware](https://expressjs.com/en/resources/middleware.html) - [cors](http://expressjs.com/en/resources/middleware/cors.html)
+- [Express middleware](https://expressjs.com/en/resources/middleware.html) - [cors](http://expressjs.com/en/resources/middleware/cors.html) - [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
   - Has the ___access___ to the ___request object___
   - ___Responses object___
   - Can ___process the request___ before the ___server___ sends a ___response___
@@ -967,3 +968,64 @@ function App() {
 
 export default App;
 ```
+
+## Quiz
+
+1. ___Node.js___ is a _______?
+   - `Javascript Runtime Environment`
+2. How will you ___declare a dynamic api parameter___ named ___productKey___ under the ___products___ api?
+   - `/products/:productKey`
+``` JavaScript
+app.get(“____?____”, (req, res) => {
+	
+})
+```
+3. Which command will you use to ___initialize a Node server___?
+   - `npm init`
+4. What is ___cors policy___? (Google it and read about it.)
+   - [x] ___A website can only request resources form the same origin___
+   - [ ] An alternative to fetch api to load data from server
+   - [ ] A express js special api call method
+5. What will be in the ___blank space___?
+   - `express()`
+``` JavaScript
+const express = require('express')
+const app = ____?_____
+```
+6. How will you ___return the user object___ when anyone calls the user api?
+   - `res.send`
+``` JavaScript
+app.get( ‘ /user’ , (req, res) => {
+  const user = {name: ‘Node Mama ’, Job: “Chaa khawano”};
+  ___?__(user);
+})
+```
+7. How will you ___get the value___ from the input box using the ___useRef() hook___? 
+   - `nameRef.current.value`
+``` JavaScript
+const nameRef = useRef()
+
+<input type="text"  ref={nameRef} placeholder="name"/>
+```
+8. How will you ___use cors___ in your application?
+   - `app.use(cors())`
+9.  How will you ___read___ the ___user id___?
+    - `req.params`
+``` JavaScript
+app.get('/users /:userId', (req, res) => {
+	const user = {name: 'node guru', id: 1307};
+	const id = ___?__.userId;
+})
+```
+10. How will you get the query parameter "___search___"?
+    - `req.query.search`
+``` JavaScript
+localhost:5000/users?search="ChokinA"
+```
+11. Which ___method___ should you use to ___read data___ from the server?
+    - `app.get()`
+12. Which command will you use to ___install nodemon___ for ___development purpose___ only?
+    - `npm install nodemon --save-dev`
+13. ___Express.js___ is a framework for____
+    - `Node.js`
+
