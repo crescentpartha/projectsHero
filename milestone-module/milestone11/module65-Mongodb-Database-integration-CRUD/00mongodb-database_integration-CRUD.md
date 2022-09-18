@@ -3,19 +3,23 @@
 - [Module 65: Mongodb, database integration, CRUD](#module-65-mongodb-database-integration-crud)
   - [65.1 Module Overview, node recap, mongodb vs MySql](#651-module-overview-node-recap-mongodb-vs-mysql)
     - [`Basic Server Setup Steps`](#basic-server-setup-steps)
-      - [___Create Directory___](#create-directory)
-      - [___Create package.json file___](#create-packagejson-file)
-      - [___Install Express, CORS, mondgodb___](#install-express-cors-mondgodb)
-      - [___Install nodemon___ (one time for each computer)](#install-nodemon-one-time-for-each-computer)
-      - [___Modify scripts of package.json file___](#modify-scripts-of-packagejson-file)
-      - [___Steps for Express/Node server___](#steps-for-expressnode-server)
-      - [___Run Node server or Backend server___](#run-node-server-or-backend-server)
-      - [___Set middleware___](#set-middleware)
-      - [___Set .gitignore for node project___](#set-gitignore-for-node-project)
+      - [`Create Directory`](#create-directory)
+      - [`Create package.json file`](#create-packagejson-file)
+      - [`Install Express, CORS, MongoDB`](#install-express-cors-mongodb)
+      - [`Install nodemon` (one time for each computer)](#install-nodemon-one-time-for-each-computer)
+      - [`Modify scripts of package.json file`](#modify-scripts-of-packagejson-file)
+      - [`Steps for Express/Node server`](#steps-for-expressnode-server)
+      - [`Run Node server or Backend server`](#run-node-server-or-backend-server)
+      - [`Set middleware`](#set-middleware)
+      - [`Set .gitignore for node project`](#set-gitignore-for-node-project)
     - [`What is mongodb?`](#what-is-mongodb)
     - [`MySQL vs MongoDB?`](#mysql-vs-mongodb)
-      - [___What is MySQL Database?___](#what-is-mysql-database)
-      - [___What is MongoDb Database?___](#what-is-mongodb-database)
+      - [`What is MySQL Database?`](#what-is-mysql-database)
+      - [`What is MongoDb Database?`](#what-is-mongodb-database)
+  - [65.2 Create mongodb atlas account and Connect to database](#652-create-mongodb-atlas-account-and-connect-to-database)
+    - [`Basic Five Steps`](#basic-five-steps)
+    - [`Copy Paste Code`](#copy-paste-code)
+    - [`Modify Copy Paste Code`](#modify-copy-paste-code)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -24,7 +28,7 @@
 
 ### `Basic Server Setup Steps`
 
-#### ___Create Directory___
+#### `Create Directory`
 
 ``` Terminal
 mkdir 01node-mongo-crud
@@ -32,7 +36,7 @@ cd 01node-mongo-crud
 code .
 ```
 
-#### ___Create package.json file___
+#### `Create package.json file`
 
 ``` Terminal
 npm init -y
@@ -53,13 +57,13 @@ npm init -y
 }
 ```
 
-#### ___Install Express, CORS, mondgodb___
+#### `Install Express, CORS, MongoDB`
 
 ``` Terminal
 npm i express cors mongodb
 ```
 
-#### ___Install nodemon___ (one time for each computer)
+#### `Install nodemon` (one time for each computer)
 
 - `-g` ___flag___ stands for ___global___ | we can find it anywhere in our computer when we use `-g` ___flag___
 - One time for each computer if we use `-g` ___flag___
@@ -68,7 +72,7 @@ npm i express cors mongodb
 npm install -g nodemon
 ```
 
-#### ___Modify scripts of package.json file___
+#### `Modify scripts of package.json file`
 
 - `"start": "node index.js",` should be ___added___
 - `"start-dev": "nodemon index.js",` should be ___added___
@@ -89,7 +93,7 @@ npm install -g nodemon
 },
 ```
 
-#### ___Steps for Express/Node server___
+#### `Steps for Express/Node server`
 
 - Create `index.js` file
   1. require express
@@ -114,7 +118,7 @@ app.listen(port, () => {
 });
 ```
 
-#### ___Run Node server or Backend server___
+#### `Run Node server or Backend server`
 
 - If we run `npm run start-dev` command, then it ___executes___ `nodemon index.js` command.
 - In contrast, we can run directly `nodemon index.js` command
@@ -127,7 +131,7 @@ npm run start-dev
 nodemon index.js
 ```
 
-#### ___Set middleware___
+#### `Set middleware`
 
 ``` JavaScript
 const cors = require('cors');
@@ -158,7 +162,7 @@ app.listen(port, () => {
 });
 ```
 
-#### ___Set .gitignore for node project___
+#### `Set .gitignore for node project`
 
 - Create `.gitignore file` and include `node_modules` inside the `.gitignore` file.
 - It will ignore the ___node_modules___ folder when I push commits to github.
@@ -182,14 +186,88 @@ node_modules
 
 ### `MySQL vs MongoDB?`
 
-#### ___What is MySQL Database?___
+#### `What is MySQL Database?`
 
 > `MySQL` is a relational database management system (___RDBMS___) from the Oracle Corporation. Like other relational systems, MySQL stores ___data in tables___ and uses structured query language (___SQL___) ___for database access___. When MySQL developers need to access data in an application, they ___merge data from multiple tables___ together in a process called a ___join___. In MySQL, you ___predefine___ your ___database schema___ and ___set up rules to govern the relationships___ between fields in your tables.
 
-#### ___What is MongoDb Database?___
+#### `What is MongoDb Database?`
 
 > `MongoDB` is a ___NoSQL database___ that stores data as ___JSON-like documents___. Documents store ___related information together___ and use the MongoDB query language (___MQL___) ___for access___. Fields can vary from ___document to document___ - there is no need to declare the structure of documents to the system, as ___documents are self-describing___. Optionally, ___schema validation___ can be used to ___enforce data governance controls___ over each collection.
 
-- ___Resources:___ [MongoDB vs. MySQL Differences](https://www.mongodb.com/compare/mongodb-mysql "MongoDB vs. MySQL Differences - mongodb.com") | [MongoDB vs MySQL](https://www.geeksforgeeks.org/mongodb-vs-mysql/ "MongoDB vs MySQL - geeksforgeeks.org")
+- ___Resources:___ [NoSQL](https://www.mongodb.com/nosql-explained "NoSQL - mongodb.com") | [MongoDB vs. MySQL Differences](https://www.mongodb.com/compare/mongodb-mysql "MongoDB vs. MySQL Differences - mongodb.com") | [MongoDB vs MySQL](https://www.geeksforgeeks.org/mongodb-vs-mysql/ "MongoDB vs MySQL - geeksforgeeks.org")
+
+
+## 65.2 Create mongodb atlas account and Connect to database
+
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register "Registration Link for MongoDB Atlas | Create an Atlas account")
+
+### `Basic Five Steps`
+
+1. `Create an account` ↪ Create your ___MongoDb Atlas account___
+2. `Build your first cluster` ↪ Database Deployments > Build a Database > ___Shared___ > Create > ___Create Cluster___
+3. `Create your first database user` ↪ How would you like to authenticate your connection?
+    - Username and Password > ___dbuser1___ (Username) > ___Autogenerate Secure Password___ (clicked on) > fLF42yfe7MM0cDWF (Password) > ___Copy and Paste___ (username & password) in ___index.js___ > ___Create User___
+4. `Add IP Address to your Access List` ↪ Where would you like to connect from?
+    - ___My Local Environment___ > ___Add My Current IP Address___ > Finish and Close > Go to Databases
+    - ___SECURITY/Network Access___ > Add IP Address > ALLOW ACCESS FROM ANYWHERE > ___Confirm___ | (___It is optional, if my IP not work___)
+5. `Connect to the database` ↪ Database Deployments > ___Connect___ > Connect your application > ___Include full driver code example___ (clicked on) > Copy and Paste in index.js > replace `<password>` by ___password___ > Close
+
+> `Notes:` If Quickstart not found. Then, <br /> &emsp;&emsp;01. Project Settings > Atlas Security Quickstart (___Enable___) <br /> &emsp;&emsp;02. Atlas > SECURITY/Quickstart 
+
+### `Copy Paste Code`
+
+``` JavaScript
+// In index.js
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://dbuser1:<password>@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+```
+
+### `Modify Copy Paste Code`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin';
+app.use(express.json()); // To parse body (req.body)
+
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log('db connected');
+  // perform actions on the collection object
+  client.close();
+});
+
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
 
 
