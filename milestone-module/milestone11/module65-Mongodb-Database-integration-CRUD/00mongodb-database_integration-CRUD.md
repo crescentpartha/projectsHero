@@ -20,6 +20,9 @@
     - [`Basic Five Steps`](#basic-five-steps)
     - [`Copy Paste Code`](#copy-paste-code)
     - [`Modify Copy Paste Code`](#modify-copy-paste-code)
+  - [65.3 Send data to database using mongodb insertOne](#653-send-data-to-database-using-mongodb-insertone)
+    - [`Insert a Document (JavaScript):` (Demo Code to Real Example)](#insert-a-document-javascript-demo-code-to-real-example)
+    - [`Full Example`](#full-example)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -206,7 +209,7 @@ node_modules
 1. `Create an account` ↪ Create your ___MongoDb Atlas account___
 2. `Build your first cluster` ↪ Database Deployments > Build a Database > ___Shared___ > Create > ___Create Cluster___
 3. `Create your first database user` ↪ How would you like to authenticate your connection?
-    - Username and Password > ___dbuser1___ (Username) > ___Autogenerate Secure Password___ (clicked on) > fLF42yfe7MM0cDWF (Password) > ___Copy and Paste___ (username & password) in ___index.js___ > ___Create User___
+    - Username and Password > ___dbuser1___ (Username) > ___Autogenerate Secure Password___ (clicked on) > ___fLF42yfe7MM0cDWF___ (Password) > ___Copy and Paste___ (username & password) in ___index.js___ > ___Create User___
 4. `Add IP Address to your Access List` ↪ Where would you like to connect from?
     - ___My Local Environment___ > ___Add My Current IP Address___ > Finish and Close > Go to Databases
     - ___SECURITY/Network Access___ > Add IP Address > ALLOW ACCESS FROM ANYWHERE > ___Confirm___ | (___It is optional, if my IP not work___)
@@ -259,6 +262,77 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });
+
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
+
+## 65.3 Send data to database using mongodb insertOne
+
+- [Node MongoDB CRUD Operations](https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/ "CRUD Operations - mongodb.com") - [Quick Start](https://www.mongodb.com/docs/drivers/node/current/quick-start/ "mongodb.com") - [Insert a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/insertOne/ "mongodb.com")
+- [JavaScript try catch finally](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch "mdn web docs")
+
+### `Insert a Document (JavaScript):` (Demo Code to Real Example)
+
+``` JavaScript
+// Insert a Document (JavaScript) | Demo Code to Real Example
+
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db("foodExpress").collection("user");
+        const user = { name: 'Mohona Nodi', email: 'nodi@gmail.com' };
+        const result = await userCollection.insertOne(user);
+        console.log(`User inserted with id: ${result.insertedId}`);
+    } 
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `Full Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin';
+app.use(express.json()); // To parse body (req.body)
+
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db("foodExpress").collection("user");
+        const user = { name: 'Mohona Nodi', email: 'nodi@gmail.com' };
+        const result = await userCollection.insertOne(user);
+        console.log(`User inserted with id: ${result.insertedId}`);
+    } 
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
