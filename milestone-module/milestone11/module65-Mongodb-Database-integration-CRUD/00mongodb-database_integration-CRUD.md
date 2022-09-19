@@ -47,6 +47,7 @@
   - [65.9 (bonus) Load single item by id and Update user info](#659-bonus-load-single-item-by-id-and-update-user-info)
     - [`Modified Code`](#modified-code-3)
     - [`Full Example`](#full-example-4)
+  - [Quiz 65](#quiz-65)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -1250,4 +1251,61 @@ app.listen(port, () => {
 });
 ```
 
+## Quiz 65
+
+1. What is ___mongoDB___?
+   - `A NoSQL database`
+2. ___NoSQl databases___ are _______.
+   - [ ] document based database
+   - [ ] horizontally scalable
+   - [ ] Schemas are flexible
+   - [x] ___All of the above___
+3. Which route/___method___ should you use to ___read data___ from the server?
+   - `app.get()`
+4. How will you ___use cors___ in your ___express application___?
+   - `app.use(cors())`
+5. We can use ___await without putting async___ at the beginning of a function.
+   - `False`
+6. Which ___React hook___ we use to ___get value___ from an ___input box___?
+   - `useRef()`
+7. Let's say you ___need___ to get ___only the first 10___ documents (___data___) from your mongodb database. How will you get it (google it. Read those answers and try to figure it out)
+   - [ ] find(10)
+   - [x] ___limit(10)___
+   - [ ] limitTo(10)
+   - [ ] only(10)
+8. Which ___method___ will you use to ___find multiple data___ from the server?
+   - [x] ___find({})___
+   - [ ] fineOne({})
+   - [ ] findMultiple({})
+   - [ ] findMany({})
+9.  What should you write to ___delete data___ from the server ?
+    - `method`
+``` JavaScript
+fetch( url , {
+ __?__ : ‘DELETE’
+}).then( res => console.log(res) )
+```
+10. How will you ___require ObjectId___ in your ___express application___?
+    - `const ObjectId = require('mongodb').ObjectId;`
+11. How will you ___get the data collection named products___ from your mongodb database? (be careful)
+    - `.collection`
+``` JavaScript
+const collection = client.db(“onlineStore”)_____?_______(“products”);
+```
+12. How will you ___add one___ document/___data___ into a database collection?
+    - `insertOne`
+``` JavaScript
+const collection = client.db(“onlineStore”).collection(“products”);
+collection._______?_______({name:’Mark Hanson’, job:’statistics’})
+```
+13. Which ___method___/route will you use to ___update data___ on the server?
+    - `put`
+14. What will you set in mongoDB ___network IP address___ if you want to ___get data from anywhere___?
+    - `0.0.0.0`
+15. What will you write in the ___content type___ if you want to ___send json data___ to the server from the client side?
+    - `application/json`
+``` JavaScript
+headers: {
+  'content-type':  ____?_____ },
+```
 
