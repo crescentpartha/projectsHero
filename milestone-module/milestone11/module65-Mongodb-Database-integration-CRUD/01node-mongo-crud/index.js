@@ -44,6 +44,14 @@ async function run() {
             const cursor = userCollection.find(query);
             const users = await cursor.toArray();
             res.send(users);
+        });
+
+        // load particular user data for UpdateUser
+        app.get('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userCollection.findOne(query);
+            res.send(result);
         })
 
         // POST User: Add a new user
@@ -54,10 +62,12 @@ async function run() {
             res.send(result);
         })
 
-        // delete a user
+        // delete a user in server-side and send to the database
         app.delete('/user/:id', async(req, res) => {
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
+            const result = await userCollection.deleteOne(query);
+            res.send(result);
         })
     }
     finally {

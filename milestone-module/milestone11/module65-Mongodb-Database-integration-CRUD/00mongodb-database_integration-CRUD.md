@@ -40,6 +40,10 @@
     - [`Delete`](#delete)
     - [`Modified Code`](#modified-code-1)
     - [`Full Example`](#full-example-2)
+  - [65.8 Delete a user from the database](#658-delete-a-user-from-the-database)
+    - [`Steps`](#steps)
+    - [`Modified Code`](#modified-code-2)
+    - [`Full Example`](#full-example-3)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -837,5 +841,233 @@ app.listen(port, () => {
     console.log('CRUD Server is running');
 });
 ```
+
+## 65.8 Delete a user from the database
+
+### `Steps`
+
+- delete a user in server-side and send to the database
+- delete a user in client-side and send to the server-side
+- remove deleted user from the state in client-side for better user experience
+- create UpdateUser component
+- Setup UpdateUser Route
+- added Update button in the Home component
+- load particular user data for UpdateUser | [Find a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/findOne/ "Find a Document - mongodb.com")
+
+
+### `Modified Code`
+
+``` JavaScript
+// In Home.js
+
+import { Link } from 'react-router-dom';
+
+const handleUserDelete = id => {
+    const proceed = window.confirm('Are you sure want to delete?');
+    if (proceed) {
+        // delete a user in client-side and send to the server-side
+        console.log('Deleting user with id, ', id);
+        const url = `http://localhost:5000/user/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data);
+            if (data.deletedCount > 0) {
+                console.log('Deleted');
+                // remove deleted user from the state in client-side for better user experience
+                const remaining = users.filter(user => user._id !== id);
+                setUsers(remaining);
+            }
+        })
+    }
+}
+
+{/* added Update button in the Home component */}
+<Link to={`/update/${user._id}`}><button>Update</button></Link>
+```
+
+``` JavaScript
+// In UpdateUser.js | create UpdateUser component
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const UpdateUser = () => {
+    const { id } = useParams();
+    return (
+        <div>
+            <h2>Updating User: {id}</h2>
+        </div>
+    );
+};
+
+export default UpdateUser;
+```
+
+``` JavaScript
+// In App.js | Setup UpdateUser Route
+
+import UpdateUser from './components/UpdateUser/UpdateUser';
+
+<Route path='/update/:id' element={<UpdateUser></UpdateUser>}></Route>
+```
+
+``` JavaScript
+// In index.js
+
+// load particular user data for UpdateUser
+app.get('/user/:id', async(req, res) => {
+    const id = req.params.id;
+    const query = {_id: ObjectId(id)};
+    const result = await userCollection.findOne(query);
+    res.send(result);
+})
+
+// delete a user in server-side and send to the database
+app.delete('/user/:id', async(req, res) => {
+    const id = req.params.id;
+    const query = {_id: ObjectId(id)};
+    const result = await userCollection.deleteOne(query);
+    res.send(result);
+})
+```
+
+### `Full Example`
+
+``` JavaScript
+// In Home.js
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const Home = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setUsers(data));
+    }, []);
+
+    const handleUserDelete = id => {
+        const proceed = window.confirm('Are you sure want to delete?');
+        if (proceed) {
+            // delete a user in client-side and send to the server-side
+            console.log('Deleting user with id, ', id);
+            const url = `http://localhost:5000/user/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.deletedCount > 0) {
+                    console.log('Deleted');
+                    // remove deleted user from the state in client-side for better user experience
+                    const remaining = users.filter(user => user._id !== id);
+                    setUsers(remaining);
+                }
+            })
+        }
+    }
+
+    return (
+        <div>
+            <h2>Available Users: {users.length}</h2>
+            <ul>
+                {
+                    users.map(user => <li
+                        key={user._id}
+                    >
+                        {user.name}:: {user.email}
+                        {/* added Update button in the Home component */}
+                        <Link to={`/update/${user._id}`}><button>Update</button></Link>
+                        <button onClick={() => handleUserDelete(user._id)}>X</button>
+                    </li>)
+                }
+            </ul>
+        </div>
+    );
+};
+
+export default Home;
+```
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        // Load Data: get users json data
+        app.get('/user', async(req,res) => {
+            const query = {};
+            const cursor = userCollection.find(query);
+            const users = await cursor.toArray();
+            res.send(users);
+        });
+
+        // load particular user data for UpdateUser
+        app.get('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userCollection.findOne(query);
+            res.send(result);
+        })
+
+        // POST User: Add a new user
+        app.post('/user', async(req, res) => {
+            const newUser = req.body;
+            console.log('adding new user', newUser);
+            const result = await userCollection.insertOne(newUser);
+            res.send(result);
+        })
+
+        // delete a user in server-side and send to the database
+        app.delete('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userCollection.deleteOne(query);
+            res.send(result);
+        })
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
+
 
 
