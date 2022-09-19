@@ -28,6 +28,9 @@
     - [`Create Atlas Account`](#create-atlas-account)
     - [`CRUD Operation`](#crud-operation)
     - [`Code Example`](#code-example)
+  - [65.5 Send user data to the server and get response to client](#655-send-user-data-to-the-server-and-get-response-to-client)
+    - [`Integrate sending data from client to server`](#integrate-sending-data-from-client-to-server)
+    - [`Send data from client-side to server-side and capture it`](#send-data-from-client-side-to-server-side-and-capture-it)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -145,8 +148,8 @@ nodemon index.js
 const cors = require('cors');
 
 // use middleware
-app.use(cors()); // for 'Access-Control-Allow-Origin';
-app.use(express.json()); // To parse body (req.body)
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
 ```
 
 ``` JavaScript
@@ -158,8 +161,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // use middleware
-app.use(cors()); // for 'Access-Control-Allow-Origin';
-app.use(express.json()); // To parse body (req.body)
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
 
 app.get('/', (req, res) => {
     res.send('Running My Node CRUD Server');
@@ -252,8 +255,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // use middleware
-app.use(cors()); // for 'Access-Control-Allow-Origin';
-app.use(express.json()); // To parse body (req.body)
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
 
 
 // user: dbuser1
@@ -315,8 +318,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // use middleware
-app.use(cors()); // for 'Access-Control-Allow-Origin';
-app.use(express.json()); // To parse body (req.body)
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
 
 
 // user: dbuser1
@@ -418,7 +421,129 @@ run().catch(console.dir);
 - Setup React Router
 - Setup Routes (___Home___, ___AddUser___)
 
+## 65.5 Send user data to the server and get response to client
 
+### `Integrate sending data from client to server`
+
+1. `Client side:` ___create form___
+2. `Client side:` on submit ___get form data___ and create ___user object___
+3. `on Server:` Create ___user POST method___ to receive data on the backend (___index.js___)
+4. `on client side:` ___set fetch with POST, headers, body___ (___AddUser.js___)
+5. `on client side:` Make sure you ___return a json___ from the ___POST API___
+
+### `Send data from client-side to server-side and capture it`
+
+``` JavaScript
+// In index.js | Backend Side
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        app.post('/user', (req, res) => {
+            const newUser = req.body;
+            console.log('adding new user', newUser);
+            res.send({result: 'success'});
+        })
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+```
+
+``` JavaScript
+// In index.js | Backend Side - Full Example
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        app.post('/user', (req, res) => {
+            const newUser = req.body;
+            console.log('adding new user', newUser);
+            res.send({result: 'success'});
+        })
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
+
+``` JavaScript
+// In AddUser.js | Client Side - Full Example
+
+import React from 'react';
+
+const AddUser = () => {
+    const handleAddUser = event => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        // console.log(name, email);
+
+        const user = { name, email };
+
+        // send data to the server
+        fetch('http://localhost:5000/user', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('success: ', data);
+        })
+    }
+    return (
+        <div>
+            <h2>Please, Add a new User</h2>
+            <form onSubmit={handleAddUser}>
+                <input type="text" name="name" placeholder='Name' required />
+                <br />
+                <input type="email" name="email" placeholder='Email' required />
+                <br />
+                <input type="submit" value="Add User" />
+            </form>
+        </div>
+    );
+};
+
+export default AddUser;
+```
 
 
 
