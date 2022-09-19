@@ -23,6 +23,11 @@
   - [65.3 Send data to database using mongodb insertOne](#653-send-data-to-database-using-mongodb-insertone)
     - [`Insert a Document (JavaScript):` (Demo Code to Real Example)](#insert-a-document-javascript-demo-code-to-real-example)
     - [`Full Example`](#full-example)
+  - [65.4 (Recap) Async await, try catch and mongodb connection](#654-recap-async-await-try-catch-and-mongodb-connection)
+    - [`Initial Setup`](#initial-setup)
+    - [`Create Atlas Account`](#create-atlas-account)
+    - [`CRUD Operation`](#crud-operation)
+    - [`Code Example`](#code-example)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -343,5 +348,77 @@ app.listen(port, () => {
     console.log('CRUD Server is running');
 });
 ```
+
+## 65.4 (Recap) Async await, try catch and mongodb connection
+
+### `Initial Setup`
+
+- ___Create a node server with 5 steps___
+    1. create folder
+    2. npm init
+    3. npm i express cors mongodb
+    4. script-dev: nodemon index.js
+    5. create index.js
+    6. use ___5 steps___ to create a node server 
+
+### `Create Atlas Account`
+
+1. sign up or google access
+2. create a cluster
+3. create a user dbuser1 and password
+4. Network Access > ip address: allow all
+5. database > Connect > code copy paste in index.js
+
+### `CRUD Operation`
+
+1. node mongodb CRUD > Fundamentals
+2. create async run function
+
+---
+
+### `Code Example`
+
+``` JavaScript
+// In index.js
+
+// Create hardcoded data and send to the database
+// async function run() {
+//     try {
+//         await client.connect();
+//         const userCollection = client.db("foodExpress").collection("user");
+//         const user = { name: 'Mohona Nodi', email: 'nodi@gmail.com' };
+//         const result = await userCollection.insertOne(user);
+//         console.log(`User inserted with id: ${result.insertedId}`);
+//     } 
+//     finally {
+//         // await client.close(); // commented, if I want to keep connection active;
+//     }
+// }
+// run().catch(console.dir);
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        app.post('/user', (req, res) => {
+
+        })
+
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+```
+
+- create a React App called ___02react-node-mongodb___
+- Setup React Router
+- Setup Routes (___Home___, ___AddUser___)
+
+
+
 
 
