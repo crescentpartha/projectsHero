@@ -35,6 +35,11 @@
     - [`Load Data to the client side`](#load-data-to-the-client-side)
     - [`Modified Code`](#modified-code)
     - [`Full Example`](#full-example-1)
+  - [65.7 Load and display data from database, create delete button](#657-load-and-display-data-from-database-create-delete-button)
+    - [`Load Data to the client side`](#load-data-to-the-client-side-1)
+    - [`Delete`](#delete)
+    - [`Modified Code`](#modified-code-1)
+    - [`Full Example`](#full-example-2)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -697,5 +702,140 @@ const AddUser = () => {
 export default AddUser;
 ```
 
+## 65.7 Load and display data from database, create delete button
+
+### `Load Data to the client side`
+
+1. create get API on the server
+2. create a query object
+3. collection.find (query)
+4. cursor.toArray()
+5. return the result
+6. from client useEffect and display like you have done before
+
+### `Delete`
+
+- [Delete a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/deleteOne/ "Delete a Document - mongodb.com")
+
+### `Modified Code`
+
+``` JavaScript
+// In index.js
+
+const ObjectId = require('mongodb').ObjectId;
+
+// delete a user
+app.delete('/user/:id', async(req, res) => {
+    const id = req.params.id;
+    const query = {_id: ObjectId(id)};
+})
+```
+
+``` JavaScript
+// In Home.js
+
+import React, { useEffect, useState } from 'react';
+
+const Home = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setUsers(data));
+    }, []);
+
+    const handleUserDelete = id => {
+        const proceed = window.confirm('Are you sure want to delete?');
+        if (proceed) {
+            console.log('Deleting user with id, ', id);
+        }
+    }
+
+    return (
+        <div>
+            <h2>Available Users: {users.length}</h2>
+            <ul>
+                {
+                    users.map(user => <li
+                        key={user._id}
+                    >
+                        {user.name}:: {user.email}
+                        <button onClick={() => handleUserDelete(user._id)}>X</button>
+                    </li>)
+                }
+            </ul>
+        </div>
+    );
+};
+
+export default Home;
+```
+
+### `Full Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        // Load Data: get users json data
+        app.get('/user', async(req,res) => {
+            const query = {};
+            const cursor = userCollection.find(query);
+            const users = await cursor.toArray();
+            res.send(users);
+        })
+
+        // POST User: Add a new user
+        app.post('/user', async(req, res) => {
+            const newUser = req.body;
+            console.log('adding new user', newUser);
+            const result = await userCollection.insertOne(newUser);
+            res.send(result);
+        })
+
+        // delete a user
+        app.delete('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+        })
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
 
 
