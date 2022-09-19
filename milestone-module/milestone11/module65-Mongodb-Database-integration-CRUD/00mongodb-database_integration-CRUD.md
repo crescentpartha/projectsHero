@@ -44,6 +44,9 @@
     - [`Steps`](#steps)
     - [`Modified Code`](#modified-code-2)
     - [`Full Example`](#full-example-3)
+  - [65.9 (bonus) Load single item by id and Update user info](#659-bonus-load-single-item-by-id-and-update-user-info)
+    - [`Modified Code`](#modified-code-3)
+    - [`Full Example`](#full-example-4)
 
 
 # Module 65: Mongodb, database integration, CRUD
@@ -1069,5 +1072,182 @@ app.listen(port, () => {
 });
 ```
 
+## 65.9 (bonus) Load single item by id and Update user info
+
+- [Update a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/updateOne/ "Update a Document - mongodb.com")
+
+### `Modified Code`
+
+``` JavaScript
+// In index.js
+
+// update user
+app.put('user/:id', async(req, res) => {
+    const id = req.params.id;
+    const updatedUser = req.body;
+    const filter = {_id: ObjectId(id)};
+    const options = { upsert: true };
+    const updatedDoc = {
+        $set: {
+            name: updatedUser.name,
+            email: updatedUser.email
+        }
+    };
+    const result = await userCollection.updateOne(filter, updatedDoc, options);
+    res.send(result);
+})
+```
+
+### `Full Example`
+
+``` JavaScript
+// In UpdateUser.js
+
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+const UpdateUser = () => {
+    const { id } = useParams();
+    const [user, setUser] = useState({});
+
+    // load id-wise individual data for display single user info
+    useEffect( () => {
+        const url = `http://localhost:5000/user/${id}`;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setUser(data));
+    }, []);
+
+    const handleUpdateUser = event => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        // console.log(name, email);
+
+        const updatedUser = { name, email };
+
+        // send data to the server
+        const url = `http://localhost:5000/user/${id}`;
+        fetch(url, {
+            method: 'PUT', // if user exists in database, then update. Otherwise add user.
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('success: ', data);
+            alert('user updated successfully!!!');
+            event.target.reset();
+        })
+    }
+
+    return (
+        <div>
+            <h2>Updating User: {user.name}</h2>
+            <form onSubmit={handleUpdateUser}>
+                <input type="text" name="name" placeholder='Name' required />
+                <br />
+                <input type="email" name="email" placeholder='Email' required />
+                <br />
+                <input type="submit" value="Update User" />
+            </form>
+        </div>
+    );
+};
+
+export default UpdateUser;
+```
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
+
+// user: dbuser1
+// password: fLF42yfe7MM0cDWF
+
+const uri = "mongodb+srv://dbuser1:fLF42yfe7MM0cDWF@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        // Load Data: get users json data
+        app.get('/user', async(req,res) => {
+            const query = {};
+            const cursor = userCollection.find(query);
+            const users = await cursor.toArray();
+            res.send(users);
+        });
+
+        // load particular user data for UpdateUser
+        app.get('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userCollection.findOne(query);
+            res.send(result);
+        })
+
+        // POST User: Add a new user
+        app.post('/user', async(req, res) => {
+            const newUser = req.body;
+            console.log('adding new user', newUser);
+            const result = await userCollection.insertOne(newUser);
+            res.send(result);
+        })
+
+        // update user
+        app.put('user/:id', async(req, res) => {
+            const id = req.params.id;
+            const updatedUser = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    name: updatedUser.name,
+                    email: updatedUser.email
+                }
+            };
+            const result = await userCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        })
+
+        // delete a user in server-side and send to the database
+        app.delete('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userCollection.deleteOne(query);
+            res.send(result);
+        })
+    }
+    finally {
+
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running My Node CRUD Server');
+});
+
+app.listen(port, () => {
+    console.log('CRUD Server is running');
+});
+```
 
 
