@@ -78,6 +78,20 @@ Table of Contents
 - [Module 66: Genius Car Node Mongo CRUD Recap](#module-66-genius-car-node-mongo-crud-recap)
   - [61.1 (Conceptual) Node, Mongo, React, Client, Server, Rest, CRUD](#611-conceptual-node-mongo-react-client-server-rest-crud)
     - [`Technology Selection`](#technology-selection)
+  - [66.2 Setup simple node express server with dotenv](#662-setup-simple-node-express-server-with-dotenv)
+    - [`Clone project's Requirements`](#clone-projects-requirements)
+    - [`Basic Server Setup Steps`](#basic-server-setup-steps)
+      - [`Create Directory`](#create-directory)
+      - [`Create package.json file`](#create-packagejson-file)
+      - [`Install Express, CORS, MongoDB, dotenv`](#install-express-cors-mongodb-dotenv)
+      - [`Install nodemon` (one time for each computer)](#install-nodemon-one-time-for-each-computer)
+      - [`Modify scripts of package.json file`](#modify-scripts-of-packagejson-file)
+      - [`Steps for Express/Node server` (in index.js)](#steps-for-expressnode-server-in-indexjs)
+      - [`Set middleware`](#set-middleware)
+      - [`import and configure dotenv:`](#import-and-configure-dotenv)
+      - [`Set .gitignore for node project`](#set-gitignore-for-node-project)
+      - [`Create a .env file in the root of your project`](#create-a-env-file-in-the-root-of-your-project)
+      - [`Run Node server or Backend server`](#run-node-server-or-backend-server)
 
 
 
@@ -1442,16 +1456,182 @@ export default Maps;
 
 ### `Technology Selection`
 
-- ___Resources:___ [Client/Server Model Image](https://www.researchgate.net/profile/Agisilaos-Konidaris/publication/314474221/figure/fig1/AS:633794000347137@1528119673567/The-client-server-model-of-our-approach.png "Client/Server Model Image - researchgate.net") | [Three-Tier Architecture Image](data:image/png;base64,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 "Client Server Architecture - Client Server Model")
+- ___Resources:___ [Client/Server Model Image](https://www.researchgate.net/profile/Agisilaos-Konidaris/publication/314474221/figure/fig1/AS:633794000347137@1528119673567/The-client-server-model-of-our-approach.png "Client/Server Model Image - researchgate.net") | [Three-Tier Architecture Image](https://www.researchgate.net/profile/Muhammad-Ashraf-52/publication/331373674/figure/fig3/AS:730820847353860@1551252676941/Three-tier-architecture-c-N-tier-architecture-N-tier-architecture-is-a-multi-tier.png "Client Server Architecture - Client Server Model")
 - `Client-side:` HTML, CSS, JavaScript, `React`, Library and Framework etc
 - `Server-side:` Python, PHT, `Node.js`, .Net etc
 - `Database:` MySQL, PostgreSQL, `MongoDB`, MariaDB, Oracle, Firebase, AWS Hosting etc
   - ___SQL database vs NoSQL database___
 
-> `Notes:` Every technology has some `pros and cons`. Every technology `serves different solutions`. So It is not mandatory that If we use `React` in client-side, then must use `Node.js` as a server-side and `MongoDB` as a database. What types of technology I used in my project that actually depends on `Project's size, volume, complexity, need and user interaction`.<br /><br /> In here, We use ___Node.js___ for `CRUD operations` and `REST API`.<br /> ___([CRUD](https://www.abaponhana.com/wp-content/uploads/2018/11/CRUD-operations.jpg "CRUD Operation - Image") = Create, Read, Update and Delete)___ <br /> ___(REST = Representational State Transfer)___ <br /> ___(REST API = RESTful API)___ <br /> ___(API = Application Programming Interface or web API)___ <br /><br /> ___Resources:___ [What is a REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api "What is a REST API - redhat.com") | [How Web Hosting works](data:image/jpeg;base64,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 "How Web Hosting Works? - Image") | [Express.js](https://expressjs.com/ "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications.")
+> `Notes:` Every technology has some `pros and cons`. Every technology `serves different solutions`. So It is not mandatory that If we use `React` in client-side, then must use `Node.js` as a server-side and `MongoDB` as a database. What types of technology I used in my project that actually depends on `Project's size, volume, complexity, need and user interaction`.<br /><br /> In here, We use ___Node.js___ for `CRUD operations` and `REST API`.<br /> ___([CRUD](https://www.abaponhana.com/wp-content/uploads/2018/11/CRUD-operations.jpg "CRUD Operation - Image") = Create, Read, Update and Delete)___ <br /> ___(REST = Representational State Transfer)___ <br /> ___(REST API = RESTful API)___ <br /> ___(API = Application Programming Interface or web API)___ <br /><br /> ___Resources:___ [What is a REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api "What is a REST API - redhat.com") | [How Web Hosting works](https://www.roseindia.net/webhostingguide/How-Hosting-Server-works.jpg "How Web Hosting Works? - Image") | [Express.js](https://expressjs.com/ "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications.")
 
+## 66.2 Setup simple node express server with dotenv
 
+### `Clone project's Requirements`
 
+> If we clone this project, then we need to `install dependencies` and set `.env.local` to implement `Environment Variables` for our firebase config. Otherwise, project doesn't work.
+
+### `Basic Server Setup Steps`
+
+#### `Create Directory`
+
+``` Terminal
+mkdir 02genius-car-services-server
+cd 02genius-car-services-server
+code .
+```
+
+#### `Create package.json file`
+
+``` Terminal
+npm init -y
+```
+
+``` JSON
+{
+  "name": "02genius-car-services-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+#### `Install Express, CORS, MongoDB, dotenv`
+
+- [dotenv](https://www.npmjs.com/package/dotenv "dotenv - npmjs.com")
+  - ___Dotenv___ is a zero-dependency module that loads environment variables from a `.env` file into `process.env`.
+  - Storing configuration in the environment separate from code is based on `The Twelve-Factor App` methodology.
+
+``` Terminal
+npm i express cors mongodb dotenv
+```
+
+#### `Install nodemon` (one time for each computer)
+
+- `-g` flag stands for global | we can find it anywhere in our computer when we use `-g` flag
+- One time for each computer if we use `-g` flag
+
+``` Terminal
+npm install -g nodemon
+```
+
+#### `Modify scripts of package.json file`
+
+- `"start": "node index.js",` should be added
+- `"start-dev": "nodemon index.js",` should be added
+
+``` JSON
+// Before
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+``` JSON
+// After adding the script
+"scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+#### `Steps for Express/Node server` (in index.js)
+
+- Create `index.js` file
+  1. require express
+  2. create app variable
+  3. declare port
+  4. set app.get('/', ...)
+  5. listen to port
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Running Genius Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+#### `Set middleware`
+
+``` JavaScript
+const cors = require('cors');
+
+// use middleware
+app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
+app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
+```
+
+#### `import and configure dotenv:`
+
+``` JavaScript
+// In index.js
+
+require('dotenv').config();
+```
+
+#### `Set .gitignore for node project`
+
+- Create `.gitignore` file and include `node_modules` inside the `.gitignore` file.
+- It will ignore the `node_modules` folder when I push commits to github.
+
+``` .gitignore
+// In .gitignore
+
+node_modules
+```
+
+> `Notes:` If you don't create `.gitignore` file before run 1st `push` command, then `node_modules` folder won't be ignored.
+
+#### `Create a .env file in the root of your project`
+
+- ___Where is root?___
+  - Where `package.json` file exists.
+- Create `.gitignore` file and include `.env` inside the `.gitignore` file.
+- It will ignore the `.env` file when I push commits to github.
+
+``` .gitignore
+// In .gitignore
+
+node_modules
+.env
+```
+
+> `Notes:` If you don't create `.gitignore` file before run 1st `push` command, then `.env` file won't be ignored.
+
+#### `Run Node server or Backend server`
+
+- If we run `npm run start-dev` command, then it executes `nodemon index.js` command.
+- In contrast, we can run directly `nodemon index.js` command
+
+``` Terminal
+npm run start-dev
+
+// OR
+
+nodemon index.js
+```
 
 
 
