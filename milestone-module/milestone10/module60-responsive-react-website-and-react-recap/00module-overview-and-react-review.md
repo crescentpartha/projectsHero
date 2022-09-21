@@ -131,6 +131,7 @@ Table of Contents
   - [66.8 Module Summary and git push](#668-module-summary-and-git-push)
     - [`Module Tast List`](#module-tast-list)
     - [`Clone Repository`](#clone-repository)
+  - [Quiz 66](#quiz-66)
 
 
 
@@ -2606,6 +2607,62 @@ app.listen(port, () => {
 ### `Clone Repository`
 
 > `Notes:` If you clone this repository, this project doesn't work. Because, We need to create ___Environment Variables___ like ___DB_USER___ & ___DB_PASS___ in ___.env___ file and also need to install all the ___dependencies___. 
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Quiz 66
+
+1. What is ___express.js___? (google it)
+   - `minimalist web framework for Node.js`
+2. Which command will you ___run to restart your server___ after making some changes?
+   - `npm start-dev`
+``` JSON
+{
+    "start": "node index.js"
+    "start-dev": "nodemon index.js" 
+}
+```
+3. If you get the error `Firebase: Error(“auth/invalid”)` key error after ___cloning any firebase project___, what should you do?
+   - [ ] cloning the project again
+   - [ ] repeat the command npm i
+   - [x] ___create a `.env.local` file and add configs___
+   - [ ] I will sleep if i get this
+4. How will you ___use cors___ in your ___express application___?
+   - `app.use(cors())`
+5. What will you ___write to add___ the `.env` file to your ___express application___? (if needed google it)
+   - `require('dotenv').config();`
+6. What will you ___write in the query___ to get a ___specific service using id___? 
+   - `_id: ObjectId(id)`
+``` JavaScript
+const ObjectId = require('mongodb').ObjectId;
+    
+app.get('/services/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { ___?___};
+})
+```
+7. What is ___wrong___ with the ___following code___?
+   - `headers spelling mistake`
+``` JavaScript
+fetch( url , {
+    method: 'PUT',
+    header: {
+        'content-type': 'application/json'
+    },
+    body: JSON.stringify(user)
+})
+```
+8. What is ___HTTPS___ (google it)
+   - `A system to encrypt data transfer to database`
+9.  Which ___method___ will you use in your ___express application___ to ___get json data___ from the client side?
+    - `app.use(express.json())`
+10. What will you use to get ___all the services___?
+    - `find({})`
+``` JavaScript
+app.get('/services', async (req, res) => {
+    const cursor = servicesCollection.__?____;
+}
+```
 
 **[🔼Back to Top](#table-of-contents)**
 
