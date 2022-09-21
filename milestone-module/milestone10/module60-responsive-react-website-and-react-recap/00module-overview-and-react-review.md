@@ -106,6 +106,12 @@ Table of Contents
     - [`Full Example` (Load particular service data & all services data from Database)](#full-example-load-particular-service-data--all-services-data-from-database)
     - [`Modified Client-side Code`](#modified-client-side-code)
     - [`Full Example` (Modified Client-side Code)](#full-example-modified-client-side-code)
+  - [66.5 Load single Service, Use React hook form to add service](#665-load-single-service-use-react-hook-form-to-add-service)
+    - [`Module-wise Task list`](#module-wise-task-list)
+    - [`Particular (id-wise) data load in ServiceDetail.js component`](#particular-id-wise-data-load-in-servicedetailjs-component)
+    - [`Verify Email: Only for password`](#verify-email-only-for-password)
+    - [`Create AddService.js component and Use react-hook-form to add service`](#create-addservicejs-component-and-use-react-hook-form-to-add-service)
+    - [`Setup Route with RequireAuth`](#setup-route-with-requireauth)
 
 
 
@@ -1977,7 +1983,120 @@ const Service = ({service}) => {
 
 export default Service;
 ```
-**[↑Back to Top](#table-of-contents)**
+**[🔼Back to Top](#table-of-contents)**
+
+## 66.5 Load single Service, Use React hook form to add service
+
+### `Module-wise Task list`
+
+- Particular (id-wise) data load in ServiceDetail.js component
+- Verify Email: Only for password
+- Create AddService.js component
+- Use react-hook-form to add service in AddService.js component
+- Setup Route with RequireAuth
+
+### `Particular (id-wise) data load in ServiceDetail.js component`
+
+``` JavaScript
+// In ServiceDetail.js
+
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+const ServiceDetail = () => {
+    const {serviceDetailId} = useParams();
+    const [service, setService] = useState({});
+
+    useEffect( () => {
+        const url = `http://localhost:5000/service/${serviceDetailId}`;
+
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setService(data));
+
+    }, [serviceDetailId]);
+
+    return (
+        <div>
+            <h2 className='text-center m-5'>You are about to book: <span className='text-primary'>{service.name}</span></h2>
+            <div className='text-center mb-5'>
+                <Link to='/checkout'>
+                    <button className='btn btn-primary'>Proceed Checkout</button>
+                </Link>
+            </div>
+        </div>
+    );
+};
+
+export default ServiceDetail;
+```
+
+### `Verify Email: Only for password`
+
+``` JavaScript
+// In RequireAuth.js
+
+// console.log(user);
+if (user.providerData[0]?.providerId === 'password' && !user.emailVerified) {
+    return <div className='m-5' style={{textAlign: 'center'}}>
+        <h3 className='text-danger'>Your Email is not verified!!</h3>
+        <h5 className='text-success'>Please, Verify your email address</h5>
+        <button
+            className='btn btn-primary'
+            onClick={async () => {
+                await sendEmailVerification();
+                toast('Sent email');
+            }}
+        >
+            Send Verification Email Again
+        </button>
+        <ToastContainer></ToastContainer>
+    </div>
+}
+```
+
+### `Create AddService.js component and Use react-hook-form to add service`
+
+``` JavaScript
+// AddService.js
+
+import React from 'react';
+import { useForm } from "react-hook-form";
+
+const AddService = () => {
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
+    return (
+        <div>
+            <h2>Please add a service</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input {...register("firstName", { required: true, maxLength: 20 })} />
+                <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
+                <input type="number" {...register("age", { min: 18, max: 99 })} />
+                <input type="submit" />
+            </form>
+        </div>
+    );
+};
+
+export default AddService;
+```
+
+### `Setup Route with RequireAuth`
+
+``` JavaScript
+// In App.js
+
+import AddService from './Pages/AddService/AddService';
+
+<Route path='/addService' element={
+    <RequireAuth>
+    <AddService></AddService>
+    </RequireAuth>
+}></Route>
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
 
 

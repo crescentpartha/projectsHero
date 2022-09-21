@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './Pages/About/About';
+import AddService from './Pages/AddService/AddService';
 import Maps from './Pages/GoogleMaps/Maps/Maps';
 import Checkout from './Pages/Home/Checkout/Checkout';
 import Home from './Pages/Home/Home/Home';
@@ -32,6 +33,11 @@ function App() {
         <Route path='/about' element={
           <RequireAuth>
             <About></About>
+          </RequireAuth>
+        }></Route>
+        <Route path='/addService' element={
+          <RequireAuth>
+            <AddService></AddService>
           </RequireAuth>
         }></Route>
         <Route path='/googleMaps' element={<Maps></Maps>}></Route>
