@@ -34,6 +34,14 @@ async function run() {
             const service = await serviceCollection.findOne(query);
             res.send(service);
         });
+
+        // POST a service from server-side to database
+        app.post('/service', async(req, res) => {
+            const newService = req.body;
+            console.log('Adding new service', newService);
+            const result = await serviceCollection.insertOne(newService);
+            res.send(result);
+        });
     }
     finally {
         // await client.close(); // commented, if I want to keep connection active;

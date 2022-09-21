@@ -112,6 +112,13 @@ Table of Contents
     - [`Verify Email: Only for password`](#verify-email-only-for-password)
     - [`Create AddService.js component and Use react-hook-form to add service`](#create-addservicejs-component-and-use-react-hook-form-to-add-service)
     - [`Setup Route with RequireAuth`](#setup-route-with-requireauth)
+    - [`Add-Service Route added to the Header component`](#add-service-route-added-to-the-header-component)
+  - [66.6 Insert Service data to the mongodb cloud database](#666-insert-service-data-to-the-mongodb-cloud-database)
+    - [`Module-wise Task list`](#module-wise-task-list-1)
+    - [`Modified AddService.js component`](#modified-addservicejs-component)
+    - [`POST a service from server-side to database`](#post-a-service-from-server-side-to-database)
+    - [`POST a service from client-side to database`](#post-a-service-from-client-side-to-database)
+    - [`Full Code Example`](#full-code-example)
 
 
 
@@ -177,6 +184,8 @@ Table of Contents
 2. ___React-Router___ Concepts
 3. ___Responsive___ React Website
 4. ___Firebase___ Concepts
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 60.2 Create Project Component setup and router setup
 
@@ -264,6 +273,7 @@ Table of Contents
 1. `npm run build`
 2. `firebase deploy`
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 60.3 Collect, Edit, Optimize and host images for your website
 
@@ -285,6 +295,7 @@ const services = [
 ```
 > `Note:` We ___can't covert___ direct image to a ___JSON format___ because image information will be remove. That's why we should use ___image link___. <br /> [ImgBB](https://imgbb.com/ "ImgBB - free image hosting | Upload and share your images") is a ___free image hosting___ website. We can ___upload and share___ own images with other or use to make ___custom data purposes___.
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 60.4 Load fake data map services to display single services
 
@@ -361,6 +372,8 @@ const services = [
 }
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 60.6 Build Responsive React website using Bootstrap
 
 ### `Using Bootstrap:`
@@ -369,6 +382,8 @@ const services = [
 - ___Card___
 - ___Gutters___
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 60.7 React Bootstrap for responsive and image slider, banner
 
 ### `Using React-Bootstrap:`
@@ -376,6 +391,7 @@ const services = [
 - ___Carousels___
 - [React Carousel libraries](https://react.libhunt.com/libs/carousel) | [14 Top React Carousel Components](https://alvarotrigo.com/blog/react-carousels/) | [10 Best React Carousel Libraries](https://openbase.com/categories/js/best-react-carousel-libraries)
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 60.8 Module Summary, Add navbar and set footer dynamic date
 
@@ -416,6 +432,8 @@ const Header = () => {
     );
 };
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## Quiz
 
@@ -498,6 +516,8 @@ ___________{
    </Row>
 </Container>
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 <br />
 
@@ -599,6 +619,8 @@ const SignUp = () => {
 export default SignUp;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 60.5.2 Practice Firebase Authentication, Implement Twitter Authentication with react-firebase-hooks
 
 ### `Steps to use firebase & (Twitter Authentication):` (___Twitter Sign-in Provider___)
@@ -672,6 +694,8 @@ export default Login;
 - __In Firebase:__
   - Authentication → Settings → Add Domain → `https://genius-car-services-a8da0.web.app/` (It will be the ___Homepage URL___ | ___App URL___)
 
+**[🔼Back to Top](#table-of-contents)**
+
 <br />
 
 # Module 61: React Router and Firebase Auth Recap
@@ -730,6 +754,8 @@ const Header = () => {
 
 export default Header;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 61.2 Setup Dynamic Route and Access route params
 
@@ -812,6 +838,8 @@ const ServiceDetail = () => {
 
 export default ServiceDetail;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 61.6 (optional) Environment variable for Firebase in Create React App | Get form data in 3 different ways
 
@@ -998,6 +1026,8 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 ### `Issue:` [Navigate to #id in Layout component - stack overflow](https://stackoverflow.com/questions/65646065/navigate-to-id-in-layout-component)
 
+**[🔼Back to Top](#table-of-contents)**
+
 <br />
 
 # Module 63.5: Dynamic Title and Google Map
@@ -1021,6 +1051,8 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 - [react router (react-router-dom) setting page title from current route (functional components)?](https://stackoverflow.com/questions/65705086/react-router-react-router-dom-setting-page-title-from-current-route-functiona "stackoverflow.com")
 - [How to add a dynamic title on your React app](https://dev.to/luispa/how-to-add-a-dynamic-title-on-your-react-app-1l7k "dev.to")
 - [2 Ways to Set Page Title Dynamically in React](https://www.kindacode.com/article/ways-to-set-page-title-dynamically-in-react/ "kindacode.com")
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 63.5.2 Set Dynamic page title based on Route using react-helmet-async
 
@@ -1125,6 +1157,7 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 - Then, Others ___attribute___ like path, element need to ___pass___ to the Route component.
 - In this way, We can ___reduce___ the ___duplication___ and ___increase___ the ___customization___ or ___optimization___.
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 63.5.3 Do not allow protected route without email verification
 
@@ -1227,6 +1260,8 @@ const RequireAuth = ({ children }) => {
 
 export default RequireAuth;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 63.5.4 How to display a location and a Marker on a Google Map
 
@@ -1339,6 +1374,7 @@ export default Direction;
 
 > `Notes:` If we want to use `Direction`. Then, we need to use ___DirectionsService___ and ___DirectionsRenderer___
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 63.5.5 Display Dynamic Driving Direction and Route on Google Map
 
@@ -1468,6 +1504,8 @@ const Maps = () => {
 export default Maps;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 <br />
 
 # Module 66: Genius Car Node Mongo CRUD Recap
@@ -1483,6 +1521,8 @@ export default Maps;
   - ___SQL database vs NoSQL database___
 
 > `Notes:` Every technology has some `pros and cons`. Every technology `serves different solutions`. So It is not mandatory that If we use `React` in client-side, then must use `Node.js` as a server-side and `MongoDB` as a database. What types of technology I used in my project that actually depends on `Project's size, volume, complexity, need and user interaction`.<br /><br /> In here, We use ___Node.js___ for `CRUD operations` and `REST API`.<br /> ___([CRUD](https://www.abaponhana.com/wp-content/uploads/2018/11/CRUD-operations.jpg "CRUD Operation - Image") = Create, Read, Update and Delete)___ <br /> ___(REST = Representational State Transfer)___ <br /> ___(REST API = RESTful API)___ <br /> ___(API = Application Programming Interface or web API)___ <br /><br /> ___Resources:___ [What is a REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api "What is a REST API - redhat.com") | [How Web Hosting works](https://www.roseindia.net/webhostingguide/How-Hosting-Server-works.jpg "How Web Hosting Works? - Image") | [Express.js](https://expressjs.com/ "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications.")
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 66.2 Setup simple node express server with dotenv
 
@@ -1653,6 +1693,8 @@ npm run start-dev
 nodemon index.js
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 66.3 Connect to database with secure password on environment variable
 
 ### `Create a Database inside the previous Cluster`
@@ -1781,6 +1823,8 @@ app.listen(port, () => {
     console.log('Listening to port', port);
 });
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 66.4 Load all services and create single service API
 
@@ -1983,17 +2027,19 @@ const Service = ({service}) => {
 
 export default Service;
 ```
+
 **[🔼Back to Top](#table-of-contents)**
 
 ## 66.5 Load single Service, Use React hook form to add service
 
 ### `Module-wise Task list`
 
-- Particular (id-wise) data load in ServiceDetail.js component
-- Verify Email: Only for password
-- Create AddService.js component
-- Use react-hook-form to add service in AddService.js component
-- Setup Route with RequireAuth
+- Particular (___id-wise___) data load in ServiceDetail.js component
+- ___Verify Email:___ Only for ___password___
+- Create ___AddService.js___ component
+- Use ___react-hook-form___ to ___add service___ in AddService.js component
+- ___Setup Route___ with RequireAuth
+- Add-Service ___Route added___ to the Header component
 
 ### `Particular (id-wise) data load in ServiceDetail.js component`
 
@@ -2094,6 +2140,203 @@ import AddService from './Pages/AddService/AddService';
     <AddService></AddService>
     </RequireAuth>
 }></Route>
+```
+
+### `Add-Service Route added to the Header component`
+
+``` JavaScript
+// In Header.js
+
+<Nav.Link as={Link} to="/addService">Add-Service</Nav.Link>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 66.6 Insert Service data to the mongodb cloud database
+
+### `Module-wise Task list`
+
+- Modified ___AddService.js___ component
+- ___POST___ a service from ___server-side to database___
+- ___POST___ a service from ___client-side to database___
+- ___Full Code Example___
+
+### `Modified AddService.js component`
+
+``` JavaScript
+// In AddService.js
+
+<div className='w-50 mx-auto my-5'>
+    <h2 className='text-center'>Please add a service</h2>
+    <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+        <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+        <textarea placeholder='Description' {...register("description", { required: true })} />
+        <input placeholder='Price' type="number" {...register("price", { required: true })} />
+        <input placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+        <input type="submit" value="Add Service" />
+    </form>
+</div>
+```
+
+### `POST a service from server-side to database`
+
+``` JavaScript
+// In index.js
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // POST a service from server-side to database
+        app.post('/service', async(req, res) => {
+            const newService = req.body;
+            console.log('Adding new service', newService);
+            const result = await serviceCollection.insertOne(newService);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `POST a service from client-side to database`
+
+``` JavaScript
+// In AddService.js
+
+const onSubmit = data => {
+    console.log(data);
+
+    // POST a service from client-side to database
+    const url = `http://localhost:5000/service`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        console.log(result);
+    })
+};
+
+<form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+```
+
+### `Full Code Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // get all services json data
+        app.get('/service', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.toArray();
+            res.send(services);
+        });
+
+        // load particular service data (id-wise)
+        app.get('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const service = await serviceCollection.findOne(query);
+            res.send(service);
+        });
+
+        // POST a service from server-side to database
+        app.post('/service', async(req, res) => {
+            const newService = req.body;
+            console.log('Adding new service', newService);
+            const result = await serviceCollection.insertOne(newService);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running Genius Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+``` JavaScript
+// In AddService.js
+
+import React from 'react';
+import { useForm } from "react-hook-form";
+
+const AddService = () => {
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+
+        // POST a service from client-side to database
+        const url = `http://localhost:5000/service`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+        })
+    };
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2 className='text-center'>Please add a service</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <textarea placeholder='Description' {...register("description", { required: true })} />
+                <input placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Service" />
+            </form>
+        </div>
+    );
+};
+
+export default AddService;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
