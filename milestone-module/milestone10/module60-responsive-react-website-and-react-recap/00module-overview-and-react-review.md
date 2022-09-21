@@ -92,6 +92,13 @@ Table of Contents
       - [`Set .gitignore for node project`](#set-gitignore-for-node-project)
       - [`Create a .env file in the root of your project`](#create-a-env-file-in-the-root-of-your-project)
       - [`Run Node server or Backend server`](#run-node-server-or-backend-server)
+  - [66.3 Connect to database with secure password on environment variable](#663-connect-to-database-with-secure-password-on-environment-variable)
+    - [`Create a Database inside the previous Cluster`](#create-a-database-inside-the-previous-cluster)
+    - [`Insert Data on MongoDB Database`](#insert-data-on-mongodb-database)
+    - [`Connection Setup with Database` (Find multiple user)](#connection-setup-with-database-find-multiple-user)
+    - [`How to get connection string from MongoDB Database`](#how-to-get-connection-string-from-mongodb-database)
+    - [`How to get password from MongoDB`](#how-to-get-password-from-mongodb)
+    - [`Full Example`](#full-example-1)
 
 
 
@@ -1633,5 +1640,133 @@ npm run start-dev
 nodemon index.js
 ```
 
+## 66.3 Connect to database with secure password on environment variable
+
+### `Create a Database inside the previous Cluster`
+
+- Database Deployments > Browse Collections (___Cluster0___)> Create Database > database name (___geniusCar___) > collection name (___service___) > Create
+
+### `Insert Data on MongoDB Database`
+
+- Collection name (___service___) > ___INSERT DOCUMENT___ > Paste ___JSON data without id attribute___ (mongodb automatically gives `_id` attribute) > Insert
+
+``` JSON
+[
+    {
+        "name": "ENGINE DIAGNOSTIC",
+        "price": "300",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/dGDkr4v/1.jpg"
+    },
+    {
+        "name": "WHEEL ALIGNMENT",
+        "price": "100",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/tY8dmnP/2.jpg"
+    },
+    {
+        "name": "OIL CHANGING",
+        "price": "150",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/Yh04YVw/3.jpg"
+    },
+    {
+        "name": "BRAKE REPARING",
+        "price": "180",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/ZX2Cbkn/4.jpg"
+    },
+    {
+        "name": "WASH AND GLASSING",
+        "price": "100",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/FgQ3jXp/5.jpg"
+    },
+    {
+        "name": "COMPLETE ANALYSIS",
+        "price": "300",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa",
+        "img": "https://i.ibb.co/zJy5ZDd/6.jpg"
+    },
+    {
+        "name": "CAR SERVICE",
+        "price": "500",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa",
+        "img": "https://i.ibb.co/S624Z3D/car-service.webp"
+    },
+    {
+        "name": "AUTO SERVICE",
+        "price": "400",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa",
+        "img": "https://i.ibb.co/wNZy7k8/auto-service.webp"
+    }
+]
+```
+### `Connection Setup with Database` (Find multiple user)
+
+- MongoDB Documentation > Usage Examples > Find Operations > [Find Multiple Documents](https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/ "Find Multiple Documents - mongodb.com")
+
+### `How to get connection string from MongoDB Database`
+
+- ___Database___ > ___Connect___ (from ___Cluster0___)> Connect your application > Include full driver code example (___Selected___ to get full Code) > ___Copy & Paste___ in index.js
+
+``` JavaScript
+// In index.js
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log('Genius Car DB Connected');
+  // perform actions on the collection object
+  client.close();
+});
+```
+
+### `How to get password from MongoDB`
+
+- ___Database Access___ > Edit (password) or ___ADD NEW DATABASE USER___ > Username (___geniusUser___) > Autogenerate password (___WfRnZQmYC5To03nC___) > Copy & Paste in `.env` file > get Username & Password by `${process.env.DB_USER}` and `${process.env.DB_PASS}` format
+
+``` .env
+DB_USER=geniusUser
+DB_PASS=WfRnZQmYC5To03nC
+```
+
+### `Full Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log('Genius Car DB Connected');
+  // perform actions on the collection object
+  client.close();
+});
+
+app.get('/', (req, res) => {
+    res.send('Running Genius Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
 
 
