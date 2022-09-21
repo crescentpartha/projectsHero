@@ -99,6 +99,13 @@ Table of Contents
     - [`How to get connection string from MongoDB Database`](#how-to-get-connection-string-from-mongodb-database)
     - [`How to get password from MongoDB`](#how-to-get-password-from-mongodb)
     - [`Full Example`](#full-example-1)
+  - [66.4 Load all services and create single service API](#664-load-all-services-and-create-single-service-api)
+    - [`Data Load from Database`](#data-load-from-database)
+    - [`All services data Load from Database`](#all-services-data-load-from-database)
+    - [`Particular service data Load from Database`](#particular-service-data-load-from-database)
+    - [`Full Example` (Load particular service data & all services data from Database)](#full-example-load-particular-service-data--all-services-data-from-database)
+    - [`Modified Client-side Code`](#modified-client-side-code)
+    - [`Full Example` (Modified Client-side Code)](#full-example-modified-client-side-code)
 
 
 
@@ -1768,5 +1775,209 @@ app.listen(port, () => {
     console.log('Listening to port', port);
 });
 ```
+
+## 66.4 Load all services and create single service API
+
+### `Data Load from Database`
+
+- MongoDB Documentation > Usage Examples > Find Operations > [Find Multiple Documents](https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/ "Find Multiple Documents - mongodb.com")
+- MongoDB Documentation > Usage Examples > Find Operations > [Find a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/findOne/ "Find a Document - mongodb.com")
+- `client.connect` section, we will do it as a `async-await system`, We don't do it as a `callback system pattern`.
+- [MongoServerError: user is not allowed to do action [find] on [genius-car.service]](https://stackoverflow.com/questions/73560873/mongoservererror-user-is-not-allowed-to-do-action-find-on-genius-car-service "stackoverflow.com")
+  - Database Access > Database Users > ___EDIT___ actions for certain user > Specific Privileges > Add Specific Privilege > ___readWriteAnyDatabase___ (Select Role) > Update User
+
+### `All services data Load from Database`
+
+``` JavaScript
+// In index.js | Multiple Documents load from Database
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // get all services json data
+        app.get('/service', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.toArray();
+            res.send(services);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `Particular service data Load from Database`
+
+``` JavaScript
+// In index.js | single Document load from Database
+
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // load particular service data (id-wise)
+        app.get('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const service = await serviceCollection.findOne(query);
+            res.send(service);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `Full Example` (Load particular service data & all services data from Database)
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // get all services json data
+        app.get('/service', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.toArray();
+            res.send(services);
+        });
+
+        // load particular service data (id-wise)
+        app.get('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const service = await serviceCollection.findOne(query);
+            res.send(service);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running Genius Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+### `Modified Client-side Code`
+
+> We need to change ___fakeData Load___ to ___server-side___ `url` & ___id___ to `_id`, because, MongoDB uses `_id` instead of `id` attribute. <br /><br /> `services.json` ⋙ `http://localhost:5000/service` || `id` ⋙ `_id`
+
+``` JavaScript
+// In Services.js
+
+fetch('http://localhost:5000/service')
+key={service._id}
+```
+
+``` JavaScript
+// In Service.js
+
+const {_id, name, img, description, price} = service;
+<button onClick={() => handleNavigateToServiceDetail(_id)} className='btn btn-primary'>Book: {name}</button>
+```
+
+### `Full Example` (Modified Client-side Code)
+
+``` JavaScript
+// In Services.js
+
+import React, { useEffect, useState } from 'react';
+import Service from '../Service/Service';
+import './Services.css';
+
+const Services = () => {
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/service')
+            .then(res => res.json())
+            .then(data => setServices(data));
+    }, []);
+
+    return (
+        <div id="services">
+            <h1 className='services-title'>Our Services: <span>{services.length}</span></h1>
+            <div className='services-container'>
+                {
+                    services.map(service => <Service
+                        key={service._id}
+                        service={service}
+                    ></Service>)
+                }
+            </div>
+        </div>
+    );
+};
+
+export default Services;
+```
+
+``` JavaScript
+// In Service.js
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Service.css';
+
+const Service = ({service}) => {
+    const {_id, name, img, description, price} = service;
+    const navigate = useNavigate();
+    const handleNavigateToServiceDetail = id => {
+        navigate(`/service/${id}`);
+    }
+    return (
+        <div className='service'>
+            <img className='w-100' src={img} alt="" />
+            <h2>{name}</h2>
+            <p>Price: {price}</p>
+            <p><small>{description}</small></p>
+            <button onClick={() => handleNavigateToServiceDetail(_id)} className='btn btn-primary'>Book: {name}</button>
+        </div>
+    );
+};
+
+export default Service;
+```
+**[↑Back to Top](#table-of-contents)**
+
 
 
