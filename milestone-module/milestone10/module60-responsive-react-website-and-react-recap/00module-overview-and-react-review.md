@@ -112,13 +112,22 @@ Table of Contents
     - [`Verify Email: Only for password`](#verify-email-only-for-password)
     - [`Create AddService.js component and Use react-hook-form to add service`](#create-addservicejs-component-and-use-react-hook-form-to-add-service)
     - [`Setup Route with RequireAuth`](#setup-route-with-requireauth)
-    - [`Add-Service Route added to the Header component`](#add-service-route-added-to-the-header-component)
+    - [`AddService added as a Add Route to the Header component`](#addservice-added-as-a-add-route-to-the-header-component)
   - [66.6 Insert Service data to the mongodb cloud database](#666-insert-service-data-to-the-mongodb-cloud-database)
     - [`Module-wise Task list`](#module-wise-task-list-1)
     - [`Modified AddService.js component`](#modified-addservicejs-component)
     - [`POST a service from server-side to database`](#post-a-service-from-server-side-to-database)
-    - [`POST a service from client-side to database`](#post-a-service-from-client-side-to-database)
+    - [`POST a service from client-side to server-side`](#post-a-service-from-client-side-to-server-side)
     - [`Full Code Example`](#full-code-example)
+  - [66.7 Manage Services and explore delete api](#667-manage-services-and-explore-delete-api)
+    - [`Module-wise Task list`](#module-wise-task-list-2)
+    - [`Create a ManageServices.js component`](#create-a-manageservicesjs-component)
+    - [`Setup Route with RequireAuth`](#setup-route-with-requireauth-1)
+    - [`ManageServices added as a Manage Route to the Header component`](#manageservices-added-as-a-manage-route-to-the-header-component)
+    - [`Create a custom hook called useServices.js`](#create-a-custom-hook-called-useservicesjs)
+    - [`DELETE a service from server-side to database`](#delete-a-service-from-server-side-to-database)
+    - [`DELETE a service from client-side`](#delete-a-service-from-client-side)
+    - [`Full Code Example`](#full-code-example-1)
 
 
 
@@ -2039,7 +2048,7 @@ export default Service;
 - Create ___AddService.js___ component
 - Use ___react-hook-form___ to ___add service___ in AddService.js component
 - ___Setup Route___ with RequireAuth
-- Add-Service ___Route added___ to the Header component
+- ___AddService___ added as a ___Add Route___ to the Header component
 
 ### `Particular (id-wise) data load in ServiceDetail.js component`
 
@@ -2142,7 +2151,7 @@ import AddService from './Pages/AddService/AddService';
 }></Route>
 ```
 
-### `Add-Service Route added to the Header component`
+### `AddService added as a Add Route to the Header component`
 
 ``` JavaScript
 // In Header.js
@@ -2158,7 +2167,7 @@ import AddService from './Pages/AddService/AddService';
 
 - Modified ___AddService.js___ component
 - ___POST___ a service from ___server-side to database___
-- ___POST___ a service from ___client-side to database___
+- ___POST___ a service from ___client-side to server-side___
 - ___Full Code Example___
 
 ### `Modified AddService.js component`
@@ -2204,7 +2213,7 @@ async function run() {
 run().catch(console.dir);
 ```
 
-### `POST a service from client-side to database`
+### `POST a service from client-side to server-side`
 
 ``` JavaScript
 // In AddService.js
@@ -2341,5 +2350,235 @@ export default AddService;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 66.7 Manage Services and explore delete api
+
+### `Module-wise Task list`
+
+- Create a ___ManageServices.js___ component
+- ___Setup Route___ with RequireAuth
+- ___ManageServices___ added as a ___Manage Route___ to the Header component
+- Create a ___custom hook___ called ___useServices.js___
+- ___DELETE a service___ from ___server-side to database___
+- ___DELETE a service___ from ___client-side___
+- ___Full Code Example___
+
+### `Create a ManageServices.js component`
+
+``` JavaScript
+// In ManageServices.js
+```
+
+### `Setup Route with RequireAuth`
+
+``` JavaScript
+// In App.js
+
+import ManageServices from './Pages/ManageServices/ManageServices';
+
+<Route path='/manageService' element={
+    <RequireAuth>
+    <ManageServices></ManageServices>
+    </RequireAuth>
+}></Route>
+```
+
+### `ManageServices added as a Manage Route to the Header component`
+
+``` JavaScript
+// In Header.js
+
+<Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+        <Nav.Link as={Link} to="/home">Home</Nav.Link>
+        <NavDropdown title="Services" id="collasible-nav-dropdown">
+            <NavDropdown.Item as={Link} to="home#services">Services</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item as={Link} to="home#experts">Experts</NavDropdown.Item>
+        </NavDropdown>
+        <Nav.Link as={Link} to="/about">About</Nav.Link>
+        <Nav.Link as={Link} to="/googleMaps">Maps</Nav.Link>
+    </Nav>
+    <Nav>
+        {
+            user && 
+            <>
+                <Nav.Link as={Link} to="/addService">Add</Nav.Link>
+                <Nav.Link as={Link} to="/manageService">Manage</Nav.Link>
+            </>
+        }
+    </Nav>
+</Navbar.Collapse>
+```
+
+### `Create a custom hook called useServices.js`
+
+``` JavaScript
+// In useServices.js
+
+import { useEffect, useState } from "react";
+
+const useServices = () => {
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/service')
+            .then(res => res.json())
+            .then(data => setServices(data));
+    }, []);
+
+    return [services, setServices];
+}
+
+export default useServices;
+```
+
+### `DELETE a service from server-side to database`
+
+``` JavaScript
+// In index.js
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // DELETE a service
+        app.delete('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await serviceCollection.deleteOne(query);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `DELETE a service from client-side`
+
+``` JavaScript
+// In ManageServices.js
+
+import React from 'react';
+import useServices from '../../hooks/useServices';
+
+const ManageServices = () => {
+    const [services, setServices] = useServices();
+
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure?');
+        if (proceed) {
+            // delete a service in client-side and send to the server-side
+            console.log('Deleting service with id, ', id);
+            const url = `http://localhost:5000/service/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.deletedCount > 0) {
+                    console.log('Deleted');
+                    // remove deleted service from the state in client-side for better user experience
+                    const remaining = services.filter(service => service._id !== id);
+                    setServices(remaining);
+                }
+            })
+        }
+    }
+
+    return (
+        <div className='w-50 mx-auto'>
+            <h2>Manage your services</h2>
+            {
+                services.map(service => <div key={service._id}>
+                    <h5>{service.name} <button onClick={() => handleDelete(service._id)}>X</button></h5>
+                </div>)
+            }
+        </div>
+    );
+};
+
+export default ManageServices;
+```
+
+### `Full Code Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+
+        // get all services json data
+        app.get('/service', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.toArray();
+            res.send(services);
+        });
+
+        // load particular service data (id-wise)
+        app.get('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const service = await serviceCollection.findOne(query);
+            res.send(service);
+        });
+
+        // POST a service from server-side to database
+        app.post('/service', async(req, res) => {
+            const newService = req.body;
+            console.log('Adding new service', newService);
+            const result = await serviceCollection.insertOne(newService);
+            res.send(result);
+        });
+
+        // DELETE a service from server-side to database
+        app.delete('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await serviceCollection.deleteOne(query);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running Genius Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
 

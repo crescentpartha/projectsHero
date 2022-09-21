@@ -7,6 +7,7 @@ import Checkout from './Pages/Home/Checkout/Checkout';
 import Home from './Pages/Home/Home/Home';
 import ServiceDetail from './Pages/Home/ServiceDetail/ServiceDetail';
 import Login from './Pages/Login/Login';
+import ManageServices from './Pages/ManageServices/ManageServices';
 import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 import NotFound from './Pages/Shared/NotFound/NotFound';
@@ -38,6 +39,11 @@ function App() {
         <Route path='/addService' element={
           <RequireAuth>
             <AddService></AddService>
+          </RequireAuth>
+        }></Route>
+        <Route path='/manageService' element={
+          <RequireAuth>
+            <ManageServices></ManageServices>
           </RequireAuth>
         }></Route>
         <Route path='/googleMaps' element={<Maps></Maps>}></Route>
