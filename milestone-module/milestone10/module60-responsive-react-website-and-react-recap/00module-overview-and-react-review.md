@@ -128,6 +128,9 @@ Table of Contents
     - [`DELETE a service from server-side to database`](#delete-a-service-from-server-side-to-database)
     - [`DELETE a service from client-side`](#delete-a-service-from-client-side)
     - [`Full Code Example`](#full-code-example-1)
+  - [66.8 Module Summary and git push](#668-module-summary-and-git-push)
+    - [`Module Tast List`](#module-tast-list)
+    - [`Clone Repository`](#clone-repository)
 
 
 
@@ -2443,7 +2446,7 @@ async function run() {
         await client.connect();
         const serviceCollection = client.db('geniusCar').collection('service');
 
-        // DELETE a service
+        // DELETE a service from server-side to database
         app.delete('/service/:id', async(req, res) => {
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
@@ -2578,6 +2581,31 @@ app.listen(port, () => {
     console.log('Listening to port', port);
 });
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 66.8 Module Summary and git push
+
+### `Module Tast List`
+
+⫸ ___In Server-Side:___
+
+- How to ___create a service___ like `app.get('/service', ...)`
+- ___Insert JSON data___ to database
+- ___Id-wise data load___ from database
+- How to ___create a new service data___ and send to the database
+- How to ___delete a old service data___
+
+⫸ ___In Client-Side:___
+
+- Create a ___custom hook___ for ___data loading___
+- ___Data load___ in ServiceDetail
+- ___Data delete___ from ManageServices
+- Set ___Email Validation___ only for ___password___
+
+### `Clone Repository`
+
+> `Notes:` If you clone this repository, this project doesn't work. Because, We need to create ___Environment Variables___ like ___DB_USER___ & ___DB_PASS___ in ___.env___ file and also need to install all the ___dependencies___. 
 
 **[🔼Back to Top](#table-of-contents)**
 
