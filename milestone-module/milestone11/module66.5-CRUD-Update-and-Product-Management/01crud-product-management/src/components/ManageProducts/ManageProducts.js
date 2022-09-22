@@ -2,7 +2,7 @@ import React from 'react';
 
 const ManageProducts = () => {
     return (
-        <div>
+        <div className='my-3'>
             <h2>Manage Products</h2>
         </div>
     );

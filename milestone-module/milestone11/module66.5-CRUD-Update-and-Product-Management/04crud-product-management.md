@@ -28,4 +28,7 @@ Table of Contents
 - Change ___project title___
 - Add ___favicon.ico___
 
+---
+
+- ___Responsive Navbar___ added
 
