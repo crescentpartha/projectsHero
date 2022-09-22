@@ -11,8 +11,9 @@ const UpdateUser = () => {
         fetch(url)
         .then(res => res.json())
         .then(data => setUser(data));
-    }, []);
+    }, [id]);
 
+    // Update a particular user (id-wise) from client-side to server-side
     const handleUpdateUser = event => {
         event.preventDefault();
         const name = event.target.name.value;
@@ -21,10 +22,10 @@ const UpdateUser = () => {
 
         const updatedUser = { name, email };
 
-        // send data to the server 
+        // send data from client-side to the server-side
         const url = `http://localhost:5000/user/${id}`;
         fetch(url, {
-            method: 'PUT', // if user exists in database, then update. Otherwise add user.
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },

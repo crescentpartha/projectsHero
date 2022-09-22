@@ -62,8 +62,8 @@ async function run() {
             res.send(result);
         })
 
-        // update user
-        app.put('user/:id', async(req, res) => {
+        // update a user in server-side and send to the database
+        app.put('/user/:id', async(req, res) => {
             const id = req.params.id;
             const updatedUser = req.body;
             const filter = {_id: ObjectId(id)};
@@ -72,7 +72,7 @@ async function run() {
                 $set: {
                     name: updatedUser.name,
                     email: updatedUser.email
-                }
+                },
             };
             const result = await userCollection.updateOne(filter, updatedDoc, options);
             res.send(result);
@@ -87,7 +87,7 @@ async function run() {
         })
     }
     finally {
-
+        // await client.close(); // commented, if I want to keep connection active;
     }
 }
 run().catch(console.dir);

@@ -1,4 +1,5 @@
-## Table of Content
+Table of Contents
+---
 
 - [Module 65: Mongodb, database integration, CRUD](#module-65-mongodb-database-integration-crud)
   - [65.1 Module Overview, node recap, mongodb vs MySql](#651-module-overview-node-recap-mongodb-vs-mysql)
@@ -45,7 +46,8 @@
     - [`Modified Code`](#modified-code-2)
     - [`Full Example`](#full-example-3)
   - [65.9 (bonus) Load single item by id and Update user info](#659-bonus-load-single-item-by-id-and-update-user-info)
-    - [`Modified Code`](#modified-code-3)
+    - [`Update a user in server-side and send to the database`](#update-a-user-in-server-side-and-send-to-the-database)
+    - [`Update a particular user (id-wise) from client-side and send to the server-side`](#update-a-particular-user-id-wise-from-client-side-and-send-to-the-server-side)
     - [`Full Example`](#full-example-4)
   - [Quiz 65](#quiz-65)
 
@@ -224,6 +226,7 @@ node_modules
 
 - ___Resources:___ [NoSQL](https://www.mongodb.com/nosql-explained "NoSQL - mongodb.com") | [MongoDB vs. MySQL Differences](https://www.mongodb.com/compare/mongodb-mysql "MongoDB vs. MySQL Differences - mongodb.com") | [MongoDB vs MySQL](https://www.geeksforgeeks.org/mongodb-vs-mysql/ "MongoDB vs MySQL - geeksforgeeks.org")
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 65.2 Create mongodb atlas account and Connect to database
 
@@ -298,6 +301,8 @@ app.listen(port, () => {
 });
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 65.3 Send data to database using mongodb insertOne
 
 - [Node MongoDB CRUD Operations](https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/ "CRUD Operations - mongodb.com") - [Quick Start](https://www.mongodb.com/docs/drivers/node/current/quick-start/ "mongodb.com") - [Insert a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/insertOne/ "mongodb.com")
@@ -369,6 +374,8 @@ app.listen(port, () => {
 });
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 65.4 (Recap) Async await, try catch and mongodb connection
 
 ### `Initial Setup`
@@ -437,6 +444,8 @@ run().catch(console.dir);
 - create a React App called ___02react-node-mongodb___
 - Setup React Router
 - Setup Routes (___Home___, ___AddUser___)
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 65.5 Send user data to the server and get response to client
 
@@ -561,6 +570,8 @@ const AddUser = () => {
 
 export default AddUser;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 65.6 Save data from React Client side to mongo database
 
@@ -710,6 +721,8 @@ const AddUser = () => {
 export default AddUser;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 65.7 Load and display data from database, create delete button
 
 ### `Load Data to the client side`
@@ -846,17 +859,19 @@ app.listen(port, () => {
 });
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 65.8 Delete a user from the database
 
 ### `Steps`
 
-- delete a user in server-side and send to the database
-- delete a user in client-side and send to the server-side
-- remove deleted user from the state in client-side for better user experience
-- create UpdateUser component
-- Setup UpdateUser Route
-- added Update button in the Home component
-- load particular user data for UpdateUser | [Find a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/findOne/ "Find a Document - mongodb.com")
+- ___delete a user___ in ___server-side___ and send to the ___database___
+- ___delete a user___ in ___client-side___ and send to the ___server-side___
+- ___remove deleted user___ from the ___state___ in client-side for ___better user experience___
+- create ___UpdateUser___ component
+- ___Setup UpdateUser Route___
+- ___added Update button___ in the Home component
+- load ___particular user data___ for UpdateUser | [Find a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/findOne/ "Find a Document - mongodb.com")
 
 
 ### `Modified Code`
@@ -1073,30 +1088,76 @@ app.listen(port, () => {
 });
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 65.9 (bonus) Load single item by id and Update user info
 
 - [Update a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/updateOne/ "Update a Document - mongodb.com")
 
-### `Modified Code`
+### `Update a user in server-side and send to the database`
 
 ``` JavaScript
 // In index.js
 
-// update user
-app.put('user/:id', async(req, res) => {
-    const id = req.params.id;
-    const updatedUser = req.body;
-    const filter = {_id: ObjectId(id)};
-    const options = { upsert: true };
-    const updatedDoc = {
-        $set: {
-            name: updatedUser.name,
-            email: updatedUser.email
-        }
-    };
-    const result = await userCollection.updateOne(filter, updatedDoc, options);
-    res.send(result);
-})
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const userCollection = client.db('foodExpress').collection('user');
+
+        // update a user in server-side and send to the database
+        app.put('/user/:id', async(req, res) => {
+            const id = req.params.id;
+            const updatedUser = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    name: updatedUser.name,
+                    email: updatedUser.email
+                },
+            };
+            const result = await userCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        })
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+### `Update a particular user (id-wise) from client-side and send to the server-side`
+
+``` JavaScript
+// In updateUser.js
+
+// Update a particular user (id-wise) from client-side and send to the server-side
+const handleUpdateUser = event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    // console.log(name, email);
+
+    const updatedUser = { name, email };
+
+    // send data from client-side to the server-side
+    const url = `http://localhost:5000/user/${id}`;
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedUser)
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log('success: ', data);
+        alert('user updated successfully!!!');
+        event.target.reset();
+    })
+}
 ```
 
 ### `Full Example`
@@ -1117,8 +1178,9 @@ const UpdateUser = () => {
         fetch(url)
         .then(res => res.json())
         .then(data => setUser(data));
-    }, []);
+    }, [id]);
 
+    // Update a particular user (id-wise) from client-side to server-side
     const handleUpdateUser = event => {
         event.preventDefault();
         const name = event.target.name.value;
@@ -1127,10 +1189,10 @@ const UpdateUser = () => {
 
         const updatedUser = { name, email };
 
-        // send data to the server
+        // send data from client-side to the server-side
         const url = `http://localhost:5000/user/${id}`;
         fetch(url, {
-            method: 'PUT', // if user exists in database, then update. Otherwise add user.
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -1145,7 +1207,7 @@ const UpdateUser = () => {
     }
 
     return (
-        <div>
+        <div className='my-5'>
             <h2>Updating User: {user.name}</h2>
             <form onSubmit={handleUpdateUser}>
                 <input type="text" name="name" placeholder='Name' required />
@@ -1212,8 +1274,8 @@ async function run() {
             res.send(result);
         })
 
-        // update user
-        app.put('user/:id', async(req, res) => {
+        // update a user in server-side and send to the database
+        app.put('/user/:id', async(req, res) => {
             const id = req.params.id;
             const updatedUser = req.body;
             const filter = {_id: ObjectId(id)};
@@ -1222,7 +1284,7 @@ async function run() {
                 $set: {
                     name: updatedUser.name,
                     email: updatedUser.email
-                }
+                },
             };
             const result = await userCollection.updateOne(filter, updatedDoc, options);
             res.send(result);
@@ -1237,7 +1299,7 @@ async function run() {
         })
     }
     finally {
-
+        // await client.close(); // commented, if I want to keep connection active;
     }
 }
 run().catch(console.dir);
@@ -1250,6 +1312,8 @@ app.listen(port, () => {
     console.log('CRUD Server is running');
 });
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## Quiz 65
 
@@ -1308,4 +1372,8 @@ collection._______?_______({name:’Mark Hanson’, job:’statistics’})
 headers: {
   'content-type':  ____?_____ },
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+
 
