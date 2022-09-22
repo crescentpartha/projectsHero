@@ -33,17 +33,17 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className='my-5'>
             <h2>Available Users: {users.length}</h2>
             <ul>
                 {
                     users.map(user => <li
                         key={user._id}
                     >
-                        {user.name}:: {user.email}
+                        {user.name} :: {user.email}
                         {/* added Update button in the Home component */}
-                        <Link to={`/update/${user._id}`}><button>Update</button></Link>
-                        <button onClick={() => handleUserDelete(user._id)}>X</button>
+                        <Link className='mx-2' to={`/update/${user._id}`}><button>Update</button></Link>
+                        <button onClick={() => handleUserDelete(user._id)}>Delete</button>
                     </li>)
                 }
             </ul>

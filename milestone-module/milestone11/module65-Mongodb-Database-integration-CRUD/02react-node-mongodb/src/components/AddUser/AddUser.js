@@ -25,7 +25,7 @@ const AddUser = () => {
         })
     }
     return (
-        <div>
+        <div className='my-5'>
             <h2>Please, Add a new User</h2>
             <form onSubmit={handleAddUser}>
                 <input type="text" name="name" placeholder='Name' required />

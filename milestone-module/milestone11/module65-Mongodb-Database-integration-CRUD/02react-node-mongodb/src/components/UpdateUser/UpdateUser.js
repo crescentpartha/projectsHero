@@ -21,7 +21,7 @@ const UpdateUser = () => {
 
         const updatedUser = { name, email };
 
-        // send data to the server
+        // send data to the server 
         const url = `http://localhost:5000/user/${id}`;
         fetch(url, {
             method: 'PUT', // if user exists in database, then update. Otherwise add user.
@@ -39,7 +39,7 @@ const UpdateUser = () => {
     }
 
     return (
-        <div>
+        <div className='my-5'>
             <h2>Updating User: {user.name}</h2>
             <form onSubmit={handleUpdateUser}>
                 <input type="text" name="name" placeholder='Name' required />
