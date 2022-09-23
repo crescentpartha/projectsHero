@@ -20,10 +20,16 @@ Table of Contents
   - [Connect to database with secure password on environment variable](#connect-to-database-with-secure-password-on-environment-variable)
     - [`Create a Database inside the previous Cluster`](#create-a-database-inside-the-previous-cluster)
     - [`Insert Data on MongoDB Database`](#insert-data-on-mongodb-database)
-    - [`Connection Setup with Database` (Find multiple user)](#connection-setup-with-database-find-multiple-user)
+    - [`Connection Setup with Database` (Find multiple documents)](#connection-setup-with-database-find-multiple-documents)
     - [`How to get connection string from MongoDB Database`](#how-to-get-connection-string-from-mongodb-database)
     - [`How to get password from MongoDB`](#how-to-get-password-from-mongodb)
     - [`Full Example`](#full-example)
+  - [Load all products from database by creating a product API of get method](#load-all-products-from-database-by-creating-a-product-api-of-get-method)
+    - [`Data Load from Database` (Documentation)](#data-load-from-database-documentation)
+    - [`All products data Load from Database`](#all-products-data-load-from-database)
+    - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
+    - [`Modified Client-side Code` (Full Example)](#modified-client-side-code-full-example)
+    - [`Modified Server-side Code` (Full Example) - (Load all products data from Database)](#modified-server-side-code-full-example---load-all-products-data-from-database)
 
 # CRUD Product Management
 
@@ -250,6 +256,8 @@ nodemon index.js
 
 - Database Deployments > Browse Collections (___Cluster0___)> Create Database > database name (___crudProductManagement___) > collection name (___product___) > Create
 
+**[🔼Back to Top](#table-of-contents)**
+
 ### `Insert Data on MongoDB Database`
 
 - Collection name (___product___) > ___INSERT DOCUMENT___ > Paste ___JSON data without id attribute___ (mongodb automatically gives `_id` attribute) > Insert
@@ -259,23 +267,27 @@ nodemon index.js
 
 [
     {
-        "name": "ENGINE DIAGNOSTIC",
+        "name": "toyota-corolla",
         "price": "300",
-        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
-        "img": "https://i.ibb.co/dGDkr4v/1.jpg"
+        "quantity": "46",
+        "img": "https://i.ibb.co/yg4J4dh/toyota-corolla.png"
     },
     {
-        "name": "AUTO SERVICE",
+        "name": "toyota-camry",
         "price": "400",
-        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa",
-        "img": "https://i.ibb.co/wNZy7k8/auto-service.webp"
+        "quantity": "40",
+        "img": "https://i.ibb.co/P5ykgjn/toyota-camry.png"
     }
 ]
 ```
 
-### `Connection Setup with Database` (Find multiple user)
+**[🔼Back to Top](#table-of-contents)**
+
+### `Connection Setup with Database` (Find multiple documents)
 
 - MongoDB Documentation > Usage Examples > Find Operations > [Find Multiple Documents](https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/ "Find Multiple Documents - mongodb.com")
+
+**[🔼Back to Top](#table-of-contents)**
 
 ### `How to get connection string from MongoDB Database`
 
@@ -296,6 +308,8 @@ client.connect(err => {
 });
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ### `How to get password from MongoDB`
 
 - ___Database Access___ > Edit (password) or ___ADD NEW DATABASE USER___ > Username (___geniusUser___) > Autogenerate password (___WfRnZQmYC5To03nC___) > Copy & Paste in `.env` file > get Username & Password by `${process.env.DB_USER}` and `${process.env.DB_PASS}` format
@@ -306,6 +320,8 @@ client.connect(err => {
 DB_USER=productUser
 DB_PASS=WZMHnqq8W4BDDELR
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ### `Full Example`
 
@@ -345,5 +361,219 @@ app.listen(port, () => {
 
 **[🔼Back to Top](#table-of-contents)**
 
+## Load all products from database by creating a product API of get method
+
+### `Data Load from Database` (Documentation)
+
+- MongoDB Documentation > Usage Examples > Find Operations > [Find Multiple Documents](https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/ "Find Multiple Documents - mongodb.com")
+- `client.connect` section, we will do it as a `async-await system`, We don't do it as a `callback system pattern`.
+- [MongoServerError: user is not allowed to do action [find] on [genius-car.service]](https://stackoverflow.com/questions/73560873/mongoservererror-user-is-not-allowed-to-do-action-find-on-genius-car-service "stackoverflow.com")
+  - Database Access > Database Users > ___EDIT___ actions for certain user > Specific Privileges > Add Specific Privilege > ___readWriteAnyDatabase___ (Select Role) > Update User
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `All products data Load from Database`
+
+``` JavaScript
+// In index.js | Multiple Documents load from Database
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async (req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Client-side Code` (Particular Section)
+
+> We need to change ___fakeData Load___ to ___server-side___ `url` & ___id___ to `_id`, because, MongoDB uses `_id` instead of `id` attribute. <br /><br /> `products.json` ⋙ `http://localhost:5000/product` || `id` ⋙ `_id`
+
+``` JavaScript
+// In Home.js
+
+fetch('http://localhost:5000/product')
+
+key={product._id}
+```
+
+``` JavaScript
+// In Product.js
+
+const { _id: id, name, price, quantity, img } = product;
+
+<button className='btn btn-outline-success w-50 mx-auto mb-2' onClick={() => handleNavigateToUpdateProduct(id)}>Update</button>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Client-side Code` (Full Example)
+
+``` JavaScript
+// In Home.js | Load all products from database
+
+import React, { useEffect, useState } from 'react';
+import { Row } from 'react-bootstrap';
+import Product from './Product';
+
+const Home = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, []);
+
+    return (
+        <div className='my-3 mx-5'>
+            <h2>Available Product: {products.length}</h2>
+            <Row xs={1} md={2} lg={3} className="g-4 my-3">
+                {
+                    products.map(product => <Product
+                        key={product._id}
+                        product={product}
+                    ></Product>)
+                }
+            </Row>
+        </div>
+    );
+};
+
+export default Home;
+```
+
+``` JavaScript
+// In Product.js | Display all products data from database
+
+import React from 'react';
+import { Card, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
+const Product = ({ product }) => {
+    const { _id: id, name, price, quantity, img } = product;
+
+    const navigate = useNavigate();
+    const handleNavigateToUpdateProduct = id => {
+        navigate(`/updateProduct/${id}`);
+    }
+
+    return (
+        <Col>
+            <Card>
+                <Card.Img className='w-75 mx-auto' variant="top" src={img} alt={name} />
+                <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <div className='d-flex align-items-center justify-content-around'>
+                        <Card.Text className='mb-0'>Price: <span className='fw-semibold'>{price}</span></Card.Text>
+                        <Card.Text>Quantity: <span className='fw-semibold'>{quantity}</span></Card.Text>
+                    </div>
+                </Card.Body>
+                <div className='d-flex flex-nowrap gap-2 mx-2 align-items-center justify-content-around'>
+                    <button className='btn btn-outline-success w-50 mx-auto mb-2' onClick={() => handleNavigateToUpdateProduct(id)}>Update</button>
+                    <button className='btn btn-outline-success w-50 mx-auto mb-2'>Delete</button>
+                </div>
+            </Card>
+        </Col>
+    );
+};
+
+export default Product;
+```
+
+``` JavaScript
+// In UpdateProducts.js | Display single product id
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const UpdateProducts = () => {
+    const { id } = useParams();
+    return (
+        <div className='my-3'>
+            <h2>Update Products: {id}</h2>
+        </div>
+    );
+};
+
+export default UpdateProducts;
+```
+
+``` JavaScript
+// In App.js | Setup dynamic route with id
+
+import UpdateProducts from './components/UpdateProducts/UpdateProducts';
+
+<Route path='/updateProduct/:id' element={<UpdateProducts></UpdateProducts>}></Route>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Server-side Code` (Full Example) - (Load all products data from Database)
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async (req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running CRUD-Product-Management Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
 
