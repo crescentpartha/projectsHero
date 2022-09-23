@@ -30,6 +30,15 @@ Table of Contents
     - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
     - [`Modified Client-side Code` (Full Example)](#modified-client-side-code-full-example)
     - [`Modified Server-side Code` (Full Example) - (Load all products data from Database)](#modified-server-side-code-full-example---load-all-products-data-from-database)
+  - [Insert a Product data to the MongoDb Cloud Database](#insert-a-product-data-to-the-mongodb-cloud-database)
+    - [`Module-wise Task List`](#module-wise-task-list)
+    - [`Install react hook form`](#install-react-hook-form)
+    - [`Create a form using react-hook-form in the AddProducts component`](#create-a-form-using-react-hook-form-in-the-addproducts-component)
+    - [`POST a product from server-side to database`](#post-a-product-from-server-side-to-database)
+    - [`POST a product from client-side to server-side`](#post-a-product-from-client-side-to-server-side)
+    - [`Full Code Example`](#full-code-example)
+      - [`index.js`](#indexjs)
+      - [`AddProducts.js`](#addproductsjs)
 
 # CRUD Product Management
 
@@ -572,6 +581,229 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log('Listening to port', port);
 });
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Insert a Product data to the MongoDb Cloud Database
+
+### `Module-wise Task List`
+
+- ___Install___ react hook form
+- ___Create a form___ using ___react-hook-form___ in the ___AddProducts___ component
+- ___POST a product___ from ___server-side to database___
+- ___POST a product___ from ___client-side to server-side___
+- ___Full Code___ Example
+  - ___index.js___
+  - ___AddProducts.js___
+
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Install react hook form`
+
+``` Terminal
+npm install react-hook-form
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create a form using react-hook-form in the AddProducts component`
+
+``` JavaScript
+// In AddProducts.js
+
+import React from 'react';
+import { useForm } from "react-hook-form";
+
+const AddProducts = () => {
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+    }
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2 className='text-center'>Add a product</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <input placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
+                <input placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Product" />
+            </form>
+        </div>
+    );
+};
+
+export default AddProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `POST a product from server-side to database`
+
+``` JavaScript
+// In index.js
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // POST a product form server-side to database
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            console.log('Adding a new product', newProduct);
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `POST a product from client-side to server-side`
+
+``` JavaScript
+// In AddProducts.js
+
+const onSubmit = data => {
+    console.log(data);
+
+    // POST a product form client-side to database
+    const url = `http://localhost:5000/product`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        console.log(result);
+    })
+}
+
+<form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+#### `index.js`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async (req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+
+        // POST a product form server-side to database
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            console.log('Adding a new product', newProduct);
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running CRUD-Product-Management Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `AddProducts.js`
+
+``` JavaScript
+// In AddProducts.js
+
+import React from 'react';
+import { useForm } from "react-hook-form";
+
+const AddProducts = () => {
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+
+        // POST a product form client-side to database
+        const url = `http://localhost:5000/product`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+        })
+    }
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2 className='text-center'>Add a product</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <input placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
+                <input placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Product" />
+            </form>
+        </div>
+    );
+};
+
+export default AddProducts;
 ```
 
 **[🔼Back to Top](#table-of-contents)**

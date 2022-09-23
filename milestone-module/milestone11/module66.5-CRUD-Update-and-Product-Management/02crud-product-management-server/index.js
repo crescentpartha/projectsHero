@@ -27,6 +27,14 @@ async function run() {
             const products = await cursor.toArray();
             res.send(products);
         });
+
+        // POST a product form server-side to database
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            console.log('Adding a new product', newProduct);
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
     }
     finally {
         // await client.close(); // commented, if I want to keep connection active;
