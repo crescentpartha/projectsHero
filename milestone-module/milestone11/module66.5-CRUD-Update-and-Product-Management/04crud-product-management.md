@@ -17,6 +17,13 @@ Table of Contents
     - [`Set .gitignore for node project`](#set-gitignore-for-node-project)
     - [`Create a .env file in the root of your project`](#create-a-env-file-in-the-root-of-your-project)
     - [`Run Node server or Backend server`](#run-node-server-or-backend-server)
+  - [Connect to database with secure password on environment variable](#connect-to-database-with-secure-password-on-environment-variable)
+    - [`Create a Database inside the previous Cluster`](#create-a-database-inside-the-previous-cluster)
+    - [`Insert Data on MongoDB Database`](#insert-data-on-mongodb-database)
+    - [`Connection Setup with Database` (Find multiple user)](#connection-setup-with-database-find-multiple-user)
+    - [`How to get connection string from MongoDB Database`](#how-to-get-connection-string-from-mongodb-database)
+    - [`How to get password from MongoDB`](#how-to-get-password-from-mongodb)
+    - [`Full Example`](#full-example)
 
 # CRUD Product Management
 
@@ -67,6 +74,8 @@ npm init -y
 ```
 
 ``` JSON
+// In package.json
+
 {
   "name": "02crud-product-management-server",
   "version": "1.0.0",
@@ -113,6 +122,7 @@ npm install -g nodemon
 
 ``` JSON
 // Before
+
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
 },
@@ -120,6 +130,7 @@ npm install -g nodemon
 
 ``` JSON
 // After adding the script
+
 "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
@@ -167,6 +178,7 @@ app.listen(port, () => {
 
 ``` JavaScript
 const cors = require('cors');
+
 // use middleware
 app.use(cors()); // for 'Access-Control-Allow-Origin'; // without it, communication doesn't established between 3000 and 5000;
 app.use(express.json()); // To parse body (req.body) // without it, don't get data on req.body
@@ -178,6 +190,7 @@ app.use(express.json()); // To parse body (req.body) // without it, don't get da
 
 ``` JavaScript
 // In index.js
+
 require('dotenv').config();
 ```
 
@@ -190,6 +203,7 @@ require('dotenv').config();
 
 ``` .gitignore
 // In .gitignore
+
 node_modules
 ```
 
@@ -206,6 +220,7 @@ node_modules
 
 ``` .gitignore
 // In .gitignore
+
 node_modules
 .env
 ```
@@ -221,9 +236,114 @@ node_modules
 
 ``` Terminal
 npm run start-dev
+
 // OR
+
 nodemon index.js
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## Connect to database with secure password on environment variable
+
+### `Create a Database inside the previous Cluster`
+
+- Database Deployments > Browse Collections (___Cluster0___)> Create Database > database name (___crudProductManagement___) > collection name (___product___) > Create
+
+### `Insert Data on MongoDB Database`
+
+- Collection name (___product___) > ___INSERT DOCUMENT___ > Paste ___JSON data without id attribute___ (mongodb automatically gives `_id` attribute) > Insert
+
+``` JSON
+// In products.json
+
+[
+    {
+        "name": "ENGINE DIAGNOSTIC",
+        "price": "300",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa.",
+        "img": "https://i.ibb.co/dGDkr4v/1.jpg"
+    },
+    {
+        "name": "AUTO SERVICE",
+        "price": "400",
+        "description": "Lorem ipsum dolor sit amet, consectetu radipisi cing elitBeatae autem aperiam nequ quaera molestias voluptatibus harum ametipsa",
+        "img": "https://i.ibb.co/wNZy7k8/auto-service.webp"
+    }
+]
+```
+
+### `Connection Setup with Database` (Find multiple user)
+
+- MongoDB Documentation > Usage Examples > Find Operations > [Find Multiple Documents](https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/ "Find Multiple Documents - mongodb.com")
+
+### `How to get connection string from MongoDB Database`
+
+- ___Database___ > ___Connect___ (from ___Cluster0___)> Connect your application > Include full driver code example (___Selected___ to get full Code) > ___Copy & Paste___ in index.js
+
+``` JavaScript
+// In index.js
+
+// connection setup with database with secure password on environment variable
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log('crudProductManagement database connected');
+  // perform actions on the collection object
+  client.close();
+});
+```
+
+### `How to get password from MongoDB`
+
+- ___Database Access___ > Edit (password) or ___ADD NEW DATABASE USER___ > Username (___geniusUser___) > Autogenerate password (___WfRnZQmYC5To03nC___) > Copy & Paste in `.env` file > get Username & Password by `${process.env.DB_USER}` and `${process.env.DB_PASS}` format
+
+``` JavaScript
+// In .env
+
+DB_USER=productUser
+DB_PASS=WZMHnqq8W4BDDELR
+```
+
+### `Full Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log('crudProductManagement database connected');
+  // perform actions on the collection object
+  client.close();
+});
+
+app.get('/', (req, res) => {
+    res.send('Running CRUD-Product-Management Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+
 
