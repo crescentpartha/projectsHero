@@ -39,6 +39,9 @@ Table of Contents
     - [`Full Code Example`](#full-code-example)
       - [`index.js`](#indexjs)
       - [`AddProducts.js`](#addproductsjs)
+  - [Create a Custom Hook](#create-a-custom-hook)
+    - [`Create Custom Hook called useDisplayProducts.js`](#create-custom-hook-called-usedisplayproductsjs)
+    - [`Uses of Custom Hook`](#uses-of-custom-hook)
 
 # CRUD Product Management
 
@@ -808,4 +811,59 @@ export default AddProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## Create a Custom Hook
+
+### `Create Custom Hook called useDisplayProducts.js`
+
+``` JavaScript
+// In useDisplayProducts.js
+
+const { useState, useEffect } = require("react");
+
+const useDisplayProducts = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, []);
+
+    return [products, setProducts];
+}
+
+export default useDisplayProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Uses of Custom Hook`
+
+``` JavaScript
+// In Home.js
+
+import useDisplayProducts from '../../hooks/useDisplayProducts';
+
+const Home = () => {
+    const [products] = useDisplayProducts();
+};
+
+export default Home;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+``` JavaScript
+// In ManageProducts.js
+
+import useDisplayProducts from '../../hooks/useDisplayProducts';
+
+const ManageProducts = () => {
+    const [products] = useDisplayProducts();
+};
+
+export default ManageProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
 

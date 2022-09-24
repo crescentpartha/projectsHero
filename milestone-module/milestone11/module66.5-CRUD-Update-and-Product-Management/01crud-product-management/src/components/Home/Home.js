@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Row } from 'react-bootstrap';
+import useDisplayProducts from '../../hooks/useDisplayProducts';
 import Product from './Product';
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/product')
-            .then(res => res.json())
-            .then(data => setProducts(data));
-    }, []);
+    const [products] = useDisplayProducts();
 
     return (
         <div className='my-3 mx-5'>
