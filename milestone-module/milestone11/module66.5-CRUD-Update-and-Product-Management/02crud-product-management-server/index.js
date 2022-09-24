@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 
@@ -33,6 +33,15 @@ async function run() {
             const newProduct = req.body;
             console.log('Adding a new product', newProduct);
             const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
+
+        // DELETE a product from server-side to database
+        app.delete('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.deleteOne(query);
+            console.log('One product is deleted');
             res.send(result);
         });
     }

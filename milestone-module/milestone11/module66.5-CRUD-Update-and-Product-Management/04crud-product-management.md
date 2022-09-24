@@ -39,13 +39,17 @@ Table of Contents
     - [`Full Code Example`](#full-code-example)
       - [`index.js`](#indexjs)
       - [`AddProducts.js`](#addproductsjs)
-  - [Create a Custom Hook](#create-a-custom-hook)
-    - [`Create Custom Hook called useDisplayProducts.js`](#create-custom-hook-called-usedisplayproductsjs)
-    - [`Uses of Custom Hook`](#uses-of-custom-hook)
-  - [Display all products on Manage-Products Route](#display-all-products-on-manage-products-route)
-    - [`Product.js` (Modified)](#productjs-modified)
-    - [`ManageProducts.js` (Modified)](#manageproductsjs-modified)
-    - [`ManageProductsDisplay.js` (Created)](#manageproductsdisplayjs-created)
+  - [Manage Products and Explore DELETE API](#manage-products-and-explore-delete-api)
+    - [`Create a Custom Hook`](#create-a-custom-hook)
+      - [`Create Custom Hook called useDisplayProducts.js`](#create-custom-hook-called-usedisplayproductsjs)
+      - [`Uses of Custom Hook`](#uses-of-custom-hook)
+    - [Display all products on Manage-Products Route for Deleting](#display-all-products-on-manage-products-route-for-deleting)
+      - [`Product.js` (Modified)](#productjs-modified)
+      - [`ManageProducts.js` (Modified)](#manageproductsjs-modified)
+      - [`ManageProductsDisplay.js` (Created)](#manageproductsdisplayjs-created)
+    - [`DELETE a product from server-side to database`](#delete-a-product-from-server-side-to-database)
+    - [`DELETE a product from client-side to server-side`](#delete-a-product-from-client-side-to-server-side)
+    - [`Full Code Example`](#full-code-example-1)
 
 # CRUD Product Management
 
@@ -815,9 +819,11 @@ export default AddProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
-## Create a Custom Hook
+## Manage Products and Explore DELETE API
 
-### `Create Custom Hook called useDisplayProducts.js`
+### `Create a Custom Hook`
+
+#### `Create Custom Hook called useDisplayProducts.js`
 
 ``` JavaScript
 // In useDisplayProducts.js
@@ -831,7 +837,7 @@ const useDisplayProducts = () => {
         fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data));
-    }, []);
+    }, [products]);
 
     return [products, setProducts];
 }
@@ -841,7 +847,7 @@ export default useDisplayProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `Uses of Custom Hook`
+#### `Uses of Custom Hook`
 
 ``` JavaScript
 // In Home.js
@@ -871,9 +877,9 @@ export default ManageProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
-## Display all products on Manage-Products Route
+### Display all products on Manage-Products Route for Deleting
 
-### `Product.js` (Modified)
+#### `Product.js` (Modified)
 
 ``` JavaScript
 // In Product.js
@@ -885,7 +891,7 @@ import { Link } from 'react-router-dom';
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `ManageProducts.js` (Modified)
+#### `ManageProducts.js` (Modified)
 
 ``` JavaScript
 // In ManageProducts.js
@@ -900,7 +906,7 @@ const ManageProducts = () => {
     return (
         <div className='my-3'>
             <h2>Manage Products: {products.length}</h2>
-            <Row xs={1} md={1} lg={1} style={{margin: '0 25%'}} className="g-4 my-3">
+            <Row xs={1} md={1} lg={1} className="g-4 my-3 mx-2 mx-sm-5 mx-md-5">
                 {
                     products.map(product => <ManageProductsDisplay
                         key={product._id}
@@ -917,7 +923,7 @@ export default ManageProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `ManageProductsDisplay.js` (Created)
+#### `ManageProductsDisplay.js` (Created)
 
 ``` JavaScript
 // In ManageProductsDisplay.js
@@ -931,7 +937,7 @@ const ManageProductsDisplay = ({ product }) => {
         <div>
             <Col>
                 <Card>
-                    <div className='d-flex flex-nowrap align-items-center justify-content-around'>
+                    <div className='d-flex flex-nowrap flex-md-nowrap flex-lg-nowrap align-items-center justify-content-around'>
                         <Card.Img className='w-25 mx-5' variant="top" src={img} alt={name} />
                         <Card.Body>
                             <Card.Title>{name}</Card.Title>
@@ -948,4 +954,164 @@ export default ManageProductsDisplay;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+### `DELETE a product from server-side to database`
+
+``` JavaScript
+// In index.js
+
+const { ObjectId } = require('mongodb');
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // DELETE a product from server-side to database
+        app.delete('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.deleteOne(query);
+            console.log('One product is deleted');
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `DELETE a product from client-side to server-side`
+
+``` JavaScript
+// In ManageProductsDisplay.js
+
+import React from 'react';
+import { Card, Col } from 'react-bootstrap';
+import useDisplayProducts from '../../hooks/useDisplayProducts';
+
+const ManageProductsDisplay = ({ product }) => {
+    const [products, setProducts] = useDisplayProducts();
+    const { img, name } = product;
+
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure?');
+        if (proceed) {
+            console.log('Deleting product with id = ', id);
+            
+            // delete a product in client-side and send to the server-side
+            const url = `http://localhost:5000/product/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                // console.log(data?.deletedCount);
+                if (data.deletedCount > 0) {
+                    console.log('Deleted');
+                    // remove deleted service from the state in client-side for better user experience
+                    const remaining = products.filter(product => product._id !== id);
+                    setProducts(remaining);
+                }
+            });
+        }
+    }
+
+    return (
+        <div>
+            <Col>
+                <Card>
+                    <div className='d-flex flex-wrap flex-md-nowrap flex-lg-nowrap align-items-center justify-content-around'>
+                        <Card.Img className='w-25 mx-5' variant="top" src={img} alt={name} />
+                        <Card.Body>
+                            <Card.Title>{name}</Card.Title>
+                            <button className='btn btn-outline-success w-50 mx-auto mb-2' onClick={() => handleDelete(product._id)}>Delete</button>
+                        </Card.Body>
+                    </div>
+                </Card>
+            </Col>
+        </div>
+    );
+};
+
+export default ManageProductsDisplay;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async (req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+
+        // POST a product form server-side to database
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            console.log('Adding a new product', newProduct);
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
+
+        // DELETE a product from server-side to database
+        app.delete('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.deleteOne(query);
+            console.log('One product is deleted');
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running CRUD-Product-Management Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 

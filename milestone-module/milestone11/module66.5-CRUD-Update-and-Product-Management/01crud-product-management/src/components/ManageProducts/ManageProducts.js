@@ -8,7 +8,7 @@ const ManageProducts = () => {
     return (
         <div className='my-3'>
             <h2>Manage Products: {products.length}</h2>
-            <Row xs={1} md={1} lg={1} style={{margin: '0 25%'}} className="g-4 my-3">
+            <Row xs={1} md={1} lg={1} className="g-4 my-3 mx-2 mx-sm-5 mx-md-5">
                 {
                     products.map(product => <ManageProductsDisplay
                         key={product._id}
