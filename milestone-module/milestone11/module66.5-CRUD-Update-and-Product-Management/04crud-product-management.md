@@ -1239,7 +1239,7 @@ const UpdateProducts = () => {
 
     return (
         <div className='w-50 mx-auto my-5'>
-            <h2>Update Product: {id}</h2>
+            <h2>Update Product: {product.name}</h2>
             <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
                 <input value={product.name} placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
                 <input value={product.price} placeholder='Price' type="number" {...register("price", { required: true })} />
@@ -1267,9 +1267,40 @@ export default UpdateProducts;
 ### `Update a product in server-side and send to the database`
 
 ``` JavaScript
-// In 
+// In index.js
 
+const { ObjectId } = require('mongodb');
 
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // Update a product in server-side and send to the database
+        app.put('product/:id', async(req, res) => {
+            const id = req.params.id;
+            const data = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    name: data.name,
+                    price: data.price,
+                    quantity: data.quantity,
+                    img: data.img
+                },
+            };
+            const result = await productCollection.updateOne(filter, updatedDoc, options);
+            console.log('Product is updated');
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
 ```
 
 **[🔼Back to Top](#table-of-contents)**
@@ -1277,9 +1308,53 @@ export default UpdateProducts;
 ### `Update a particular product (id-wise) from client-side and send to the server-side`
 
 ``` JavaScript
-// In 
+// In UpdateProducts.js
 
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import useLoadSingleProduct from '../../hooks/useLoadSingleProduct';
 
+const UpdateProducts = () => {
+    const { register, handleSubmit } = useForm();
+    const { id } = useParams();
+    const [product] = useLoadSingleProduct(id);
+    // console.log(product);
+
+    const onSubmit = data => {
+        console.log(data);
+
+        // Update a product in client-side and send to the server-side
+        const url = `http://localhost:5000/product/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('success', data);
+            alert('Product updated successfully!!!');
+        });
+    }
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2>Update Product: {product.name}</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input value={product.name} placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <input value={product.price} placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input value={product.quantity} placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
+                <input value={product.img} placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Product" />
+            </form>
+        </div>
+    );
+};
+
+export default UpdateProducts;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
@@ -1287,11 +1362,96 @@ export default UpdateProducts;
 ### `Full Code Example`
 
 ``` JavaScript
-// In 
+// In index.js
 
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require('dotenv').config();
+const port = process.env.PORT || 5000;
 
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i9tckrt.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async (req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+
+        // POST a product form server-side to database
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            console.log('Adding a new product', newProduct);
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        });
+
+        // DELETE a product from server-side to database
+        app.delete('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.deleteOne(query);
+            console.log('One product is deleted');
+            res.send(result);
+        });
+
+        // Load a particular product data from database - (id-wise)
+        app.get('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.findOne(query);
+            res.send(result);
+        });
+
+        // Update a product in server-side and send to the database
+        app.put('product/:id', async(req, res) => {
+            const id = req.params.id;
+            const data = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    name: data.name,
+                    price: data.price,
+                    quantity: data.quantity,
+                    img: data.img
+                },
+            };
+            const result = await productCollection.updateOne(filter, updatedDoc, options);
+            console.log('Product is updated');
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Running CRUD-Product-Management Server');
+});
+
+app.listen(port, () => {
+    console.log('Listening to port', port);
+});
 ```
 
 **[🔼Back to Top](#table-of-contents)**
-
 
