@@ -40,16 +40,26 @@ Table of Contents
       - [`index.js`](#indexjs)
       - [`AddProducts.js`](#addproductsjs)
   - [Manage Products and Explore DELETE API](#manage-products-and-explore-delete-api)
-    - [`Create a Custom Hook`](#create-a-custom-hook)
-      - [`Create Custom Hook called useDisplayProducts.js`](#create-custom-hook-called-usedisplayproductsjs)
+    - [`Create a Custom Hook with dependency`](#create-a-custom-hook-with-dependency)
+      - [`Create Custom Hook with dependency called useDisplayProducts.js`](#create-custom-hook-with-dependency-called-usedisplayproductsjs)
       - [`Uses of Custom Hook`](#uses-of-custom-hook)
-    - [Display all products on Manage-Products Route for Deleting](#display-all-products-on-manage-products-route-for-deleting)
+    - [`Display all products on Manage-Products Route for Deleting`](#display-all-products-on-manage-products-route-for-deleting)
       - [`Product.js` (Modified)](#productjs-modified)
       - [`ManageProducts.js` (Modified)](#manageproductsjs-modified)
       - [`ManageProductsDisplay.js` (Created)](#manageproductsdisplayjs-created)
     - [`DELETE a product from server-side to database`](#delete-a-product-from-server-side-to-database)
     - [`DELETE a product from client-side to server-side`](#delete-a-product-from-client-side-to-server-side)
     - [`Full Code Example`](#full-code-example-1)
+  - [Load single product data by using id and Setup form's field value](#load-single-product-data-by-using-id-and-setup-forms-field-value)
+    - [`Create a form using react-hook-form`](#create-a-form-using-react-hook-form)
+    - [`Load a particular product data from database in client-side` - (id-wise)](#load-a-particular-product-data-from-database-in-client-side---id-wise)
+    - [`Create a custom hook with dependency to load individual product data` - (id-wise)](#create-a-custom-hook-with-dependency-to-load-individual-product-data---id-wise)
+    - [`Modify form to setup form's field value for individual product` - (id-wise)](#modify-form-to-setup-forms-field-value-for-individual-product---id-wise)
+  - [Update a single product info according to id](#update-a-single-product-info-according-to-id)
+    - [`Update a single document of Database` (Documentation)](#update-a-single-document-of-database-documentation)
+    - [`Update a product in server-side and send to the database`](#update-a-product-in-server-side-and-send-to-the-database)
+    - [`Update a particular product (id-wise) from client-side and send to the server-side`](#update-a-particular-product-id-wise-from-client-side-and-send-to-the-server-side)
+    - [`Full Code Example`](#full-code-example-2)
 
 # CRUD Product Management
 
@@ -821,9 +831,9 @@ export default AddProducts;
 
 ## Manage Products and Explore DELETE API
 
-### `Create a Custom Hook`
+### `Create a Custom Hook with dependency`
 
-#### `Create Custom Hook called useDisplayProducts.js`
+#### `Create Custom Hook with dependency called useDisplayProducts.js`
 
 ``` JavaScript
 // In useDisplayProducts.js
@@ -877,7 +887,7 @@ export default ManageProducts;
 
 **[🔼Back to Top](#table-of-contents)**
 
-### Display all products on Manage-Products Route for Deleting
+### `Display all products on Manage-Products Route for Deleting`
 
 #### `Product.js` (Modified)
 
@@ -1110,6 +1120,176 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log('Listening to port', port);
 });
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Load single product data by using id and Setup form's field value
+
+### `Create a form using react-hook-form`
+
+``` JavaScript
+// In UpdateProducts.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+
+const UpdateProducts = () => {
+    const { register, handleSubmit } = useForm();
+    const { id } = useParams();
+
+    const onSubmit = data => {
+        console.log(data);
+    }
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2>Update Product: {id}</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <input placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
+                <input placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Product" />
+            </form>
+        </div>
+    );
+};
+
+export default UpdateProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Load a particular product data from database in client-side` - (id-wise)
+
+``` JavaScript
+// In index.js
+
+const { ObjectId } = require('mongodb');
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('crudProductManagement').collection('product');
+
+        // Load a particular product data from database - (id-wise)
+        app.get('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.findOne(query);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create a custom hook with dependency to load individual product data` - (id-wise)
+
+``` JavaScript
+// In useLoadSingleProduct.js
+
+const { useState, useEffect } = require("react")
+
+const useLoadSingleProduct = (id) => {
+    const [product, setProduct] = useState({});
+
+    useEffect( () => {
+        const url = `http://localhost:5000/product/${id}`;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setProduct(data));
+    }, [id]);
+
+    return [product, setProduct];
+}
+
+export default useLoadSingleProduct;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modify form to setup form's field value for individual product` - (id-wise)
+
+``` JavaScript
+// In UpdateProducts.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import useLoadSingleProduct from '../../hooks/useLoadSingleProduct';
+
+const UpdateProducts = () => {
+    const { register, handleSubmit } = useForm();
+    const { id } = useParams();
+    const [product, setProduct] = useLoadSingleProduct(id);
+    console.log(product);
+
+    const onSubmit = data => {
+        console.log(data);
+    }
+
+    return (
+        <div className='w-50 mx-auto my-5'>
+            <h2>Update Product: {id}</h2>
+            <form className='d-flex flex-column gap-2' onSubmit={handleSubmit(onSubmit)}>
+                <input value={product.name} placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
+                <input value={product.price} placeholder='Price' type="number" {...register("price", { required: true })} />
+                <input value={product.quantity} placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
+                <input value={product.img} placeholder='Photo URL' type="text" {...register("img", { required: true })} />
+                <input type="submit" value="Add Product" />
+            </form>
+        </div>
+    );
+};
+
+export default UpdateProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Update a single product info according to id
+
+### `Update a single document of Database` (Documentation)
+
+- MongoDB Documentation > Usage Examples > Update & Replace Operations > [Update a Document](https://www.mongodb.com/docs/drivers/node/current/usage-examples/updateOne/ "Update a Document - mongodb.com")
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Update a product in server-side and send to the database`
+
+``` JavaScript
+// In 
+
+
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Update a particular product (id-wise) from client-side and send to the server-side`
+
+``` JavaScript
+// In 
+
+
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+``` JavaScript
+// In 
+
+
 ```
 
 **[🔼Back to Top](#table-of-contents)**

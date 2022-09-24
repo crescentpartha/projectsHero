@@ -44,6 +44,14 @@ async function run() {
             console.log('One product is deleted');
             res.send(result);
         });
+
+        // Load a particular product data from database - (id-wise)
+        app.get('/product/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productCollection.findOne(query);
+            res.send(result);
+        });
     }
     finally {
         // await client.close(); // commented, if I want to keep connection active;
