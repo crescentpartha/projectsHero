@@ -42,6 +42,10 @@ Table of Contents
   - [Create a Custom Hook](#create-a-custom-hook)
     - [`Create Custom Hook called useDisplayProducts.js`](#create-custom-hook-called-usedisplayproductsjs)
     - [`Uses of Custom Hook`](#uses-of-custom-hook)
+  - [Display all products on Manage-Products Route](#display-all-products-on-manage-products-route)
+    - [`Product.js` (Modified)](#productjs-modified)
+    - [`ManageProducts.js` (Modified)](#manageproductsjs-modified)
+    - [`ManageProductsDisplay.js` (Created)](#manageproductsdisplayjs-created)
 
 # CRUD Product Management
 
@@ -863,6 +867,84 @@ const ManageProducts = () => {
 };
 
 export default ManageProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Display all products on Manage-Products Route
+
+### `Product.js` (Modified)
+
+``` JavaScript
+// In Product.js
+
+import { Link } from 'react-router-dom';
+
+<Link className='btn btn-outline-success w-50 mx-auto mb-2' to='/manageProducts'>Delete</Link>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `ManageProducts.js` (Modified)
+
+``` JavaScript
+// In ManageProducts.js
+
+import React from 'react';
+import { Row } from 'react-bootstrap';
+import useDisplayProducts from '../../hooks/useDisplayProducts';
+import ManageProductsDisplay from './ManageProductsDisplay';
+
+const ManageProducts = () => {
+    const [products] = useDisplayProducts();
+    return (
+        <div className='my-3'>
+            <h2>Manage Products: {products.length}</h2>
+            <Row xs={1} md={1} lg={1} style={{margin: '0 25%'}} className="g-4 my-3">
+                {
+                    products.map(product => <ManageProductsDisplay
+                        key={product._id}
+                        product={product}
+                    ></ManageProductsDisplay>)
+                }
+            </Row>
+        </div>
+    );
+};
+
+export default ManageProducts;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `ManageProductsDisplay.js` (Created)
+
+``` JavaScript
+// In ManageProductsDisplay.js
+
+import React from 'react';
+import { Card, Col } from 'react-bootstrap';
+
+const ManageProductsDisplay = ({ product }) => {
+    const { img, name } = product;
+    return (
+        <div>
+            <Col>
+                <Card>
+                    <div className='d-flex flex-nowrap align-items-center justify-content-around'>
+                        <Card.Img className='w-25 mx-5' variant="top" src={img} alt={name} />
+                        <Card.Body>
+                            <Card.Title>{name}</Card.Title>
+                            <button className='btn btn-outline-success w-50 mx-auto mb-2'>Delete</button>
+                        </Card.Body>
+                    </div>
+                </Card>
+            </Col>
+        </div>
+    );
+};
+
+export default ManageProductsDisplay;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
