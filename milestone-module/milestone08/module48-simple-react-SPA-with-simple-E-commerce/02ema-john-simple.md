@@ -1,6 +1,95 @@
-# Module 48: Simple React SPA with Simple E-commerce
+Table of Contents
+---
 
-# `02ema-john-simple`
+- [Module 48: Simple React SPA with Simple E-commerce](#module-48-simple-react-spa-with-simple-e-commerce)
+  - [48.1 Module Introduction, site resource, figma](#481-module-introduction-site-resource-figma)
+  - [48.2 Header Component, logo position, set nav menu](#482-header-component-logo-position-set-nav-menu)
+  - [48.3 Shop Component, component layout, display data](#483-shop-component-component-layout-display-data)
+  - [48.4 Product Component, component layout, display data](#484-product-component-component-layout-display-data)
+  - [48.5 Style Product Cart, style debug and button position](#485-style-product-cart-style-debug-and-button-position)
+  - [48.6 (advanced) set eventhandler, pass eventhandler to Child](#486-advanced-set-eventhandler-pass-eventhandler-to-child)
+  - [48.7 (advanced) Cart state setup, update cart and total on click](#487-advanced-cart-state-setup-update-cart-and-total-on-click)
+  - [48.8 Install external packages, react-fontawesome, display icon](#488-install-external-packages-react-fontawesome-display-icon)
+  - [48.9 Simple React SPA module summary](#489-simple-react-spa-module-summary)
+  - [48.10 (Bonus) Deploy Simple React website to Netlify](#4810-bonus-deploy-simple-react-website-to-netlify)
+  - [Quiz 48](#quiz-48)
+- [Module 49: (advanced) Cart calculation, Save and Retrieve cart](#module-49-advanced-cart-calculation-save-and-retrieve-cart)
+  - [49.1 Module Introduction and simple ema-john recap](#491-module-introduction-and-simple-ema-john-recap)
+  - [49.2 Run Github clone react project, Create Cart Component](#492-run-github-clone-react-project-create-cart-component)
+    - [`Run Github clone react Project:`](#run-github-clone-react-project)
+    - [`Access the Github clone react Project:`](#access-the-github-clone-react-project)
+    - [`Create Cart Component:`](#create-cart-component)
+  - [49.3 Calculate shopping cart price, shipping and tax with toFixed](#493-calculate-shopping-cart-price-shipping-and-tax-with-tofixed)
+    - [`Calculate shopping cart price:`](#calculate-shopping-cart-price)
+  - [49.4 Setting the cart data on the localStorage for future retrieve](#494-setting-the-cart-data-on-the-localstorage-for-future-retrieve)
+    - [`Setup cart data`](#setup-cart-data)
+    - [`Use fakedb.js in Shop.js file`](#use-fakedbjs-in-shopjs-file)
+  - [49.5 (advanced) Load cart from local storage, find product](#495-advanced-load-cart-from-local-storage-find-product)
+  - [49.6 (advanced) Display local storage cart to the UI](#496-advanced-display-local-storage-cart-to-the-ui)
+  - [49.7 (super advanced) Handle quantity from storage to cart](#497-super-advanced-handle-quantity-from-storage-to-cart)
+  - [49.8 (advanced) Add to the cart with quantity and explanation](#498-advanced-add-to-the-cart-with-quantity-and-explanation)
+  - [49.9 Module summary, deploy, code recap](#499-module-summary-deploy-code-recap)
+  - [Quiz 49](#quiz-49)
+- [Module 52: ema-john with router and custom hook](#module-52-ema-john-with-router-and-custom-hook)
+  - [53.0 Text Instruction](#530-text-instruction)
+    - [`Follow the five Steps to set-up the React-Router`](#follow-the-five-steps-to-set-up-the-react-router)
+  - [53.1 Install React router and implement simple router setup](#531-install-react-router-and-implement-simple-router-setup)
+    - [`Install React Router dependencies:`](#install-react-router-dependencies)
+    - [`Connect the URL:`](#connect-the-url)
+    - [`Replace the default markup with some routes:`](#replace-the-default-markup-with-some-routes)
+    - [`Create your route components & Link them in Header.js file:`](#create-your-route-components--link-them-in-headerjs-file)
+  - [53.2 Recap React Router setup and intro to order review page](#532-recap-react-router-setup-and-intro-to-order-review-page)
+  - [53.3 Write useState and useEffect in a different file and import it (Custom Hook)](#533-write-usestate-and-useeffect-in-a-different-file-and-import-it-custom-hook)
+    - [`Product Load in different outside file:`](#product-load-in-different-outside-file)
+    - [`Create a Custom Hook without dependency:`](#create-a-custom-hook-without-dependency)
+    - [`JavaScript function usually return only one element:`](#javascript-function-usually-return-only-one-element)
+    - [`Use a Custom Hook:`](#use-a-custom-hook)
+  - [53.4 Create useCart with products dependency and use it](#534-create-usecart-with-products-dependency-and-use-it)
+    - [`Create a Custom Hook with dependency:`](#create-a-custom-hook-with-dependency)
+    - [`Use a Custom Hook:`](#use-a-custom-hook-1)
+  - [53.5 Create review page structure and Display Shopping cart](#535-create-review-page-structure-and-display-shopping-cart)
+    - [__Adding a CSS Modules Stylesheet:__](#adding-a-css-modules-stylesheet)
+  - [53.6 Implement Review Item style with a lot of flex](#536-implement-review-item-style-with-a-lot-of-flex)
+    - [`Ternary Operation:` (___if name length is greater than 20___)](#ternary-operation-if-name-length-is-greater-than-20)
+    - [`Implement ReviewItem style:`](#implement-reviewitem-style)
+  - [53.7 More style of Review item and apply Remove Item handler](#537-more-style-of-review-item-and-apply-remove-item-handler)
+    - [`Add Remove Item Handler:` ___handleRemoveProduct___](#add-remove-item-handler-handleremoveproduct)
+    - [`More style added in ReviewItem:`](#more-style-added-in-reviewitem)
+  - [53.8 Make Data consistent across UI and explore children props](#538-make-data-consistent-across-ui-and-explore-children-props)
+    - [`Children Props:`](#children-props)
+  - [53.9 Module Summary, use navigate and recap custom hook](#539-module-summary-use-navigate-and-recap-custom-hook)
+    - [useNavigate():](#usenavigate)
+  - [Quiz 53](#quiz-53)
+- [Module 59: Private Route with Ema-John](#module-59-private-route-with-ema-john)
+  - [59.1 Module Introduction firebase setup and git clone](#591-module-introduction-firebase-setup-and-git-clone)
+    - [`If Clone any React Project:` (___Need to follow some steps___)](#if-clone-any-react-project-need-to-follow-some-steps)
+    - [`Authentication Steps or Auth_steps:`](#authentication-steps-or-auth_steps)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now--hosting--get-started)
+    - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times)
+  - [59.2 Create Login component and style Login form](#592-create-login-component-and-style-login-form)
+  - [59.3 Style sign up component and access email, password using handler](#593-style-sign-up-component-and-access-email-password-using-handler)
+  - [59.4 Install React firebase hook implement create user](#594-install-react-firebase-hook-implement-create-user)
+  - [59.5 Implement Login and redirect user after login](#595-implement-login-and-redirect-user-after-login)
+  - [59.6 Create Require Auth and Navigate from location](#596-create-require-auth-and-navigate-from-location)
+    - [`Create RequireAuth component`](#create-requireauth-component)
+    - [`Wrap Inventory component by RequireAuth component for restricted access`](#wrap-inventory-component-by-requireauth-component-for-restricted-access)
+    - [`Redirected to the expected location`](#redirected-to-the-expected-location)
+    - [`Conditional Rendering to toggle Login and Sign Out button`](#conditional-rendering-to-toggle-login-and-sign-out-button)
+  - [59.7 Implement Sign out and Create a shipment form](#597-implement-sign-out-and-create-a-shipment-form)
+    - [`Implement Sign Out from firebase/auth`](#implement-sign-out-from-firebaseauth)
+    - [`Change navigate notFound to shipment route`](#change-navigate-notfound-to-shipment-route)
+    - [`Wrap Shipment component by RequireAuth component for restricted access`](#wrap-shipment-component-by-requireauth-component-for-restricted-access)
+    - [`Create Shipment component like SignUp component`](#create-shipment-component-like-signup-component)
+  - [59.8 Module Summary and list to implement auth](#598-module-summary-and-list-to-implement-auth)
+    - [`Make Email field readOnly and set value={user?.email}`](#make-email-field-readonly-and-set-valueuseremail)
+  - [59.9 (bonus video) Host your react app to firebase](#599-bonus-video-host-your-react-app-to-firebase)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now)
+    - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times-1)
+  - [Quiz 59](#quiz-59)
+    - [`Some Notes:`](#some-notes)
+
+
+# Module 48: Simple React SPA with Simple E-commerce
 
 ## 48.1 Module Introduction, site resource, figma
 
@@ -11,6 +100,8 @@
 ⫸ __API Data Load:__
 - __products.json__ in __public__ folder
 - https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 48.2 Header Component, logo position, set nav menu
 
@@ -27,6 +118,8 @@
     color: orange;
 }
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 48.3 Shop Component, component layout, display data
 
@@ -55,6 +148,8 @@ const Shop = () => {
     );
 };
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 48.4 Product Component, component layout, display data
 
@@ -88,6 +183,8 @@ const Product = (props) => {
 };
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 48.5 Style Product Cart, style debug and button position
 
 - style __debug__ from using __chrome dev tools__
@@ -103,12 +200,16 @@ const Product = (props) => {
 }
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 48.6 (advanced) set eventhandler, pass eventhandler to Child
 
 - If we click __"Add to Cart"__ button, we can value update inside the __same component__.
 - However, we can send data Parent component to Child component because props follows __water flow__ system.
 - But, In React, we can't send data Child component to Parent component because React is __Unidirectional__. 
+
 ---
+
 - In React, We can pass data from __up to down__
 - EventHandler need to puts in shop component sothat we can pass data as a props in a cart.
 - We can pass data like __(object, function, EventHandler)__ as a props `<Product handleAddToCart={handleAddToCart}></Product>`
@@ -135,6 +236,8 @@ const handleAddToCart = (product) => {
 <p align="center">
     <img src='./images/EventHandler.drawio.svg' alt="EventHandler Call from Child Component" />
 </p>
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 48.7 (advanced) Cart state setup, update cart and total on click
 
@@ -216,6 +319,8 @@ const Product = ({product, handleAddToCart}) => {
 };
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 48.8 Install external packages, react-fontawesome, display icon
 
 ⫸ [__heroicons__](https://heroicons.com/ "Beautiful hand-crafted SVG icons") | [__Heroicons__](https://heroicons.dev/ "heroicons.dev")
@@ -257,46 +362,52 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 ```
 - Change __favicon.ico__ and __title__ of the page.
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 48.9 Simple React SPA module summary
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 48.10 (Bonus) Deploy Simple React website to Netlify
 
 - `To Deploy:` [Netlify.com](https://www.netlify.com/) → sites → Drag & Drop (__build__ folder) → Click Link → get React App
 - `To Modify:` Change → npm run build → Drag & Drop (build folder) → Click shareable Link → get React App
 
-## Quiz:
+**[🔼Back to Top](#table-of-contents)**
 
-1. What is the purpose of the key prop used in react?
-   - It can efficiently identify the changes in virtual DOM
-2. How will you import useState in React?
+## Quiz 48
+
+1. What is the ___purpose of the key prop___ used in react?
+   - `It can efficiently identify the changes in virtual DOM`
+2. How will you ___import useState___ in React?
    - `import { useState } from 'react'`
 3. `const [count, setCount] = useState(0)` → What should you do to increase the count state?
    - `setCount(count+1)`
-4. `const [products, setProducts] = useState( _?_ )` → What will be the default value of the above state  If you want to store an array of objects from a server and set it to the state?
-   - __[]__
-5. Can we pass a function through props?
-   - Yes
-6. If A and B are siblings of components that share a common state, where should you declare the state?
-   - In their Parent Component
-7. Where did we declare  const [products, setProducts] = useState( [ ] ) in the Ema John Project?
-   - In Shop.js
-8. How do we pass data from a Child to a parent Component using props?
-   - No, you can not sent data from child to parent using props
-9. What does the package.json file do? (Search on Google Mama)
-   - It records important metadata about a project
-10. Which is the correct way to call the function inside a button in React?
+4. `const [products, setProducts] = useState( _?_ )` → What will be the ___default value___ of the above state  If you want to store an ___array of objects___ from a server and set it to the state?
+   - `[]`
+5. Can we ___pass a function___ through ___props___?
+   - `Yes`
+6. If ___A and B___ are ___siblings___ of components that ___share a common state___, where should you ___declare the state___?
+   - `In their Parent Component`
+7. Where did we ___declare___  `const [products, setProducts] = useState([])` in the ___Ema John Project___?
+   - `In Shop.js`
+8. How do we ___pass data___ from ___a Child to a parent___ Component using props?
+   - `No, you can not sent data from child to parent using props`
+9. What does the `package.json` file do? (Search on Google Mama)
+   - `It records important metadata about a project`
+10. Which is the ___correct way___ to ___call the function inside a button___ in React?
     - `<button onClick={() => handleAdd(item)}> </button>`
 ``` JavaScript
 const handleAdd( item ){
     console.log(item)  
 }
 ```
-11.  How will you set a clickhandler on a Button using React?
+11.  How will you ___set a click handler___ on a Button using React?
      - `onClick`
 ``` JavaScript
 <button ________= {handleClick}>Click me</button>
 ```
-12. How would you import a App.css file staying in the same folder of the App.js file? (if needed check the React Project that you have created)
+12. How would you ___import a App.css file___ staying in the ___same folder___ of the App.js file? (if needed check the React Project that you have created)
     - `"./App.css";`
 ``` JavaScript
 import ______?______;
@@ -304,19 +415,23 @@ import ______?______;
 13. Which ReactJS function ___renders HTML___ to the web page?
     - `ReactDOM.render()`
 14. What does ___transpile jsx___ in react?
-    - ___Babel___
+    - `Babel`
 15. ___Where___ we can ___call react hooks___?
-    - ___At the top level of React function___
+    - `At the top level of React function`
 
----
+**[🔼Back to Top](#table-of-contents)**
+
+<br /> <br />
 
 # Module 49: (advanced) Cart calculation, Save and Retrieve cart
 
 ## 49.1 Module Introduction and simple ema-john recap
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 49.2 Run Github clone react project, Create Cart Component
 
-⫸ `Run Github clone react Project:`
+### `Run Github clone react Project:`
 - If we ___clone any react repository___ from github and try to execute command `npm start`, It will give an ___error message___.
 - If we clone any react repository, then we need to `install these dependencies`.
 - We don't find `node_modules` folder when we clone react repository.
@@ -325,9 +440,9 @@ import ______?______;
 - After run `npm install`, we can run `npm start` command.
 - After that, we can also change our ___project/folder name___.
 
----
+**[🔼Back to Top](#table-of-contents)**
 
-⫸ `Access the Github clone react Project:`
+### `Access the Github clone react Project:`
 - When we `push` any clone repository into Github, It shows an error message that you ___don't have access___. 
 - Run `git remote -v`, to check the ___origin___ where to fetch and where did push.
 - If we want to send these into another Repository: (search: [__git remote set-url origin__](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories "Managing remote repositories | Switching remote URLs from SSH to HTTPS"))
@@ -335,9 +450,9 @@ import ______?______;
   - run `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
   - Then, run `git remote -v` to verify that the remote URL has changed.
 
----
+**[🔼Back to Top](#table-of-contents)**
 
-⫸ `Create Cart Component:`
+### `Create Cart Component:`
 
 ``` JavaScript
 <div className="cart-container">
@@ -356,9 +471,11 @@ const Cart = ({cart}) => {
 };
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 49.3 Calculate shopping cart price, shipping and tax with toFixed
 
-⫸ `Calculate shopping cart price:`
+### `Calculate shopping cart price:`
 - 2 ways: `Reduce` & `for of` loop
 
 ``` JavaScript
@@ -391,7 +508,11 @@ const Cart = (props) => {
 - [JavaScript two decimal places without rounding](https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding "stackoverflow.com")
 - [JavaScript toFixed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed "Number.prototype.toFixed() - MDN web docs")
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 49.4 Setting the cart data on the localStorage for future retrieve
+
+### `Setup cart data`
 
 ``` JavaScript
 const Cart = (props) => {
@@ -406,7 +527,10 @@ const Cart = (props) => {
     );
 };
 ```
-⫸ `Use fakedb.js in Shop.js file:`
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Use fakedb.js in Shop.js file`
 
 ``` JavaScript
 import { addToDb } from '../../utilities/fakedb';
@@ -417,6 +541,8 @@ const Shop = () => {
     }
 };
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 49.5 (advanced) Load cart from local storage, find product
 
@@ -454,6 +580,8 @@ useEffect( () => {
         }
     }, [])
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 49.6 (advanced) Display local storage cart to the UI
 
@@ -501,6 +629,8 @@ const Shop = () => {
 };
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 49.7 (super advanced) Handle quantity from storage to cart
 
 - Use `for in` loop, if it is ___object___.
@@ -524,6 +654,8 @@ const Cart = (props) => {
     );
 };
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 49.8 (advanced) Add to the cart with quantity and explanation
 
@@ -551,11 +683,15 @@ const Shop = () => {
 ```
 - To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-8-advanced-add-to-the-cart-with-quantity-and-explanation?t=532s "Add to the cart with quantity and explanation"): Go to __M49.8__, Time Start: __8:52__
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 49.9 Module summary, deploy, code recap
 
 - To Watch the [__visual explanation__](https://web.programming-hero.com/web-5/video/web-5-49-9-module-summary-deploy-code-recap "Module Summary: How whole process works"): Go to __M49.9__, Time Start: __5:45__
 
-## `Quiz:`
+**[🔼Back to Top](#table-of-contents)**
+
+## Quiz 49
 
 1. What ___type of things___ can we ___send via props___?
    - ___array, object, function, event handler___
@@ -620,28 +756,36 @@ const Phone = (props) => {
 }
 ```
 
----
+**[🔼Back to Top](#table-of-contents)**
+
+<br /><br/>
 
 # Module 52: ema-john with router and custom hook
 
 ## 53.0 Text Instruction
 
-⫸ `Follow the five Steps to set-up the React-Router:`
+### `Follow the five Steps to set-up the React-Router`
 1. Use ___BrowserRouter___ in ___index.js___
 2. Set ___Routes___ in ___App.js___
 3. Set many ___Route___ inside the ___Routes___
 4. Route includes ___path___
 5. Route also includes a __prop__ called ___element___
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.1 Install React router and implement simple router setup
 
-⫸ `Install React Router dependencies:`
+### `Install React Router dependencies:`
 
 ``` Terminal
 npm install react-router-dom@6
 ```
 
-⫸ `Connect the URL:` import ___BrowserRouter___ from ___react-router-dom___ near the top of your file and ___wrap___ your app in a `<BrowserRouter>`:
+**[🔼Back to Top](#table-of-contents)**
+
+### `Connect the URL:` 
+
+import ___BrowserRouter___ from ___react-router-dom___ near the top of your file and ___wrap___ your app in a `<BrowserRouter>`:
 
 ``` JavaScript
 // In src/index.js
@@ -657,7 +801,9 @@ root.render(
 );
 ```
 
-⫸ `Replace the default markup with some routes:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Replace the default markup with some routes:`
 
 ``` JavaScript
 // In src/App.js
@@ -691,7 +837,9 @@ function App() {
 export default App;
 ```
 
-⫸ `Create your route components & Link them in Header.js file:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create your route components & Link them in Header.js file:`
 
 ``` JavaScript
 // In Header.js
@@ -718,21 +866,26 @@ const Header = () => {
 export default Header;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.2 Recap React Router setup and intro to order review page
 
 ⫸ `Order Summary from Shop page, we need to bring it in Orders page:` (___2 ways to solve it___)
 1. We ___loaded data___ according to ___Id___ in a component, this time we do it ___outside of the component___.
 2. Use ___Redux___ 
 
+**[🔼Back to Top](#table-of-contents)**
 
 ## 53.3 Write useState and useEffect in a different file and import it (Custom Hook)
 
-⫸ `Product Load in different outside file:`
+### `Product Load in different outside file:`
 - Increase ___code reusability___
   - Same code implement in different different file easily.
 - Reduce ___code duplication/Repetition___ (DRY - Don't Repeat Yourself)
 
-⫸ `Create a Custom Hook without dependency:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create a Custom Hook without dependency:`
 - A ___custom Hook___ is a JavaScript function whose name starts with `”use”` and that may call other Hooks.
 - For example, `useProducts` and `useCart` are our custom hook.
 
@@ -756,11 +909,15 @@ const useProducts = () => {
 export default useProducts;
 ```
 
-⫸ `JavaScript function usually return only one element:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `JavaScript function usually return only one element:`
 - ___Return one thing___ → `return products;`
 - But, we can ___return many thing___ like as array → `return [products, setProducts];`
 
-⫸ `Use a Custom Hook:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Use a Custom Hook:`
 
 ``` JavaScript
 // In Orders.js
@@ -794,9 +951,11 @@ const Shop = () => {
 export default Shop;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.4 Create useCart with products dependency and use it
 
-⫸ `Create a Custom Hook with dependency:`
+### `Create a Custom Hook with dependency:`
 
 ``` JavaScript
 // In hooks/useCart.js
@@ -828,7 +987,9 @@ const useCart = (products) => {
 export default useCart;
 ```
 
-⫸ `Use a Custom Hook:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Use a Custom Hook:`
 
 ``` JavaScript
 // In Orders.js
@@ -865,9 +1026,11 @@ const Shop = () => {
 export default Shop;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.5 Create review page structure and Display Shopping cart
 
-⫸ __Adding a CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically") Stylesheet:__
+### __Adding a CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically") Stylesheet:__
 - ___CSS Modules___ → `[name].module.css` file naming convention.
   - Modules ___means___ use only this component, other component can't use it.
   - If we don't name it `Shop.module.css`, then it access from other files.
@@ -908,9 +1071,11 @@ const Orders = () => {
 export default Orders;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.6 Implement Review Item style with a lot of flex
 
-⫸ `Ternary Operation:` (___if name length is greater than 20___)
+### `Ternary Operation:` (___if name length is greater than 20___)
 - `{name.length > 20 ? name.slice(0, 20) + '...' : name}`
 - ___Output:___ `NMD_R1 V2 SHOES` | `LUNAR NEW YEAR ULTRA...`
 - Use `title` to show ___full name___.
@@ -922,7 +1087,9 @@ export default Orders;
 </p>
 ```
 
-⫸ `Implement ReviewItem style:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Implement ReviewItem style:`
 
 ``` JavaScript
 // In ReviewItem.js
@@ -956,9 +1123,11 @@ const ReviewItem = (props) => {
 export default ReviewItem;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.7 More style of Review item and apply Remove Item handler
 
-⫸ `Add Remove Item Handler:` ___handleRemoveProduct___
+### `Add Remove Item Handler:` ___handleRemoveProduct___
 
 ``` JavaScript
 // In Orders.js
@@ -1002,7 +1171,9 @@ const Orders = () => {
 export default Orders;
 ```
 
-⫸ `More style added in ReviewItem:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `More style added in ReviewItem:`
 
 ``` JavaScript
 // In ReviewItem.js
@@ -1042,9 +1213,11 @@ const ReviewItem = (props) => {
 export default ReviewItem;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.8 Make Data consistent across UI and explore children props
 
-⫸ `Children Props:`
+### `Children Props:`
 - [Composition vs Inheritance](https://reactjs.org/docs/composition-vs-inheritance.html "React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components") | [Using Children Props](https://medium.com/@martin.crabtree/react-js-using-children-props-c83d5b259756 "React.js: Using Children Props - medium.com")
 - If I write anything inside the component, then send it as a ___special props___ called ___children___. `{props.children}`
 
@@ -1099,9 +1272,11 @@ const Shop = () => {
                type: "p"
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 53.9 Module Summary, use navigate and recap custom hook
 
-⫸ [useNavigate():](https://reactrouter.com/docs/en/v6/hooks/use-navigate "useNavigate - React Router")
+### [useNavigate():](https://reactrouter.com/docs/en/v6/hooks/use-navigate "useNavigate - React Router")
 
 ``` JavaScript
 import React from 'react';
@@ -1129,7 +1304,9 @@ const Orders = () => {
 export default Orders;
 ```
 
-## `53.10 Quiz`
+**[🔼Back to Top](#table-of-contents)**
+
+## Quiz 53
 
 1. If you ___clone a repository___ that does not contain ___node_modules___ , ___which command___ should you run?
    - `npm install`
@@ -1174,7 +1351,9 @@ const  item= items.filter(item => item.id != "j555")
 12. What is the name of the ___node module___ that you ___installed___ to have the ___react router___ in your React web application?
     - ___react-router-dom___
 
----
+**[🔼Back to Top](#table-of-contents)**
+
+<br /> <br />
 
 # Module 59: Private Route with Ema-John
 
@@ -1182,7 +1361,7 @@ const  item= items.filter(item => item.id != "j555")
 
 ⫸ [ema-john-with-router-module-53](https://github.com/ProgrammingHero1/ema-john-with-router-module-53 "Clone from 'ProgrammingHero1/ema-john-with-router-module-53', if needed")
 
-⫸ `If Clone any React Project:` (___Need to follow some steps___)
+### `If Clone any React Project:` (___Need to follow some steps___)
 1. `npm install` for ___node_modules___ folder, it installs all the ___dependency___ of this project.
 2. Create a ___new Repository___ 
 3. `git remote -v` (___to check remote URL___)
@@ -1197,9 +1376,11 @@ const  item= items.filter(item => item.id != "j555")
    - `git push`
    - `git status`
 
+**[🔼Back to Top](#table-of-contents)**
+
 ---
 
-⫸ `Authentication Steps or Auth_steps:`
+### `Authentication Steps or Auth_steps:`
 1. Create a ___new firebase project___ in ___console.firebase.google.com___
 2. ___Register app___
 3. `npm install firebase`
@@ -1216,9 +1397,11 @@ const  item= items.filter(item => item.id != "j555")
     - Check ___user exists___ and also ___tract user location___
 14. In route, ___wrap protected component___ by using ___RequireAuth___ component
 
+**[🔼Back to Top](#table-of-contents)**
+
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
+### `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
 1. ___Install Firebase CLI___ 
    - `npm install -g firebase-tools` (___one time___ for your ___computer___)
 2. ___Initialize your Project___
@@ -1240,11 +1423,15 @@ const  item= items.filter(item => item.id != "j555")
 
 > `Note:` It could be needed in the next time.
 
+**[🔼Back to Top](#table-of-contents)**
+
 ---
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+### `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
 1. `npm run build`
 2. `firebase deploy`
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 59.2 Create Login component and style Login form
 
@@ -1383,6 +1570,8 @@ export default Login;
 }
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.3 Style sign up component and access email, password using handler
 
 ``` JavaScript
@@ -1458,6 +1647,8 @@ const SignUp = () => {
 
 export default SignUp;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
 
 ## 59.4 Install React firebase hook implement create user
 
@@ -1552,6 +1743,8 @@ const SignUp = () => {
 export default SignUp;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.5 Implement Login and redirect user after login
 
 ``` JavaScript
@@ -1628,11 +1821,15 @@ const Login = () => {
 export default Login;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.6 Create Require Auth and Navigate from location
 
 ⫸ [React-Router > Authentication:](https://reactrouter.com/docs/en/v6/examples/auth "Clicked on 'Open in StackBlitz' | This example demonstrates how to restrict access to routes to authenticated users.")
 
-⫸ `Create RequireAuth component:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create RequireAuth component`
 
 ``` JavaScript
 // In RequireAuth.js
@@ -1657,7 +1854,9 @@ const RequireAuth = ({children}) => {
 export default RequireAuth;
 ```
 
-⫸ `Wrap Inventory component by RequireAuth component for restricted access:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Wrap Inventory component by RequireAuth component for restricted access`
 
 ``` JavaScript
 // In App.js
@@ -1687,7 +1886,9 @@ function App() {
 export default App;
 ```
 
-⫸ `Redirected to the expected location:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Redirected to the expected location`
 
 ``` JavaScript
 // In Login.js
@@ -1708,7 +1909,9 @@ const Login = () => {
 export default Login;
 ```
 
-⫸ `Conditional Rendering to toggle Login and Sign Out button:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Conditional Rendering to toggle Login and Sign Out button`
 
 ``` JavaScript
 // In Header.js
@@ -1736,9 +1939,11 @@ const Header = () => {
 export default Header;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.7 Implement Sign out and Create a shipment form
 
-⫸ `Implement Sign Out from firebase/auth:`
+### `Implement Sign Out from firebase/auth`
 
 ``` JavaScript
 // In Header.js
@@ -1769,7 +1974,9 @@ const Header = () => {
 export default Header;
 ```
 
-⫸ `Change navigate notFound to shipment route:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Change navigate notFound to shipment route`
 
 ``` JavaScript
 // In Orders.js
@@ -1789,7 +1996,9 @@ const Orders = () => {
 export default Orders;
 ```
 
-⫸ `Wrap Shipment component by RequireAuth component for restricted access:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Wrap Shipment component by RequireAuth component for restricted access`
 
 ``` JavaScript
 // In App.js
@@ -1813,7 +2022,9 @@ function App() {
 export default App;
 ```
 
-⫸ `Create Shipment component like SignUp component:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Shipment component like SignUp component`
 
 ``` JavaScript
 // In Shipment.js
@@ -1880,9 +2091,11 @@ const Shipment = () => {
 export default Shipment;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.8 Module Summary and list to implement auth
 
-⫸ `Make Email field readOnly and set value={user?.email}`
+### `Make Email field readOnly and set value={user?.email}`
 
 ``` JavaScript
 // In Shipment.js
@@ -1919,9 +2132,12 @@ const Shipment = () => {
 export default Shipment;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 59.9 (bonus video) Host your react app to firebase
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
+### `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!)
+(___Hosting > Get Started___)
 1. ___Install Firebase CLI___ 
    - `npm install -g firebase-tools` (___one time___ for your ___computer___)
 2. ___Initialize your Project___
@@ -1943,13 +2159,15 @@ export default Shipment;
 
 > `Note:` It could be needed in the next time.
 
----
+**[🔼Back to Top](#table-of-contents)**
 
-⫸ `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
+### `Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)
 1. `npm run build`
 2. `firebase deploy`
 
-## Quiz
+**[🔼Back to Top](#table-of-contents)**
+
+## Quiz 59
 
 1. Which one is true about the ___React Hook rule___? (you will need to search online: Rules of hooks)
    - [x] React hooks can be called from the ___inside___ of a React ___Functional Component___
@@ -2018,12 +2236,14 @@ navigate(url);
      - [ ] Share more than one value using props
      - [ ] Pass data using state in a context object
 
----
+**[🔼Back to Top](#table-of-contents)**
 
-⫸ `Some Notes:`
+### `Some Notes:`
 1. ___Rules of Hooks - React___
    - ___Don't call___ Hooks ___inside loops___, ___conditions___, or ___nested functions___. <br /> Instead, always use Hooks at the ___top level of your React function___, before any early returns.
 2. ___Custom Hooks___
    - Custom Hooks are ___a mechanism to reuse stateful logic___ (such as setting up a subscription and remembering the current value), but every time you use a custom Hook, ___all state and effects___ inside of it are ___fully isolated___. Each call to a Hook ___gets isolated state___.
+
+**[🔼Back to Top](#table-of-contents)**
 
 
