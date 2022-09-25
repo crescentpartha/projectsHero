@@ -13,22 +13,25 @@ const UpdateProducts = () => {
     const onSubmit = data => {
         // console.log(data);
 
-        // Update a product in client-side and send to the server-side
-        const url = `http://localhost:5000/product/${id}`;
-        // console.log(url, id);
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(result => {
-            console.log('success', result);
-            alert('Product updated successfully!!!');
-            navigate('/');
-        });
+        const proceed = window.confirm('Are you sure want to update?');
+        if (proceed) {
+            // Update a product in client-side and send to the server-side
+            const url = `http://localhost:5000/product/${id}`;
+            // console.log(url, id);
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(result => {
+                    console.log('success', result);
+                    alert('Product updated successfully!!!');
+                    navigate('/');
+                });
+        }
     };
 
     return (
