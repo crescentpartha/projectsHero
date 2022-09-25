@@ -166,10 +166,12 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 ## Milestone 10
 
-* [Module 64 03react-with-node](https://64-3react-with-node-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Getting Started with Node, Express and API")
+* [Module 64 03react-with-node](https://64-3react-with-node-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Getting Started with Node, Express and API - Deploy in Netlify")
 
-* [Module 65 02react-node-mongodb](https://65-2react-node-mongodb-crescentpartha.netlify.app/ "React-App | Live-Server _-_ CRUD Operations - MongoDB, Database Integration, CRUD")
+* [Module 65 02react-node-mongodb](https://65-2react-node-mongodb-crescentpartha.netlify.app/ "React-App | Live-Server _-_ CRUD Operations - MERN Stack - MongoDB, Database Integration, CRUD - Deploy in Netlify")
 
-* [Module 60_&_66 01genius-car-services](https://60-1genius-car-services-cp.netlify.app/ "React-App | Live-Server _-_ Deploy in Netlify (Old-Version)") ⇔ [firebase-deploy](https://genius-car-services-a8da0.web.app/ "React-App | Live-Server _-_ Genius Car Node Mongo CRUD Recap - Deploy and Hosting in Firebase")
+* [Module 60_&_66 01genius-car-services](https://60-1genius-car-services-cp.netlify.app/ "React-App | Live-Server _-_ Deploy in Netlify (Old-Version)") ⇔ [firebase-deploy](https://genius-car-services-a8da0.web.app/ "React-App | Live-Server _-_ Genius Car Node Mongo CRUD Recap - Deploy and Hosting in Firebase (Updated-Version)")
+
+* [Module 66.5 01crud-product-management](https://66-5-1crud-product-management-cp.netlify.app/ "React-App | Live-Server _-_ CRUD Operations - MERN Stack - react-hook-form - Deploy in Netlify")
 
 
