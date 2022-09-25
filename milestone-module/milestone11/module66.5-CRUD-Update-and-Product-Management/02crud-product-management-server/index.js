@@ -54,18 +54,18 @@ async function run() {
         });
 
         // Update a product in server-side and send to the database
-        app.put('product/:id', async(req, res) => {
+        app.put('/product/:id', async(req, res) => {
             const id = req.params.id;
-            const data = req.body;
+            const productData = req.body;
             const filter = {_id: ObjectId(id)};
             const options = { upsert: true };
             const updatedDoc = {
                 $set: {
-                    name: data.name,
-                    price: data.price,
-                    quantity: data.quantity,
-                    img: data.img
-                },
+                    name: productData.name,
+                    price: productData.price,
+                    quantity: productData.quantity,
+                    img: productData.img
+                }
             };
             const result = await productCollection.updateOne(filter, updatedDoc, options);
             console.log('Product is updated');

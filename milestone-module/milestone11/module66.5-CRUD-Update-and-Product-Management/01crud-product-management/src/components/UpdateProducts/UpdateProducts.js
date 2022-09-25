@@ -1,19 +1,21 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useLoadSingleProduct from '../../hooks/useLoadSingleProduct';
 
 const UpdateProducts = () => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [product] = useLoadSingleProduct(id);
     // console.log(product);
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
 
         // Update a product in client-side and send to the server-side
         const url = `http://localhost:5000/product/${id}`;
+        // console.log(url, id);
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -22,11 +24,12 @@ const UpdateProducts = () => {
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(data => {
-            console.log('success', data);
+        .then(result => {
+            console.log('success', result);
             alert('Product updated successfully!!!');
+            navigate('/');
         });
-    }
+    };
 
     return (
         <div className='w-50 mx-auto my-5'>
@@ -36,7 +39,7 @@ const UpdateProducts = () => {
                 <input value={product.price} placeholder='Price' type="number" {...register("price", { required: true })} />
                 <input value={product.quantity} placeholder='Quantity' type="number" {...register("quantity", { required: true })} />
                 <input value={product.img} placeholder='Photo URL' type="text" {...register("img", { required: true })} />
-                <input type="submit" value="Add Product" />
+                <input type="submit" value="Update Product" />
             </form>
         </div>
     );
