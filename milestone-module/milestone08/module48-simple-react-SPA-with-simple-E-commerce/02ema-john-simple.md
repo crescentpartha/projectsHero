@@ -113,6 +113,16 @@ Table of Contents
     - [`Connect to Database`](#connect-to-database)
       - [`Without Modification`](#without-modification)
       - [`With Modification`](#with-modification)
+  - [67.3 Add data from JSON to database and load on the UI](#673-add-data-from-json-to-database-and-load-on-the-ui)
+    - [`Resources` (CSP - Content Security Policy)](#resources-csp---content-security-policy)
+    - [`Create Database and Collection` (Add My Own Data)](#create-database-and-collection-add-my-own-data)
+    - [`Insert Data from JSON to MongoDB Database`](#insert-data-from-json-to-mongodb-database)
+      - [`Keyboard Shortcut`](#keyboard-shortcut)
+      - [`Pasted Data Sample`](#pasted-data-sample)
+      - [`Original Data Sample from Database`](#original-data-sample-from-database)
+    - [`All product's data Load form Database` (GET Method)](#all-products-data-load-form-database-get-method)
+    - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
+    - [`Full Code Example` (Server-Side)](#full-code-example-server-side)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -1057,6 +1067,7 @@ export default Shop;
 ## 53.5 Create review page structure and Display Shopping cart
 
 ### __Adding a CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically") Stylesheet:__
+
 - ___CSS Modules___ → `[name].module.css` file naming convention.
   - Modules ___means___ use only this component, other component can't use it.
   - If we don't name it `Shop.module.css`, then it access from other files.
@@ -2570,5 +2581,221 @@ client.connect(err => {
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 67.3 Add data from JSON to database and load on the UI
+
+### `Resources` (CSP - Content Security Policy)
+
+- [How does Content Security Policy (CSP) work?](https://stackoverflow.com/questions/30280370/how-does-content-security-policy-csp-work?rq=1 "stackoverflow.com")
+- [Content Security Policy Level 3](https://www.w3.org/TR/CSP/#csp-header "W3C Working Draft - w3.org")
+- [Content Security Policy "data" not working for base64 Images in Chrome 28](https://stackoverflow.com/questions/18447970/content-security-policy-data-not-working-for-base64-images-in-chrome-28 "stackoverflow.com")
+- [Content-Security-Policy: An Introduction](https://www.youtube.com/watch?v=J90t0h0AP1U "YouTube.com")
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Database and Collection` (Add My Own Data)
+
+- EMA-JOHN (project) > Database > Database Deployments > Browse Collections > ___Add My Own Data___ > Database name (___emaJohn___) > Collection name (___product___) > ___Create___ 
+
+``` JavaScript
+▼ emaJohn
+    | product
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Insert Data from JSON to MongoDB Database`
+
+- Database name (___emaJohn___) > Collection name (___product___) > ___INSERT DOCUMENT___ > Paste ___JSON data without id attribute___ (mongodb automatically gives `_id` attribute) > Insert
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Keyboard Shortcut`
+
+- Select `"id"` > `Ctrl + Shift + L` (it select every product according to `"id"`)
+- Clicked on `Home` > Every cursor will go to the first of lines.
+- `Shift + End` > Every lines including `"id"` will be selected
+- `Backspace` > Remove selected section of every lines including `"id"`
+- `Shift + Up-Arrow` > Selected for every lines
+- `Backspace` > Remove selected section of every lines
+- `Ctrl + A` > Select all product's data
+- `ctrl + C` > Copy all product's data
+- ___Paste___ all product's data in ___Database___
+- `Ctrl + Z` > Undo to go previous state and save it
+- `Ctrl + Shift + F` > Search file in entire folder like `products.json`
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Pasted Data Sample`
+
+``` JSON
+// In products.json | 76 product data added
+
+[
+  {
+    "category": "Men's Sneaker",
+    "name": "ULTRABOOST 22 SHOES",
+    "seller": "Addidas",
+    "price": 420,
+    "stock": 20,
+    "ratings": 4,
+    "ratingsCount": 3725,
+    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fbaf991a78bc4896a3e9ad7800abcec6_9366/Ultraboost_22_Shoes_Black_GZ0127_01_standard.jpg",
+    "shipping": 1,
+    "quantity": 0
+  },
+  {
+    "category": "Men's Sneaker",
+    "name": "LUNAR NEW YEAR ULTRABOOST DNA SHOES",
+    "seller": "Addidas",
+    "price": 196,
+    "stock": 19,
+    "ratings": 5,
+    "ratingsCount": 4355,
+    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2cee64414e1f4f31baf1ae270099d950_9366/Lunar_New_Year_Ultraboost_DNA_Shoes_Black_GZ6074_01_standard.jpg",
+    "shipping": 14,
+    "quantity": 0
+  }
+]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Original Data Sample from Database`
+
+``` JSON
+// In products.json | 76 product data added
+
+[
+  {
+    "_id": "ObjectId('6331d2685e15fffe7748f162')",
+    "category": "Men's Sneaker",
+    "name": "ULTRABOOST 22 SHOES",
+    "seller": "Addidas",
+    "price": 420,
+    "stock": 20,
+    "ratings": 4,
+    "ratingsCount": 3725,
+    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fbaf991a78bc4896a3e9ad7800abcec6_9366/Ultraboost_22_Shoes_Black_GZ0127_01_standard.jpg",
+    "shipping": 1,
+    "quantity": 0
+  },
+  {
+    "_id": "ObjectId('6331d2685e15fffe7748f162')",
+    "category": "Men's Sneaker",
+    "name": "LUNAR NEW YEAR ULTRABOOST DNA SHOES",
+    "seller": "Addidas",
+    "price": 196,
+    "stock": 19,
+    "ratings": 5,
+    "ratingsCount": 4355,
+    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2cee64414e1f4f31baf1ae270099d950_9366/Lunar_New_Year_Ultraboost_DNA_Shoes_Black_GZ6074_01_standard.jpg",
+    "shipping": 14,
+    "quantity": 0
+  }
+]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `All product's data Load form Database` (GET Method)
+
+``` JavaScript
+// In index.js | Multiple Documents load form Database
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Client-side Code` (Particular Section)
+
+> We need to change (data load) ___fakeData___ to ___server-side___ `url` & ___id___ to `_id`, because, MongoDB uses `_id` instead of `id` attribute. <br /><br /> `products.json` ⋙ `http://localhost:5000/product` || `id` ⋙ `_id`
+
+``` JavaScript
+// In useProducts.js
+
+fetch('http://localhost:5000/product')
+```
+
+``` JavaScript
+// In Shop.js
+
+key={product._id}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example` (Server-Side)
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors()); // Without it, don't establish the Cross-Connection between 3000 and 5000 PORT;
+app.use(express.json()); // parse the JSON-data from request or req.body and then give it to us;
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('John is running and waiting for Ema - Running ema-john-server');
+});
+
+app.listen(port, () => {
+    // console.log('Listening to port', port);
+    console.log('John is running on port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 

@@ -13,12 +13,26 @@ app.use(express.json()); // parse the JSON-data from request or req.body and the
 // connection setup with database with secure password on environment variable
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("emaJohn").collection("product");
-  // perform actions on the collection object
-  console.log('emaJohn database is connected');
-  client.close();
-});
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
 
 app.get('/', (req, res) => {
     res.send('John is running and waiting for Ema - Running ema-john-server');
