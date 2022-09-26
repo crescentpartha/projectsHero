@@ -102,6 +102,17 @@ Table of Contents
       - [`Set .gitignore for node project`](#set-gitignore-for-node-project)
       - [`Create a .env file in the root of your project`](#create-a-env-file-in-the-root-of-your-project)
       - [`Run Node server or Backend server`](#run-node-server-or-backend-server)
+  - [67.2 (Conceptual) HTTP Method, Get VS POST, Connect MongoDB](#672-conceptual-http-method-get-vs-post-connect-mongodb)
+    - [`Resources`](#resources-1)
+    - [`Create New Project`](#create-new-project)
+    - [`Setup Database Access` (Add new Database User)](#setup-database-access-add-new-database-user)
+    - [`Setup Network Access` (Add IP Address)](#setup-network-access-add-ip-address)
+    - [`Create a database` (Create Cluster)](#create-a-database-create-cluster)
+    - [`Setup Quickstart` (Create new User & Add new IP)](#setup-quickstart-create-new-user--add-new-ip)
+    - [`Enable Atlas Security Quickstart in Side-bar`](#enable-atlas-security-quickstart-in-side-bar)
+    - [`Connect to Database`](#connect-to-database)
+      - [`Without Modification`](#without-modification)
+      - [`With Modification`](#with-modification)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -2462,4 +2473,102 @@ nodemon index.js
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 67.2 (Conceptual) HTTP Method, Get VS POST, Connect MongoDB
+
+### `Resources`
+
+- [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods "developer.mozilla.org") - [HTTP Request Methods](https://www.w3schools.com/tags/ref_httpmethods.asp "All methods and GET vs POST - w3schools.com")
+- [Difference between HTTP GET and POST Methods](https://www.geeksforgeeks.org/difference-between-http-get-and-post-methods/ "geeksforgeeks.org") - [GET vs POST Requests](https://www.diffen.com/difference/GET-vs-POST-HTTP-Requests "diffen.com")
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create New Project`
+
+- Click on ___Project dropdown___ > New Project > Name Your Project (___ema-john___) > Next > Create Project
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Setup Database Access` (Add new Database User)
+
+- Database Access > Add New Database User > Password > Password Authentication > Username & Password (Autogenerate Secure Password) > Copy & Paste in `.env` > Built-in Role > Select Role (Read and write to any database) > Add Specific Privileges (readWriteAnyDatabase) > Add User
+
+``` JavaScript
+// In .env
+
+DB_USER=dbJohn1
+DB_PASS=To9RpxEiy4wR2jdO
+```
+
+> `Read and write to any database` (Built-in Role) & `readWriteAnyDatabase` (Add Specific Privileges) are `same Roll`. So, use `only once`. If you add both, it will be `duplicate of same roll` and can't add new user.
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Setup Network Access` (Add IP Address)
+
+- Network Access > Add IP Address > ___ALLOW ACCESS FORM ANYWHERE___ (0.0.0.0/0) > ___Confirm___
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create a database` (Create Cluster)
+
+- Database > Create a database > Build a Database > Shared (Free) > Create > Create a Shared Cluster > Remain everything by default > ___Create Cluster___
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Setup Quickstart` (Create new User & Add new IP)
+
+- ___Quickstart___ > Security Quickstart > Username and Password > ___Create another User___ (if you want) > Add another IP to ___Add entries to your IP Access List___ (if you want) > Finish and Close > Go to Databases 
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Enable Atlas Security Quickstart in Side-bar`
+
+- Project > Project Settings > Atlas Security Quickstart > ___Enable___
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Connect to Database`
+
+- Database > Connect > Connect your application > Select on ___Include full driver code example___ > Copy & Paste to `index.js`
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Without Modification`
+
+``` JavaScript
+// In index.js | Without Modification
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://dbJohn1:<password>@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `With Modification`
+
+``` JavaScript
+// In index.js | With Modification
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("emaJohn").collection("product");
+  // perform actions on the collection object
+  console.log('emaJohn database is connected');
+  client.close();
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
