@@ -24,6 +24,7 @@ async function run() {
         app.get('/product', async(req, res) => {
             const query = {};
             const cursor = productCollection.find(query);
+            // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
             const products = await cursor.toArray();
             res.send(products);
         });

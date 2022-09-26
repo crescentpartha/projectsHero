@@ -123,6 +123,9 @@ Table of Contents
     - [`All product's data Load form Database` (GET Method)](#all-products-data-load-form-database-get-method)
     - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
     - [`Full Code Example` (Server-Side)](#full-code-example-server-side)
+  - [`Introduction to pagination and pagination concept`](#introduction-to-pagination-and-pagination-concept)
+    - [`Pagination Concept`](#pagination-concept)
+    - [`My Own Resources` (About Pagination)](#my-own-resources-about-pagination)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -2713,6 +2716,7 @@ async function run() {
         app.get('/product', async(req, res) => {
             const query = {};
             const cursor = productCollection.find(query);
+            // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
             const products = await cursor.toArray();
             res.send(products);
         });
@@ -2737,10 +2741,29 @@ fetch('http://localhost:5000/product')
 ```
 
 ``` JavaScript
+// In useCart.js
+
+const addedProduct = products.find(product => product._id === id);
+```
+
+``` JavaScript
 // In Shop.js
 
+const exists = cart.find(product => product._id === selectedProduct._id);
+const rest = cart.filter(product => product._id !== selectedProduct._id);
+addToDb(selectedProduct._id);
 key={product._id}
 ```
+
+``` JavaScript
+// In Orders.js
+
+const rest = cart.filter(pd => pd._id !== product._id);
+removeFromDb(product._id);
+key={product._id}
+```
+
+> `Notes:` If anything changes, then we need to check everything works well or not.
 
 **[🔼Back to Top](#table-of-contents)**
 
@@ -2775,6 +2798,7 @@ async function run() {
         app.get('/product', async(req, res) => {
             const query = {};
             const cursor = productCollection.find(query);
+            // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
             const products = await cursor.toArray();
             res.send(products);
         });
@@ -2794,6 +2818,52 @@ app.listen(port, () => {
     console.log('John is running on port', port);
 });
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## `Introduction to pagination and pagination concept`
+
+### `Pagination Concept`
+
+- How to ___divide in a page___?
+  - Think, ___How many products___ I have.
+
+``` JavaScript
+// Pagination Math | Calculate Total Pages
+
+100/10 // 10
+90/10 // 9
+95/10 // 9.5
+Math.ceil(95/10) // 10
+Math.ceil(91/10) // 10
+Math.ceil(90/10) // 9
+Math.ceil(88/10) // 9
+```
+
+``` JavaScript
+// Pagination Math | Calculate Total Products in a single Page
+
+Suppose, I have 90 products
+Page no 1 = 0-10
+Page no 2 = 11-20
+Page no 3 = 21-30
+
+NumberOfPage * 10 > 5 * 10 = 50
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `My Own Resources` (About Pagination)
+
+- [Everything You Need to Know About API Pagination](https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ "nordicapis.com")
+- [Pagination, incremental page loading, and their impact on Google Search](https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading "Google Search Central - developers.google.com")
+- [Pagination Design Examples](https://fireart.studio/blog/pagination-design-examples/ "fireart.studio")
+- [How to Implement Pagination in ReactJS](https://www.youtube.com/watch?v=MnkjoXWM7Vk "YouTube.com")
+- [Simple React Pagination Using React Hooks](https://www.youtube.com/watch?v=8Gmi1NNPtB8 "YouTube.com")
+- [ReactJS Pagination Tutorial using React Hooks](https://www.youtube.com/watch?v=HANSMtDy508 "YouTube.com")
+- [Simple Frontend Pagination - React](https://www.youtube.com/watch?v=IYCa1F-OWmk "YouTube.com")
+- [React js Pagination With API Call Using React-paginate](https://www.youtube.com/watch?v=kMuRr53RjcE&t=436s "YouTube.com")
+- [Implement Search, Sort, Filter & Pagination using JSON Server in React](https://www.youtube.com/watch?v=xRBE4iKX0yw "YouTube.com")
 
 **[🔼Back to Top](#table-of-contents)**
 
