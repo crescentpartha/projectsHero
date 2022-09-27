@@ -10,7 +10,7 @@ import './Shop.css';
 const Shop = () => {
 
     // using a custom hook
-    const [products, setProducts] = useProducts();
+    // const [products, setProducts] = useProducts();
     
     // const [products, setProducts] = useState([]);
 
@@ -51,6 +51,16 @@ const Shop = () => {
     // }, [products])
 
     const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [products, setProducts] = useState([]);
+
+    useEffect( () => {
+        // products load in a special way like page-wise and size-wise;
+        fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, []);
 
     useEffect( () => {
         fetch('http://localhost:5000/productCount')
@@ -93,8 +103,21 @@ const Shop = () => {
                 <div className='pagination'>
                     {
                         [...Array(pageCount).keys()]
-                        .map(number => <button>{number + 1}</button>)
+                        .map(number => <button 
+                            // Use Conditional CSS Class
+                            className={page === number ? 'selected' : ''}
+                            key={number}
+                            onClick={() => setPage(number)}
+                        >{number + 1}</button>)
                     }
+                    {/* {size} */}
+                    {/* Page Size: (Select) How many products show in a single page. */}
+                    <select onChange={e => setSize(e.target.value)}>
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
                 </div>
             </div>
             <div className="cart-container">

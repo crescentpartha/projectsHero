@@ -48,17 +48,17 @@ Table of Contents
     - [`Create a Custom Hook with dependency:`](#create-a-custom-hook-with-dependency)
     - [`Use a Custom Hook:`](#use-a-custom-hook-1)
   - [53.5 Create review page structure and Display Shopping cart](#535-create-review-page-structure-and-display-shopping-cart)
-    - [__Adding a CSS Modules Stylesheet:__](#adding-a-css-modules-stylesheet)
+    - [`Adding a CSS Modules Stylesheet:`](#adding-a-css-modules-stylesheet)
   - [53.6 Implement Review Item style with a lot of flex](#536-implement-review-item-style-with-a-lot-of-flex)
     - [`Ternary Operation:` (___if name length is greater than 20___)](#ternary-operation-if-name-length-is-greater-than-20)
     - [`Implement ReviewItem style:`](#implement-reviewitem-style)
   - [53.7 More style of Review item and apply Remove Item handler](#537-more-style-of-review-item-and-apply-remove-item-handler)
-    - [`Add Remove Item Handler:` ___handleRemoveProduct___](#add-remove-item-handler-handleremoveproduct)
+    - [`Add Remove Item Handler:` (___handleRemoveProduct___)](#add-remove-item-handler-handleremoveproduct)
     - [`More style added in ReviewItem:`](#more-style-added-in-reviewitem)
   - [53.8 Make Data consistent across UI and explore children props](#538-make-data-consistent-across-ui-and-explore-children-props)
     - [`Children Props:`](#children-props)
   - [53.9 Module Summary, use navigate and recap custom hook](#539-module-summary-use-navigate-and-recap-custom-hook)
-    - [useNavigate():](#usenavigate)
+    - [`useNavigate()`](#usenavigate)
   - [Quiz 53](#quiz-53)
 - [Module 59: Private Route with Ema-John](#module-59-private-route-with-ema-john)
   - [59.1 Module Introduction firebase setup and git clone](#591-module-introduction-firebase-setup-and-git-clone)
@@ -123,7 +123,7 @@ Table of Contents
     - [`All product's data Load form Database` (GET Method)](#all-products-data-load-form-database-get-method)
     - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
     - [`Full Code Example` (Server-Side)](#full-code-example-server-side)
-  - [`67.4 Introduction to pagination and pagination concept`](#674-introduction-to-pagination-and-pagination-concept)
+  - [67.4 Introduction to pagination and pagination concept](#674-introduction-to-pagination-and-pagination-concept)
     - [`Pagination Concept`](#pagination-concept)
     - [`My Own Resources` (About Pagination)](#my-own-resources-about-pagination)
   - [67.5 (Interesting) get page count and Create pagination button](#675-interesting-get-page-count-and-create-pagination-button)
@@ -132,6 +132,9 @@ Table of Contents
     - [`Explain array of total pages` (In Console)](#explain-array-of-total-pages-in-console)
     - [`Create Pagination Button` (___Product Count___ & ___Pages Count___ in Client-Side)](#create-pagination-button-product-count--pages-count-in-client-side)
     - [`Pagination Button Style`](#pagination-button-style)
+  - [67.6 Set Page and Size state and send search query to server](#676-set-page-and-size-state-and-send-search-query-to-server)
+    - [`Set Page state and Size state - Send search query to server-side`](#set-page-state-and-size-state---send-search-query-to-server-side)
+    - [`Conditional CSS Style for Pagination Selected Button`](#conditional-css-style-for-pagination-selected-button)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -1075,9 +1078,9 @@ export default Shop;
 
 ## 53.5 Create review page structure and Display Shopping cart
 
-### __Adding a CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically") Stylesheet:__
+### `Adding a CSS Modules Stylesheet:`
 
-- ___CSS Modules___ → `[name].module.css` file naming convention.
+- ___CSS [Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ "A module encapsulates a set of related functions and components semantically")___ → `[name].module.css` file naming convention.
   - Modules ___means___ use only this component, other component can't use it.
   - If we don't name it `Shop.module.css`, then it access from other files.
   - By default, ___CSS Class___ __name__ like `.products-container` accessible from all files, because React combine all together.
@@ -1173,7 +1176,7 @@ export default ReviewItem;
 
 ## 53.7 More style of Review item and apply Remove Item handler
 
-### `Add Remove Item Handler:` ___handleRemoveProduct___
+### `Add Remove Item Handler:` (___handleRemoveProduct___)
 
 ``` JavaScript
 // In Orders.js
@@ -1322,7 +1325,9 @@ const Shop = () => {
 
 ## 53.9 Module Summary, use navigate and recap custom hook
 
-### [useNavigate():](https://reactrouter.com/docs/en/v6/hooks/use-navigate "useNavigate - React Router")
+### `useNavigate()`
+
+- [useNavigate()](https://reactrouter.com/docs/en/v6/hooks/use-navigate "useNavigate - React Router")
 
 ``` JavaScript
 import React from 'react';
@@ -2723,7 +2728,7 @@ async function run() {
 
         // get all products data (json format) from database
         app.get('/product', async(req, res) => {
-            const query = {};
+            const query = {}; // search-query added here for filtering
             const cursor = productCollection.find(query);
             // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
             const products = await cursor.toArray();
@@ -2805,7 +2810,7 @@ async function run() {
 
         // get all products data (json format) from database
         app.get('/product', async(req, res) => {
-            const query = {};
+            const query = {};  // search-query added here for filtering
             const cursor = productCollection.find(query);
             // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
             const products = await cursor.toArray();
@@ -2830,7 +2835,7 @@ app.listen(port, () => {
 
 **[🔼Back to Top](#table-of-contents)**
 
-## `67.4 Introduction to pagination and pagination concept`
+## 67.4 Introduction to pagination and pagination concept
 
 ### `Pagination Concept`
 
@@ -2920,7 +2925,7 @@ run().catch(console.dir);
 ###  `Explain array of total pages` (In Console)
 
 ``` JavaScript
-// In Console/Terminal
+// In Console
 
 Array() // ▸ []
 Array(5) // ▸ (5) [empty x 5]
@@ -2962,7 +2967,7 @@ const Shop = () => {
                 <div className='pagination'>
                     {
                         [...Array(pageCount).keys()]
-                        .map(number => <button>{number + 1}</button>)
+                        .map(number => <button key={number}>{number + 1}</button>)
                     }
                 </div>
             </div>
@@ -2989,4 +2994,94 @@ export default Shop;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 67.6 Set Page and Size state and send search query to server
+
+### `Set Page state and Size state - Send search query to server-side`
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import './Shop.css';
+
+const Shop = () => {
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [products, setProducts] = useState([]);
+
+    useEffect( () => {
+        // products load in a special way like page-wise and size-wise;
+        fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, []);
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => {
+            const count = data.count;
+            const pages = Math.ceil(count/10); // calculate total pages for 10 products in a single page;
+            setPageCount(pages);
+        })
+    }, []);
+
+    return (
+        <div className='shop-container'> 
+            <div className="products-container">
+                {
+                    products.map(...)
+                }
+                <div className='pagination'>
+                    {
+                        [...Array(pageCount).keys()]
+                        .map(number => <button 
+                            // Use Conditional CSS Class
+                            className={page === number ? 'selected' : ''}
+                            key={number}
+                            onClick={() => setPage(number)}
+                        >{number + 1}</button>)
+                    }
+                    {/* {size} */}
+                    {/* Page Size: (Select) How many products show in a single page. */}
+                    <select onChange={e => setSize(e.target.value)}>
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+            <div className="cart-container"> </div>
+        </div>
+    );
+};
+
+export default Shop;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Conditional CSS Style for Pagination Selected Button`
+
+``` CSS
+/* In Shop.css */
+
+.pagination button {
+    margin-right: 10px;
+    background-color: white;
+    border: 1px solid orange;
+}
+
+.pagination .selected {
+    background-color: orange;
+    color: white;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+
 

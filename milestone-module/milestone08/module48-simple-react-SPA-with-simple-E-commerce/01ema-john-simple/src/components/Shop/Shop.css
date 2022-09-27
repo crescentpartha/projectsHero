@@ -20,6 +20,11 @@
     border: 1px solid orange;
 }
 
+.pagination .selected {
+    background-color: orange;
+    color: white;
+}
+
 @media screen and (max-width:1400px) {
     .shop-container {
         grid-template-columns: 4fr 2fr;
