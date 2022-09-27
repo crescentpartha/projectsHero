@@ -140,6 +140,15 @@ Table of Contents
     - [`Fix the warning` (cursor.count)](#fix-the-warning-cursorcount)
     - [`Modified Code` (get all products data (json format) from database according to page_number & product_size) (___page & size___)](#modified-code-get-all-products-data-json-format-from-database-according-to-page_number--product_size-page--size)
     - [`Modified Code` (product count: How many products have in the database) (___Fix deprecatedWarning___)](#modified-code-product-count-how-many-products-have-in-the-database-fix-deprecatedwarning)
+  - [67.8 (Advanced) Use Post to load some products using keys](#678-advanced-use-post-to-load-some-products-using-keys)
+    - [`Resources`](#resources-3)
+    - [`Use post to get products by ids`](#use-post-to-get-products-by-ids)
+    - [`Modified useCart.js hook`](#modified-usecartjs-hook)
+    - [`Modified Orders.js component`](#modified-ordersjs-component)
+    - [`Modified Shop.js component`](#modified-shopjs-component)
+    - [`Full Code Example`](#full-code-example)
+      - [`index.js`](#indexjs)
+      - [`Shop.js`](#shopjs)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -3218,6 +3227,361 @@ async function run() {
     }
 }
 run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 67.8 (Advanced) Use Post to load some products using keys
+
+### `Resources`
+
+- [$in MongoDB](https://www.mongodb.com/docs/manual/reference/operator/query/in/ "MongoDB Documentation")
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Use post to get products by ids`
+
+``` JavaScript
+// In index.js
+
+const { ObjectId } = require('mongodb');
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // use post to get products by ids
+        app.post('/productByKeys', async(req, res) => {
+            const keys = req.body;
+            const ids = keys.map(id => ObjectId(id));
+            const query = {_id: {$in: ids}};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            console.log(keys);
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified useCart.js hook`
+
+``` JavaScript
+// In useCart.js
+
+import { useEffect, useState } from "react"
+import { getStoredCart } from "../utilities/fakedb";
+
+const useCart = () => {
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        const storedCart = getStoredCart();
+        const savedCart = [];
+        const keys = Object.keys(storedCart);
+        // console.log(storedCart);
+        console.log(keys);
+        fetch('http://localhost:5000/productByKeys', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(keys)
+        })
+            .then(res => res.json())
+            .then(products => {
+                console.log(products);
+                for (const id in storedCart) {
+                    const addedProduct = products.find(product => product._id === id);
+                    if (addedProduct) {
+                        const quantity = storedCart[id];
+                        addedProduct.quantity = quantity;
+                        savedCart.push(addedProduct);
+                    }
+                }
+                setCart(savedCart);
+            })
+    }, []);
+
+    return [cart, setCart];
+}
+
+export default useCart;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Orders.js component`
+
+``` JavaScript
+// In Orders.js
+
+import Cart from '../Cart/Cart';
+
+const [cart, setCart] = useCart();
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Shop.js component`
+
+``` JavaScript
+// In Shop.js
+
+import useCart from '../../hooks/useCart';
+
+const [cart, setCart] = useCart();
+const [pageCount, setPageCount] = useState(0);
+const [page, setPage] = useState(0);
+const [size, setSize] = useState(10);
+const [products, setProducts] = useState([]);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+#### `index.js`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors()); // Without it, don't establish the Cross-Connection between 3000 and 5000 PORT;
+app.use(express.json()); // parse the JSON-data from request or req.body and then give it to us;
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            console.log('query', req.query);
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+
+            const query = {};  // search-query added here for filtering
+            const cursor = productCollection.find(query);
+
+            let products;
+            if (page || size) {
+                // page-0: --> skip: 0*10(size) --> get: 0-10 --> 10 products;
+                // page-1: --> skip: 1*10(size) --> get: 11-20 --> 10 products;
+                // page-2: --> skip: 2*10(size) --> get: 21-30 --> 10 products;
+                products = await cursor.skip(page*size).limit(size).toArray();
+            }
+            else {
+                // products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
+                products = await cursor.toArray();
+            }
+            res.send(products);
+        });
+
+        // product count: How many products have in the database | {"count":76}
+        app.get('/productCount', async(req, res) => {
+
+            // those two lines aren't needed
+            // const query = {};
+            // const cursor = productCollection.find(query);
+
+            // const count = await cursor.count(); // give us a deprecatedWarning;
+
+            const count = await productCollection.estimatedDocumentCount(); // deprecatedWarning solution;
+            res.send({count});
+        });
+
+        // use post to get products by ids
+        app.post('/productByKeys', async(req, res) => {
+            const keys = req.body;
+            const ids = keys.map(id => ObjectId(id));
+            const query = {_id: {$in: ids}};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            console.log(keys);
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('John is running and waiting for Ema - Running ema-john-server');
+});
+
+app.listen(port, () => {
+    // console.log('Listening to port', port);
+    console.log('John is running on port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Shop.js`
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
+import useProducts from '../../hooks/useProducts';
+import { addToDb, getStoredCart } from '../../utilities/fakedb';
+import Cart from '../Cart/Cart';
+import Product from '../Product/Product';
+import './Shop.css';
+
+const Shop = () => {
+
+    // using a custom hook
+    // const [products, setProducts] = useProducts();
+    
+    // const [products, setProducts] = useState([]);
+
+    // useEffect( () => {
+    //     // console.log('products load before fetch');
+    //     // fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
+    //     fetch('products.json')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setProducts(data);
+    //         // console.log('products loaded');
+    //     });
+    // }, [])
+
+    // using a custom hook
+    // const [cart, setCart] = useCart(products);
+
+    // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart();
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [products, setProducts] = useState([]);
+
+    // useEffect( () => {
+    //     // console.log('Local Storage first line', products);
+    //     const storedCart = getStoredCart();
+    //     // console.log(storedCart);
+    //     const savedCart = [];
+    //     for (const id in storedCart) {
+    //         // console.log(id);
+    //         const addedProduct = products.find(product => product.id === id);
+    //         if (addedProduct) {
+    //             const quantity = storedCart[id];
+    //             addedProduct.quantity = quantity;
+    //             // console.log(addedProduct);
+    //             savedCart.push(addedProduct);
+    //         }
+    //     }
+    //     setCart(savedCart);
+    //     // console.log('local storage finished');
+    // }, [products]);
+
+    useEffect( () => {
+        // products load in a special way like page-wise and size-wise;
+        fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, [page, size]);
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => {
+            const count = data.count;
+            const pages = Math.ceil(count/10); // calculate total pages for 10 products in a single page;
+            setPageCount(pages);
+        })
+    }, []);
+
+    const handleAddToCart = (selectedProduct) => {
+        // console.log(selectedProduct);
+        let newCart = [];
+        const exists = cart.find(product => product._id === selectedProduct._id);
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            // cart.push(product); // Don't do this
+            newCart = [...cart, selectedProduct];
+        }
+        else {
+            const rest = cart.filter(product => product._id !== selectedProduct._id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+        setCart(newCart);
+        addToDb(selectedProduct._id);
+    }
+
+    return (
+        <div className='shop-container'> 
+            <div className="products-container">
+                {
+                    products.map(product => <Product
+                    key={product._id}
+                    product={product}
+                    handleAddToCart={handleAddToCart}
+                    ></Product>)
+                }
+                <div className='pagination'>
+                    {
+                        [...Array(pageCount).keys()]
+                        .map(number => <button 
+                            // Use Conditional CSS Class
+                            className={page === number ? 'selected' : ''}
+                            key={number}
+                            onClick={() => setPage(number)}
+                        >{number}</button>)
+                    }
+                    {/* {size} */}
+                    {/* Page Size: (Select) How many products show in a single page. */}
+                    <select defaultValue={10} onChange={e => setSize(e.target.value)}>
+                        <option value="5">5</option>
+                        {/* <option value="10" selected>10</option> */}
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    {/* React uses defaultValue instead of selected */}
+                    {/* React uses the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
+                </div>
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <Link to="/orders">
+                        <button className='summary-button'>Review Order</button>
+                    </Link>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Shop;
 ```
 
 **[🔼Back to Top](#table-of-contents)**

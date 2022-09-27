@@ -25,11 +25,15 @@ const Shop = () => {
     //     });
     // }, [])
 
-    
     // using a custom hook
     // const [cart, setCart] = useCart(products);
 
     // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart();
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [products, setProducts] = useState([]);
 
     // useEffect( () => {
     //     // console.log('Local Storage first line', products);
@@ -48,13 +52,7 @@ const Shop = () => {
     //     }
     //     setCart(savedCart);
     //     // console.log('local storage finished');
-    // }, [products])
-
-    const [pageCount, setPageCount] = useState(0);
-    const [page, setPage] = useState(0);
-    const [size, setSize] = useState(10);
-    const [products, setProducts] = useState([]);
-    const [cart, setCart] = useCart(products);
+    // }, [products]);
 
     useEffect( () => {
         // products load in a special way like page-wise and size-wise;
