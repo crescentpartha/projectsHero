@@ -61,7 +61,7 @@ const Shop = () => {
         fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
         .then(res => res.json())
         .then(data => setProducts(data));
-    }, []);
+    }, [page, size]);
 
     useEffect( () => {
         fetch('http://localhost:5000/productCount')
@@ -109,7 +109,7 @@ const Shop = () => {
                             className={page === number ? 'selected' : ''}
                             key={number}
                             onClick={() => setPage(number)}
-                        >{number + 1}</button>)
+                        >{number}</button>)
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}

@@ -22,18 +22,37 @@ async function run() {
 
         // get all products data (json format) from database
         app.get('/product', async(req, res) => {
+            console.log('query', req.query);
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+
             const query = {};  // search-query added here for filtering
             const cursor = productCollection.find(query);
-            // const products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
-            const products = await cursor.toArray();
+
+            let products;
+            if (page || size) {
+                // page-0: --> skip: 0*10(size) --> get: 0-10 --> 10 products;
+                // page-1: --> skip: 1*10(size) --> get: 11-20 --> 10 products;
+                // page-2: --> skip: 2*10(size) --> get: 21-30 --> 10 products;
+                products = await cursor.skip(page*size).limit(size).toArray();
+            }
+            else {
+                // products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
+                products = await cursor.toArray();
+            }
             res.send(products);
         });
 
         // product count: How many products have in the database | {"count":76}
         app.get('/productCount', async(req, res) => {
-            const query = {};
-            const cursor = productCollection.find(query);
-            const count = await cursor.count();
+
+            // those two lines aren't needed
+            // const query = {};
+            // const cursor = productCollection.find(query);
+
+            // const count = await cursor.count(); // give us a deprecatedWarning;
+
+            const count = await productCollection.estimatedDocumentCount(); // deprecatedWarning solution;
             res.send({count});
         });
     }

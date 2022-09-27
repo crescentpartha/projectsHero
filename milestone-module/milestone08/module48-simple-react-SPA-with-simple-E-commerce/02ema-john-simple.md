@@ -136,6 +136,10 @@ Table of Contents
     - [`Resources`](#resources-2)
     - [`Set Page state and Size state - Send search query to server-side`](#set-page-state-and-size-state---send-search-query-to-server-side)
     - [`Conditional CSS Style for Pagination Selected Button`](#conditional-css-style-for-pagination-selected-button)
+  - [67.7 (Interesting) Load data based on the page number and size (no of products)](#677-interesting-load-data-based-on-the-page-number-and-size-no-of-products)
+    - [`Fix the warning` (cursor.count)](#fix-the-warning-cursorcount)
+    - [`Modified Code` (get all products data (json format) from database according to page_number & product_size) (___page & size___)](#modified-code-get-all-products-data-json-format-from-database-according-to-page_number--product_size-page--size)
+    - [`Modified Code` (product count: How many products have in the database) (___Fix deprecatedWarning___)](#modified-code-product-count-how-many-products-have-in-the-database-fix-deprecatedwarning)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -3056,7 +3060,7 @@ const Shop = () => {
         fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
         .then(res => res.json())
         .then(data => setProducts(data));
-    }, []);
+    }, [page, size]);
 
     useEffect( () => {
         fetch('http://localhost:5000/productCount')
@@ -3082,7 +3086,7 @@ const Shop = () => {
                             className={page === number ? 'selected' : ''}
                             key={number}
                             onClick={() => setPage(number)}
-                        >{number + 1}</button>)
+                        >{number}</button>)
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}
@@ -3126,5 +3130,96 @@ export default Shop;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 67.7 (Interesting) Load data based on the page number and size (no of products)
+
+### `Fix the warning` (cursor.count)
+
+- [Chapter1: count is deprecated. Use Collection.count_documents instead](https://www.mongodb.com/community/forums/t/chapter1-count-is-deprecated-use-collection-count-documents-instead/17297 "MongoDB Developer Community")
+- [mongodb-nodejs-driver, DeprecationWarning: collection.count is deprecated](https://stackoverflow.com/questions/51146152/mongodb-nodejs-driver-deprecationwarning-collection-count-is-deprecated "stackoverflow.com")
+
+``` JavaScript
+// Error Message in server-terminal
+
+(node:11180) [MONGODB DRIVER] Warning: cursor.count is deprecated and will be removed in the next major version, please use `collection.estimatedDocumentCount` or `collection.countDocuments` instead   
+(Use `node --trace-warnings ...` to show where the warning was created)
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Code` (get all products data (json format) from database according to page_number & product_size) (___page & size___)
+
+``` JavaScript
+// In index.js
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            console.log('query', req.query);
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+
+            const query = {};  // search-query added here for filtering
+            const cursor = productCollection.find(query);
+
+            let products;
+            if (page || size) {
+                // page-0: --> skip: 0*10(size) --> get: 0-10 --> 10 products;
+                // page-1: --> skip: 1*10(size) --> get: 11-20 --> 10 products;
+                // page-2: --> skip: 2*10(size) --> get: 21-30 --> 10 products;
+                products = await cursor.skip(page*size).limit(size).toArray();
+            }
+            else {
+                // products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
+                products = await cursor.toArray();
+            }
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Code` (product count: How many products have in the database) (___Fix deprecatedWarning___)
+
+``` JavaScript
+// In index.js
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+        
+        // product count: How many products have in the database | {"count":76}
+        app.get('/productCount', async(req, res) => {
+
+            // those two lines aren't needed
+            // const query = {};
+            // const cursor = productCollection.find(query);
+
+            // const count = await cursor.count(); // give us a deprecatedWarning;
+
+            const count = await productCollection.estimatedDocumentCount(); // deprecatedWarning solution;
+            res.send({count});
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
 
