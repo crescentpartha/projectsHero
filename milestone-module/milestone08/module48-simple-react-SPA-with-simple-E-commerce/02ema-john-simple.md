@@ -154,6 +154,7 @@ Table of Contents
     - [`Final & Full modified Code`](#final--full-modified-code)
       - [`index.js`](#indexjs-1)
       - [`Shop.js`](#shopjs-1)
+  - [Quiz 67](#quiz-67)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -3796,5 +3797,68 @@ export default Shop;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## Quiz 67
 
+1. How will you ___get the key___?
+   - [ ] req.params.id
+   - [x] ___req.params.key___
+   - [ ] req.query.key
+   - [ ] req.query.id
+``` JavaScript
+app.get ('/products/:key')
+```
+2. When you get the `missing scripts error` when running your ___express server___?
+   - `When we don't set "start-dev": "nodemon index.js" in our package.json file`
+3. Which ___REST method___ will you use to ___modify previously stored data___ on the database? (google it seriously)
+   - [x] ___Update___
+   - [ ] Modify
+   - [ ] Change
+   - [ ] Post
+4. What will you ___get___ if you ___console keys___? 
+   - `['B1XTJK', 'GT2XKM', 'XY2OKHJ']`
+``` JavaScript
+const savedCart={'B1XTJK': 2,'GT2XKM':1, 'XY2OKHJ':4}
+const keys = Object.keys(savedCart)
+```
+5. Which method will you use to ___insert a single data___ on a mongodb?
+   - `insertOne`
+``` JavaScript
+const collection = client.db('').collection("products");
+const result = await collection.______?_______(product)
+```
+6. What do you write in the query to ___get the products___ that ___match the keys___?
+   - [ ] key: { in: keys }
+   - [x] ___key: { $in: keys }___
+   - [ ] key: { $in= keys }
+   - [ ] key = { $in: keys }
+``` JavaScript
+app.post('/products/byKeys', async (req, res) => {
+    const keys = req.body;
+    const query = { __?__}
+    const products = await productCollection.find(query).toArray();
+})
+```
+7. Check ___mongodb documentation___.
+   - `await`
+``` JavaScript
+const cursor = productCollection.find( {} );
+const count = _____?_____ cursor.count()
+```
+8. Which of the following commands will ___find all the products___ that have the `laptop` ___as category___?
+   - `db.products.find({ category: "laptop" });`
+9.  If ___page=2___ and ___size=10___, then ___how many products___ will you get in the response?
+    - `10`
+``` JavaScript
+products = await cursor.skip(page * size).limit(size).toArray();
+```
+10. How will you ___load all data___ from ___a database collection___?
+    - `find`
+``` JavaScript
+const collection = client.db(‘’).collection(“products”);
+const cursor = movies.____?_____(query, options);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+<br /> <br />
 
