@@ -50,6 +50,18 @@ const Shop = () => {
     //     // console.log('local storage finished');
     // }, [products])
 
+    const [pageCount, setPageCount] = useState(0);
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => {
+            const count = data.count;
+            const pages = Math.ceil(count/10); // calculate total pages for 10 products in a single page;
+            setPageCount(pages);
+        })
+    }, []);
+
     const handleAddToCart = (selectedProduct) => {
         // console.log(selectedProduct);
         let newCart = [];
@@ -78,6 +90,12 @@ const Shop = () => {
                     handleAddToCart={handleAddToCart}
                     ></Product>)
                 }
+                <div className='pagination'>
+                    {
+                        [...Array(pageCount).keys()]
+                        .map(number => <button>{number + 1}</button>)
+                    }
+                </div>
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>

@@ -28,6 +28,14 @@ async function run() {
             const products = await cursor.toArray();
             res.send(products);
         });
+
+        // product count: How many products have in the database | {"count":76}
+        app.get('/productCount', async(req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const count = await cursor.count();
+            res.send({count});
+        });
     }
     finally {
         // await client.close(); // commented, if I want to keep connection active;

@@ -64,7 +64,7 @@ Table of Contents
   - [59.1 Module Introduction firebase setup and git clone](#591-module-introduction-firebase-setup-and-git-clone)
     - [`If Clone any React Project:` (___Need to follow some steps___)](#if-clone-any-react-project-need-to-follow-some-steps)
     - [`Authentication Steps or Auth_steps:`](#authentication-steps-or-auth_steps)
-    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now--hosting--get-started)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now)
     - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times)
   - [59.2 Create Login component and style Login form](#592-create-login-component-and-style-login-form)
   - [59.3 Style sign up component and access email, password using handler](#593-style-sign-up-component-and-access-email-password-using-handler)
@@ -83,7 +83,7 @@ Table of Contents
   - [59.8 Module Summary and list to implement auth](#598-module-summary-and-list-to-implement-auth)
     - [`Make Email field readOnly and set value={user?.email}`](#make-email-field-readonly-and-set-valueuseremail)
   - [59.9 (bonus video) Host your react app to firebase](#599-bonus-video-host-your-react-app-to-firebase)
-    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now)
+    - [`Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!)](#firebase-hostingdeploy-steps-for-1st-time-not-mandatory-right-now-1)
     - [`Firebase Hosting/Deploy Steps:` (for ___2nd/multiple times___)](#firebase-hostingdeploy-steps-for-2ndmultiple-times-1)
   - [Quiz 59](#quiz-59)
     - [`Some Notes:`](#some-notes)
@@ -123,9 +123,15 @@ Table of Contents
     - [`All product's data Load form Database` (GET Method)](#all-products-data-load-form-database-get-method)
     - [`Modified Client-side Code` (Particular Section)](#modified-client-side-code-particular-section)
     - [`Full Code Example` (Server-Side)](#full-code-example-server-side)
-  - [`Introduction to pagination and pagination concept`](#introduction-to-pagination-and-pagination-concept)
+  - [`67.4 Introduction to pagination and pagination concept`](#674-introduction-to-pagination-and-pagination-concept)
     - [`Pagination Concept`](#pagination-concept)
     - [`My Own Resources` (About Pagination)](#my-own-resources-about-pagination)
+  - [67.5 (Interesting) get page count and Create pagination button](#675-interesting-get-page-count-and-create-pagination-button)
+    - [`Pagination Theory`](#pagination-theory)
+    - [`How many products have in the database` (___Product Count___ from Server-Side)](#how-many-products-have-in-the-database-product-count-from-server-side)
+    - [`Explain array of total pages` (In Console)](#explain-array-of-total-pages-in-console)
+    - [`Create Pagination Button` (___Product Count___ & ___Pages Count___ in Client-Side)](#create-pagination-button-product-count--pages-count-in-client-side)
+    - [`Pagination Button Style`](#pagination-button-style)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -1441,7 +1447,10 @@ const  item= items.filter(item => item.id != "j555")
 
 ---
 
-### `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) <br /> (___Hosting > Get Started___)
+### `Firebase Hosting/Deploy Steps:` (for ___1st time___) (not mandatory right now!) 
+
+(___Hosting > Get Started___)
+
 1. ___Install Firebase CLI___ 
    - `npm install -g firebase-tools` (___one time___ for your ___computer___)
 2. ___Initialize your Project___
@@ -2821,7 +2830,7 @@ app.listen(port, () => {
 
 **[🔼Back to Top](#table-of-contents)**
 
-## `Introduction to pagination and pagination concept`
+## `67.4 Introduction to pagination and pagination concept`
 
 ### `Pagination Concept`
 
@@ -2867,5 +2876,117 @@ NumberOfPage * 10 > 5 * 10 = 50
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 67.5 (Interesting) get page count and Create pagination button
 
+### `Pagination Theory`
+
+- We can use ___Framework___ like ___react-pagination___ or ___bootstrap component library___
+- Must know about, ___How many data we have___ - (total ___100___ products) (___product count___)
+- We need to tell (in a dynamic or static way) ___how many data contain in a single page___ - (___10___ products in a single page)
+- In two way, we can say the `product count`
+  - ___All data load and tell___ total product count (1M data)
+  - ___Internal mechanism maintain___ by every database to tell product count
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `How many products have in the database` (___Product Count___ from Server-Side)
+
+``` JavaScript
+// In index.js
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // product count: How many products have in the database | {"count":76}
+        app.get('/productCount', async(req, res) => {
+            const query = {};
+            const cursor = productCollection.find(query);
+            const count = await cursor.count();
+            res.send({count});
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+###  `Explain array of total pages` (In Console)
+
+``` JavaScript
+// In Console/Terminal
+
+Array() // ▸ []
+Array(5) // ▸ (5) [empty x 5]
+Array(9) // ▸ (9) [empty x 9]
+[...Array(5)] // (5) [undefined, undefined, undefined, undefined, undefined]
+[...Array(5).keys()] // (5) [0, 1, 2, 3, 4]
+[...Array(9).keys()] // (9) [0, 1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Pagination Button` (___Product Count___ & ___Pages Count___ in Client-Side)
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import './Shop.css';
+
+const Shop = () => {
+    const [pageCount, setPageCount] = useState(0);
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => {
+            const count = data.count;
+            const pages = Math.ceil(count/10); // calculate total pages for 10 products in a single page;
+            setPageCount(pages);
+        })
+    }, []);
+
+    return (
+        <div className='shop-container'> 
+            <div className="products-container">
+                {
+                    products.map(...)
+                }
+                <div className='pagination'>
+                    {
+                        [...Array(pageCount).keys()]
+                        .map(number => <button>{number + 1}</button>)
+                    }
+                </div>
+            </div>
+            <div className="cart-container"> </div>
+        </div>
+    );
+};
+
+export default Shop;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Pagination Button Style` 
+
+``` CSS
+/* In Shop.css */
+
+.pagination button {
+    margin-right: 10px;
+    background-color: white;
+    border: 1px solid orange;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
