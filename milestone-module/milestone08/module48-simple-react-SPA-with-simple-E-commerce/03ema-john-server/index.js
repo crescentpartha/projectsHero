@@ -22,7 +22,7 @@ async function run() {
 
         // get all products data (json format) from database
         app.get('/product', async(req, res) => {
-            console.log('query', req.query);
+            // console.log('query', req.query);
             const page = parseInt(req.query.page);
             const size = parseInt(req.query.size);
 

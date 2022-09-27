@@ -9,7 +9,7 @@ const useCart = () => {
         const savedCart = [];
         const keys = Object.keys(storedCart);
         // console.log(storedCart);
-        console.log(keys);
+        // console.log(keys);
         fetch('http://localhost:5000/productByKeys', {
             method: 'POST',
             headers: {
@@ -19,7 +19,7 @@ const useCart = () => {
         })
             .then(res => res.json())
             .then(products => {
-                console.log(products);
+                // console.log(products);
                 for (const id in storedCart) {
                     const addedProduct = products.find(product => product._id === id);
                     if (addedProduct) {

@@ -149,6 +149,11 @@ Table of Contents
     - [`Full Code Example`](#full-code-example)
       - [`index.js`](#indexjs)
       - [`Shop.js`](#shopjs)
+  - [67.9 Module Summary](#679-module-summary)
+    - [`Interesting things of this Module`](#interesting-things-of-this-module)
+    - [`Final & Full modified Code`](#final--full-modified-code)
+      - [`index.js`](#indexjs-1)
+      - [`Shop.js`](#shopjs-1)
 
 
 # Module 48: Simple React SPA with Simple E-commerce
@@ -3095,7 +3100,7 @@ const Shop = () => {
                             className={page === number ? 'selected' : ''}
                             key={number}
                             onClick={() => setPage(number)}
-                        >{number}</button>)
+                        >{number + 1}</button>)
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}
@@ -3555,7 +3560,7 @@ const Shop = () => {
                             className={page === number ? 'selected' : ''}
                             key={number}
                             onClick={() => setPage(number)}
-                        >{number}</button>)
+                        >{number + 1}</button>)
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}
@@ -3585,5 +3590,211 @@ export default Shop;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 67.9 Module Summary
+
+### `Interesting things of this Module`
+
+- ___Pagination___
+  - All loaded data ___divided by multiple pages___
+- ___Specific product load based on ids___
+  - Use `$in` to load specific product
+
+> `Notes:` After some ___modification___, we need to check anything is ___broken___ or ___not working___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Final & Full modified Code`
+
+#### `index.js`
+
+``` JavaScript
+// In index.js
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+// middleware
+app.use(cors()); // Without it, don't establish the Cross-Connection between 3000 and 5000 PORT;
+app.use(express.json()); // parse the JSON-data from request or req.body and then give it to us;
+
+// connection setup with database with secure password on environment variable
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vvj7ch.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// create/handle dynamic data from client-side to database
+async function run() {
+    try {
+        await client.connect();
+        const productCollection = client.db('emaJohn').collection('product');
+
+        // get all products data (json format) from database
+        app.get('/product', async(req, res) => {
+            // console.log('query', req.query);
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+
+            const query = {};  // search-query added here for filtering
+            const cursor = productCollection.find(query);
+
+            let products;
+            if (page || size) {
+                // page-0: --> skip: 0*10(size) --> get: 0-10 --> 10 products;
+                // page-1: --> skip: 1*10(size) --> get: 11-20 --> 10 products;
+                // page-2: --> skip: 2*10(size) --> get: 21-30 --> 10 products;
+                products = await cursor.skip(page*size).limit(size).toArray();
+            }
+            else {
+                // products = await cursor.limit(10).toArray(); // In here, it shows only 10 product;
+                products = await cursor.toArray();
+            }
+            res.send(products);
+        });
+
+        // product count: How many products have in the database | {"count":76}
+        app.get('/productCount', async(req, res) => {
+            const count = await productCollection.estimatedDocumentCount(); // deprecatedWarning solution;
+            res.send({count});
+        });
+
+        // use post to get products by ids
+        app.post('/productByKeys', async(req, res) => {
+            const keys = req.body;
+            const ids = keys.map(id => ObjectId(id));
+            const query = {_id: {$in: ids}};
+            const cursor = productCollection.find(query);
+            const products = await cursor.toArray();
+            console.log(keys);
+            res.send(products);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('John is running and waiting for Ema - Running ema-john-server');
+});
+
+app.listen(port, () => {
+    // console.log('Listening to port', port);
+    console.log('John is running on port', port);
+});
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Shop.js`
+
+``` JavaScript
+// In Shop.js
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
+import { addToDb } from '../../utilities/fakedb';
+import Cart from '../Cart/Cart';
+import Product from '../Product/Product';
+import './Shop.css';
+
+const Shop = () => {
+    // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart();
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [products, setProducts] = useState([]);
+
+    useEffect( () => {
+        // products load in a special way like page-wise and size-wise;
+        fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, [page, size]);
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => {
+            const count = data.count;
+            const pages = Math.ceil(count/10); // calculate total pages for 10 products in a single page;
+            setPageCount(pages);
+        })
+    }, []);
+
+    const handleAddToCart = (selectedProduct) => {
+        // console.log(selectedProduct);
+        let newCart = [];
+        const exists = cart.find(product => product._id === selectedProduct._id);
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            // cart.push(product); // Don't do this
+            newCart = [...cart, selectedProduct];
+        }
+        else {
+            const rest = cart.filter(product => product._id !== selectedProduct._id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+        setCart(newCart);
+        addToDb(selectedProduct._id);
+    }
+
+    return (
+        <div className='shop-container'> 
+            <div className="products-container">
+                {
+                    products.map(product => <Product
+                    key={product._id}
+                    product={product}
+                    handleAddToCart={handleAddToCart}
+                    ></Product>)
+                }
+                <div className='pagination'>
+                    {
+                        [...Array(pageCount).keys()]
+                        .map(number => <button 
+                            // Use Conditional CSS Class
+                            className={page === number ? 'selected' : ''}
+                            key={number}
+                            onClick={() => setPage(number)}
+                        >{number + 1}</button>)
+                    }
+                    {/* {size} */}
+                    {/* Page Size: (Select) How many products show in a single page. */}
+                    <select defaultValue={10} onChange={e => setSize(e.target.value)}>
+                        <option value="5">5</option>
+                        {/* <option value="10" selected>10</option> */}
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    {/* React uses defaultValue instead of selected */}
+                    {/* React uses the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
+                </div>
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <Link to="/orders">
+                        <button className='summary-button'>Review Order</button>
+                    </Link>
+                </Cart>
+            </div>
+        </div>
+    );
+};
+
+export default Shop;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 
