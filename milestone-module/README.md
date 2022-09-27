@@ -164,7 +164,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 62.5 01travel-guru](https://62-5-1-travel-guru-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Create React App - Setup (React Router, File-Structure, _redirects, documentation, title & favicon, FontAwesomeIcons, React-Bootstrap, Add Bootstrap CDN) - Create JSON data - added images folder with resize & optimize images - Responsive Navber & Dynamic Footer - Conditional Rendering in Hearder - Opacity control for background image - Swiperjs Slider added - Dynamic Size free images added - react-router-hash-link setup - Deploy in Netlify") | [02red-onion](https://62-5-1-red-onion-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Create React App - Setup (React Router, File-Structure, _redirects, documentation, title & favicon, FontAwesomeIcons, React-Bootstrap, Add Bootstrap CDN) - JSON data, Nested Route, Dynamic Footer added - Deploy in Netlify") | [AppifyQuiz](https://appifyquiz-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Deploy in Firebase")
 
-## Milestone 10
+## Milestone 11
 
 * [Module 64 03react-with-node](https://64-3react-with-node-crescentpartha.netlify.app/ "React-App | Live-Server _-_ Getting Started with Node, Express and API - Deploy in Netlify")
 
@@ -173,5 +173,7 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 * [Module 60_&_66 01genius-car-services](https://60-1genius-car-services-cp.netlify.app/ "React-App | Live-Server _-_ Deploy in Netlify (Old-Version)") ⇔ [firebase-deploy](https://genius-car-services-a8da0.web.app/ "React-App | Live-Server _-_ Genius Car Node Mongo CRUD Recap - Deploy and Hosting in Firebase (Updated-Version)")
 
 * [Module 66.5 01crud-product-management](https://66-5-1crud-product-management-cp.netlify.app/ "React-App | Live-Server _-_ CRUD Operations - MERN Stack - react-hook-form - Deploy in Netlify")
+
+* [Module 48_&-49-&-53-&-59-&_67 01ema-john-simple](https://48-1ema-john-simple.netlify.app/ "React-App | Live-Server _-_ Deploy in Netlify (Old-Version)") ⇔ [firebase-deploy](https://ema-john-simple-447ad.web.app/ "React-App | Live-Server _-_ Pagination - Specific id-wise product data load form database - Use $in - Deploy in Firebase (Updated-Version)")
 
 
