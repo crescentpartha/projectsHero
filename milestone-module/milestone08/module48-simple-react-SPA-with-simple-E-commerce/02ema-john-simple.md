@@ -133,6 +133,7 @@ Table of Contents
     - [`Create Pagination Button` (___Product Count___ & ___Pages Count___ in Client-Side)](#create-pagination-button-product-count--pages-count-in-client-side)
     - [`Pagination Button Style`](#pagination-button-style)
   - [67.6 Set Page and Size state and send search query to server](#676-set-page-and-size-state-and-send-search-query-to-server)
+    - [`Resources`](#resources-2)
     - [`Set Page state and Size state - Send search query to server-side`](#set-page-state-and-size-state---send-search-query-to-server-side)
     - [`Conditional CSS Style for Pagination Selected Button`](#conditional-css-style-for-pagination-selected-button)
 
@@ -2997,6 +2998,44 @@ export default Shop;
 
 ## 67.6 Set Page and Size state and send search query to server
 
+### `Resources`
+
+- [Warning: Use the '___defaultValue___' or '___value___' props on `<select>` instead of setting '___selected___' on `<option>`](https://stackoverflow.com/questions/44786669/warning-use-the-defaultvalue-or-value-props-on-select-instead-of-setting "stackoverflow.com")
+
+``` JavaScript
+// Correct format | Demo Code
+
+<select defaultValue={'DEFAULT'} >
+    <option value="DEFAULT" disabled>Choose a salutation ...</option>
+    <option value="1">Mr</option>
+    <option value="2">Mrs</option>
+</select>
+
+/* ---------------------------------------------- */
+
+// Correct format | Real Example
+
+<select defaultValue={10} onChange={e => setSize(e.target.value)}>
+    <option value="5">5</option>
+    {/* <option value="10" selected>10</option> */}
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+</select>
+
+// Incorrect format | Real Example
+
+<select onChange={e => setSize(e.target.value)}>
+    <option value="5">5</option>
+    <option value="10" selected>10</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+</select>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 ### `Set Page state and Size state - Send search query to server-side`
 
 ``` JavaScript
@@ -3010,6 +3049,7 @@ const Shop = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useCart(products);
 
     useEffect( () => {
         // products load in a special way like page-wise and size-wise;
@@ -3046,12 +3086,15 @@ const Shop = () => {
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}
-                    <select onChange={e => setSize(e.target.value)}>
+                    <select defaultValue={10} onChange={e => setSize(e.target.value)}>
                         <option value="5">5</option>
-                        <option value="10" selected>10</option>
+                        {/* <option value="10" selected>10</option> */}
+                        <option value="10">10</option>
                         <option value="15">15</option>
                         <option value="20">20</option>
                     </select>
+                    {/* React uses defaultValue instead of selected */}
+                    {/* React uses the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
                 </div>
             </div>
             <div className="cart-container"> </div>

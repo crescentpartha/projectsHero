@@ -27,7 +27,7 @@ const Shop = () => {
 
     
     // using a custom hook
-    const [cart, setCart] = useCart(products);
+    // const [cart, setCart] = useCart(products);
 
     // const [cart, setCart] = useState([]);
 
@@ -54,6 +54,7 @@ const Shop = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useCart(products);
 
     useEffect( () => {
         // products load in a special way like page-wise and size-wise;
@@ -112,12 +113,15 @@ const Shop = () => {
                     }
                     {/* {size} */}
                     {/* Page Size: (Select) How many products show in a single page. */}
-                    <select onChange={e => setSize(e.target.value)}>
+                    <select defaultValue={10} onChange={e => setSize(e.target.value)}>
                         <option value="5">5</option>
-                        <option value="10" selected>10</option>
+                        {/* <option value="10" selected>10</option> */}
+                        <option value="10">10</option>
                         <option value="15">15</option>
                         <option value="20">20</option>
                     </select>
+                    {/* React uses defaultValue instead of selected */}
+                    {/* React uses the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
                 </div>
             </div>
             <div className="cart-container">
