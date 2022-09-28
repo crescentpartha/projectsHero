@@ -132,6 +132,12 @@ Table of Contents
     - [`Module Tast List`](#module-tast-list)
     - [`Clone Repository`](#clone-repository)
   - [Quiz 66](#quiz-66)
+- [Module 68: (Advanced) Secure API using JWT](#module-68-advanced-secure-api-using-jwt)
+  - [68.0 Text Instruction](#680-text-instruction)
+    - [`What I know from this Milestone`](#what-i-know-from-this-milestone)
+    - [`What I will know`](#what-i-will-know)
+    - [`Learning from this Module`](#learning-from-this-module)
+  - [68.1 Module Introduction Project setup recap custom hook](#681-module-introduction-project-setup-recap-custom-hook)
 
 
 
@@ -532,7 +538,7 @@ ___________{
 
 **[🔼Back to Top](#table-of-contents)**
 
-<br />
+<br /> <br />
 
 # Module 60.5: Firebase auth and private Route Recap
 
@@ -709,7 +715,7 @@ export default Login;
 
 **[🔼Back to Top](#table-of-contents)**
 
-<br />
+<br /> <br />
 
 # Module 61: React Router and Firebase Auth Recap
 
@@ -1041,7 +1047,7 @@ https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=process.env.REACT_
 
 **[🔼Back to Top](#table-of-contents)**
 
-<br />
+<br /> <br />
 
 # Module 63.5: Dynamic Title and Google Map
 
@@ -1519,7 +1525,7 @@ export default Maps;
 
 **[🔼Back to Top](#table-of-contents)**
 
-<br />
+<br /> <br />
 
 # Module 66: Genius Car Node Mongo CRUD Recap
 
@@ -2665,5 +2671,41 @@ app.get('/services', async (req, res) => {
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+<br /> <br />
+
+# Module 68: (Advanced) Secure API using JWT
+
+## 68.0 Text Instruction
+
+### `What I know from this Milestone`
+
+1. How to create a ___node project___.
+2. How to ___create a API___ like ___simple API___, ___dynamic API___ etc. How to ___create API for GET, POST, Update, Delete___ methods and how to ___call___ these types of ___API from client-side___.
+3. How to ___add data___ form ___client-side to MongoDB Database___. How to ___load data___ form MongoDB Databse and also ___Edit___ and ___Update___ those data and how to ___Delete___ data form database.
+4. [Pagination and Load Data by filter](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone08/module48-simple-react-SPA-with-simple-E-commerce/02ema-john-simple.md#module-67-pagination-and-load-data-by-filter "M8M67: Pagination and Load Data by filter (ema-john-simple")
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `What I will know`
+
+5. How to ___host database's API___ and how to ___load data___ in UI from ___hosting database___ using ___node___.
+6. Bigest learning: how to ___manage error handling___. 
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Learning from this Module`
+
+- How to ___set default value in form___ and how to ___save___ those data in a server. How to ___display___ those data in a website.
+- `JWT token`: Introduction. From where, we ___can get these token___ and after getting these token, how to ___put these token in client-side___.
+- After getting these token in client-side, ___send these token___ as a ___authorization header___ in server-side. Then ___extract these token form header___ and ___varify___ it. To do this, we need to ___install jsonwebtoken package___. After that, ___Decode___ the ___JWT token___ using ___a function of middleware___.
+- How to ___send invalid JWT token holder___ to ___Login page___.
+
+> `JWT token` ___secure___ the `server-side API`
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 68.1 Module Introduction Project setup recap custom hook
+
 
 
