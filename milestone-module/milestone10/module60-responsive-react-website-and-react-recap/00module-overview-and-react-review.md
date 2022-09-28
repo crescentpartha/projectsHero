@@ -138,6 +138,11 @@ Table of Contents
     - [`What I will know`](#what-i-will-know)
     - [`Learning from this Module`](#learning-from-this-module)
   - [68.1 Module Introduction Project setup recap custom hook](#681-module-introduction-project-setup-recap-custom-hook)
+    - [`App.js`](#appjs)
+    - [`Create Custom Hook called useServiceDetail.js`](#create-custom-hook-called-useservicedetailjs)
+    - [`ServiceDetail.js`](#servicedetailjs)
+    - [`Checkout.js`](#checkoutjs)
+  - [68.2 (Optional) Handle Controlled input value change in your form](#682-optional-handle-controlled-input-value-change-in-your-form)
 
 
 
@@ -2707,5 +2712,104 @@ app.get('/services', async (req, res) => {
 
 ## 68.1 Module Introduction Project setup recap custom hook
 
+### `App.js`
+
+``` JavaScript
+// In App.js
+
+<Route path='/checkout/:serviceDetailId' element={
+    <RequireAuth>
+        <Checkout></Checkout>
+    </RequireAuth>
+}></Route>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Custom Hook called useServiceDetail.js`
+
+``` JavaScript
+// In useServiceDetail.js
+
+import { useEffect, useState } from "react";
+
+const useServiceDetail = serviceDetailId => {
+    const [service, setService] = useState({});
+
+    useEffect( () => {
+        const url = `http://localhost:5000/service/${serviceDetailId}`;
+        // console.log(url);
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setService(data));
+
+    }, [serviceDetailId]);
+
+    return [service, setService];
+}
+
+export default useServiceDetail;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `ServiceDetail.js`
+
+``` JavaScript
+// In ServiceDetail.js
+
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+
+const ServiceDetail = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+
+    return (
+        <div>
+            <h2 className='text-center m-5'>You are about to book: <span className='text-primary'>{service.name}</span></h2>
+            <div className='text-center mb-5'>
+                <Link to={`/checkout/${serviceDetailId}`}>
+                    <button className='btn btn-primary'>Proceed Checkout</button>
+                </Link>
+            </div>
+        </div>
+    );
+};
+
+export default ServiceDetail;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Checkout.js`
+
+``` JavaScript
+// In Checkout.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+
+const Checkout = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+    return (
+        <div className='w-50 mx-auto'>
+            <h2 className='text-center m-5'>Please Order: {service.name}</h2>
+            <form>
+                <input type="text" name="name" placeholder='Name' required />
+            </form>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 68.2 (Optional) Handle Controlled input value change in your form
 
 

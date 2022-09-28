@@ -26,7 +26,7 @@ function App() {
             <ServiceDetail></ServiceDetail>
           </RequireAuth>
         }></Route>
-        <Route path='/checkout' element={
+        <Route path='/checkout/:serviceDetailId' element={
           <RequireAuth>
             <Checkout></Checkout>
           </RequireAuth>
