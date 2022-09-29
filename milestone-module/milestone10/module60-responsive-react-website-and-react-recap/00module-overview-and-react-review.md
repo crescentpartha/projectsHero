@@ -146,6 +146,10 @@ Table of Contents
     - [`Error` (Changing an uncontrolled input to be controlled)](#error-changing-an-uncontrolled-input-to-be-controlled)
       - [`Fix the Error` (Changing an uncontrolled input to be controlled)](#fix-the-error-changing-an-uncontrolled-input-to-be-controlled)
     - [`Create another Error` (provided a `value` prop to a form field without an `onChange` handler)](#create-another-error-provided-a-value-prop-to-a-form-field-without-an-onchange-handler)
+  - [68.3 Get Order data, create API endpoint and readonly input](#683-get-order-data-create-api-endpoint-and-readonly-input)
+    - [`Install Axios` (in client-side)](#install-axios-in-client-side)
+    - [`Create Order Collection API` (index.js)](#create-order-collection-api-indexjs)
+    - [`Modified Form` (Checkout.js)](#modified-form-checkoutjs)
 
 
 
@@ -2859,7 +2863,7 @@ export default Checkout;
 
 #### `Fix the Error` (Changing an uncontrolled input to be controlled)
 
-> `Input field shows` the `state value`. So, we need to `set the state` and `modify the state value`. In this way, we can use only once input field called `Controlled input field`. Otherwise, we create an ___uncontrolled input field___ but change those ___uncontrolled input to be controlled___ and this ___makes an error___.
+> `Input field shows` the `state value`. So, we need to `set the state` and `modify the state value`. In this way, we can use only once type of input field called `Controlled input field`. Otherwise, we create an ___uncontrolled input field___ but change those ___uncontrolled input to be controlled___ and this ___makes an error___.
 
 ``` JavaScript
 // In Checkout.js
@@ -2920,5 +2924,120 @@ export default Checkout;
 > `Solution:` <br /> Set `onChange` ___handler___ like `address input-field` for other input-field such as ___name___, ___email___, ___service___, ___phone___.
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 68.3 Get Order data, create API endpoint and readonly input
+
+### `Install Axios` (in client-side)
+
+- [Axios](https://axios-http.com/docs/intro "Getting Started") - [POST Requests](https://axios-http.com/docs/post_example "How to perform POST requests with Axios")
+- If we use `Axios`, we don't need to write ___headers___, ___JSON.stringify___ and don't need to ___convert response___ to ___JSON___ like `res.json()` etc.
+
+``` Terminal
+npm install axios
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Order Collection API` (index.js)
+
+``` JavaScript
+// In index.js
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+        const orderCollection = client.db('geniusCar').collection('order'); // MongoDB automatic create it, if doesn't exists.
+
+        // Order collection API
+        app.post('/order', async(req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
+            res.send(result);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified Form` (Checkout.js)
+
+``` JavaScript
+// In Checkout.js
+
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+
+const Checkout = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+    const [user] = useAuthState(auth);
+
+    // if (user) {
+    //     console.log(user);
+    // }
+
+    // const [user, setUser] = useState({
+    //     name: 'Akbar The Great',
+    //     email: 'akbar@momo.taj',
+    //     address: 'Tajmohol Road Md.pur',
+    //     phone: '01711111111'
+    // });
+
+    // const handleAddressChange = event => {
+    //     console.log(event.target.value);
+    //     const {address, ...rest} = user;
+    //     // console.log(address, rest);
+    //     const newAddress = event.target.value;
+    //     const newUser = {address: newAddress, ...rest};
+    //     console.log(newUser);
+    //     setUser(newUser);
+    // }
+
+    const handlePlaceOrder = event => {
+        event.preventDefault();
+        const order = {
+            email: user.email,
+            service: service.name,
+            serviceId: serviceDetailId,
+            address: event.target.address.value,
+            phone: event.target.phone.value
+        }
+    }
+
+    return (
+        <div className='w-50 mx-auto mb-5'>
+            <h2 className='text-center m-5'>Please Order: {service.name}</h2>
+            <form onSubmit={handlePlaceOrder}>
+                <input className='w-100 mb-2' type="text" value={user.displayName} name="name" placeholder='name' required readOnly disabled />
+                <br />
+                <input className='w-100 mb-2' type="email" value={user.email} name="email" placeholder='email' required readOnly disabled />
+                <br />
+                <input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='service' required />
+                <br />
+                <input className='w-100 mb-2' type="text" /* onChange={handleAddressChange} value={user.address} */ name="address" placeholder='address' autoComplete='off' required />
+                <br />
+                <input className='w-100 mb-2' type="phone" value={user.phone} name="phone" placeholder='phone' required />
+                <br />
+                <input className='btn btn-primary' type="submit" value="Place Order" />
+            </form>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 
