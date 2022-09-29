@@ -143,6 +143,9 @@ Table of Contents
     - [`ServiceDetail.js`](#servicedetailjs)
     - [`Checkout.js`](#checkoutjs)
   - [68.2 (Optional) Handle Controlled input value change in your form](#682-optional-handle-controlled-input-value-change-in-your-form)
+    - [`Error` (Changing an uncontrolled input to be controlled)](#error-changing-an-uncontrolled-input-to-be-controlled)
+      - [`Fix the Error` (Changing an uncontrolled input to be controlled)](#fix-the-error-changing-an-uncontrolled-input-to-be-controlled)
+    - [`Create another Error` (provided a `value` prop to a form field without an `onChange` handler)](#create-another-error-provided-a-value-prop-to-a-form-field-without-an-onchange-handler)
 
 
 
@@ -2811,5 +2814,111 @@ export default Checkout;
 **[🔼Back to Top](#table-of-contents)**
 
 ## 68.2 (Optional) Handle Controlled input value change in your form
+
+### `Error` (Changing an uncontrolled input to be controlled)
+
+> <p align="justify" style="color:red;" >▸Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.</p>
+
+``` JavaScript
+// In Checkout.js
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+
+const Checkout = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+
+    return (
+        <div className='w-50 mx-auto mb-5'>
+            <h2 className='text-center m-5'>Please Order: {service.name}</h2>
+            <form>
+                <input className='w-100 mb-2' type="text" name="name" placeholder='name' required />
+                <br />
+                <input className='w-100 mb-2' type="email" name="email" placeholder='email' required />
+                <br />
+                <input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='service' required />
+                <br />
+                <input className='w-100 mb-2' type="text" name="address" placeholder='address' required />
+                <br />
+                <input className='w-100 mb-2' type="phone" name="phone" placeholder='phone' required />
+                <br />
+                <input className='btn btn-primary' type="submit" value="Place Order" />
+            </form>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+> `<input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='service' required />` <br />⋙ this line of code is responsive to make this kind of error. Because, we `set the value of service` like `service.name` and it ___changes___ `an uncontrolled input to be controlled`.
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Fix the Error` (Changing an uncontrolled input to be controlled)
+
+> `Input field shows` the `state value`. So, we need to `set the state` and `modify the state value`. In this way, we can use only once input field called `Controlled input field`. Otherwise, we create an ___uncontrolled input field___ but change those ___uncontrolled input to be controlled___ and this ___makes an error___.
+
+``` JavaScript
+// In Checkout.js
+
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+
+const Checkout = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+    const [user, setUser] = useState({
+        name: 'Akbar The Great',
+        email: 'akbar@momo.taj',
+        address: 'Tajmohol Road Md.pur',
+        phone: '01711111111'
+    });
+
+    const handleAddressChange = event => {
+        console.log(event.target.value);
+        const {address, ...rest} = user;
+        // console.log(address, rest);
+        const newAddress = event.target.value;
+        const newUser = {address: newAddress, ...rest};
+        console.log(newUser);
+        setUser(newUser);
+    }
+
+    return (
+        <div className='w-50 mx-auto mb-5'>
+            <h2 className='text-center m-5'>Please Order: {service.name}</h2>
+            <form>
+                <input className='w-100 mb-2' type="text" value={user.name} name="name" placeholder='name' required />
+                <br />
+                <input className='w-100 mb-2' type="email" value={user.email} name="email" placeholder='email' required />
+                <br />
+                <input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='service' required />
+                <br />
+                <input className='w-100 mb-2' type="text" onChange={handleAddressChange} value={user.address} name="address" placeholder='address' required />
+                <br />
+                <input className='w-100 mb-2' type="phone" value={user.phone} name="phone" placeholder='phone' required />
+                <br />
+                <input className='btn btn-primary' type="submit" value="Place Order" />
+            </form>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create another Error` (provided a `value` prop to a form field without an `onChange` handler)
+
+> <p align="justify" style="color:red;" >▸Warning: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.</p>
+
+> `Solution:` <br /> Set `onChange` ___handler___ like `address input-field` for other input-field such as ___name___, ___email___, ___service___, ___phone___.
+
+**[🔼Back to Top](#table-of-contents)**
 
 
