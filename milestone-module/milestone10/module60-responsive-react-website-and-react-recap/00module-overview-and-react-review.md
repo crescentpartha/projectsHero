@@ -176,6 +176,11 @@ Table of Contents
     - [`HTTP Status Codes`](#http-status-codes)
     - [`Create axiosPrivate.js API`](#create-axiosprivatejs-api)
     - [`Handle the Status Codes`](#handle-the-status-codes)
+  - [68.9 (Conceptual) What is JWT and how does it work](#689-conceptual-what-is-jwt-and-how-does-it-work)
+    - [`Introduction`](#introduction)
+    - [`Why do we use JWT?`](#why-do-we-use-jwt)
+    - [`How JWT Works?`](#how-jwt-works)
+    - [`What JWT looks like?`](#what-jwt-looks-like)
 
 
 
@@ -3311,7 +3316,7 @@ npm i jsonwebtoken
   - `Refresh token` 
     - ___Original Pass___ - ___Long time period___ like (1 or 2 months - 1 or 2 years)
     - If Refresh token is ___expire___ then ___Logout___ and ___need to Login___ again.
-- ___Access_Token___ has ___three parts___.
+- ___Access_Token___ has ___three parts___ like (`Header.PayLoad.Signature`)
 
 > `In Large Application`, create your ___SERVICES API___ or ___PRODUCT API___ in ___another file or route___. Then you will know, how to use Route in Express. You can use ___File-Structure___ or ___Folder-Structure___ to manage or organize the ___APIs___.
 
@@ -3725,6 +3730,48 @@ const Order = () => {
 
 export default Order;
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 68.9 (Conceptual) What is JWT and how does it work
+
+### `Introduction`
+
+> `JWT` = `JSON WEB Token` = JWT is pronounced as "`jot`" <br /> JWT = ___securely transmits information between two parties___ 
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Why do we use JWT?` 
+
+- ___Without JWT___ you can ___access the protected route___. 
+- On the other hand, ___With JWT___ you ___can't access the protected route___.
+- JWT is mainly used for ___authorization purpose___, not authentication.
+- `Authentication` ⋙ ___Who are you?___ | ___Login and Password___
+- `Authorization` ⋙ ___What you can do?___ | ___Add photo, Delete photo, View photo___
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `How JWT Works?`
+
+1. Client ___login___ with username and password
+2. Server ___creates___ a token for the client
+3. Server ___sends___ a token to the client
+4. Client ___stores___ the token on either ___Local Storage___ or ___Browser Cookie___
+5. Next time the client ___makes a request___, a copy of the token is ___send to the server___ for authorization (by using ___Bearer___)
+6. Server ___verifies___ the ___JWT signature___ before giving the authorization
+7. Server ___responds___ to the ___client's request___
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `What JWT looks like?`
+
+- JWT Token has ___three parts___ like (`Header.PayLoad.Signature`)
+- ___Structure___ of JSON Web Token (JWT) ⋙ ___HEADER, PAYLOAD, SIGNATURE___
+- By using JSON Web Token, people ___secure the server___, ___API___, ___interact with microservice___ etc.
+- JSON Web Token
+  1. ___INDUSTRY STANDARD RFC 7519___
+  2. ___Securely transmits information___ between parties as a ___JSON object___
+  3. ___Digitally Signed___
 
 **[🔼Back to Top](#table-of-contents)**
 
