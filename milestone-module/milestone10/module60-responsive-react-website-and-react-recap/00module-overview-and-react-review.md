@@ -155,6 +155,11 @@ Table of Contents
     - [`Create Order.js component`](#create-orderjs-component)
     - [`Modified App.js` (Toast added globally & orders route added)](#modified-appjs-toast-added-globally--orders-route-added)
     - [`Orders Route added in Header component` (if user logged in)](#orders-route-added-in-header-component-if-user-logged-in)
+  - [68.5 Filter orders info by email address and introduction JWT token](#685-filter-orders-info-by-email-address-and-introduction-jwt-token)
+    - [`Get Order collection API` (get all orders json data for single user according to email address) - (server-side)](#get-order-collection-api-get-all-orders-json-data-for-single-user-according-to-email-address---server-side)
+    - [`Get Order collection API` (get all orders json data for single user according to email address) - (client-side)](#get-order-collection-api-get-all-orders-json-data-for-single-user-according-to-email-address---client-side)
+    - [`JSON Web Tokens` (JWT = jsonwebtoken) - (Introduction)](#json-web-tokens-jwt--jsonwebtoken---introduction)
+    - [`Install JWT`](#install-jwt)
 
 
 
@@ -3179,6 +3184,104 @@ export default App;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 68.5 Filter orders info by email address and introduction JWT token
+
+### `Get Order collection API` (get all orders json data for single user according to email address) - (server-side)
+
+``` JavaScript
+// In index.js
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+        const orderCollection = client.db('geniusCar').collection('order'); // MongoDB automatic create it, if doesn't exists.
+
+        // Get Order collection API | get all orders json data for single user according to email address
+        app.get('/order', async(req, res) => {
+            const email = req.query.email;
+            // console.log(email);
+            const query = {email: email};
+            const cursor = orderCollection.find(query); // Filter orders info by email address
+            const orders = await cursor.toArray();
+            res.send(orders);
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Get Order collection API` (get all orders json data for single user according to email address) - (client-side)
+
+``` JavaScript
+// In Order.js
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+const Order = () => {
+    const [user] = useAuthState(auth);
+    const [orders, setOrders] = useState([]);
+    useEffect( () => {
+        const getOrders = async() => {
+            const email = user.email;
+            const url = `http://localhost:5000/order?email=${email}`;
+            // const response = await axios.get(url);
+            // const {data} = response;
+            const {data} = await axios.get(url);
+            setOrders(data);
+        }
+        getOrders();
+    }, [user]);
+    return (
+        <div>
+            <h2>Your Orders: {orders.length}</h2>
+        </div>
+    );
+};
+
+export default Order;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `JSON Web Tokens` (JWT = jsonwebtoken) - (Introduction)
+
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken "An implementation of JSON Web Tokens - npmjs.com") - [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken "github.com") - [JWT.IO](https://jwt.io/introduction "JWT.IO allows you to decode, verify and generate JWT - jwt.io | Introduction")
+- `http://localhost:5000/order?email=crescentpartha406@gmail.com` 
+  - It is a `GET API`, so we can ___access it from browser___.
+  - We also can get `POST API` through the `Postman` & `RESTClient`.
+    - [Postman](https://www.postman.com/) is an API platform for developers to ___design, build, test and iterate___ their ___APIs___. 
+    - [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en "Chrome Extension") is an ___application___ that allows us to ___mock up frontend requests___ without writing any JavaScript. With Postman, we can practice ___sending requests___ to our ___JSON Server___.
+    - [RESTClient](http://restclient.net/) - A debugger for RESTful web services.
+    - [REST Client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo "Advanced REST client - Chrome Extension") - The only REST client that ___makes connection___ directly on ___socket___ giving you ___full control over the connection___ and ___request/response headers___.
+  - This API is ___Open___. So, it ___isn't secure___. Anyone can ___access data___ using `query search` like `?email=crescentpartha406@gmail.com`
+  - Suppose, you have ___many server___, it could be ___microservice___ or ___normal service___. You want ___not to Logout___ when go to ___one server to another server___. That time you ___give a special token___. If you give a ___valid token___, then give ___access___, otherwise ___not___. We can secure our API in this way or other way. But popular is `JSON Web Token`.
+  - So, there is a ___JWT token___, we neet to ___issue___(create) it and it will be in ___client-side___. We need to ___send it in client-side___ and ___verify___. 
+    - If token ___not found___ then we ___don't know the user___ and ___don't give the access or data___. 
+    - If token in ___found___ then we need to ___check___ it. 
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Install JWT`
+
+``` JavaScript 
+npm install jsonwebtoken
+
+/* OR */
+
+npm i jsonwebtoken
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
 
 

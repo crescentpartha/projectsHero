@@ -58,6 +58,16 @@ async function run() {
             const result = await orderCollection.insertOne(order);
             res.send(result);
         });
+
+        // Get Order collection API | get all orders json data for single user according to email address
+        app.get('/order', async(req, res) => {
+            const email = req.query.email;
+            // console.log(email);
+            const query = {email: email};
+            const cursor = orderCollection.find(query); // Filter orders info by email address
+            const orders = await cursor.toArray();
+            res.send(orders);
+        });
     }
     finally {
         // await client.close(); // commented, if I want to keep connection active;
