@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ const Login = () => {
         navigate(from, { replace: true });
     }
     if (user) {
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true }); // we navigate after getting the token
     }
 
     const handleEmailBlur = event => {
@@ -34,9 +35,14 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const handleUserSignIn = event => {
+    // After login, we issue a token
+    const handleUserSignIn = async event => {
         event.preventDefault();
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
+        const {data} = await axios.post('http://localhost:5000/login', {email});
+        // console.log(data);
+        localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
+        navigate(from, { replace: true }); // we navigate after getting the token
     }
 
     return (

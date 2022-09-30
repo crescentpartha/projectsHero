@@ -160,6 +160,12 @@ Table of Contents
     - [`Get Order collection API` (get all orders json data for single user according to email address) - (client-side)](#get-order-collection-api-get-all-orders-json-data-for-single-user-according-to-email-address---client-side)
     - [`JSON Web Tokens` (JWT = jsonwebtoken) - (Introduction)](#json-web-tokens-jwt--jsonwebtoken---introduction)
     - [`Install JWT`](#install-jwt)
+  - [68.6 (Advanced) Create JWT Token, Get jwt token on client-side](#686-advanced-create-jwt-token-get-jwt-token-on-client-side)
+    - [`JWT Introduction`](#jwt-introduction)
+    - [`Issue JWT token` (generate jwt)](#issue-jwt-token-generate-jwt)
+    - [`Create Hash Secret Key`](#create-hash-secret-key)
+    - [`Implement: navigate after getting the token` (if Logged in)](#implement-navigate-after-getting-the-token-if-logged-in)
+    - [`Full Code Example`](#full-code-example-2)
 
 
 
@@ -3282,6 +3288,130 @@ npm i jsonwebtoken
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 68.6 (Advanced) Create JWT Token, Get jwt token on client-side
+
+### `JWT Introduction`
+
+- __Issue two token__
+  - `Access token`
+    - Access token ___used for permission___. and has a ___limited time period___.
+    - If ___Access token expire___ and ___Refresh token is valid___, then ___give a new pass___.
+    - If Refresh token is ___invalid___ then ___Logout___.
+  - `Refresh token` 
+    - ___Original Pass___ - ___Long time period___ like (1 or 2 months - 1 or 2 years)
+    - If Refresh token is ___expire___ then ___Logout___ and ___need to Login___ again.
+
+> `In Large Application`, create your ___SERVICES API___ or ___PRODUCT API___ in ___another file or route___. Then you will know, how to use Route in Express. You can use ___File-Structure___ or ___Folder-Structure___ to manage or organize the ___APIs___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Issue JWT token` (generate jwt)
+
+- [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken "An implementation of JSON Web Tokens - github.com")
+
+``` JavaScript
+// In index.js | Generate or Issue JWT Token
+
+const jwt = require('jsonwebtoken');
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+        const orderCollection = client.db('geniusCar').collection('order'); // MongoDB automatic create it, if doesn't exists.
+
+        // AUTH | After login, we issue a token
+        app.post('/login', async(req, res) => {
+            const user = req.body;
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '1d' // 1 day expire date
+            });
+            res.send({accessToken});
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Hash Secret Key`
+
+- Open ___new terminal___ > go to ___inside___ your ___server-side project___ > write `node` > ___Enter___
+- write `require('crypto').randomBytes(64).toString('hex')` > ___Enter___ > it will generate ___64 bytes hash secret key___ > ___Copy___ & ___set___ in `.env`
+
+``` JavaScript
+// In Terminal | After going inside the server-side project
+
+node
+require('crypto').randomBytes(64).toString('hex')
+``` 
+
+``` JavaScript
+// In .env
+
+ACCESS_TOKEN_SECRET=36b843f7f482bfdb3a50d37112e11de90b97afc23acb72608f0e74c07048c7d0046f60fa86402838f89c9789e56fc0f46a95155351f04f249efd404603664d35
+```
+
+> `Notes:` ___ACCESS_TOKEN___ we can paste in [JWT Debugger](https://jwt.io/ "JWT Debugger - jwt.io") to be `Encoded`. In `Decoded` section, It will shows us about ___Header___, ___Playload___, ___Verify Signature___ etc.
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Implement: navigate after getting the token` (if Logged in)
+
+``` JavaScript
+// In Login.js | navigate after getting the token, if user is logged in | After login, we issue a token
+
+import axios from 'axios';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+    if (user) {
+        // navigate(from, { replace: true }); // we navigate after getting the token
+    }
+
+    // After login, we issue a token
+    const handleUserSignIn = async event => {
+        event.preventDefault();
+        await signInWithEmailAndPassword(email, password);
+        const {data} = await axios.post('http://localhost:5000/login', {email});
+        // console.log(data);
+        localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
+        navigate(from, { replace: true }); // we navigate after getting the token
+    }
+
+    return (
+        <div className='form-container'>
+            <PageTitle title="Login"></PageTitle>
+            <div>
+                <form onSubmit={handleUserSignIn}>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+- [index.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/02genius-car-services-server/index.js "index.js - 02genius-car-services-server") - [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Login/Login.js "Login.js - 01genius-car-services (client-side)")
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 
 
