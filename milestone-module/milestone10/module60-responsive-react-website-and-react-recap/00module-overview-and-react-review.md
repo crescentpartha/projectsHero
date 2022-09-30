@@ -162,10 +162,16 @@ Table of Contents
     - [`Install JWT`](#install-jwt)
   - [68.6 (Advanced) Create JWT Token, Get jwt token on client-side](#686-advanced-create-jwt-token-get-jwt-token-on-client-side)
     - [`JWT Introduction`](#jwt-introduction)
-    - [`Issue JWT token` (generate jwt)](#issue-jwt-token-generate-jwt)
+    - [`Issue JWT token` (generate/create jwt token)](#issue-jwt-token-generatecreate-jwt-token)
     - [`Create Hash Secret Key`](#create-hash-secret-key)
     - [`Implement: navigate after getting the token` (if Logged in)](#implement-navigate-after-getting-the-token-if-logged-in)
     - [`Full Code Example`](#full-code-example-2)
+  - [68.7 (Advanced) Send jwt token in the server, verify and decode jwt token](#687-advanced-send-jwt-token-in-the-server-verify-and-decode-jwt-token)
+    - [`Verify JWT Token`](#verify-jwt-token)
+      - [`How to get the token`](#how-to-get-the-token)
+      - [`Verify JWT Token` (in server-side)](#verify-jwt-token-in-server-side)
+    - [`Set Headers` (in Order.js)](#set-headers-in-orderjs)
+    - [`Full Code Example`](#full-code-example-3)
 
 
 
@@ -3301,12 +3307,13 @@ npm i jsonwebtoken
   - `Refresh token` 
     - ___Original Pass___ - ___Long time period___ like (1 or 2 months - 1 or 2 years)
     - If Refresh token is ___expire___ then ___Logout___ and ___need to Login___ again.
+- ___Access_Token___ has ___three parts___.
 
 > `In Large Application`, create your ___SERVICES API___ or ___PRODUCT API___ in ___another file or route___. Then you will know, how to use Route in Express. You can use ___File-Structure___ or ___Folder-Structure___ to manage or organize the ___APIs___.
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `Issue JWT token` (generate jwt)
+### `Issue JWT token` (generate/create jwt token)
 
 - [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken "An implementation of JSON Web Tokens - github.com")
 
@@ -3412,6 +3419,136 @@ export default Login;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 68.7 (Advanced) Send jwt token in the server, verify and decode jwt token
 
+### `Verify JWT Token`
+
+#### `How to get the token`
+``` JavaScript
+// In Console
+
+const text = 'Bearer myToken';
+text.split(' '); // ▸(2) ['Bearer', 'myToken']
+text.split(' ')[1]; // 'myToken'
+
+/* -------------------------------- */
+
+const token = authHeader.split(' ')[1];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Verify JWT Token` (in server-side)
+
+``` JavaScript
+// In index.js
+
+const jwt = require('jsonwebtoken');
+
+// Verify JWT Token
+function verifyJWT(req, res, next) {
+    const authHeader = req.headers.authorization; // get headers
+    if (!authHeader) {
+        return res.status(401).send({ message: 'unauthorized access' });
+    }
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(403).send({ message: 'Forbidden access' });
+        }
+        console.log('decoded', decoded);
+        req.decoded = decoded;
+    })
+    // console.log('Inside verifyJWT', authHeader);
+    next();
+}
+
+// Create dynamic data and send to the database
+async function run() {
+    try {
+        await client.connect();
+        const serviceCollection = client.db('geniusCar').collection('service');
+        const orderCollection = client.db('geniusCar').collection('order'); // MongoDB automatic create it, if doesn't exists.
+
+        // AUTH | After login, we issue a token
+        app.post('/login', async (req, res) => {
+            const user = req.body;
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '1d' // 1 day expire date
+            });
+            res.send({ accessToken });
+        });
+
+        // Get Order collection API | get all orders json data for single user according to email address
+        app.get('/order', verifyJWT, async (req, res) => { // we create a middleware by setting verifyJWT
+            const decodedEmail = req.decoded.email;
+            const email = req.query.email;
+            // console.log(email);
+            if (email === decodedEmail) {
+                const query = { email: email };
+                const cursor = orderCollection.find(query); // Filter orders info by email address
+                const orders = await cursor.toArray();
+                res.send(orders);
+            }
+            else {
+                res.status(403).send({message: 'forbidden access'});
+            }
+        });
+    }
+    finally {
+        // await client.close(); // commented, if I want to keep connection active;
+    }
+}
+run().catch(console.dir);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Set Headers` (in Order.js)
+
+``` JavaScript
+// In Order.js
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
+const Order = () => {
+    const [user] = useAuthState(auth);
+    const [orders, setOrders] = useState([]);
+    useEffect( () => {
+        const getOrders = async() => {
+            const email = user.email;
+            const url = `http://localhost:5000/order?email=${email}`;
+            // const response = await axios.get(url);
+            // const {data} = response;
+            const {data} = await axios.get(url, {
+                // set headers
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            setOrders(data);
+        }
+        getOrders();
+    }, [user]);
+    return (
+        <div>
+            <h2>Your Orders: {orders.length}</h2>
+        </div>
+    );
+};
+
+export default Order;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+- [index.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/02genius-car-services-server/index.js "index.js - 02genius-car-services-server")
+
+**[🔼Back to Top](#table-of-contents)**
 
 

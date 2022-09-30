@@ -12,7 +12,12 @@ const Order = () => {
             const url = `http://localhost:5000/order?email=${email}`;
             // const response = await axios.get(url);
             // const {data} = response;
-            const {data} = await axios.get(url);
+            const {data} = await axios.get(url, {
+                // set headers
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             setOrders(data);
         }
         getOrders();
