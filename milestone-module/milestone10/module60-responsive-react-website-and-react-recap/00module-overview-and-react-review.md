@@ -150,6 +150,11 @@ Table of Contents
     - [`Install Axios` (in client-side)](#install-axios-in-client-side)
     - [`Create Order Collection API` (index.js)](#create-order-collection-api-indexjs)
     - [`Modified Form` (Checkout.js)](#modified-form-checkoutjs)
+  - [68.4 Save order for multiple users and set one account per user](#684-save-order-for-multiple-users-and-set-one-account-per-user)
+    - [`Modified Checkout.js`](#modified-checkoutjs)
+    - [`Create Order.js component`](#create-orderjs-component)
+    - [`Modified App.js` (Toast added globally & orders route added)](#modified-appjs-toast-added-globally--orders-route-added)
+    - [`Orders Route added in Header component` (if user logged in)](#orders-route-added-in-header-component-if-user-logged-in)
 
 
 
@@ -3038,6 +3043,142 @@ export default Checkout;
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 68.4 Save order for multiple users and set one account per user
+
+### `Modified Checkout.js`
+
+``` JavaScript
+// In Checkout.js
+
+import React from 'react';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import useServiceDetail from '../../../hooks/useServiceDetail';
+import axios from 'axios';
+
+const Checkout = () => {
+    const {serviceDetailId} = useParams();
+    const [service] = useServiceDetail(serviceDetailId);
+    const [user] = useAuthState(auth);
+
+    // if (user) {
+    //     console.log(user);
+    // }
+
+    const handlePlaceOrder = event => {
+        event.preventDefault();
+        const order = {
+            email: user.email,
+            service: service.name,
+            serviceId: serviceDetailId,
+            address: event.target.address.value,
+            phone: event.target.phone.value
+        }
+        axios.post('http://localhost:5000/order', order)
+        .then(response => {
+            // console.log(response);
+            const {data} = response;
+            if (data.insertedId) {
+                toast('Your order is booked!!!');
+                event.target.reset();
+            }
+        })
+    }
+
+    return (
+        <div className='w-50 mx-auto mb-5'>
+            <h2 className='text-center m-5'>Please Order: {service.name}</h2>
+            <form onSubmit={handlePlaceOrder}>
+                <input className='w-100 mb-2' type="text" value={user?.displayName} name="name" placeholder='name' required readOnly disabled />
+                <br />
+                <input className='w-100 mb-2' type="email" value={user?.email} name="email" placeholder='email' required readOnly disabled />
+                <br />
+                <input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='service' required readOnly disabled />
+                <br />
+                <input className='w-100 mb-2' type="text" name="address" placeholder='address' autoComplete='off' required />
+                <br />
+                <input className='w-100 mb-2' type="phone" name="phone" placeholder='phone' required />
+                <br />
+                <input className='btn btn-primary' type="submit" value="Place Order" />
+            </form>
+        </div>
+    );
+};
+
+export default Checkout;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create Order.js component`
+
+``` JavaScript
+// In Order.js
+
+import React from 'react';
+
+const Order = () => {
+    return (
+        <div>
+            <h2>Your Orders</h2>
+        </div>
+    );
+};
+
+export default Order;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Modified App.js` (Toast added globally & orders route added)
+
+``` JavaScript
+// In App.js
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Order from './Pages/Order/Order';
+
+function App() {
+  return (
+    <div className="App">
+      <Header></Header>
+      <Routes>
+        <Route path='/service/:serviceDetailId' element={<ServiceDetail></ServiceDetail>}></Route>
+        <Route path='/orders' element={
+          <RequireAuth>
+            <Order></Order>
+          </RequireAuth>
+        }></Route>
+      </Routes>
+      <ToastContainer />
+    </div>
+  );
+}
+
+export default App;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Orders Route added in Header component` (if user logged in)
+
+``` JavaScript
+// In Header.js
+
+{
+    user && 
+    <>
+        <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
+    </>
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 
 

@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import About from './Pages/About/About';
 import AddService from './Pages/AddService/AddService';
 import Maps from './Pages/GoogleMaps/Maps/Maps';
@@ -13,6 +15,7 @@ import Header from './Pages/Shared/Header/Header';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import RequireAuth from './Pages/Shared/RequireAuth/RequireAuth';
 import SignUp from './Pages/SignUp/SignUp';
+import Order from './Pages/Order/Order';
 
 function App() {
   return (
@@ -21,11 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/service/:serviceDetailId' element={
-          <RequireAuth>
-            <ServiceDetail></ServiceDetail>
-          </RequireAuth>
-        }></Route>
+        <Route path='/service/:serviceDetailId' element={<ServiceDetail></ServiceDetail>}></Route>
         <Route path='/checkout/:serviceDetailId' element={
           <RequireAuth>
             <Checkout></Checkout>
@@ -46,6 +45,11 @@ function App() {
             <ManageServices></ManageServices>
           </RequireAuth>
         }></Route>
+        <Route path='/orders' element={
+          <RequireAuth>
+            <Order></Order>
+          </RequireAuth>
+        }></Route>
         <Route path='/googleMaps' element={<Maps></Maps>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
@@ -53,6 +57,7 @@ function App() {
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }
