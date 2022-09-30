@@ -172,6 +172,10 @@ Table of Contents
       - [`Verify JWT Token` (in server-side)](#verify-jwt-token-in-server-side)
     - [`Set Headers` (in Order.js)](#set-headers-in-orderjs)
     - [`Full Code Example`](#full-code-example-3)
+  - [68.8 (Advanced) Handle 401, 403 to log out user and interceptors](#688-advanced-handle-401-403-to-log-out-user-and-interceptors)
+    - [`HTTP Status Codes`](#http-status-codes)
+    - [`Create axiosPrivate.js API`](#create-axiosprivatejs-api)
+    - [`Handle the Status Codes`](#handle-the-status-codes)
 
 
 
@@ -3458,9 +3462,9 @@ function verifyJWT(req, res, next) {
         }
         console.log('decoded', decoded);
         req.decoded = decoded;
+        next();
     })
     // console.log('Inside verifyJWT', authHeader);
-    next();
 }
 
 // Create dynamic data and send to the database
@@ -3550,5 +3554,179 @@ export default Order;
 - [index.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/02genius-car-services-server/index.js "index.js - 02genius-car-services-server")
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 68.8 (Advanced) Handle 401, 403 to log out user and interceptors
+
+### `HTTP Status Codes`
+
+- [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status "HTTP response status codes - mdn web docs")
+- [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes "en.wikipedia.org")
+
+``` JavaScript
+// STATUS_CODES
+
+100 Continue
+101 Switching Protocols
+103 Early Hints
+200 OK
+201 Created
+202 Accepted
+203 Non-Authoritative Information
+204 No Content
+205 Reset Content
+206 Partial Content
+300 Multiple Choices
+301 Moved Permanently
+302 Found
+303 See Other
+304 Not Modified
+307 Temporary Redirect
+308 Permanent Redirect
+400 Bad Request
+401 Unauthorized
+402 Payment Required
+403 Forbidden
+404 Not Found
+405 Method Not Allowed
+406 Not Acceptable
+407 Proxy Authentication Required
+408 Request Timeout
+409 Conflict
+410 Gone
+411 Length Required
+412 Precondition Failed
+413 Payload Too Large
+414 URI Too Long
+415 Unsupported Media Type
+416 Range Not Satisfiable
+417 Expectation Failed
+418 I'm a teapot
+422 Unprocessable Entity
+425 Too Early
+426 Upgrade Required
+428 Precondition Required
+429 Too Many Requests
+431 Request Header Fields Too Large
+451 Unavailable For Legal Reasons
+500 Internal Server Error
+501 Not Implemented
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout
+505 HTTP Version Not Supported
+506 Variant Also Negotiates
+507 Insufficient Storage
+508 Loop Detected
+510 Not Extended
+511 Network Authentication Required
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Create axiosPrivate.js API`
+
+- [Interceptors](https://axios-http.com/docs/interceptors "Interceptors - axios-http.com")
+  - ___Axios interceptors___ are ___functions___ that Axios calls for every request. You can use interceptors to ___transform the request before Axios sends it___, or transform the response ___before Axios returns the response___ to your code. You can think of interceptors as Axios' equivalent to ___middleware___ in Express or Mongoose.
+  - How many request send to the backend by using axios, axios ___gives a property for all in together___.
+
+``` JavaScript
+// In axiosPrivate.js
+
+import axios from "axios";
+
+const axiosPrivate = axios.create({});
+
+// Add a request interceptor
+axiosPrivate.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    if (!config.headers.authorization) {
+        config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+    }
+    return config;
+}, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+});
+
+// Add a response interceptor
+axiosPrivate.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+}, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    if (error.response.status === 403) {
+        // refresh token
+        // send to the server
+
+    }
+    return Promise.reject(error);
+});
+
+export default axiosPrivate;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Handle the Status Codes`
+
+``` JavaScript
+// In Order.js
+
+// import axios from 'axios';
+import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import axiosPrivate from '../../api/axiosPrivate';
+import auth from '../../firebase.init';
+
+const Order = () => {
+    const [user] = useAuthState(auth);
+    const [orders, setOrders] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        const getOrders = async () => {
+            const email = user.email;
+            const url = `http://localhost:5000/order?email=${email}`;
+            // const response = await axios.get(url);
+            // const {data} = response;
+
+            // Handle the Status Codes
+            try {
+                // const { data } = await axios.get(url, {
+                //     // set headers
+                //     headers: {
+                //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                //     }
+                // });
+
+                const { data } = await axiosPrivate.get(url);
+                setOrders(data);
+            }
+            catch (error) {
+                // console.log(error);
+                console.log(error.message);
+                if (error.response.status === 401 || error.response.status === 403) {
+                    signOut(auth); // if token is expire or invalid, then logout.
+                    navigate('/login');
+                }
+            }
+        }
+        getOrders();
+    }, [user, navigate]);
+    return (
+        <div>
+            <h2>Your Orders: {orders.length}</h2>
+        </div>
+    );
+};
+
+export default Order;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
 
