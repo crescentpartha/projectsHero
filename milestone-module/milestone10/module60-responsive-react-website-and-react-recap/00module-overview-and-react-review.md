@@ -181,6 +181,7 @@ Table of Contents
     - [`Why do we use JWT?`](#why-do-we-use-jwt)
     - [`How JWT Works?`](#how-jwt-works)
     - [`What JWT looks like?`](#what-jwt-looks-like)
+  - [Quiz 68](#quiz-68)
 
 
 
@@ -3775,5 +3776,49 @@ export default Order;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## Quiz 68
 
+1. What is ___controlled input___ in react?
+   - `An input element whose value is being controlled by a component's state`
+2. What is ___Axios___?
+   - `Axios is a promise-based HTTP client for node.js and the browser`
+3. Which one is ___true about Axios___?
+   - [ ] Make XMLHttpRequests from the browser
+   - [ ] Make HTTP requests from node.js
+   - [ ] Automatic transforms for JSON data
+   - [ ] Client-side support for protecting against XSRF
+   - [x] ___All of above___
+4. What is ___wrong___ with the ___code snippet below___?
+   - `You do not need to pass the "method"`
+``` JavaScript
+axios.post('/user',{
+  Method : "POST" }
+ {
+  firstName: 'Fred',
+  lastName: 'Flintstone'
+ })
+ .then(function (response) {
+  console.log(response);
+ })
+ .catch(function (error) {
+  console.log(error);
+ });
+```
+5. You can use ___multiple collections___ inside of a database in MongoDB.
+   - `True`
+6. What is ___JWT___?
+   - `JWT is a compact and self-contained way for securely transmitting information between parties`
+7. What is ___crypto___ in ___node.js___?
+   - [x] ___Crypto is a node module___
+   - [ ] Crypto is a digital asset
+   - [ ] Crypto is a password 
+   - [ ] All of the above
+8. How would you ___convert random bytes to Hexadecimal___ in node.js?
+   - `.toString('hex')`
+9.  How to ___generate a token using JWT___?
+    - `const token = jwt.sign({ email: 'user@gmail.com'}, 'secret');`
+10. What does ___401 status code___ mean?
+    - `Unauthorized`
+
+**[🔼Back to Top](#table-of-contents)**
 
