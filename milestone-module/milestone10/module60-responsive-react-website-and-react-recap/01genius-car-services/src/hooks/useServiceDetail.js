@@ -4,7 +4,7 @@ const useServiceDetail = serviceDetailId => {
     const [service, setService] = useState({});
 
     useEffect( () => {
-        const url = `http://localhost:5000/service/${serviceDetailId}`;
+        const url = `https://serene-peak-34256.herokuapp.com/service/${serviceDetailId}`;
         // console.log(url);
         fetch(url)
         .then(res => res.json())

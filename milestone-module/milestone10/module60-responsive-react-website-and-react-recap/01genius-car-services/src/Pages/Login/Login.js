@@ -39,7 +39,7 @@ const Login = () => {
     const handleUserSignIn = async event => {
         event.preventDefault();
         await signInWithEmailAndPassword(email, password);
-        const {data} = await axios.post('http://localhost:5000/login', {email});
+        const {data} = await axios.post('https://serene-peak-34256.herokuapp.com/login', {email});
         // console.log(data);
         localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
         navigate(from, { replace: true }); // we navigate after getting the token

@@ -24,7 +24,7 @@ const Checkout = () => {
             address: event.target.address.value,
             phone: event.target.phone.value
         }
-        axios.post('http://localhost:5000/order', order)
+        axios.post('https://serene-peak-34256.herokuapp.com/order', order)
         .then(response => {
             // console.log(response);
             const {data} = response;

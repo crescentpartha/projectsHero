@@ -10,7 +10,7 @@ const ManageServices = () => {
             // delete a service in client-side and send to the server-side
             console.log('Deleting service with id, ', id);
 
-            const url = `http://localhost:5000/service/${id}`;
+            const url = `https://serene-peak-34256.herokuapp.com/service/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

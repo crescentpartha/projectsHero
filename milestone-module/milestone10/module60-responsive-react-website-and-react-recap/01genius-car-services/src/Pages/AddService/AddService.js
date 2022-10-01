@@ -8,7 +8,7 @@ const AddService = () => {
         console.log(data);
 
         // POST a service from client-side to database
-        const url = `http://localhost:5000/service`;
+        const url = `https://serene-peak-34256.herokuapp.com/service`;
         fetch(url, {
             method: 'POST',
             headers: {

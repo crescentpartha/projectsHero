@@ -5,8 +5,12 @@ Table of Contents
   - [69.1 Introduction to Heroku setup account and initial deploy](#691-introduction-to-heroku-setup-account-and-initial-deploy)
     - [`Resources`](#resources)
     - [`Must use those lines or commands`](#must-use-those-lines-or-commands)
-    - [`Server Deploy` (Setup - one time)](#server-deploy-setup---one-time)
-    - [`Deploy the app` (Setup - For each project one time)](#deploy-the-app-setup---for-each-project-one-time)
+    - [`Server Setup`](#server-setup)
+      - [`Server Deploy` (Setup - one time)](#server-deploy-setup---one-time)
+      - [`Deploy the app` (Setup - For each project one time)](#deploy-the-app-setup---for-each-project-one-time)
+  - [69.2 Deploy client side project to firebase with server side url](#692-deploy-client-side-project-to-firebase-with-server-side-url)
+    - [`UPDATE SERVER with new changes`](#update-server-with-new-changes)
+    - [`Connect Server with Client and Deploy Client`](#connect-server-with-client-and-deploy-client)
 
 
 # Module 69: Deploy to Heroku and Practice Problem
@@ -20,6 +24,7 @@ Table of Contents
 - [Heroku Documentation](https://devcenter.heroku.com/) 
 - [Get Started > Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs "Getting Started on Heroku with Node.js") 
   - ___I'm ready to start___ > ___64-bit Installer___ (download) > ___Install___
+- [02genius-car-services-server 69.1M](https://github.com/crescentpartha/02genius-car-services-server/blob/main/Steps.md "Documentation for Module-69.1")
 
 **[🔼Back to Top](#table-of-contents)**
 
@@ -34,7 +39,9 @@ const port = process.env.PORT || 5000;  // Heroku is a shared server and One por
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `Server Deploy` (Setup - one time)
+### `Server Setup`
+
+#### `Server Deploy` (Setup - one time)
 
 1. Create Heroku account 
 2. Verify Email 
@@ -57,7 +64,7 @@ git --version
 
 **[🔼Back to Top](#table-of-contents)**
 
-### `Deploy the app` (Setup - For each project one time)
+#### `Deploy the app` (Setup - For each project one time)
 
 - [Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app "Deploy the app - Getting Started on Heroku with Node.js - heroku.com") (run in `Command Prompt`)
 
@@ -77,8 +84,43 @@ https://sleepy-depths-59287.herokuapp.com/ | https://git.heroku.com/sleepy-depth
    - ___Code push in heroku main branch using git command___ 
    - ___Deploy your code___ | initial deploy
    - ___Copy the link___ and ___paste___ in the ___browser___ to ___run___
+   - [02genius-car-services-server 69.1M](https://github.com/crescentpartha/02genius-car-services-server/blob/main/Steps.md "Documentation for Module-69.1")
+4. Go to Heroku ___Dashboard___ > Current Project (___serene-peak-34256___) > Settings > ___Reveal Config Vars___
+5. Copy Paste ___config vars___ from your `.env` file
+
+``` JavaScript
+// Reveal Config Vars > Config Vars
+
+// KEY VALUE Add
+DB_USER geniusUser
+DB_PASS WfRnZQmYC5To03nC
+ACCESS_TOKEN_SECRET 36b843f7f482bfdb3a50d37112e11de90b97afc23acb72608f0e74c07048c7d0046f60fa86402838f89c9789e56fc0f46a95155351f04f249efd404603664d35
+```
+
+6. Make sure you have ___whitelisted all ip address___ to access mongodb
+7. `https://serene-peak-34256.herokuapp.com/service` check ___data loaded___ or not. If loaded, then ___Server-Setup Done___
 
 > `Notes:` Create `individual Server-Side Project`. Otherwise, `Heroku doesn't identify your git commit` and Say, please make sure you have the `correct access rights` and the `repository exists`.
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 69.2 Deploy client side project to firebase with server side url
+
+### `UPDATE SERVER with new changes`
+
+1. Make changes
+2. Make sure everything is ___updated___ like `git add .` `git commit` `git push`
+3. `git push heroku main` 
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Connect Server with Client and Deploy Client`
+
+1. Replace localhost by heroku link
+   - `http://localhost:5000/` by `https://serene-peak-34256.herokuapp.com/` in Client-side
+2. `npm run build`
+3. `firebase deploy`
+   - [https://genius-car-services-a8da0.web.app](https://genius-car-services-a8da0.web.app) check everything is ok or not.
 
 **[🔼Back to Top](#table-of-contents)**
 
