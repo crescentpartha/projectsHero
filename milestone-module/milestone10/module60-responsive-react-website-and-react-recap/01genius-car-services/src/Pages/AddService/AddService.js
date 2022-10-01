@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddService = () => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
@@ -19,6 +22,8 @@ const AddService = () => {
         .then(res => res.json())
         .then(result => {
             console.log(result);
+            toast('Service added successfully!!!');
+            navigate('/home');
         })
     };
 

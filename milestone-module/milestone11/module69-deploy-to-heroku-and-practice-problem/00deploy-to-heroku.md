@@ -6,11 +6,17 @@ Table of Contents
     - [`Resources`](#resources)
     - [`Must use those lines or commands`](#must-use-those-lines-or-commands)
     - [`Server Setup`](#server-setup)
-      - [`Server Deploy` (Setup - one time)](#server-deploy-setup---one-time)
+      - [`Server Deploy in Heroku` (Setup - one time)](#server-deploy-in-heroku-setup---one-time)
       - [`Deploy the app` (Setup - For each project one time)](#deploy-the-app-setup---for-each-project-one-time)
   - [69.2 Deploy client side project to firebase with server side url](#692-deploy-client-side-project-to-firebase-with-server-side-url)
     - [`UPDATE SERVER with new changes`](#update-server-with-new-changes)
     - [`Connect Server with Client and Deploy Client`](#connect-server-with-client-and-deploy-client)
+  - [69.3 Test live website and push update to the client-side](#693-test-live-website-and-push-update-to-the-client-side)
+    - [`Summary`](#summary)
+      - [`Step-01` (Server Deploy in Heroku)](#step-01-server-deploy-in-heroku)
+        - [`Investigation`](#investigation)
+      - [`Step-02`](#step-02)
+    - [`Some fact about localhost, Heroku-Server, MongoDB-Database`](#some-fact-about-localhost-heroku-server-mongodb-database)
 
 
 # Module 69: Deploy to Heroku and Practice Problem
@@ -41,7 +47,7 @@ const port = process.env.PORT || 5000;  // Heroku is a shared server and One por
 
 ### `Server Setup`
 
-#### `Server Deploy` (Setup - one time)
+#### `Server Deploy in Heroku` (Setup - one time)
 
 1. Create Heroku account 
 2. Verify Email 
@@ -121,6 +127,66 @@ ACCESS_TOKEN_SECRET 36b843f7f482bfdb3a50d37112e11de90b97afc23acb72608f0e74c07048
 2. `npm run build`
 3. `firebase deploy`
    - [https://genius-car-services-a8da0.web.app](https://genius-car-services-a8da0.web.app) check everything is ok or not.
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 69.3 Test live website and push update to the client-side
+
+### `Summary`
+
+#### `Step-01` (Server Deploy in Heroku)
+
+1. Heroku install
+2. Heroku login
+3. Heroku create
+4. Everything send to the GitHub
+5. git push heroku main
+
+**[🔼Back to Top](#table-of-contents)**
+
+##### `Investigation`
+
+1. Check ___PORT___ is alright or not
+2. Check ___Start Script___ is alright or not
+3. Dashboard > Project > Setting > Set `Config Vars` or `Environment Variables`
+4. Then, Check everything is ___Ok or not___ like a ___normal User___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Step-02`
+
+1. ___Root URL___ works or not.
+2. Check ___connection with mongodb___ (Load some products data)
+3. ___Replace___ `localhost by Heroku URL` in client-side
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Some fact about localhost, Heroku-Server, MongoDB-Database`
+
+- Previously, ___client-side takes data___ from ___Local-Computer-Server___, but ___connected with MongoDB___.
+- Now, we ___deploy Server in Heroku___ and also ___Config setup in Heroku___. So, ___Heroku-Server connected___ with ___MongoDB___.
+- As we ___replace the Localhost with Heroku-Link___, So, if we ___run client in locally___, it will also ___connected to MongoDB through the Heroku-Server___.
+- We send our ___client-side in firebase___ by `npm run build` or `making a package`. So, if we ___close our localhost___, it will also ___run___ from `firebase live website link` and also it's ___database isn't a localhost___.
+
+---
+
+- So, we made `two deploy` a React App.
+  1. ___Firebase Deploy___ (client-side)
+  2. ___Heroku Deploy___ (server-side)
+- `Responsibility`
+  1. Everything is ___running perfectly___, not only ___Homepage___. 
+  2. In large Organization, `CI-CD` modestly ensure that everything is ___run perfectly after deploying___. 
+  3. But, As a developer, it is our ___responsibility___ to maintain everything is Ok or works perfectly.
+
+---
+
+- People ___configure for different environment___ (for serious or professional works or large application)
+  1. ___Connect to the localhost___, when works for the ___development___.
+  2. When ___deploy___, they read according to ___environment variables___.
+- As a beginner, we run it from ___Heroku-link___. But, in a large application, it ___doesn't work___ or it ___isn't the standard process___.
+- If we ___change anything for development___, we should run it ___locally___ by using ___localhost___. After ___deployment___, it runs from ___Heroku-link___.
+  - So, we should use `busy url` after going to ___axios___ or used `proxy`. 
+
 
 **[🔼Back to Top](#table-of-contents)**
 
