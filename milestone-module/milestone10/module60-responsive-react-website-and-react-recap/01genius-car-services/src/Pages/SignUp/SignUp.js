@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../src/firebase.init';
+import useToken from '../../hooks/useToken';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
 import PageTitle from '../Shared/PageTitle/PageTitle';
@@ -14,16 +15,21 @@ const SignUp = () => {
 
     const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || googleUser);
     
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
-    if (googleUser) {
-        navigate(from, { replace: true });
-    }
-    if (user) {
+    // if (googleUser) {
+    //     navigate(from, { replace: true });
+    // }
+    // if (user) {
+    //     navigate(from, { replace: true });
+    // }
+
+    if (token) {
         navigate(from, { replace: true });
     }
 

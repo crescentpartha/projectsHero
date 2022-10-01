@@ -17,6 +17,14 @@ Table of Contents
         - [`Investigation`](#investigation)
       - [`Step-02`](#step-02)
     - [`Some fact about localhost, Heroku-Server, MongoDB-Database`](#some-fact-about-localhost-heroku-server-mongodb-database)
+  - [69.4 Create JWT token for Registration and Social Login](#694-create-jwt-token-for-registration-and-social-login)
+    - [`Create useToken.js Custom Hook`](#create-usetokenjs-custom-hook)
+    - [`Get token and then navigate` (Modify Login.js)](#get-token-and-then-navigate-modify-loginjs)
+    - [`Get token and then navigate` (Modify SignUp.js)](#get-token-and-then-navigate-modify-signupjs)
+    - [`Used Optional Chaining` (Modify Order.js)](#used-optional-chaining-modify-orderjs)
+    - [`Full Code Example`](#full-code-example)
+  - [Module 69: Deploy to Heroku and Practice Problem](#module-69-deploy-to-heroku-and-practice-problem-1)
+    - [`Documentation Links for Module 69`](#documentation-links-for-module-69)
 
 
 # Module 69: Deploy to Heroku and Practice Problem
@@ -187,6 +195,128 @@ ACCESS_TOKEN_SECRET 36b843f7f482bfdb3a50d37112e11de90b97afc23acb72608f0e74c07048
 - If we ___change anything for development___, we should run it ___locally___ by using ___localhost___. After ___deployment___, it runs from ___Heroku-link___.
   - So, we should use `busy url` after going to ___axios___ or used `proxy`. 
 
+**[🔼Back to Top](#table-of-contents)**
+
+## 69.4 Create JWT token for Registration and Social Login
+
+### `Create useToken.js Custom Hook`
+
+``` JavaScript
+// In useToken.js
+
+import axios from "axios";
+import { useEffect, useState } from "react"
+
+const useToken = user => {
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        const getToken = async () => {
+            // console.log(user);
+            const email = user?.user?.email;
+            if (email) {
+                const { data } = await axios.post('https://serene-peak-34256.herokuapp.com/login', { email });
+                // console.log(data);
+                setToken(data.accessToken);
+                localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
+            }
+        }
+        getToken();
+    }, [user]);
+
+    return [token, setToken];
+}
+
+export default useToken;
+```
 
 **[🔼Back to Top](#table-of-contents)**
 
+### `Get token and then navigate` (Modify Login.js)
+
+``` JavaScript
+// In Login.js
+
+// import axios from 'axios';
+import useToken from '../../hooks/useToken';
+
+const Login = () => {
+    const [token] = useToken(user || googleUser);
+
+    // if (googleUser) {
+    //     navigate(from, { replace: true });
+    // }
+
+    if (token) {
+        navigate(from, { replace: true }); // we navigate after getting the token
+    }
+
+    // After login, we issue a token
+    const handleUserSignIn = async event => {
+        event.preventDefault();
+        await signInWithEmailAndPassword(email, password);
+
+        // const {data} = await axios.post('https://serene-peak-34256.herokuapp.com/login', {email});
+        // console.log(data);
+        // localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
+        // navigate(from, { replace: true }); // we navigate after getting the token 
+    }
+};
+
+export default Login;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Get token and then navigate` (Modify SignUp.js)
+
+``` JavaScript
+// In SignUp.js
+
+import useToken from '../../hooks/useToken';
+
+const SignUp = () => {
+    const [token] = useToken(user || googleUser);
+
+    // if (googleUser) {
+    //     navigate(from, { replace: true });
+    // }
+    // if (user) {
+    //     navigate(from, { replace: true });
+    // }
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
+};
+
+export default SignUp;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Used Optional Chaining` (Modify Order.js)
+
+``` JavaScript
+// In Order.js
+
+const email = user?.email;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Full Code Example`
+
+- [Login.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Login/Login.js "Login.js - 01genius-car-services") - [SignUp.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/SignUp/SignUp.js "SignUp.js - 01genius-car-services") - [Order.js](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone10/module60-responsive-react-website-and-react-recap/01genius-car-services/src/Pages/Order/Order.js "Order.js - 01genius-car-services")
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Module 69: Deploy to Heroku and Practice Problem 
+
+### `Documentation Links for Module 69`
+
+- [Module 69: Deploy to Heroku and Practice Problem](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone11/module69-deploy-to-heroku-and-practice-problem/00deploy-to-heroku.md "Module 69: Documentation")
+- [02genius-car-services-server/Steps.md](https://github.com/crescentpartha/02genius-car-services-server/blob/main/Steps.md "Only 69.1M Documentation for Module 69")
+- [02genius-car-services-server](https://github.com/crescentpartha/02genius-car-services-server "02genius-car-services-server Repository Link | Deploy in Heroku")
+
+**[🔼Back to Top](#table-of-contents)**

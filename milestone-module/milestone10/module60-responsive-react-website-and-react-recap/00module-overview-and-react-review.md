@@ -182,6 +182,8 @@ Table of Contents
     - [`How JWT Works?`](#how-jwt-works)
     - [`What JWT looks like?`](#what-jwt-looks-like)
   - [Quiz 68](#quiz-68)
+- [Module 69: Deploy to Heroku and Practice Problem](#module-69-deploy-to-heroku-and-practice-problem)
+  - [`Documentation Links for Module 69`](#documentation-links-for-module-69)
 
 
 
@@ -3822,3 +3824,14 @@ axios.post('/user',{
 
 **[🔼Back to Top](#table-of-contents)**
 
+<br /> <br />
+
+# Module 69: Deploy to Heroku and Practice Problem
+
+## `Documentation Links for Module 69`
+
+- [Module 69: Deploy to Heroku and Practice Problem](https://github.com/crescentpartha/projectsHero/blob/main/milestone-module/milestone11/module69-deploy-to-heroku-and-practice-problem/00deploy-to-heroku.md "Module 69: Documentation")
+- [02genius-car-services-server/Steps.md](https://github.com/crescentpartha/02genius-car-services-server/blob/main/Steps.md "Only 69.1M Documentation for Module 69")
+- [02genius-car-services-server](https://github.com/crescentpartha/02genius-car-services-server "02genius-car-services-server Repository Link | Deploy in Heroku")
+
+**[🔼Back to Top](#table-of-contents)**

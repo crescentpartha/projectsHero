@@ -1,8 +1,9 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import google from '../../images/googleIcon.jpg';
 import twitter from '../../images/twitterIcon.jpg';
 import PageTitle from '../Shared/PageTitle/PageTitle';
@@ -14,17 +15,19 @@ const Login = () => {
 
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || googleUser);
 
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
-    if (googleUser) {
-        navigate(from, { replace: true });
-    }
-    if (user) {
-        // navigate(from, { replace: true }); // we navigate after getting the token
+    // if (googleUser) {
+    //     navigate(from, { replace: true });
+    // }
+
+    if (token) {
+        navigate(from, { replace: true }); // we navigate after getting the token
     }
 
     const handleEmailBlur = event => {
@@ -39,10 +42,11 @@ const Login = () => {
     const handleUserSignIn = async event => {
         event.preventDefault();
         await signInWithEmailAndPassword(email, password);
-        const {data} = await axios.post('https://serene-peak-34256.herokuapp.com/login', {email});
+
+        // const {data} = await axios.post('https://serene-peak-34256.herokuapp.com/login', {email});
         // console.log(data);
-        localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
-        navigate(from, { replace: true }); // we navigate after getting the token
+        // localStorage.setItem('accessToken', data.accessToken); // localStorage isn't the best place to set accessToken, we can set it in the cookies for extra-security.
+        // navigate(from, { replace: true }); // we navigate after getting the token 
     }
 
     return (
@@ -76,10 +80,10 @@ const Login = () => {
                         </div>
                     }
                     {
-                        error && <p style={{color: 'red'}}>{error.message}</p>
+                        error && <p style={{ color: 'red' }}>{error.message}</p>
                     }
                     {
-                        googleError && <p style={{color: 'red'}}>{googleError.message}</p>
+                        googleError && <p style={{ color: 'red' }}>{googleError.message}</p>
                     }
                     <input className='submit-button' type="submit" value="Login" />
                 </form>

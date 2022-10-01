@@ -12,7 +12,7 @@ const Order = () => {
     const navigate = useNavigate();
     useEffect(() => {
         const getOrders = async () => {
-            const email = user.email;
+            const email = user?.email;
             const url = `https://serene-peak-34256.herokuapp.com/order?email=${email}`;
             // const response = await axios.get(url);
             // const {data} = response;
