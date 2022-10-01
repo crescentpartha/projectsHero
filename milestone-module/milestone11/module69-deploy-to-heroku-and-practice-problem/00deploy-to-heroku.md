@@ -23,6 +23,7 @@ Table of Contents
     - [`Get token and then navigate` (Modify SignUp.js)](#get-token-and-then-navigate-modify-signupjs)
     - [`Used Optional Chaining` (Modify Order.js)](#used-optional-chaining-modify-orderjs)
     - [`Full Code Example`](#full-code-example)
+  - [Quiz 69](#quiz-69)
   - [Module 69: Deploy to Heroku and Practice Problem](#module-69-deploy-to-heroku-and-practice-problem-1)
     - [`Documentation Links for Module 69`](#documentation-links-for-module-69)
 
@@ -311,6 +312,39 @@ const email = user?.email;
 
 **[🔼Back to Top](#table-of-contents)**
 
+## Quiz 69
+
+1. What is ___heroku___?
+   - `Heroku is a container-based cloud Platform`
+2. After ___installing heroku CLI___, what is the ___first step to using it___?
+   - `heroku login`
+3. Heroku is ___connected___ to _________ for ___deployment___?
+   - `Local git repository`
+4. How you can ___set a project name___ while giving the command `heroku create`?
+   - `You can pass a parameter to specify your own app name.` (ex. `heroku create yourProjectName`)
+5. What ___command___ will you use to ___deploy a project to Heroku___?
+   - `git push heroku main`
+6. What is the full form of ___JWT___?
+   - `JSON Web Token`
+7. When should you use ___JSON Web Tokens___?
+   - [ ] ___For authorization___
+   - [ ] ___For information exchange___
+   - [ ] None of the above
+   - [x] Both 1 & 2
+8. Which one is the correct ___JWT structure___?
+   - `Header.Payload.Signature`
+9. How we can ___share data___ in ___multiple react components___?
+   - [ ] ___Using custom react hooks___
+   - [ ] ___Using context API___
+   - [ ] ___Using props drilling___
+   - [x] All of the above
+10. If we want to use `await`, ___what kind of function___ do we need to create?
+    - `Asynchronous function by using "async" keyword.`
+
+**[🔼Back to Top](#table-of-contents)**
+
+<br /> <br />
+
 ## Module 69: Deploy to Heroku and Practice Problem 
 
 ### `Documentation Links for Module 69`
@@ -320,3 +354,6 @@ const email = user?.email;
 - [02genius-car-services-server](https://github.com/crescentpartha/02genius-car-services-server "02genius-car-services-server Repository Link | Deploy in Heroku")
 
 **[🔼Back to Top](#table-of-contents)**
+
+
+
