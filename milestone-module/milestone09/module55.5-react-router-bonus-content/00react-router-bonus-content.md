@@ -1,3 +1,20 @@
+Table of Contents
+---
+
+- [Module 55.5: React Router Bonus Content](#module-555-react-router-bonus-content)
+  - [55.5.1 Recap use State hook with simple example](#5551-recap-use-state-hook-with-simple-example)
+  - [55.5.2 Connection between useEffect and useState](#5552-connection-between-useeffect-and-usestate)
+    - [`useState Hook:`](#usestate-hook)
+    - [`Custom Hook:`](#custom-hook)
+  - [55.5.3 Use custom hook to share hook code among components](#5553-use-custom-hook-to-share-hook-code-among-components)
+    - [`Custom Hook without dependency:`](#custom-hook-without-dependency)
+    - [`To Use ↪ Custom Hook without dependency:`](#to-use--custom-hook-without-dependency)
+  - [55.5.4 Implement Search with simple code](#5554-implement-search-with-simple-code)
+    - [`Search feature Implementation using Event Handler:`](#search-feature-implementation-using-event-handler)
+  - [55.5.5 useEffect with dependency List](#5555-useeffect-with-dependency-list)
+    - [`Search feature Implementation using useEffect with dependency:` (___Best way___)](#search-feature-implementation-using-useeffect-with-dependency-best-way)
+    - [`Image Hosting` (Imgur)](#image-hosting-imgur)
+
 # Module 55.5: React Router Bonus Content
 
 ## 55.5.1 Recap use State hook with simple example
@@ -23,11 +40,13 @@ const Home = () => {
 export default Home;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 55.5.2 Connection between useEffect and useState
 
 > Hooks are reusable functions.
 
-⫸ `useState Hook:`
+### `useState Hook:`
 
 - The useState hook is used for ___storing variables___ that are part of your application's state and ___will change___ as the ___user interacts___ with your website.
 - `const [state, setState] = useState(initialState);`
@@ -40,7 +59,9 @@ export default Home;
 - Dependency Injection:
   - dependency could be `[]` or `[searchText]` or `[searchText, volunteers]` or `empty` ↪ (___run infinity times___)
 
-⫸ `Custom Hook:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Custom Hook:`
 
 - Custom Hooks are ___a mechanism to reuse stateful logic___, all state and effects inside of it are ___fully isolated___.
 - Every hook start with ___use___.
@@ -49,9 +70,11 @@ export default Home;
 - It increase the ___code reusability___
 - Prevent ___code duplication___
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 55.5.3 Use custom hook to share hook code among components
 
-⫸ `Custom Hook without dependency:`
+### `Custom Hook without dependency:`
 
 ``` JavaScript
 import { useEffect, useState } from "react"
@@ -71,7 +94,9 @@ const useVolunteers = () => {
 export default useVolunteers;
 ```
 
-⫸ `To Use ↪ Custom Hook without dependency:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `To Use ↪ Custom Hook without dependency:`
 
 ``` JavaScript
 import useVolunteers from '../../hooks/useVolunteers';
@@ -83,9 +108,11 @@ const Main = () => {
 }
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 55.5.4 Implement Search with simple code
 
-⫸ `Search feature Implementation using Event Handler:`
+### `Search feature Implementation using Event Handler:`
 
 ``` JavaScript
 import React, { useEffect, useState } from 'react';
@@ -126,9 +153,11 @@ const Main = () => {
 export default Main;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
 ## 55.5.5 useEffect with dependency List
 
-⫸ `Search feature Implementation using useEffect with dependency:` (___Best way___)
+### `Search feature Implementation using useEffect with dependency:` (___Best way___)
 
 ``` JavaScript
 import React, { useEffect, useState } from 'react';
@@ -173,5 +202,11 @@ const Main = () => {
 export default Main;
 ```
 
+**[🔼Back to Top](#table-of-contents)**
+
+### `Image Hosting` (Imgur)
+
 ⫸ [Imgur:](https://imgur.com "Imgur is the easiest way to discover and enjoy the magic of the Internet") is an ___image hosting___ and ___sharing___ site.
+
+**[🔼Back to Top](#table-of-contents)**
 
