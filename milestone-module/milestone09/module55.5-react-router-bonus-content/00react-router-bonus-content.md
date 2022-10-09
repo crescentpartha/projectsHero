@@ -5,6 +5,7 @@ Table of Contents
   - [55.5.1 Recap use State hook with simple example](#5551-recap-use-state-hook-with-simple-example)
   - [55.5.2 Connection between useEffect and useState](#5552-connection-between-useeffect-and-usestate)
     - [`useState Hook:`](#usestate-hook)
+    - [`useEffect Hook:`](#useeffect-hook)
     - [`Custom Hook:`](#custom-hook)
   - [55.5.3 Use custom hook to share hook code among components](#5553-use-custom-hook-to-share-hook-code-among-components)
     - [`Custom Hook without dependency:`](#custom-hook-without-dependency)
@@ -52,7 +53,9 @@ export default Home;
 - `const [state, setState] = useState(initialState);`
 - initialState could be `[]` or `{}` or `''` or `""` or `0` or `100` or `state` of another useState hook.
 
-⫸ `useEffect Hook:`
+**[🔼Back to Top](#table-of-contents)**
+
+### `useEffect Hook:`
 
 - The useEffect Hook is used for ___controlling the side-effects___.
 - The useEffect hook allows components to react to lifecycle events such as ___mounting to the DOM___, ___re-rendering___, and ___unmounting___.
