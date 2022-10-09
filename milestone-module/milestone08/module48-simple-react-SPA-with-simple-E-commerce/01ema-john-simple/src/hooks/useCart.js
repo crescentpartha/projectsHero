@@ -10,7 +10,8 @@ const useCart = () => {
         const keys = Object.keys(storedCart);
         // console.log(storedCart);
         // console.log(keys);
-        fetch('http://localhost:5000/productByKeys', {
+        // fetch('http://localhost:5000/productByKeys', {
+        fetch('https://sleepy-sea-74931.herokuapp.com/productByKeys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

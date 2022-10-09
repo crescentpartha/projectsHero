@@ -55,13 +55,15 @@ const Shop = () => {
 
     useEffect( () => {
         // products load in a special way like page-wise and size-wise;
-        fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        // fetch(`http://localhost:5000/product?page=${page}&size=${size}`) // search-query added to filter
+        fetch(`https://sleepy-sea-74931.herokuapp.com/product?page=${page}&size=${size}`) // search-query added to filter
         .then(res => res.json())
         .then(data => setProducts(data));
     }, [page, size]);
 
     useEffect( () => {
-        fetch('http://localhost:5000/productCount')
+        // fetch('http://localhost:5000/productCount')
+        fetch('https://sleepy-sea-74931.herokuapp.com/productCount')
         .then(res => res.json())
         .then(data => {
             const count = data.count;
