@@ -12,6 +12,7 @@ const useCart = () => {
         // console.log(keys);
         // fetch('http://localhost:5000/productByKeys', {
         fetch('https://sleepy-sea-74931.herokuapp.com/productByKeys', {
+            // mode: 'no-cors', // To handle the CORS policy Error;
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
