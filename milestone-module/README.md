@@ -28,6 +28,8 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [M10-Assignment: Wildlife Global](https://github.com/programming-hero-web-course-4/independent-service-provider-crescentpartha "M63: Client-Side Code") | [Live-Server](https://independent-service-prov-593c7.web.app/ "Website")
 
+* [M11-Assignment: Books Warehouse](https://github.com/crescentpartha/warehouse-management-client-side-crescentpartha "M70: Client-Side") | [Server-Side](https://github.com/crescentpartha/warehouse-management-server-side-crescentpartha "M70: Server-Side") | [Live-Server](https://book-warehouse-managemen-b7590.web.app/ "Website")
+
 # Module Projects Link
 
 ## Milestone 01
@@ -180,5 +182,5 @@ Root Link: https://crescentpartha.github.io/projectsHero/
 
 * [Module 60_&-66-&-68-&_69 01genius-car-services](https://60-1genius-car-services-cp.netlify.app/ "React-App | Live-Server _-_ Deploy in Netlify (Old-Version)") ⇔ [firebase-deploy](https://genius-car-services-a8da0.web.app/ "React-App | Live-Server _-_ Genius Car Node Mongo CRUD Recap - Secure API using JWT - Fix the Error: changing an uncontrolled input to be controlled - required, readOnly, autoComplete - Filter orders info by email address - Create and Verify JWT Token - HTTP Status Codes | Deploy to Heroku and Practice Problem - Deploy and Hosting in Firebase (Updated-Version)")
 
-
+* [Module 70.5 01simple-jwt-project](https://simple-jwt-project-crescentpartha.netlify.app/ "module70.5-conceptual-jwt-token-and-pagination | Deploy in Netlify")
 
