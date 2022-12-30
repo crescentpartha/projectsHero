@@ -18,6 +18,14 @@ const verifyJWT = (req, res, next) => {
         return res.status(401).send({ message: 'unauthorized' });
     }
     const token = authHeader.split(' ')[1];
+    // Verify token and handle unauthorized token
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(403).send({message: 'forbidden'});
+        }
+        req.decoded = decoded;
+        next();
+    });
 }
 
 app.get('/', (req, res) => {
@@ -32,7 +40,10 @@ app.post('/login', (req, res) => {
     // After completing all authentication related verification, issue JWT token
     if (user.email === 'abc@def.com' && user.password === 'asdfasdf') {
         // Generate/issue JWT access token and store it localStorage on client side
-        const accessToken = jwt.sign({ email: user.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+        const accessToken = jwt.sign({ 
+            email: user.email }, 
+            process.env.ACCESS_TOKEN_SECRET, 
+            { expiresIn: '1h' });
         res.send({
             success: true,
             accessToken: accessToken
