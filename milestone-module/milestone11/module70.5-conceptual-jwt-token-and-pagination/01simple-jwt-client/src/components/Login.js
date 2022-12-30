@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const inputStyle = {
     width: '100%',
@@ -7,6 +8,8 @@ const inputStyle = {
 }
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const handleLogin = event => {
         event.preventDefault();
         const email = event.target.email.value;
@@ -23,6 +26,10 @@ const Login = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
+            if (data.success) {
+                localStorage.setItem('accessToken', data.accessToken);
+                navigate('/orders');
+            }
         })
     }
 
